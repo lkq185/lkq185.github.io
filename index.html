@@ -155,6 +155,21 @@
     <article id="post-操作系统学习10月30日" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/30/操作系统学习10月30日/">操作系统学习</a>
+    </h1>
+  
+
+        
+        <a href="/2019/10/30/操作系统学习10月30日/" class="archive-article-date">
+  	<time datetime="2019-10-30T07:51:06.852Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-30</time>
+</a>
+        
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="操作系统学习记录"><a href="#操作系统学习记录" class="headerlink" title="操作系统学习记录"></a>操作系统学习记录</h1><h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a><strong>死锁</strong></h2><p><strong>1.何为死锁</strong><br>死锁是指多个进程争夺资源而处于的僵持状态<br><strong>2.产生原因</strong><br>系统资源不足。竞争资源和进程间推进顺序非法<br><strong>3.解决死锁的四种方法</strong><br>预防 避免 解除 检测<br><strong>4.产生死锁的条件</strong><br>　　1.互斥条件：一个资源每次只能被一个进程使用<br>　　2.不可剥夺条件：进程已获得资源，在未使用完之前，不能被其他进程强行剥夺，只能主动释放<br>　　3.请求和保持条件：进程已经保持了至少一个资源，但又提出了新的资源请求，而该资源已被其他进程占有，此时请求进程被阻塞，但对自己已获得的资源保持不放。<br>　　4.循环等待条件：即进程集合{p0,p1,p2,p3…..pn};p0正在等待p1占用的资源，p1正在等待p2占用的资源，pn正在等待p0占用的资源。<br><strong>4.预防死锁具体方法</strong><br>1.当一个占有资源进程请求新任务时，如果系统不能满足，进程应该释放当前所有的资源才可以重新申请。<br>2.如果系统有足够的资源，系统一次性把资源分配给进程需要的资源<br>3.按照顺序严格的分配进程顺序，按照类型排序序号排序，进程对资源请求必须按照序号递增的次序提出</p>
