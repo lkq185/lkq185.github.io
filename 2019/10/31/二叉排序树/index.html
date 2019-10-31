@@ -6,21 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Hexo</title>
+  <title>二叉排序树和其中序输出(从小到大） | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="title:二叉排序树和其中序输出(从小到大）插入数据并按顺序输出(就是中序遍历—-左中右）如图假设通过二叉树对如下10个随机数进行排序37,9,16,34,29,6,48,46,59排序的第一个步骤是把数据插入到该二叉树中插入基本逻辑是，小、相同的放左边，大的放右边中序遍历输出即为从小到大顺序  1234567891011121314151617181920212223242526272829">
+  <meta name="description" content="插入数据并按顺序输出(就是中序遍历—-左中右）如图假设通过二叉树对如下10个随机数进行排序37,9,16,34,29,6,48,46,59排序的第一个步骤是把数据插入到该二叉树中插入基本逻辑是，小、相同的放左边，大的放右边中序遍历输出即为从小到大顺序  1234567891011121314151617181920212223242526272829303132333435363738394041">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo">
+<meta property="og:title" content="二叉排序树和其中序输出(从小到大）">
 <meta property="og:url" content="http://yoursite.com/2019/10/31/二叉排序树/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="title:二叉排序树和其中序输出(从小到大）插入数据并按顺序输出(就是中序遍历—-左中右）如图假设通过二叉树对如下10个随机数进行排序37,9,16,34,29,6,48,46,59排序的第一个步骤是把数据插入到该二叉树中插入基本逻辑是，小、相同的放左边，大的放右边中序遍历输出即为从小到大顺序  1234567891011121314151617181920212223242526272829">
+<meta property="og:description" content="插入数据并按顺序输出(就是中序遍历—-左中右）如图假设通过二叉树对如下10个随机数进行排序37,9,16,34,29,6,48,46,59排序的第一个步骤是把数据插入到该二叉树中插入基本逻辑是，小、相同的放左边，大的放右边中序遍历输出即为从小到大顺序  1234567891011121314151617181920212223242526272829303132333435363738394041">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20191031151137459.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20191031151323171.png">
-<meta property="og:updated_time" content="2019-10-31T07:17:47.796Z">
+<meta property="og:updated_time" content="2019-10-31T07:19:39.271Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
-<meta name="twitter:description" content="title:二叉排序树和其中序输出(从小到大）插入数据并按顺序输出(就是中序遍历—-左中右）如图假设通过二叉树对如下10个随机数进行排序37,9,16,34,29,6,48,46,59排序的第一个步骤是把数据插入到该二叉树中插入基本逻辑是，小、相同的放左边，大的放右边中序遍历输出即为从小到大顺序  1234567891011121314151617181920212223242526272829">
+<meta name="twitter:title" content="二叉排序树和其中序输出(从小到大）">
+<meta name="twitter:description" content="插入数据并按顺序输出(就是中序遍历—-左中右）如图假设通过二叉树对如下10个随机数进行排序37,9,16,34,29,6,48,46,59排序的第一个步骤是把数据插入到该二叉树中插入基本逻辑是，小、相同的放左边，大的放右边中序遍历输出即为从小到大顺序  1234567891011121314151617181920212223242526272829303132333435363738394041">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/20191031151137459.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -84,7 +84,7 @@
 		<nav class="header-nav">
 			<div class="social">
 				
-					<a class="github" target="_blank" href="#" title="github"><i class="icon-github"></i></a>
+					<a class="github" target="_blank" href="https://github.com/lkq185" title="github"><i class="icon-github"></i></a>
 		        
 					<a class="weibo" target="_blank" href="#" title="weibo"><i class="icon-weibo"></i></a>
 		        
@@ -127,7 +127,7 @@
 			<nav class="header-nav">
 				<div class="social">
 					
-						<a class="github" target="_blank" href="#" title="github"><i class="icon-github"></i></a>
+						<a class="github" target="_blank" href="https://github.com/lkq185" title="github"><i class="icon-github"></i></a>
 			        
 						<a class="weibo" target="_blank" href="#" title="weibo"><i class="icon-weibo"></i></a>
 			        
@@ -164,10 +164,24 @@
             <article id="post-二叉排序树" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      二叉排序树和其中序输出(从小到大）
+    </h1>
+  
+
+        
+        <a href="/2019/10/31/二叉排序树/" class="archive-article-date">
+  	<time datetime="2019-10-31T07:15:15.251Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-31</time>
+</a>
+        
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <hr>
-<h2 id="title-二叉排序树和其中序输出-从小到大）"><a href="#title-二叉排序树和其中序输出-从小到大）" class="headerlink" title="title:二叉排序树和其中序输出(从小到大）"></a>title:二叉排序树和其中序输出(从小到大）</h2><p>插入数据并按顺序输出(就是中序遍历—-左中右）<br>如图<br>假设通过二叉树对如下10个随机数进行排序<br>37,9,16,34,29,6,48,46,59<br>排序的第一个步骤是把数据插入到该二叉树中<br>插入基本逻辑是，小、相同的放左边，大的放右边中序遍历输出即为从小到大顺序</p>
+        <p>插入数据并按顺序输出(就是中序遍历—-左中右）<br>如图<br>假设通过二叉树对如下10个随机数进行排序<br>37,9,16,34,29,6,48,46,59<br>排序的第一个步骤是把数据插入到该二叉树中<br>插入基本逻辑是，小、相同的放左边，大的放右边中序遍历输出即为从小到大顺序</p>
 <p><img src="https://img-blog.csdnimg.cn/20191031151137459.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">package nnn;</span><br><span class="line">import java.util.*;</span><br><span class="line">public class node &#123;</span><br><span class="line">	public node left;</span><br><span class="line">	public node right;</span><br><span class="line">	public Object value;//存空,所以用Object</span><br><span class="line">	public void add(Object num)&#123;</span><br><span class="line">		 // 如果当前节点没有值，就把数据放在当前节点上</span><br><span class="line">		if(value==null)</span><br><span class="line">			value=num;</span><br><span class="line">		// 如果当前节点有值，就进行判断，新增的值与当前值的大小关系</span><br><span class="line">		else&#123;</span><br><span class="line">			// 新增的值，比当前值小或者相同</span><br><span class="line">			if((Integer)num-((Integer)value)&lt;=0)&#123;</span><br><span class="line">				if(left==null)</span><br><span class="line">				left=new node();</span><br><span class="line">				left.add(num);</span><br><span class="line">			&#125;</span><br><span class="line">			else&#123;</span><br><span class="line">				if(right==null)</span><br><span class="line">				right=new node();</span><br><span class="line">				right.add(num);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;	</span><br><span class="line">	&#125;</span><br><span class="line">	public List&lt;Object&gt; values()&#123;</span><br><span class="line">		List&lt;Object&gt; values = new ArrayList&lt;&gt;();</span><br><span class="line">	    if(left!=null)</span><br><span class="line">            values.addAll(left.values());//等于把左子树的所有递归得到的值存到容器中</span><br><span class="line">	    values.add(value);</span><br><span class="line">	    if(right!=null)</span><br><span class="line">	    	values.addAll(right.values());</span><br><span class="line">	    return values;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		int p[]=new int[]&#123;37,9,16,34,29,6,48,46,59&#125;;</span><br><span class="line">		  node S=new node();</span><br><span class="line">		  for(int number:p)&#123;</span><br><span class="line">			  S.add(number);</span><br><span class="line">		  &#125;	</span><br><span class="line">		  System.out.println(S.values());//从根开始便利</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
