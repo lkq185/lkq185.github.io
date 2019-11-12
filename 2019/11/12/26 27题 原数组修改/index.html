@@ -6,24 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>二叉树镜像，深度，按层次输出 | Hexo</title>
+  <title>原数组修改 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="二叉树镜像思路：递归 123456789public static void Mirror(node root) &amp;#123;//镜像        if(root == null)            return;        node temp = root.left;        root.left = root.right;        root.right = temp;">
+  <meta name="description" content="26题给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。 不要使用额外的数组空间，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成。 示例 1: 给定数组 nums = [1,1,2],  函数应该返回新的长度 2, 并且原数组 nums 的前两个元素被修改为 1, 2。  你不需要考虑数组中超出新长度后面的元素。 示例 2: 给定">
 <meta property="og:type" content="article">
-<meta property="og:title" content="二叉树镜像，深度，按层次输出">
-<meta property="og:url" content="http://yoursite.com/2019/11/07/二叉树镜像，深度，按层次输出/index.html">
+<meta property="og:title" content="原数组修改">
+<meta property="og:url" content="http://yoursite.com/2019/11/12/26 27题 原数组修改/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="二叉树镜像思路：递归 123456789public static void Mirror(node root) &amp;#123;//镜像        if(root == null)            return;        node temp = root.left;        root.left = root.right;        root.right = temp;">
+<meta property="og:description" content="26题给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。 不要使用额外的数组空间，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成。 示例 1: 给定数组 nums = [1,1,2],  函数应该返回新的长度 2, 并且原数组 nums 的前两个元素被修改为 1, 2。  你不需要考虑数组中超出新长度后面的元素。 示例 2: 给定">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20191031151137459.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20191107224419145.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20191107224610930.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20191107224733429.png">
-<meta property="og:updated_time" content="2019-11-07T14:52:01.940Z">
+<meta property="og:updated_time" content="2019-11-12T15:27:17.773Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="二叉树镜像，深度，按层次输出">
-<meta name="twitter:description" content="二叉树镜像思路：递归 123456789public static void Mirror(node root) &amp;#123;//镜像        if(root == null)            return;        node temp = root.left;        root.left = root.right;        root.right = temp;">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20191031151137459.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70">
+<meta name="twitter:title" content="原数组修改">
+<meta name="twitter:description" content="26题给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。 不要使用额外的数组空间，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成。 示例 1: 给定数组 nums = [1,1,2],  函数应该返回新的长度 2, 并且原数组 nums 的前两个元素被修改为 1, 2。  你不需要考虑数组中超出新长度后面的元素。 示例 2: 给定">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -163,38 +158,52 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-二叉树镜像，深度，按层次输出" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-26 27题 原数组修改" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      二叉树镜像，深度，按层次输出
+      原数组修改
     </h1>
   
 
         
-        <a href="/2019/11/07/二叉树镜像，深度，按层次输出/" class="archive-article-date">
-  	<time datetime="2019-11-07T14:49:44.146Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-07</time>
+        <a href="/2019/11/12/26 27题 原数组修改/" class="archive-article-date">
+  	<time datetime="2019-11-12T15:25:47.727Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-12</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="https://img-blog.csdnimg.cn/20191031151137459.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="二叉树镜像"><a href="#二叉树镜像" class="headerlink" title="二叉树镜像"></a><strong>二叉树镜像</strong></h2><p>思路：递归</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public static void Mirror(node root) &#123;//镜像</span><br><span class="line">        if(root == null)</span><br><span class="line">            return;</span><br><span class="line">        node temp = root.left;</span><br><span class="line">        root.left = root.right;</span><br><span class="line">        root.right = temp;</span><br><span class="line">        Mirror(root.left);</span><br><span class="line">        Mirror(root.right);</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+        <h2 id="26题"><a href="#26题" class="headerlink" title="26题"></a>26题</h2><p>给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。</p>
+<p>不要使用额外的数组空间，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成。</p>
+<p>示例 1:</p>
+<p>给定数组 nums = [1,1,2], </p>
+<p>函数应该返回新的长度 2, 并且原数组 nums 的前两个元素被修改为 1, 2。 </p>
+<p>你不需要考虑数组中超出新长度后面的元素。</p>
+<p>示例 2:</p>
+<p>给定 nums = [0,0,1,1,1,2,2,3,3,4],</p>
+<p>函数应该返回新的长度 5, 并且原数组 nums 的前五个元素被修改为 0, 1, 2, 3, 4。</p>
+<p>你不需要考虑数组中超出新长度后面的元素。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int removeDuplicates(int[] nums)&#123;</span><br><span class="line">		     int ans=0;</span><br><span class="line">	         int j;</span><br><span class="line">	            for(j=1;j&lt;nums.length;j++)&#123;//从1开始</span><br><span class="line">	            	if(nums[j]!=nums[ans])</span><br><span class="line">	            	&#123;</span><br><span class="line">	            		nums[++ans]=nums[j];</span><br><span class="line">	            		 </span><br><span class="line">	            		//System.out.println(nums[ans]);</span><br><span class="line">	            	&#125;</span><br><span class="line">	            &#125;</span><br><span class="line">	            //System.out.println(ans);</span><br><span class="line">	         return ans+1;//数组长度加1</span><br><span class="line">	    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://img-blog.csdnimg.cn/20191107224419145.png" alt="在这里插入图片描述"></p>
-<h2 id="二叉树按层数遍历"><a href="#二叉树按层数遍历" class="headerlink" title="二叉树按层数遍历"></a>二叉树按层数遍历</h2><p>思路：队列</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">public static void printf(node S)&#123;</span><br><span class="line">		Queue&lt;node&gt; q=new LinkedBlockingQueue&lt;node&gt;();</span><br><span class="line">		q.add(S);</span><br><span class="line">		int a=1; //操作前队列中元素个数</span><br><span class="line">	    int b=0; //当层已操作队列元素个数</span><br><span class="line">	    int i=1;  //记录层数</span><br><span class="line">	    System.out.print(&quot;第1层：&quot;);</span><br><span class="line">		while(!q.isEmpty())&#123;</span><br><span class="line">			node top=q.poll();</span><br><span class="line">			a--;</span><br><span class="line">			System.out.print(top.value+&quot; &quot;);</span><br><span class="line">			if(top.left!=null)&#123;</span><br><span class="line">				b++;</span><br><span class="line">				q.add(top.left);</span><br><span class="line">			&#125;</span><br><span class="line">			if(top.right!=null)&#123;</span><br><span class="line">				b++;</span><br><span class="line">				q.add(top.right);</span><br><span class="line">			&#125;</span><br><span class="line">			if(a==0)&#123;//如果a为0，即此层遍历结束</span><br><span class="line">				a=b;//当层未操作元素个数</span><br><span class="line">				b=0;//当层已操作元素个数</span><br><span class="line">				System.out.println();</span><br><span class="line">				i++;</span><br><span class="line">				System.out.print(&quot;第&quot;+i+&quot;层：&quot;);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println();</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>这道题数组并没有改成真正的无重复数，只是占用了ans+1的nums数组长度。<br>同时题目还要求在原题下修改。<br>nums[++ans]=nums[j];</p>
+<h2 id="27题"><a href="#27题" class="headerlink" title="27题"></a>27题</h2><p>给定 nums = [3,2,2,3], val = 3,</p>
+<p>函数应该返回新的长度 2, 并且 nums 中的前两个元素均为 2。</p>
+<p>你不需要考虑数组中超出新长度后面的元素。</p>
+<p>示例 2:</p>
+<p>给定 nums = [0,1,2,2,3,0,4,2], val = 2,</p>
+<p>函数应该返回新的长度 5, 并且 nums 中的前五个元素为 0, 1, 3, 0, 4。</p>
+<p>注意这五个元素可为任意顺序。</p>
+<p>你不需要考虑数组中超出新长度后面的元素。</p>
+<p>说明:</p>
+<p>为什么返回数值是整数，但输出的答案是数组呢?</p>
+<p>请注意，输入数组是以“引用”方式传递的，这意味着在函数里修改输入数组对于调用者是可见的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int removeElement(int[] nums, int val) &#123;</span><br><span class="line">		     int ans=0;</span><br><span class="line">	         int j;</span><br><span class="line">	            for(j=0;j&lt;nums.length;j++)&#123;</span><br><span class="line">	            	if(nums[j]!=val)</span><br><span class="line">	            	&#123;</span><br><span class="line">	            		nums[ans]=nums[j];</span><br><span class="line">	            		ans++;	    </span><br><span class="line">	            	&#125;</span><br><span class="line">	            &#125;</span><br><span class="line">	            //System.out.println(ans);</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://img-blog.csdnimg.cn/20191107224610930.png" alt="在这里插入图片描述">二叉树深度<br>思路：基础dfs</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public static void dfs(node S,int deep)&#123;</span><br><span class="line">		    if(S==null)</span><br><span class="line">		    	return;</span><br><span class="line">	    	if(max&lt;deep)&#123;</span><br><span class="line">	    		max=deep;</span><br><span class="line">	    	&#125;</span><br><span class="line">	    	deep++;</span><br><span class="line">	    	dfs(S.left,deep);</span><br><span class="line">	    	dfs(S.right,deep);</span><br><span class="line">	    	deep--;</span><br><span class="line">	  &#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://img-blog.csdnimg.cn/20191107224733429.png" alt="在这里插入图片描述"></p>
 
       
 
@@ -274,7 +283,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/11/07/二叉树镜像，深度，按层次输出/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/11/12/26 27题 原数组修改/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -288,18 +297,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/11/12/第一次力扣/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          第一次力扣
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/11/07/随机化快排/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">随机化快排</div>
+    <a href="/2019/11/12/第一次力扣/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">第一次力扣</div>
       <i class="icon-circle-right"></i>
     </a>
   
