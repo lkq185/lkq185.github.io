@@ -6,15 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Hexo</title>
+  <title>贪心求最大和 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/page/2/index.html">
+  <meta name="description" content="最大子序和53给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。 示例: 输入: [-2,1,-3,4,-1,2,1,-5,4],输出: 6解释: 连续子数组 [4,-1,2,1] 的和最大，为 6。 123456789101112131415class Solution &amp;#123;    public int maxSubArray(int[">
+<meta property="og:type" content="article">
+<meta property="og:title" content="贪心求最大和">
+<meta property="og:url" content="http://yoursite.com/2019/11/13/53贪心/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="最大子序和53给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。 示例: 输入: [-2,1,-3,4,-1,2,1,-5,4],输出: 6解释: 连续子数组 [4,-1,2,1] 的和最大，为 6。 123456789101112131415class Solution &amp;#123;    public int maxSubArray(int[">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-11-13T14:45:14.890Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="贪心求最大和">
+<meta name="twitter:description" content="最大子序和53给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。 示例: 输入: [-2,1,-3,4,-1,2,1,-5,4],输出: 6解释: 连续子数组 [4,-1,2,1] 的和最大，为 6。 123456789101112131415class Solution &amp;#123;    public int maxSubArray(int[">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -154,40 +158,55 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-排序1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-53贪心" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/04/排序1/">排序1</a>
+    <h1 class="article-title" itemprop="name">
+      贪心求最大和
     </h1>
   
 
         
-        <a href="/2019/11/04/排序1/" class="archive-article-date">
-  	<time datetime="2019-11-04T00:49:08.562Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-04</time>
+        <a href="/2019/11/13/53贪心/" class="archive-article-date">
+  	<time datetime="2019-11-13T12:53:41.068Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-13</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>1.冒泡排序<br>时间复杂度最好和最坏均为n*n</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">package lkq;</span><br><span class="line">import java.util.*;</span><br><span class="line">public class MaoPao &#123;</span><br><span class="line">	public static void sort(int arr[],int n)&#123;</span><br><span class="line">		int t;</span><br><span class="line">		for(int i=0;i&lt;n-1;i++)&#123;</span><br><span class="line">			for(int j=0;j&lt;n-i-1;j++)&#123;</span><br><span class="line">				if(arr[j]&gt;arr[j+1])&#123;</span><br><span class="line">					t=arr[j];</span><br><span class="line">					arr[j]=arr[j+1];</span><br><span class="line">					arr[j+1]=t;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">		Scanner in=new Scanner(System.in);</span><br><span class="line">		int n=in.nextInt();</span><br><span class="line">		int arr[]=new int[n];</span><br><span class="line">		for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">			arr[i]=(int)(15*Math.random()+1);</span><br><span class="line">		&#125;</span><br><span class="line">		sort(arr,n);</span><br><span class="line">		for(int num:arr)&#123;</span><br><span class="line">            System.out.print(num+&quot; &quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>2.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">package lkq;</span><br><span class="line">import java.util.*;</span><br><span class="line">public class ChaRu &#123;</span><br><span class="line">	public static void charu(int s[])&#123;</span><br><span class="line">        int j;</span><br><span class="line">		for(int i=1;i&lt;s.length;i++)&#123;</span><br><span class="line">			int t=s[i];</span><br><span class="line">			for(j=i-1;j&gt;=0&amp;&amp;s[j]&gt;t;j--)&#123;//先写j&gt;=0 否则会出现数组索引异常</span><br><span class="line">				s[j+1]=s[j];</span><br><span class="line">			&#125;</span><br><span class="line">			s[j+1]=t;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Scanner in=new Scanner(System.in);</span><br><span class="line">		int n=in.nextInt();</span><br><span class="line">		int s[]=new int[n];</span><br><span class="line">		for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">			s[i]=(int)(100*Math.random()+1);</span><br><span class="line">		&#125;</span><br><span class="line">		charu(s);</span><br><span class="line">		for(int k=0;k&lt;n;k++)</span><br><span class="line">            System.out.print(s[k]+&quot; &quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>3<br>首先快速排序是一种不稳定的排序算法<br>首先其最好情况下时间复杂度为nlog2n<br>最差情况下为n*n<br>快速排序有多种方法<br>这里用的是其中一种<br>比如有如下序列 4 6 9 3 7 5<br>则我们以4为基准p<br>i=0(left) j=n-1(right)<br>先从j开始找比基准p小的数，找不到了停止<br>再从i开始找比基准p大的数，找不到了停止<br>交换arr[i]和arr[j](这样左边都比基准p小，右边都比基准p大）<br>最后当i与j碰面时 基准p与i与j碰面的位置互换<br>则第一次<br>              4 6 9 3 7 5<br>              4 3 9 6 7 5<br>              3 【4】 9 6 7 5<br>第二种方法<br>i与j同时在头的位置(i==0&amp;&amp;j==0)<br>当j找到比到比p=5小的数时停止<br>arr[i+1]与arr[j]互换<br>则第一次<br>              4 6 9 3 7 5<br>              4 6 9 3 7 5<br>              4 3 9 6 7 5<br>              4 3 【5】 6 7 9</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">package lkq;</span><br><span class="line">import java.util.*;</span><br><span class="line">public class QuickSort&#123;</span><br><span class="line">	public static void sort(int arr[],int left,int right)&#123;</span><br><span class="line">		 if(left&gt;right) return;</span><br><span class="line">	     int i=left;</span><br><span class="line">	     int j=right;</span><br><span class="line">	     int p=arr[left];</span><br><span class="line">	     int t;</span><br><span class="line">	     while(i!=j)&#123;</span><br><span class="line">	    	 while(arr[j]&gt;=p&amp;&amp;i&lt;j)&#123;</span><br><span class="line">	    		 j--;</span><br><span class="line">	    	 &#125;	 </span><br><span class="line">	         while(arr[i]&lt;=p&amp;&amp;i&lt;j)&#123;</span><br><span class="line">	        	 i++;</span><br><span class="line">	         &#125;</span><br><span class="line">	         if(i&lt;j)&#123;</span><br><span class="line">	        	t=arr[i]; </span><br><span class="line">	        	arr[i]=arr[j];</span><br><span class="line">	        	arr[j]=t;</span><br><span class="line">	         &#125;</span><br><span class="line">	     &#125;</span><br><span class="line">	     arr[left]=arr[i];</span><br><span class="line">	     arr[i]=p;</span><br><span class="line">	     sort(arr,i+1,right);</span><br><span class="line">	     sort(arr,left,i-1);</span><br><span class="line">	&#125;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">		Scanner in=new Scanner(System.in);</span><br><span class="line">		int n=in.nextInt();</span><br><span class="line">		int arr[]=new int[n];</span><br><span class="line">		for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">			arr[i]=(int)(15*Math.random()+1);</span><br><span class="line">		&#125;</span><br><span class="line">		sort(arr,0,n-1);</span><br><span class="line">		for(int num:arr)&#123;</span><br><span class="line">            System.out.print(num+&quot; &quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p>最大子序和53<br>给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。</p>
+<p>示例:</p>
+<p>输入: [-2,1,-3,4,-1,2,1,-5,4],<br>输出: 6<br>解释: 连续子数组 [4,-1,2,1] 的和最大，为 6。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int maxSubArray(int[] nums) &#123;</span><br><span class="line">        int maxn=nums[0];</span><br><span class="line">        int sum=0;</span><br><span class="line">        for(int i=0;i&lt;nums.length;i++)&#123;</span><br><span class="line">           sum+=nums[i];</span><br><span class="line">           if(sum&gt;=maxn)</span><br><span class="line">                maxn=sum;</span><br><span class="line">           if(sum&lt;0)&#123;</span><br><span class="line">               sum=0;</span><br><span class="line">           &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return maxn;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -196,16 +215,84 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/04/排序1/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/11/13/53贪心/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2019/11/13/78子集/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          位运算应用
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/11/12/26 27题 原数组修改/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">原数组修改</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -225,490 +312,14 @@
 
 
 
-
-  
-    <article id="post-Servle学习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/01/Servle学习/">Servlet学习</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/01/Servle学习/" class="archive-article-date">
-  	<time datetime="2019-11-01T15:13:37.521Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Servlet学习记录"><a href="#Servlet学习记录" class="headerlink" title="Servlet学习记录"></a>Servlet学习记录</h1><p>今天web课学习了Servlet课，对其有了新的学习与认识。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;web-app&gt;</span><br><span class="line"> </span><br><span class="line">    &lt;servlet&gt;</span><br><span class="line">        &lt;servlet-name&gt;HelloServlet&lt;/servlet-name&gt;</span><br><span class="line">        &lt;servlet-class&gt;HelloServlet&lt;/servlet-class&gt;</span><br><span class="line">    &lt;/servlet&gt;</span><br><span class="line"> </span><br><span class="line">    &lt;servlet-mapping&gt;</span><br><span class="line">        &lt;servlet-name&gt;HelloServlet&lt;/servlet-name&gt;</span><br><span class="line">        &lt;url-pattern&gt;/hello&lt;/url-pattern&gt;</span><br><span class="line">    &lt;/servlet-mapping&gt;</span><br><span class="line"> </span><br><span class="line">&lt;/web-app&gt;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; &lt;servlet&gt; 标签下的 &lt;servlet-name&gt; 与</span><br><span class="line">&gt; &lt;servlet-mapping&gt; 标签下的 &lt;servlet-name&gt;</span><br><span class="line">&gt; 必须一样</span><br><span class="line">&gt; </span><br><span class="line">&gt; &lt;servlet-name&gt;与&lt;servlet-class&gt;可以不一样，</span><br><span class="line">&gt; 但是为了便于理解与维护，一般都会写的一样。</span><br></pre></td></tr></table></figure>
-
-<p>eclipse(导包）<br>1.首先建空包 在下面写方法<br>2.建web文件夹web-inf文件夹web.xml(配置映射）<br>3.首先在WEB-INF下创建classes目录<br>把项目的class文件输出由原来的 j2ee/bin 设置到 j2ee/web/WEB-INF/classes下<br>步骤:<br>项目右键-&gt;properties-&gt;Java Build Path-&gt;Source-&gt;右下角的 Brower-&gt; 指定位置是 j2ee/web/WEB-INF/classes。</p>
-<ol start="4">
-<li>tomcat下conf下serve.xml写</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;Context path=&quot;/&quot; docBase=&quot;e:\\project\\j2ee\\web&quot; debug=&quot;0&quot; reloadable=&quot;false&quot; /&gt;</span><br><span class="line">5.启动tomcat</span><br></pre></td></tr></table></figure>
-
-<p>6.注意写加上.html(如login.html）</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/01/Servle学习/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-二叉排序树" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/31/二叉排序树/">二叉排序树和其中序输出(从小到大）</a>
-    </h1>
-  
-
-        
-        <a href="/2019/10/31/二叉排序树/" class="archive-article-date">
-  	<time datetime="2019-10-31T07:15:15.251Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-31</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>插入数据并按顺序输出(就是中序遍历—-左中右）<br>如图<br>假设通过二叉树对如下10个随机数进行排序<br>37,9,16,34,29,6,48,46,59<br>排序的第一个步骤是把数据插入到该二叉树中<br>插入基本逻辑是，小、相同的放左边，大的放右边中序遍历输出即为从小到大顺序</p>
-<p><img src="https://img-blog.csdnimg.cn/20191031151137459.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">package nnn;</span><br><span class="line">import java.util.*;</span><br><span class="line">public class node &#123;</span><br><span class="line">	public node left;</span><br><span class="line">	public node right;</span><br><span class="line">	public Object value;//存空,所以用Object</span><br><span class="line">	public void add(Object num)&#123;</span><br><span class="line">		 // 如果当前节点没有值，就把数据放在当前节点上</span><br><span class="line">		if(value==null)</span><br><span class="line">			value=num;</span><br><span class="line">		// 如果当前节点有值，就进行判断，新增的值与当前值的大小关系</span><br><span class="line">		else&#123;</span><br><span class="line">			// 新增的值，比当前值小或者相同</span><br><span class="line">			if((Integer)num-((Integer)value)&lt;=0)&#123;</span><br><span class="line">				if(left==null)</span><br><span class="line">				left=new node();</span><br><span class="line">				left.add(num);</span><br><span class="line">			&#125;</span><br><span class="line">			else&#123;</span><br><span class="line">				if(right==null)</span><br><span class="line">				right=new node();</span><br><span class="line">				right.add(num);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;	</span><br><span class="line">	&#125;</span><br><span class="line">	public List&lt;Object&gt; values()&#123;</span><br><span class="line">		List&lt;Object&gt; values = new ArrayList&lt;&gt;();</span><br><span class="line">	    if(left!=null)</span><br><span class="line">            values.addAll(left.values());//等于把左子树的所有递归得到的值存到容器中</span><br><span class="line">	    values.add(value);</span><br><span class="line">	    if(right!=null)</span><br><span class="line">	    	values.addAll(right.values());</span><br><span class="line">	    return values;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		int p[]=new int[]&#123;37,9,16,34,29,6,48,46,59&#125;;</span><br><span class="line">		  node S=new node();</span><br><span class="line">		  for(int number:p)&#123;</span><br><span class="line">			  S.add(number);</span><br><span class="line">		  &#125;	</span><br><span class="line">		  System.out.println(S.values());//从根开始便利</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>输出(为从小到大的终须排序）<br><img src="https://img-blog.csdnimg.cn/20191031151323171.png" alt="在这里插入图片描述"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/31/二叉排序树/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-操作系统学习10月30日" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/30/操作系统学习10月30日/">操作系统学习</a>
-    </h1>
-  
-
-        
-        <a href="/2019/10/30/操作系统学习10月30日/" class="archive-article-date">
-  	<time datetime="2019-10-30T07:51:06.852Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="操作系统学习记录"><a href="#操作系统学习记录" class="headerlink" title="操作系统学习记录"></a>操作系统学习记录</h1><h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a><strong>死锁</strong></h2><p><strong>1.何为死锁</strong><br>死锁是指多个进程争夺资源而处于的僵持状态<br><strong>2.产生原因</strong><br>系统资源不足。竞争资源和进程间推进顺序非法<br><strong>3.解决死锁的四种方法</strong><br>预防 避免 解除 检测<br><strong>4.产生死锁的条件</strong><br>　　1.互斥条件：一个资源每次只能被一个进程使用<br>　　2.不可剥夺条件：进程已获得资源，在未使用完之前，不能被其他进程强行剥夺，只能主动释放<br>　　3.请求和保持条件：进程已经保持了至少一个资源，但又提出了新的资源请求，而该资源已被其他进程占有，此时请求进程被阻塞，但对自己已获得的资源保持不放。<br>　　4.循环等待条件：即进程集合{p0,p1,p2,p3…..pn};p0正在等待p1占用的资源，p1正在等待p2占用的资源，pn正在等待p0占用的资源。<br><strong>4.预防死锁具体方法</strong><br>1.当一个占有资源进程请求新任务时，如果系统不能满足，进程应该释放当前所有的资源才可以重新申请。<br>2.如果系统有足够的资源，系统一次性把资源分配给进程需要的资源<br>3.按照顺序严格的分配进程顺序，按照类型排序序号排序，进程对资源请求必须按照序号递增的次序提出</p>
-<h2 id="进程和线程"><a href="#进程和线程" class="headerlink" title="进程和线程"></a>进程和线程</h2><p><strong>1.进程</strong>：一个程序即一个线程，即一个程序运行时的实例。分配系统资源的最小单位<br><strong>线程：</strong>系统分配处理器时间资源的基本单元，或者说进程之内独立执行的一个单元执行流。<strong>进程——资源分配的最小单位，线程——程序执行的最小单位。</strong></p>
-<p><strong>2.简单来记：</strong></p>
-<p>1) 简而言之,一个程序至少有一个进程,一个进程至少有一个线程.</p>
-<p>2) 线程的划分尺度小于进程，使得多线程程序的并发性高。</p>
-<p>3) 另外，进程在执行过程中拥有独立的内存单元，而多个线程共享内存，从而极大地提高了程序的运行效率。</p>
-<p>4) 线程在执行过程中与进程还是有区别的。每个独立的线程有一个程序运行的入口、顺序执行序列和程序的出口。但是线程不能够独立执行，必须依存在应用程序中，由应用程序提供多个线程执行控制。<br>5) 从逻辑角度来看，多线程的意义在于一个应用程序中，有多个执行部分可以同时执行。但操作系统并没有将多个线程看做多个独立的应用，来实现进程的调度和管理以及资源分配。这就是进程和线程的重要区别。</p>
-<p><strong>3 优缺点：</strong></p>
-<p>线程开销小，但不利于资源的管理和保护；进程与之相反。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/30/操作系统学习10月30日/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-如何写博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/30/如何写博客/">文章部署方法</a>
-    </h1>
-  
-
-        
-        <a href="/2019/10/30/如何写博客/" class="archive-article-date">
-  	<time datetime="2019-10-30T02:28:52.107Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <center>如何发布文章到自己搭建的hexo博客上</center>
-
-<p><strong>1.csdn导入</strong><br>2.选择Git Bash Here，输入 hexo g (完整命令为hexo generate)，<br>3 然后 输入 hexo s(完整命令为hexo server)，用于启动服务器<br>4.主要用来本地预览；完成后 打开浏览器输入 localhost:4000，会发现多了你刚写的那篇博客<br>5 最后输入hexo d(hexo deploy)，用于将本地文件发布到github等git仓库上；</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/30/如何写博客/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-第一篇博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/29/第一篇博客/">第一篇博客--2019年10月29日</a>
-    </h1>
-  
-
-        
-        <a href="/2019/10/29/第一篇博客/" class="archive-article-date">
-  	<time datetime="2019-10-29T14:54:33.971Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="2019年10月29日"><a href="#2019年10月29日" class="headerlink" title="2019年10月29日"></a>2019年10月29日</h1><center>第一篇博客</center>
- 在用hexo搭建博客一个月后第一次用markdown写博客，希望以后每天分享自己学到的知识，加油，为梦想奋斗。
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/29/第一篇博客/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-我的小可爱朱媛媛" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/17/我的小可爱朱媛媛/">我的小可爱朱媛媛</a>
-    </h1>
-  
-
-        
-        <a href="/2019/09/17/我的小可爱朱媛媛/" class="archive-article-date">
-  	<time datetime="2019-09-17T14:23:38.187Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/09/17/我的小可爱朱媛媛/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/17/hello-world/">Hello World</a>
-    </h1>
-  
-
-        
-        <a href="/2019/09/17/hello-world/" class="archive-article-date">
-  	<time datetime="2019-09-17T13:39:46.546Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/09/17/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-    </nav>
+  
+
+  
+
+  
+
   
 
 
@@ -731,8 +342,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
