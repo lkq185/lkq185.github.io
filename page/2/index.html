@@ -156,19 +156,87 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-53字符串基础操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-94栈对二叉树遍历" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/13/53字符串基础操作/">字符串操作</a>
+      <a class="article-title" href="/2019/11/13/94栈对二叉树遍历/">栈与二叉树</a>
     </h1>
   
 
         
-        <a href="/2019/11/13/53字符串基础操作/" class="archive-article-date">
+        <a href="/2019/11/13/94栈对二叉树遍历/" class="archive-article-date">
+  	<time datetime="2019-11-13T14:39:18.313Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>二叉树中序遍历<br>递归和栈<br>递归传统没有多说的<br>注意：可以通过help返回想要的元素类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition for a binary tree node.</span><br><span class="line"> * public class TreeNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     TreeNode left;</span><br><span class="line"> *     TreeNode right;</span><br><span class="line"> *     TreeNode(int x) &#123; val = x; &#125;</span><br><span class="line"> * &#125;</span><br><span class="line"> */</span><br><span class="line">class Solution &#123;</span><br><span class="line">            public void help(TreeNode root,List&lt;Integer&gt; A)&#123;</span><br><span class="line">               if(root==null) return;</span><br><span class="line">               help(root.left,A);</span><br><span class="line">	           A.add(root.val);</span><br><span class="line">	           help(root.right,A);</span><br><span class="line">            &#125;</span><br><span class="line">    	    public List&lt;Integer&gt; inorderTraversal(TreeNode root) &#123;</span><br><span class="line">	        List&lt;Integer&gt; a=new ArrayList&lt;&gt;();</span><br><span class="line">            help(root,a);</span><br><span class="line">	        return a;</span><br><span class="line">	    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>利用Stack<br>因为左子树的插入中，节点是先进后出<br>遍历顺序为当前节点(栈顶，可以当作父节点)-&gt;其右节点-&gt;父节点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public List&lt;Integer&gt; inorderTraversal(TreeNode root) &#123;</span><br><span class="line">        Stack&lt;TreeNode&gt; q=new Stack&lt;&gt;();</span><br><span class="line">        List&lt;Integer&gt; res=new ArrayList&lt;&gt;();</span><br><span class="line">        TreeNode t=root;</span><br><span class="line">        while(t!=null||!q.isEmpty())&#123;</span><br><span class="line">             while(t!=null)&#123;</span><br><span class="line">                 q.push(t);</span><br><span class="line">                 t=t.left;</span><br><span class="line">             &#125;</span><br><span class="line">             t=q.pop();</span><br><span class="line">            res.add(t.val);</span><br><span class="line">            t=t.right;</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/13/94栈对二叉树遍历/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-58字符串基础操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/13/58字符串基础操作/">字符串操作</a>
+    </h1>
+  
+
+        
+        <a href="/2019/11/13/58字符串基础操作/" class="archive-article-date">
   	<time datetime="2019-11-13T14:31:38.690Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-13</time>
 </a>
         
@@ -191,7 +259,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/13/53字符串基础操作/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/11/13/58字符串基础操作/">展开全文 >></a>
         </p>
       
 
@@ -445,19 +513,19 @@
 
 
   
-    <article id="post-第一次力扣" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-1第一次力扣" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/12/第一次力扣/">第一次力扣</a>
+      <a class="article-title" href="/2019/11/12/1第一次力扣/">第一次力扣</a>
     </h1>
   
 
         
-        <a href="/2019/11/12/第一次力扣/" class="archive-article-date">
+        <a href="/2019/11/12/1第一次力扣/" class="archive-article-date">
   	<time datetime="2019-11-12T15:11:28.496Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-12</time>
 </a>
         
@@ -485,7 +553,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/12/第一次力扣/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/11/12/1第一次力扣/">展开全文 >></a>
         </p>
       
 
@@ -765,80 +833,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/11/04/排序1/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Servle学习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/01/Servle学习/">Servlet学习</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/01/Servle学习/" class="archive-article-date">
-  	<time datetime="2019-11-01T15:13:37.521Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Servlet学习记录"><a href="#Servlet学习记录" class="headerlink" title="Servlet学习记录"></a>Servlet学习记录</h1><p>今天web课学习了Servlet课，对其有了新的学习与认识。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;web-app&gt;</span><br><span class="line"> </span><br><span class="line">    &lt;servlet&gt;</span><br><span class="line">        &lt;servlet-name&gt;HelloServlet&lt;/servlet-name&gt;</span><br><span class="line">        &lt;servlet-class&gt;HelloServlet&lt;/servlet-class&gt;</span><br><span class="line">    &lt;/servlet&gt;</span><br><span class="line"> </span><br><span class="line">    &lt;servlet-mapping&gt;</span><br><span class="line">        &lt;servlet-name&gt;HelloServlet&lt;/servlet-name&gt;</span><br><span class="line">        &lt;url-pattern&gt;/hello&lt;/url-pattern&gt;</span><br><span class="line">    &lt;/servlet-mapping&gt;</span><br><span class="line"> </span><br><span class="line">&lt;/web-app&gt;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; &lt;servlet&gt; 标签下的 &lt;servlet-name&gt; 与</span><br><span class="line">&gt; &lt;servlet-mapping&gt; 标签下的 &lt;servlet-name&gt;</span><br><span class="line">&gt; 必须一样</span><br><span class="line">&gt; </span><br><span class="line">&gt; &lt;servlet-name&gt;与&lt;servlet-class&gt;可以不一样，</span><br><span class="line">&gt; 但是为了便于理解与维护，一般都会写的一样。</span><br></pre></td></tr></table></figure>
-
-<p>eclipse(导包）<br>1.首先建空包 在下面写方法<br>2.建web文件夹web-inf文件夹web.xml(配置映射）<br>3.首先在WEB-INF下创建classes目录<br>把项目的class文件输出由原来的 j2ee/bin 设置到 j2ee/web/WEB-INF/classes下<br>步骤:<br>项目右键-&gt;properties-&gt;Java Build Path-&gt;Source-&gt;右下角的 Brower-&gt; 指定位置是 j2ee/web/WEB-INF/classes。</p>
-<ol start="4">
-<li>tomcat下conf下serve.xml写</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;Context path=&quot;/&quot; docBase=&quot;e:\\project\\j2ee\\web&quot; debug=&quot;0&quot; reloadable=&quot;false&quot; /&gt;</span><br><span class="line">5.启动tomcat</span><br></pre></td></tr></table></figure>
-
-<p>6.注意写加上.html(如login.html）</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/01/Servle学习/">展开全文 >></a>
         </p>
       
 
