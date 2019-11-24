@@ -156,6 +156,69 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-46 47 22全排列和括号生成" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="全排列46"><a href="#全排列46" class="headerlink" title="全排列46"></a>全排列46</h2><p>给定一个没有重复数字的序列，返回其所有可能的全排列。</p>
+<p>示例:</p>
+<p>输入: [1,2,3]<br>输出:<br>[<br>  [1,2,3],<br>  [1,3,2],<br>  [2,1,3],<br>  [2,3,1],<br>  [3,1,2],<br>  [3,2,1]<br>]</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt; res= new LinkedList();</span><br><span class="line">    int n;</span><br><span class="line">    public void back(int nums[],LinkedList&lt;Integer&gt; cur,int h[])&#123;</span><br><span class="line">        if(cur.size()==n)&#123;</span><br><span class="line">           res.add(new LinkedList(cur));</span><br><span class="line">           return;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">           if(h[i]!=0)</span><br><span class="line">           continue;</span><br><span class="line">           cur.add(nums[i]);</span><br><span class="line">           h[i]=1;</span><br><span class="line">           back(nums,cur,h);</span><br><span class="line">           h[i]=0;</span><br><span class="line">           cur.removeLast(); //除去最后一个元素</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public List&lt;List&lt;Integer&gt;&gt; permute(int[] nums) &#123;</span><br><span class="line">        int n=nums.length;</span><br><span class="line">        this.n=n; //全局变量设置</span><br><span class="line">        int used[]=new int[n]; </span><br><span class="line">        back(nums,new LinkedList&lt;Integer&gt;(),used);</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20191119225124487.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">以n叉树的思想就行递归和回溯</p>
+<h2 id="47有重复数全排列"><a href="#47有重复数全排列" class="headerlink" title="47有重复数全排列"></a>47有重复数全排列</h2><p>给定一个可包含重复数字的序列，返回所有不重复的全排列。</p>
+<p>示例:</p>
+<p>输入: [1,1,2]<br>输出:<br>[<br>  [1,1,2],<br>  [1,2,1],<br>  [2,1,1]<br>]</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt; res= new LinkedList();</span><br><span class="line">    int n;</span><br><span class="line">    int h[]=new int[100];</span><br><span class="line">    public void init(int n)&#123;</span><br><span class="line">        this.n=n;</span><br><span class="line">    &#125;</span><br><span class="line">    public void back(int nums[],LinkedList&lt;Integer&gt; cur)&#123;</span><br><span class="line">        if(cur.size()==n&amp;&amp;res.contains(cur)==false)&#123;</span><br><span class="line">           res.add(new LinkedList(cur));</span><br><span class="line">           return;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">           if(h[i]!=0)</span><br><span class="line">           continue;</span><br><span class="line">           cur.add(nums[i]);</span><br><span class="line">           h[i]=1;</span><br><span class="line">           back(nums,cur);</span><br><span class="line">           h[i]=0;</span><br><span class="line">           cur.removeLast();//除去最后一个元素</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public List&lt;List&lt;Integer&gt;&gt; permuteUnique(int[] nums) &#123;</span><br><span class="line">        int n=nums.length;</span><br><span class="line">        init(n);</span><br><span class="line">        back(nums,new LinkedList&lt;Integer&gt;());</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="22-括号生成"><a href="#22-括号生成" class="headerlink" title="22. 括号生成"></a>22. 括号生成</h2><p>给出 n 代表生成括号的对数，请你写出一个函数，使其能够生成所有可能的并且有效的括号组合。</p>
+<p>例如，给出 n = 3，生成结果为：</p>
+<p>[<br>  “((()))”,<br>  “(()())”,<br>  “(())()”,<br>  “()(())”,<br>  “()()()”<br>]</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;//必须有左括号才能右括号，只要右括号数小于左括号，总有左括号和右括号匹配</span><br><span class="line">    List&lt;String&gt; res=new ArrayList&lt;&gt;();</span><br><span class="line">    public void dfs(String t,int left,int right)&#123;</span><br><span class="line">         if(left==0&amp;&amp;right==0)&#123;</span><br><span class="line">             res.add(t);</span><br><span class="line">             return;</span><br><span class="line">         &#125;</span><br><span class="line">         if(left&gt;0)&#123;</span><br><span class="line">           dfs(t+&quot;(&quot;,left-1,right);</span><br><span class="line">         &#125;</span><br><span class="line">         if(right&gt;left)&#123;//right剩余比left多，保证left永远比right值小</span><br><span class="line">             dfs(t+&quot;)&quot;,left,right-1);</span><br><span class="line">         &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public List&lt;String&gt; generateParenthesis(int n) &#123;</span><br><span class="line">        dfs(&quot;&quot;,n,n);</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/24/46 47 22全排列和括号生成/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-128最长连续序列" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -518,79 +581,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/11/20/35二分/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-22 46 47全排列加括号生成" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/19/22 46 47全排列加括号生成/">回溯求全排列和括号生成</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/19/22 46 47全排列加括号生成/" class="archive-article-date">
-  	<time datetime="2019-11-19T14:56:36.159Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="全排列46"><a href="#全排列46" class="headerlink" title="全排列46"></a>全排列46</h2><p>给定一个没有重复数字的序列，返回其所有可能的全排列。</p>
-<p>示例:</p>
-<p>输入: [1,2,3]<br>输出:<br>[<br>  [1,2,3],<br>  [1,3,2],<br>  [2,1,3],<br>  [2,3,1],<br>  [3,1,2],<br>  [3,2,1]<br>]</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt; res= new LinkedList();</span><br><span class="line">    int n;</span><br><span class="line">    public void back(int nums[],LinkedList&lt;Integer&gt; cur,int h[])&#123;</span><br><span class="line">        if(cur.size()==n)&#123;</span><br><span class="line">           res.add(new LinkedList(cur));</span><br><span class="line">           return;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">           if(h[i]!=0)</span><br><span class="line">           continue;</span><br><span class="line">           cur.add(nums[i]);</span><br><span class="line">           h[i]=1;</span><br><span class="line">           back(nums,cur,h);</span><br><span class="line">           h[i]=0;</span><br><span class="line">           cur.removeLast(); //除去最后一个元素</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public List&lt;List&lt;Integer&gt;&gt; permute(int[] nums) &#123;</span><br><span class="line">        int n=nums.length;</span><br><span class="line">        this.n=n; //全局变量设置</span><br><span class="line">        int used[]=new int[n]; </span><br><span class="line">        back(nums,new LinkedList&lt;Integer&gt;(),used);</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://img-blog.csdnimg.cn/20191119225124487.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">以n叉树的思想就行递归和回溯</p>
-<h2 id="47有重复数全排列"><a href="#47有重复数全排列" class="headerlink" title="47有重复数全排列"></a>47有重复数全排列</h2><p>给定一个可包含重复数字的序列，返回所有不重复的全排列。</p>
-<p>示例:</p>
-<p>输入: [1,1,2]<br>输出:<br>[<br>  [1,1,2],<br>  [1,2,1],<br>  [2,1,1]<br>]</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt; res= new LinkedList();</span><br><span class="line">    int n;</span><br><span class="line">    int h[]=new int[100];</span><br><span class="line">    public void init(int n)&#123;</span><br><span class="line">        this.n=n;</span><br><span class="line">    &#125;</span><br><span class="line">    public void back(int nums[],LinkedList&lt;Integer&gt; cur)&#123;</span><br><span class="line">        if(cur.size()==n&amp;&amp;res.contains(cur)==false)&#123;</span><br><span class="line">           res.add(new LinkedList(cur));</span><br><span class="line">           return;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">           if(h[i]!=0)</span><br><span class="line">           continue;</span><br><span class="line">           cur.add(nums[i]);</span><br><span class="line">           h[i]=1;</span><br><span class="line">           back(nums,cur);</span><br><span class="line">           h[i]=0;</span><br><span class="line">           cur.removeLast();//除去最后一个元素</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public List&lt;List&lt;Integer&gt;&gt; permuteUnique(int[] nums) &#123;</span><br><span class="line">        int n=nums.length;</span><br><span class="line">        init(n);</span><br><span class="line">        back(nums,new LinkedList&lt;Integer&gt;());</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/19/22 46 47全排列加括号生成/">展开全文 >></a>
         </p>
       
 
