@@ -19,7 +19,7 @@
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
   
-    <link rel="icon" href="/favicon.png">
+    <link rel="icon" href="/img/2.png">
   
   <link rel="stylesheet" type="text/css" href="/./main.0cf68a.css">
   <style type="text/css">
@@ -155,6 +155,75 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-二叉树中序先序转后序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/06/二叉树中序先序转后序/">二叉树根据中序先序写出后序遍历结果</a>
+    </h1>
+  
+
+        
+        <a href="/2019/11/06/二叉树中序先序转后序/" class="archive-article-date">
+  	<time datetime="2019-11-06T14:42:14.963Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>如图，此二叉树<br>先序遍历为426315<br>中序遍历为623415<br>求后序遍历结果</p>
+<p><img src="https://img-blog.csdnimg.cn/20191106222235989.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;string&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">string a1=&quot;&quot;,a2=&quot;&quot;,a3=&quot;&quot;;</span><br><span class="line">int PreIn2Post(string Preorder, string Inorder)</span><br><span class="line">&#123;</span><br><span class="line">	int length = Preorder.length();</span><br><span class="line">	if (length &lt;= 0)return 0;</span><br><span class="line">	char Root = Preorder[0];</span><br><span class="line">	int i = 0;</span><br><span class="line">	for (;i&lt;length;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		if (Root == Inorder[i])</span><br><span class="line">			break;</span><br><span class="line">	&#125;</span><br><span class="line">    a1+=Root;</span><br><span class="line">	PreIn2Post(Preorder.substr(1, i), Inorder.substr(0, i));//递归访问左子树</span><br><span class="line">    a2+=Root;</span><br><span class="line">	PreIn2Post(Preorder.substr(i + 1, length - i), Inorder.substr(i + 1, length - i));//递归访问右子树</span><br><span class="line">	a3+=Root;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	string Preorder, Inorder;</span><br><span class="line">	cin &gt;&gt; Preorder &gt;&gt; Inorder;</span><br><span class="line">	PreIn2Post(Preorder, Inorder);</span><br><span class="line">	cout&lt;&lt;&quot;先序遍历：&quot;&lt;&lt;a1&lt;&lt;endl&lt;&lt;&quot;中序遍历：&quot;&lt;&lt;a2&lt;&lt;endl&lt;&lt;&quot;后序遍历：&quot;&lt;&lt;a3&lt;&lt;endl;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出：<img src="https://img-blog.csdnimg.cn/20191106223243411.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><strong>步骤</strong><br>426315<br>623415<br>4为根节点，则中序分为623【4】15<br>左子树623的跟为先序【2】6315的2<br>则6和3为2的左儿子和右儿子。。。<br>发现一直重复这一过程，则实行递归进程</p>
+<p><strong>函数解析</strong><br>   PreIn2Post(Preorder.substr(1, i), Inorder.substr(0, i));<br>   i为根节点<br>   则先序从第2个元素开始长度为i的字符串<br>   和中序第第一个元素开始长度为i字符串<br>   继续递归此操作</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/06/二叉树中序先序转后序/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-排序1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -475,70 +544,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/10/30/如何写博客/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-第一篇博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/29/第一篇博客/">第一篇博客--2019年10月29日</a>
-    </h1>
-  
-
-        
-        <a href="/2019/10/29/第一篇博客/" class="archive-article-date">
-  	<time datetime="2019-10-29T14:54:33.971Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="2019年10月29日"><a href="#2019年10月29日" class="headerlink" title="2019年10月29日"></a>2019年10月29日</h1><center>第一篇博客</center>
- 在用hexo搭建博客一个月后第一次用markdown写博客，希望以后每天分享自己学到的知识，加油，为梦想奋斗。
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/29/第一篇博客/">展开全文 >></a>
         </p>
       
 
