@@ -156,6 +156,71 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-58字符串基础操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/13/58字符串基础操作/">字符串操作</a>
+    </h1>
+  
+
+        
+        <a href="/2019/11/13/58字符串基础操作/" class="archive-article-date">
+  	<time datetime="2019-11-13T14:31:38.690Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>58<br>主要是字符串操作<br>String s(大写）<br>长度不同于数组加括号s.length()<br>没有s[i] 正确写法为charAt(i)<br>如此题求最后一个单词长度</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int lengthOfLastWord(String s) &#123;</span><br><span class="line">        int i;</span><br><span class="line">        int count=0;</span><br><span class="line">        for(i=s.length()-1;i&gt;=0;i--)&#123;</span><br><span class="line">            if(s.charAt(i)!=&apos; &apos;)</span><br><span class="line">               count++;</span><br><span class="line">            else&#123;</span><br><span class="line">            if(count!=0)//等于空格并且count=0才返回，否则继续 防止&quot;a  &quot;这种字符串后有空格的</span><br><span class="line">               return count;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/13/58字符串基础操作/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-78子集" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -497,71 +562,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/11/07/二叉树镜像，深度，按层次输出/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-随机化快排" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/07/随机化快排/">随机化快排</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/07/随机化快排/" class="archive-article-date">
-  	<time datetime="2019-11-07T14:38:33.437Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="随机化快排"><a href="#随机化快排" class="headerlink" title="随机化快排"></a><strong>随机化快排</strong></h2><p>当快速排序的序列为有序时，则并不会起到分治效果，时间复杂度为n*n<br>则可以改为随机化快速排序。<br>步骤 如 4 6 9 3 7 5<br>        取6为基准，6和5互换<br>        4 5 9 3 7【6】<br>        依旧找左大右小的，从右开始<br>        找比6小的元素…重复快排序方法<br>         4 5 3【6】7 9<br>         重复此操作<br>代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">package lkq;</span><br><span class="line">import java.util.*;</span><br><span class="line">import java.math.*;</span><br><span class="line">public class randSort &#123;</span><br><span class="line">   public static int randsort2(int []arr,int left,int right)&#123;</span><br><span class="line">	    int x=arr[right];</span><br><span class="line">	    int p=left - 1;</span><br><span class="line">	    for (int i=left;i&lt;right;i++) &#123;</span><br><span class="line">	        if (arr[i]&lt;=x) &#123;</span><br><span class="line">	            p++;</span><br><span class="line">	            swap(arr,p,i);</span><br><span class="line">	        &#125;</span><br><span class="line">	    &#125;</span><br><span class="line">	    swap(arr,p+1,right);</span><br><span class="line">	    return p+1;</span><br><span class="line">   &#125;</span><br><span class="line">   public static void randsort(int arr[],int left,int right)&#123;</span><br><span class="line">	   if (left &lt; right)&#123;//重点，否则会出现异常</span><br><span class="line">	   int p1=left+(int)(Math.random()*(right-left+1));</span><br><span class="line">	   swap(arr,right,p1);</span><br><span class="line">	   int p2=randsort2(arr,left,right);</span><br><span class="line">	   randsort(arr,left,p2-1);</span><br><span class="line">	   randsort(arr,p2+1,right);</span><br><span class="line">	   &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   public static void swap(int []arr,int a,int b)&#123;</span><br><span class="line">	   int t;</span><br><span class="line">	   t=arr[b];</span><br><span class="line">	   arr[b]=arr[a];</span><br><span class="line">	   arr[a]=t;</span><br><span class="line">   &#125;</span><br><span class="line">   public static void main(String[] args) &#123;</span><br><span class="line">	  int arr[]=new int[]&#123;4,6,9,3,7,5&#125;;</span><br><span class="line">	  randsort(arr,0,5);</span><br><span class="line">	  for(int num:arr)&#123;</span><br><span class="line">		  System.out.print(num+&quot; &quot;);</span><br><span class="line">	  &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/07/随机化快排/">展开全文 >></a>
         </p>
       
 

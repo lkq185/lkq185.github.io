@@ -156,6 +156,71 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-随机化快排" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/07/随机化快排/">随机化快排</a>
+    </h1>
+  
+
+        
+        <a href="/2019/11/07/随机化快排/" class="archive-article-date">
+  	<time datetime="2019-11-07T14:38:33.437Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="随机化快排"><a href="#随机化快排" class="headerlink" title="随机化快排"></a><strong>随机化快排</strong></h2><p>当快速排序的序列为有序时，则并不会起到分治效果，时间复杂度为n*n<br>则可以改为随机化快速排序。<br>步骤 如 4 6 9 3 7 5<br>        取6为基准，6和5互换<br>        4 5 9 3 7【6】<br>        依旧找左大右小的，从右开始<br>        找比6小的元素…重复快排序方法<br>         4 5 3【6】7 9<br>         重复此操作<br>代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">package lkq;</span><br><span class="line">import java.util.*;</span><br><span class="line">import java.math.*;</span><br><span class="line">public class randSort &#123;</span><br><span class="line">   public static int randsort2(int []arr,int left,int right)&#123;</span><br><span class="line">	    int x=arr[right];</span><br><span class="line">	    int p=left - 1;</span><br><span class="line">	    for (int i=left;i&lt;right;i++) &#123;</span><br><span class="line">	        if (arr[i]&lt;=x) &#123;</span><br><span class="line">	            p++;</span><br><span class="line">	            swap(arr,p,i);</span><br><span class="line">	        &#125;</span><br><span class="line">	    &#125;</span><br><span class="line">	    swap(arr,p+1,right);</span><br><span class="line">	    return p+1;</span><br><span class="line">   &#125;</span><br><span class="line">   public static void randsort(int arr[],int left,int right)&#123;</span><br><span class="line">	   if (left &lt; right)&#123;//重点，否则会出现异常</span><br><span class="line">	   int p1=left+(int)(Math.random()*(right-left+1));</span><br><span class="line">	   swap(arr,right,p1);</span><br><span class="line">	   int p2=randsort2(arr,left,right);</span><br><span class="line">	   randsort(arr,left,p2-1);</span><br><span class="line">	   randsort(arr,p2+1,right);</span><br><span class="line">	   &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   public static void swap(int []arr,int a,int b)&#123;</span><br><span class="line">	   int t;</span><br><span class="line">	   t=arr[b];</span><br><span class="line">	   arr[b]=arr[a];</span><br><span class="line">	   arr[a]=t;</span><br><span class="line">   &#125;</span><br><span class="line">   public static void main(String[] args) &#123;</span><br><span class="line">	  int arr[]=new int[]&#123;4,6,9,3,7,5&#125;;</span><br><span class="line">	  randsort(arr,0,5);</span><br><span class="line">	  for(int num:arr)&#123;</span><br><span class="line">		  System.out.print(num+&quot; &quot;);</span><br><span class="line">	  &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/07/随机化快排/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-二叉树中序先序转后序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -479,71 +544,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/10/30/操作系统学习10月30日/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-如何写博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/30/如何写博客/">文章部署方法</a>
-    </h1>
-  
-
-        
-        <a href="/2019/10/30/如何写博客/" class="archive-article-date">
-  	<time datetime="2019-10-30T02:28:52.107Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <center>如何发布文章到自己搭建的hexo博客上</center>
-
-<p><strong>1.csdn导入</strong><br>2.选择Git Bash Here，输入 hexo g (完整命令为hexo generate)，<br>3 然后 输入 hexo s(完整命令为hexo server)，用于启动服务器<br>4.主要用来本地预览；完成后 打开浏览器输入 localhost:4000，会发现多了你刚写的那篇博客<br>5 最后输入hexo d(hexo deploy)，用于将本地文件发布到github等git仓库上；</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/30/如何写博客/">展开全文 >></a>
         </p>
       
 
