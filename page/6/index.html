@@ -156,6 +156,232 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-78子集" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/13/78子集/">位运算应用</a>
+    </h1>
+  
+
+        
+        <a href="/2019/11/13/78子集/" class="archive-article-date">
+  	<time datetime="2019-11-13T13:27:48.553Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>给定一组不含重复元素的整数数组 nums，返回该数组所有可能的子集（幂集）。</p>
+<p>说明：解集不能包含重复的子集。</p>
+<p>示例:</p>
+<p>输入: nums = [1,2,3]<br>输出:<br>[<br>  [3],<br>  [1],<br>  [2],<br>  [1,2,3],<br>  [1,3],<br>  [2,3],<br>  [1,2],<br>  []<br>]</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public List&lt;List&lt;Integer&gt;&gt; subsets(int[] nums) &#123;</span><br><span class="line">         List&lt;List&lt;Integer&gt;&gt; res = new ArrayList&lt;List&lt;Integer&gt;&gt;();</span><br><span class="line">        for (int i = 0; i &lt; (1 &lt;&lt; nums.length); i++) &#123;</span><br><span class="line">            List&lt;Integer&gt; sub = new ArrayList&lt;Integer&gt;();</span><br><span class="line">            for (int j = 0; j &lt; nums.length; j++)</span><br><span class="line">                if (((i &gt;&gt; j) &amp; 1) == 1) sub.add(nums[j]);</span><br><span class="line">            res.add(sub);</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>首先这个题用 ArrayList&lt;List<integer>&gt;()来存储集合<br>首先幂集有2的n次幂个<br>即1&lt;&lt;3(1变成1000，1变成8）则循环8次<br>内层i&gt;&gt;j 即表示如6左移0 1 2位和1与运算<br>6位110可以看出右移1位2位时和1与运算==1<br>与运算如3&amp;2=2(只有1&amp;1==1）<br>    11<br> &amp;10<br>    10=2<br>最高为7(注意：这里的1 2 3对应数组里第1 2 3项)<br>111 [1,2,3]<br>110 [2,3]<br>101 [1,3]<br>100 [3]<br>011 [1,2]<br>010 [2]<br>001 [1]<br>000 [ ]<br>可以看出是通过1的数量来控制</integer></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/13/78子集/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-53贪心动态规划最大子序和" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/13/53贪心动态规划最大子序和/">贪心和动态规划</a>
+    </h1>
+  
+
+        
+        <a href="/2019/11/13/53贪心动态规划最大子序和/" class="archive-article-date">
+  	<time datetime="2019-11-13T12:53:41.068Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最大子序和53<br>给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。</p>
+<p>示例:</p>
+<p>输入: [-2,1,-3,4,-1,2,1,-5,4],<br>输出: 6<br>解释: 连续子数组 [4,-1,2,1] 的和最大，为 6。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int maxSubArray(int[] nums) &#123;</span><br><span class="line">        int maxn=nums[0];</span><br><span class="line">        int sum=0;</span><br><span class="line">        for(int i=0;i&lt;nums.length;i++)&#123;</span><br><span class="line">           sum+=nums[i];</span><br><span class="line">           if(sum&gt;=maxn)</span><br><span class="line">                maxn=sum;</span><br><span class="line">           if(sum&lt;0)&#123;</span><br><span class="line">               sum=0;</span><br><span class="line">           &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return maxn;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int maxSubArray(int[] nums) &#123;</span><br><span class="line">        int n=nums.length;</span><br><span class="line">        int dp[]=new int[n+1];</span><br><span class="line">        int ans=0;</span><br><span class="line">        dp[0]=nums[0];</span><br><span class="line">        ans=nums[0];</span><br><span class="line">        for(int i=1;i&lt;n;i++)&#123;</span><br><span class="line">           dp[i]=Math.max(nums[i],dp[i-1]+nums[i]);</span><br><span class="line">           ans=Math.max(ans,dp[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/13/53贪心动态规划最大子序和/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-26 27题 原数组修改" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/12/26 27题 原数组修改/">原数组修改</a>
+    </h1>
+  
+
+        
+        <a href="/2019/11/12/26 27题 原数组修改/" class="archive-article-date">
+  	<time datetime="2019-11-12T15:25:47.727Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="26题"><a href="#26题" class="headerlink" title="26题"></a>26题</h2><p>给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。</p>
+<p>不要使用额外的数组空间，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成。</p>
+<p>示例 1:</p>
+<p>给定数组 nums = [1,1,2], </p>
+<p>函数应该返回新的长度 2, 并且原数组 nums 的前两个元素被修改为 1, 2。 </p>
+<p>你不需要考虑数组中超出新长度后面的元素。</p>
+<p>示例 2:</p>
+<p>给定 nums = [0,0,1,1,1,2,2,3,3,4],</p>
+<p>函数应该返回新的长度 5, 并且原数组 nums 的前五个元素被修改为 0, 1, 2, 3, 4。</p>
+<p>你不需要考虑数组中超出新长度后面的元素。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int removeDuplicates(int[] nums)&#123;</span><br><span class="line">		     int ans=0;</span><br><span class="line">	         int j;</span><br><span class="line">	            for(j=1;j&lt;nums.length;j++)&#123;//从1开始</span><br><span class="line">	            	if(nums[j]!=nums[ans])</span><br><span class="line">	            	&#123;</span><br><span class="line">	            		nums[++ans]=nums[j];</span><br><span class="line">	            		 </span><br><span class="line">	            		//System.out.println(nums[ans]);</span><br><span class="line">	            	&#125;</span><br><span class="line">	            &#125;</span><br><span class="line">	            //System.out.println(ans);</span><br><span class="line">	         return ans+1;//数组长度加1</span><br><span class="line">	    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这道题数组并没有改成真正的无重复数，只是占用了ans+1的nums数组长度。<br>同时题目还要求在原题下修改。<br>nums[++ans]=nums[j];</p>
+<h2 id="27题"><a href="#27题" class="headerlink" title="27题"></a>27题</h2><p>给定 nums = [3,2,2,3], val = 3,</p>
+<p>函数应该返回新的长度 2, 并且 nums 中的前两个元素均为 2。</p>
+<p>你不需要考虑数组中超出新长度后面的元素。</p>
+<p>示例 2:</p>
+<p>给定 nums = [0,1,2,2,3,0,4,2], val = 2,</p>
+<p>函数应该返回新的长度 5, 并且 nums 中的前五个元素为 0, 1, 3, 0, 4。</p>
+<p>注意这五个元素可为任意顺序。</p>
+<p>你不需要考虑数组中超出新长度后面的元素。</p>
+<p>说明:</p>
+<p>为什么返回数值是整数，但输出的答案是数组呢?</p>
+<p>请注意，输入数组是以“引用”方式传递的，这意味着在函数里修改输入数组对于调用者是可见的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int removeElement(int[] nums, int val) &#123;</span><br><span class="line">		     int ans=0;</span><br><span class="line">	         int j;</span><br><span class="line">	            for(j=0;j&lt;nums.length;j++)&#123;</span><br><span class="line">	            	if(nums[j]!=val)</span><br><span class="line">	            	&#123;</span><br><span class="line">	            		nums[ans]=nums[j];</span><br><span class="line">	            		ans++;	    </span><br><span class="line">	            	&#125;</span><br><span class="line">	            &#125;</span><br><span class="line">	            //System.out.println(ans);</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/12/26 27题 原数组修改/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-1第一次力扣" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -365,223 +591,9 @@
 
 
   
-    <article id="post-二叉树中序先序转后序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/06/二叉树中序先序转后序/">二叉树根据中序先序写出后序遍历结果</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/06/二叉树中序先序转后序/" class="archive-article-date">
-  	<time datetime="2019-11-06T14:42:14.963Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>如图，此二叉树<br>先序遍历为426315<br>中序遍历为623415<br>求后序遍历结果</p>
-<p><img src="https://img-blog.csdnimg.cn/20191106222235989.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;string&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">string a1=&quot;&quot;,a2=&quot;&quot;,a3=&quot;&quot;;</span><br><span class="line">int PreIn2Post(string Preorder, string Inorder)</span><br><span class="line">&#123;</span><br><span class="line">	int length = Preorder.length();</span><br><span class="line">	if (length &lt;= 0)return 0;</span><br><span class="line">	char Root = Preorder[0];</span><br><span class="line">	int i = 0;</span><br><span class="line">	for (;i&lt;length;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		if (Root == Inorder[i])</span><br><span class="line">			break;</span><br><span class="line">	&#125;</span><br><span class="line">    a1+=Root;</span><br><span class="line">	PreIn2Post(Preorder.substr(1, i), Inorder.substr(0, i));//递归访问左子树</span><br><span class="line">    a2+=Root;</span><br><span class="line">	PreIn2Post(Preorder.substr(i + 1, length - i), Inorder.substr(i + 1, length - i));//递归访问右子树</span><br><span class="line">	a3+=Root;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	string Preorder, Inorder;</span><br><span class="line">	cin &gt;&gt; Preorder &gt;&gt; Inorder;</span><br><span class="line">	PreIn2Post(Preorder, Inorder);</span><br><span class="line">	cout&lt;&lt;&quot;先序遍历：&quot;&lt;&lt;a1&lt;&lt;endl&lt;&lt;&quot;中序遍历：&quot;&lt;&lt;a2&lt;&lt;endl&lt;&lt;&quot;后序遍历：&quot;&lt;&lt;a3&lt;&lt;endl;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>输出：<img src="https://img-blog.csdnimg.cn/20191106223243411.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p><strong>步骤</strong><br>426315<br>623415<br>4为根节点，则中序分为623【4】15<br>左子树623的跟为先序【2】6315的2<br>则6和3为2的左儿子和右儿子。。。<br>发现一直重复这一过程，则实行递归进程</p>
-<p><strong>函数解析</strong><br>   PreIn2Post(Preorder.substr(1, i), Inorder.substr(0, i));<br>   i为根节点<br>   则先序从第2个元素开始长度为i的字符串<br>   和中序第第一个元素开始长度为i字符串<br>   继续递归此操作</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/06/二叉树中序先序转后序/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-排序1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/04/排序1/">排序1</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/04/排序1/" class="archive-article-date">
-  	<time datetime="2019-11-04T00:49:08.562Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>1.冒泡排序<br>时间复杂度最好和最坏均为n*n</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">package lkq;</span><br><span class="line">import java.util.*;</span><br><span class="line">public class MaoPao &#123;</span><br><span class="line">	public static void sort(int arr[],int n)&#123;</span><br><span class="line">		int t;</span><br><span class="line">		for(int i=0;i&lt;n-1;i++)&#123;</span><br><span class="line">			for(int j=0;j&lt;n-i-1;j++)&#123;</span><br><span class="line">				if(arr[j]&gt;arr[j+1])&#123;</span><br><span class="line">					t=arr[j];</span><br><span class="line">					arr[j]=arr[j+1];</span><br><span class="line">					arr[j+1]=t;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">		Scanner in=new Scanner(System.in);</span><br><span class="line">		int n=in.nextInt();</span><br><span class="line">		int arr[]=new int[n];</span><br><span class="line">		for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">			arr[i]=(int)(15*Math.random()+1);</span><br><span class="line">		&#125;</span><br><span class="line">		sort(arr,n);</span><br><span class="line">		for(int num:arr)&#123;</span><br><span class="line">            System.out.print(num+&quot; &quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>2.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">package lkq;</span><br><span class="line">import java.util.*;</span><br><span class="line">public class ChaRu &#123;</span><br><span class="line">	public static void charu(int s[])&#123;</span><br><span class="line">        int j;</span><br><span class="line">		for(int i=1;i&lt;s.length;i++)&#123;</span><br><span class="line">			int t=s[i];</span><br><span class="line">			for(j=i-1;j&gt;=0&amp;&amp;s[j]&gt;t;j--)&#123;//先写j&gt;=0 否则会出现数组索引异常</span><br><span class="line">				s[j+1]=s[j];</span><br><span class="line">			&#125;</span><br><span class="line">			s[j+1]=t;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Scanner in=new Scanner(System.in);</span><br><span class="line">		int n=in.nextInt();</span><br><span class="line">		int s[]=new int[n];</span><br><span class="line">		for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">			s[i]=(int)(100*Math.random()+1);</span><br><span class="line">		&#125;</span><br><span class="line">		charu(s);</span><br><span class="line">		for(int k=0;k&lt;n;k++)</span><br><span class="line">            System.out.print(s[k]+&quot; &quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>3<br>首先快速排序是一种不稳定的排序算法<br>首先其最好情况下时间复杂度为nlog2n<br>最差情况下为n*n<br>快速排序有多种方法<br>这里用的是其中一种<br>比如有如下序列 4 6 9 3 7 5<br>则我们以4为基准p<br>i=0(left) j=n-1(right)<br>先从j开始找比基准p小的数，找不到了停止<br>再从i开始找比基准p大的数，找不到了停止<br>交换arr[i]和arr[j](这样左边都比基准p小，右边都比基准p大）<br>最后当i与j碰面时 基准p与i与j碰面的位置互换<br>则第一次<br>              4 6 9 3 7 5<br>              4 3 9 6 7 5<br>              3 【4】 9 6 7 5<br>第二种方法<br>i与j同时在头的位置(i==0&amp;&amp;j==0)<br>当j找到比到比p=5小的数时停止<br>arr[i+1]与arr[j]互换<br>则第一次<br>              4 6 9 3 7 5<br>              4 6 9 3 7 5<br>              4 3 9 6 7 5<br>              4 3 【5】 6 7 9</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">package lkq;</span><br><span class="line">import java.util.*;</span><br><span class="line">public class QuickSort&#123;</span><br><span class="line">	public static void sort(int arr[],int left,int right)&#123;</span><br><span class="line">		 if(left&gt;right) return;</span><br><span class="line">	     int i=left;</span><br><span class="line">	     int j=right;</span><br><span class="line">	     int p=arr[left];</span><br><span class="line">	     int t;</span><br><span class="line">	     while(i!=j)&#123;</span><br><span class="line">	    	 while(arr[j]&gt;=p&amp;&amp;i&lt;j)&#123;</span><br><span class="line">	    		 j--;</span><br><span class="line">	    	 &#125;	 </span><br><span class="line">	         while(arr[i]&lt;=p&amp;&amp;i&lt;j)&#123;</span><br><span class="line">	        	 i++;</span><br><span class="line">	         &#125;</span><br><span class="line">	         if(i&lt;j)&#123;</span><br><span class="line">	        	t=arr[i]; </span><br><span class="line">	        	arr[i]=arr[j];</span><br><span class="line">	        	arr[j]=t;</span><br><span class="line">	         &#125;</span><br><span class="line">	     &#125;</span><br><span class="line">	     arr[left]=arr[i];</span><br><span class="line">	     arr[i]=p;</span><br><span class="line">	     sort(arr,i+1,right);</span><br><span class="line">	     sort(arr,left,i-1);</span><br><span class="line">	&#125;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">		Scanner in=new Scanner(System.in);</span><br><span class="line">		int n=in.nextInt();</span><br><span class="line">		int arr[]=new int[n];</span><br><span class="line">		for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">			arr[i]=(int)(15*Math.random()+1);</span><br><span class="line">		&#125;</span><br><span class="line">		sort(arr,0,n-1);</span><br><span class="line">		for(int num:arr)&#123;</span><br><span class="line">            System.out.print(num+&quot; &quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/04/排序1/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Servle学习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/01/Servle学习/">Servlet学习</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/01/Servle学习/" class="archive-article-date">
-  	<time datetime="2019-11-01T15:13:37.521Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Servlet学习记录"><a href="#Servlet学习记录" class="headerlink" title="Servlet学习记录"></a>Servlet学习记录</h1><p>今天web课学习了Servlet课，对其有了新的学习与认识。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;web-app&gt;</span><br><span class="line"> </span><br><span class="line">    &lt;servlet&gt;</span><br><span class="line">        &lt;servlet-name&gt;HelloServlet&lt;/servlet-name&gt;</span><br><span class="line">        &lt;servlet-class&gt;HelloServlet&lt;/servlet-class&gt;</span><br><span class="line">    &lt;/servlet&gt;</span><br><span class="line"> </span><br><span class="line">    &lt;servlet-mapping&gt;</span><br><span class="line">        &lt;servlet-name&gt;HelloServlet&lt;/servlet-name&gt;</span><br><span class="line">        &lt;url-pattern&gt;/hello&lt;/url-pattern&gt;</span><br><span class="line">    &lt;/servlet-mapping&gt;</span><br><span class="line"> </span><br><span class="line">&lt;/web-app&gt;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; &lt;servlet&gt; 标签下的 &lt;servlet-name&gt; 与</span><br><span class="line">&gt; &lt;servlet-mapping&gt; 标签下的 &lt;servlet-name&gt;</span><br><span class="line">&gt; 必须一样</span><br><span class="line">&gt; </span><br><span class="line">&gt; &lt;servlet-name&gt;与&lt;servlet-class&gt;可以不一样，</span><br><span class="line">&gt; 但是为了便于理解与维护，一般都会写的一样。</span><br></pre></td></tr></table></figure>
-
-<p>eclipse(导包）<br>1.首先建空包 在下面写方法<br>2.建web文件夹web-inf文件夹web.xml(配置映射）<br>3.首先在WEB-INF下创建classes目录<br>把项目的class文件输出由原来的 j2ee/bin 设置到 j2ee/web/WEB-INF/classes下<br>步骤:<br>项目右键-&gt;properties-&gt;Java Build Path-&gt;Source-&gt;右下角的 Brower-&gt; 指定位置是 j2ee/web/WEB-INF/classes。</p>
-<ol start="4">
-<li>tomcat下conf下serve.xml写</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;Context path=&quot;/&quot; docBase=&quot;e:\\project\\j2ee\\web&quot; debug=&quot;0&quot; reloadable=&quot;false&quot; /&gt;</span><br><span class="line">5.启动tomcat</span><br></pre></td></tr></table></figure>
-
-<p>6.注意写加上.html(如login.html）</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/01/Servle学习/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/5/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/7/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/5/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/7/">Next &raquo;</a>
     </nav>
   
 
