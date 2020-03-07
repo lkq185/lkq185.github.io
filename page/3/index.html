@@ -156,6 +156,82 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-111 二叉树的最小深度" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/07/111 二叉树的最小深度/">求最小深度</a>
+    </h1>
+  
+
+        
+        <a href="/2019/12/07/111 二叉树的最小深度/" class="archive-article-date">
+  	<time datetime="2019-12-07T06:52:23.893Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>给定一个二叉树，找出其最小深度。</p>
+<p>最小深度是从根节点到最近叶子节点的最短路径上的节点数量。</p>
+<p>说明: 叶子节点是指没有子节点的节点。</p>
+<p>示例:</p>
+<p>给定二叉树 [3,9,20,null,null,15,7],</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  3</span><br><span class="line"> / \</span><br><span class="line">9  20</span><br><span class="line">  /  \</span><br><span class="line"> 15   7</span><br></pre></td></tr></table></figure>
+
+<p>返回它的最小深度  2.</p>
+<p><strong>思路：一层一层遍历，若左右儿子都为空，则结束遍历</strong><br>迭代</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int minDepth(TreeNode root) &#123;</span><br><span class="line">        if(root==null) return 0;</span><br><span class="line">        Queue&lt;TreeNode&gt; q=new LinkedList&lt;&gt;();</span><br><span class="line">        q.add(root);</span><br><span class="line">        int ans=1;</span><br><span class="line">        int k=0;</span><br><span class="line">        while(!q.isEmpty())&#123;</span><br><span class="line">            int n=q.size();</span><br><span class="line">            for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">                TreeNode t=q.poll();</span><br><span class="line">                if(t.left==null&amp;&amp;t.right==null)&#123;</span><br><span class="line">                   k=1;</span><br><span class="line">                   break;</span><br><span class="line">                &#125;</span><br><span class="line">                if(t.left!=null) q.add(t.left);</span><br><span class="line">                if(t.right!=null) q.add(t.right);`在这里插入代码片`</span><br><span class="line">            &#125;</span><br><span class="line">            if(k==1) break;</span><br><span class="line">            ans++;</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>递归</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int minDepth(TreeNode root) &#123;</span><br><span class="line">        if(root == null) return 0;</span><br><span class="line">        //这道题递归条件里分为三种情况</span><br><span class="line">        //1.左孩子和有孩子都为空的情况，说明到达了叶子节点，直接返回1即可</span><br><span class="line">        if(root.left == null &amp;&amp; root.right == null) return 1;</span><br><span class="line">        //2.如果左孩子和由孩子其中一个为空，那么需要返回比较大的那个孩子的深度        </span><br><span class="line">        int m1 = minDepth(root.left);</span><br><span class="line">        int m2 = minDepth(root.right);</span><br><span class="line">        //这里其中一个节点为空，说明m1和m2有一个必然为0，所以可以返回m1 + m2 + 1;</span><br><span class="line">        if(root.left == null || root.right == null) return m1 + m2 + 1;</span><br><span class="line">        </span><br><span class="line">        //3.最后一种情况，也就是左右孩子都不为空，返回最小深度+1即可</span><br><span class="line">        return Math.min(m1,m2) + 1; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/07/111 二叉树的最小深度/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-876链表删除操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -485,75 +561,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/12/02/83链表元素删除/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-2. 两数相加" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/02/2. 两数相加/">链表相加</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/02/2. 两数相加/" class="archive-article-date">
-  	<time datetime="2019-12-02T06:20:38.868Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。</p>
-<p>如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。</p>
-<p>您可以假设除了数字 0 之外，这两个数都不会以 0 开头。</p>
-<p>示例：</p>
-<p>输入：(2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)<br>输出：7 -&gt; 0 -&gt; 8<br>原因：342 + 465 = 807</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    int t=0;</span><br><span class="line">    public ListNode addTwoNumbers(ListNode l1, ListNode l2) &#123;</span><br><span class="line">        int t=0;</span><br><span class="line">        ListNode p=new ListNode(0);</span><br><span class="line">        ListNode ans=p;</span><br><span class="line">        while(l1!=null||l2!=null)&#123;</span><br><span class="line">             if(l1==null&amp;&amp;l2!=null)&#123;</span><br><span class="line">               ans.next=new ListNode((l2.val+t)%10);</span><br><span class="line">               ans=ans.next;</span><br><span class="line">               t=(l2.val+t)/10;</span><br><span class="line">               l2=l2.next;</span><br><span class="line">             &#125;</span><br><span class="line">             else if(l1!=null&amp;&amp;l2==null)&#123;</span><br><span class="line">               ans.next=new ListNode((l1.val+t)%10);</span><br><span class="line">               ans=ans.next;</span><br><span class="line">               t=(l1.val+t)/10;</span><br><span class="line">               l1=l1.next;</span><br><span class="line">             &#125;</span><br><span class="line">             else&#123;</span><br><span class="line">             ans.next=new ListNode((l1.val+l2.val+t)%10);//赋值方法</span><br><span class="line">             ans=ans.next;</span><br><span class="line">             t=(l1.val+l2.val+t)/10;</span><br><span class="line">             l1=l1.next;</span><br><span class="line">             l2=l2.next;</span><br><span class="line">             &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        if(t&gt;0)</span><br><span class="line">          ans.next=new ListNode(t);</span><br><span class="line">        return p.next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/02/2. 两数相加/">展开全文 >></a>
         </p>
       
 
