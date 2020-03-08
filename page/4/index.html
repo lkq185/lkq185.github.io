@@ -156,75 +156,6 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-2. 两数相加" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/02/2. 两数相加/">链表相加</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/02/2. 两数相加/" class="archive-article-date">
-  	<time datetime="2019-12-02T06:20:38.868Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。</p>
-<p>如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。</p>
-<p>您可以假设除了数字 0 之外，这两个数都不会以 0 开头。</p>
-<p>示例：</p>
-<p>输入：(2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)<br>输出：7 -&gt; 0 -&gt; 8<br>原因：342 + 465 = 807</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    int t=0;</span><br><span class="line">    public ListNode addTwoNumbers(ListNode l1, ListNode l2) &#123;</span><br><span class="line">        int t=0;</span><br><span class="line">        ListNode p=new ListNode(0);</span><br><span class="line">        ListNode ans=p;</span><br><span class="line">        while(l1!=null||l2!=null)&#123;</span><br><span class="line">             if(l1==null&amp;&amp;l2!=null)&#123;</span><br><span class="line">               ans.next=new ListNode((l2.val+t)%10);</span><br><span class="line">               ans=ans.next;</span><br><span class="line">               t=(l2.val+t)/10;</span><br><span class="line">               l2=l2.next;</span><br><span class="line">             &#125;</span><br><span class="line">             else if(l1!=null&amp;&amp;l2==null)&#123;</span><br><span class="line">               ans.next=new ListNode((l1.val+t)%10);</span><br><span class="line">               ans=ans.next;</span><br><span class="line">               t=(l1.val+t)/10;</span><br><span class="line">               l1=l1.next;</span><br><span class="line">             &#125;</span><br><span class="line">             else&#123;</span><br><span class="line">             ans.next=new ListNode((l1.val+l2.val+t)%10);//赋值方法</span><br><span class="line">             ans=ans.next;</span><br><span class="line">             t=(l1.val+l2.val+t)/10;</span><br><span class="line">             l1=l1.next;</span><br><span class="line">             l2=l2.next;</span><br><span class="line">             &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        if(t&gt;0)</span><br><span class="line">          ans.next=new ListNode(t);</span><br><span class="line">        return p.next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/02/2. 两数相加/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-5最长回文子串" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -587,6 +518,84 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/11/25/144 589 590二叉树和n叉树前序遍历/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-1160map数组形式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/25/1160map数组形式/">数组型map</a>
+    </h1>
+  
+
+        
+        <a href="/2019/11/25/1160map数组形式/" class="archive-article-date">
+  	<time datetime="2019-11-25T08:28:56.333Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="拼写单词"><a href="#拼写单词" class="headerlink" title="拼写单词"></a>拼写单词</h2><p>给你一份『词汇表』（字符串数组） words 和一张『字母表』（字符串） chars。</p>
+<p>假如你可以用 chars 中的『字母』（字符）拼写出 words 中的某个『单词』（字符串），那么我们就认为你掌握了这个单词。</p>
+<p>注意：每次拼写时，chars 中的每个字母都只能用一次。</p>
+<p>返回词汇表 words 中你掌握的所有单词的 长度之和。</p>
+<p>示例 1：</p>
+<p>输入：words = [“cat”,”bt”,”hat”,”tree”], chars = “atach”<br>输出：6<br>解释：<br>可以形成字符串 “cat” 和 “hat”，所以答案是 3 + 3 = 6。</p>
+<p>示例 2：</p>
+<p>输入：words = [“hello”,”world”,”leetcode”], chars = “welldonehoneyr”<br>输出：10<br>解释：<br>可以形成字符串 “hello” 和 “world”，所以答案是 5 + 5 = 10。</p>
+<p>提示：</p>
+<pre><code>1 &lt;= words.length &lt;= 1000
+1 &lt;= words[i].length, chars.length &lt;= 100
+所有字符串中都仅包含小写英文字母</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;//数值型map使用</span><br><span class="line">    public int countCharacters(String[] words, String chars) &#123;</span><br><span class="line">        if(words.length==0||chars.length()==0)return 0;</span><br><span class="line">        int map[]=new int[26];</span><br><span class="line">        for(int i=0;i&lt;chars.length();i++)&#123;</span><br><span class="line">            map[chars.charAt(i)-&apos;a&apos;]++;</span><br><span class="line">        &#125;</span><br><span class="line">        int ans=0;</span><br><span class="line">        for(int i=0;i&lt;words.length;i++)&#123;</span><br><span class="line">            int len=0;</span><br><span class="line">            int[] map2=Arrays.copyOf(map,map.length);</span><br><span class="line">            for(int j=0;j&lt;words[i].length();j++)&#123;</span><br><span class="line">               if(map2[words[i].charAt(j)-&apos;a&apos;]&gt;0)&#123;</span><br><span class="line">                 len++;</span><br><span class="line">                 map2[words[i].charAt(j)-&apos;a&apos;]--;</span><br><span class="line">               &#125;</span><br><span class="line">               else break;</span><br><span class="line">            &#125;</span><br><span class="line">            if(len==words[i].length())</span><br><span class="line">            ans+=len;</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>首先题中要求chars 中的每个字母都只能用一次。<br>其次要每次拷贝map2数组函数 int[] <code>map2=Arrays.copyOf(map,map.length);</code><br>初始化</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">map[chars.charAt(i)-&apos;a&apos;]++或 map[chars.charAt(i)-97]++;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/25/1160map数组形式/">展开全文 >></a>
         </p>
       
 

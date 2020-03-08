@@ -156,84 +156,6 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-1160map数组形式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/25/1160map数组形式/">数组型map</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/25/1160map数组形式/" class="archive-article-date">
-  	<time datetime="2019-11-25T08:28:56.333Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="拼写单词"><a href="#拼写单词" class="headerlink" title="拼写单词"></a>拼写单词</h2><p>给你一份『词汇表』（字符串数组） words 和一张『字母表』（字符串） chars。</p>
-<p>假如你可以用 chars 中的『字母』（字符）拼写出 words 中的某个『单词』（字符串），那么我们就认为你掌握了这个单词。</p>
-<p>注意：每次拼写时，chars 中的每个字母都只能用一次。</p>
-<p>返回词汇表 words 中你掌握的所有单词的 长度之和。</p>
-<p>示例 1：</p>
-<p>输入：words = [“cat”,”bt”,”hat”,”tree”], chars = “atach”<br>输出：6<br>解释：<br>可以形成字符串 “cat” 和 “hat”，所以答案是 3 + 3 = 6。</p>
-<p>示例 2：</p>
-<p>输入：words = [“hello”,”world”,”leetcode”], chars = “welldonehoneyr”<br>输出：10<br>解释：<br>可以形成字符串 “hello” 和 “world”，所以答案是 5 + 5 = 10。</p>
-<p>提示：</p>
-<pre><code>1 &lt;= words.length &lt;= 1000
-1 &lt;= words[i].length, chars.length &lt;= 100
-所有字符串中都仅包含小写英文字母</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;//数值型map使用</span><br><span class="line">    public int countCharacters(String[] words, String chars) &#123;</span><br><span class="line">        if(words.length==0||chars.length()==0)return 0;</span><br><span class="line">        int map[]=new int[26];</span><br><span class="line">        for(int i=0;i&lt;chars.length();i++)&#123;</span><br><span class="line">            map[chars.charAt(i)-&apos;a&apos;]++;</span><br><span class="line">        &#125;</span><br><span class="line">        int ans=0;</span><br><span class="line">        for(int i=0;i&lt;words.length;i++)&#123;</span><br><span class="line">            int len=0;</span><br><span class="line">            int[] map2=Arrays.copyOf(map,map.length);</span><br><span class="line">            for(int j=0;j&lt;words[i].length();j++)&#123;</span><br><span class="line">               if(map2[words[i].charAt(j)-&apos;a&apos;]&gt;0)&#123;</span><br><span class="line">                 len++;</span><br><span class="line">                 map2[words[i].charAt(j)-&apos;a&apos;]--;</span><br><span class="line">               &#125;</span><br><span class="line">               else break;</span><br><span class="line">            &#125;</span><br><span class="line">            if(len==words[i].length())</span><br><span class="line">            ans+=len;</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>首先题中要求chars 中的每个字母都只能用一次。<br>其次要每次拷贝map2数组函数 int[] <code>map2=Arrays.copyOf(map,map.length);</code><br>初始化</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">map[chars.charAt(i)-&apos;a&apos;]++或 map[chars.charAt(i)-97]++;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/25/1160map数组形式/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-1143最长公共子序列" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -591,6 +513,97 @@ C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。</code><
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/11/23/128最长连续序列/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-62 63像dfs的动态规划" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/22/62 63像dfs的动态规划/">像dfs的动态规划</a>
+    </h1>
+  
+
+        
+        <a href="/2019/11/22/62 63像dfs的动态规划/" class="archive-article-date">
+  	<time datetime="2019-11-22T15:07:00.940Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="62-不同路径"><a href="#62-不同路径" class="headerlink" title="62. 不同路径"></a>62. 不同路径</h2><p>一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为“Start” ）。</p>
+<p>机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为“Finish”）。</p>
+<p>问总共有多少条不同的路径？</p>
+<p>例如，上图是一个7 x 3 的网格。有多少可能的路径？</p>
+<p>说明：m 和 n 的值均不超过 100。</p>
+<p>示例 1:</p>
+<p>输入: m = 3, n = 2<br>输出: 3<br>解释:<br>从左上角开始，总共有 3 条路径可以到达右下角。</p>
+<ol>
+<li>向右 -&gt; 向右 -&gt; 向下</li>
+<li>向右 -&gt; 向下 -&gt; 向右</li>
+<li>向下 -&gt; 向右 -&gt; 向右</li>
+</ol>
+<p>示例 2:</p>
+<p>输入: m = 7, n = 3<br>输出: 28<br><img src="https://img-blog.csdnimg.cn/20191122230254102.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int uniquePaths(int m, int n) &#123;</span><br><span class="line">        int dp[][]=new int[m+1][n+1];</span><br><span class="line">        for(int i=1;i&lt;=m;i++)</span><br><span class="line">            dp[i][1]=1;//因为只能往下和右走所以边上都只有一种走法</span><br><span class="line">        for(int i=1;i&lt;=n;i++)</span><br><span class="line">            dp[1][i]=1;//因为只能往下和右走所以边上都只有一种走法</span><br><span class="line">        for(int i=2;i&lt;=m;i++)&#123;</span><br><span class="line">            for(int j=2;j&lt;=n;j++)&#123;</span><br><span class="line">                dp[i][j]=dp[i][j-1]+dp[i-1][j];中间等于俩边走法加1</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[m][n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20191122230343380.png" alt="在这里插入图片描述"></p>
+<h2 id="63-不同路径-II"><a href="#63-不同路径-II" class="headerlink" title="63. 不同路径 II"></a>63. 不同路径 II</h2><p>一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为“Start” ）。</p>
+<p>机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为“Finish”）。</p>
+<p>现在考虑网格中有障碍物。那么从左上角到右下角将会有多少条不同的路径？</p>
+<p>网格中的障碍物和空位置分别用 1 和 0 来表示。</p>
+<p>说明：m 和 n 的值均不超过 100。<br><img src="https://img-blog.csdnimg.cn/20191122230059179.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">示例 1:</p>
+<p>输入:<br>[<br>  [0,0,0],<br>  [0,1,0],<br>  [0,0,0]<br>]<br>输出: 2<br>解释:<br>3x3 网格的正中间有一个障碍物。<br>从左上角到右下角一共有 2 条不同的路径：</p>
+<ol>
+<li>向右 -&gt; 向右 -&gt; 向下 -&gt; 向下</li>
+<li>向下 -&gt; 向下 -&gt; 向右 -&gt; 向右</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int uniquePathsWithObstacles(int[][] obstacleGrid) &#123;</span><br><span class="line">        int n=obstacleGrid.length;</span><br><span class="line">        int m=obstacleGrid[0].length;</span><br><span class="line">        int dp[][]=new int[n][m];</span><br><span class="line">        if(obstacleGrid[0][0]==1) return 0;</span><br><span class="line">        dp[0][0]=1;</span><br><span class="line">        for(int i=1;i&lt;n;i++)&#123;</span><br><span class="line">            if(obstacleGrid[i][0]==0&amp;&amp;dp[i-1][0]==1)//此点不为障碍且前方从来没有障碍，否则无法到达此点</span><br><span class="line">               dp[i][0]=1;                          //则到这个地方方法为1</span><br><span class="line">            else</span><br><span class="line">               dp[i][0]=0;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i=1;i&lt;m;i++)&#123;</span><br><span class="line">            if(dp[0][i-1]==1&amp;&amp;obstacleGrid[0][i]==0)</span><br><span class="line">               dp[0][i]=1;</span><br><span class="line">            else</span><br><span class="line">               dp[0][i]=0;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i=1;i&lt;n;i++)&#123;</span><br><span class="line">            for(int j=1;j&lt;m;j++)&#123;</span><br><span class="line">                if(obstacleGrid[i][j]==1)//有障碍</span><br><span class="line">                  dp[i][j]=0; //到此点方法为0</span><br><span class="line">                else</span><br><span class="line">                  dp[i][j]=dp[i-1][j]+dp[i][j-1];//从小到上和从左到右方法相加</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[n-1][m-1];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/22/62 63像dfs的动态规划/">展开全文 >></a>
         </p>
       
 
