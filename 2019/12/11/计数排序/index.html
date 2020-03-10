@@ -9,6 +9,7 @@
   <title>计数排序 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="我们知道基于比较的排序算法的最好的情况的时间复杂度是O(nlgn)，然而存在一种神奇的排序算法，不是基于比较的，而是空间换时间，使得时间复杂度能够达到线性O(n+k)，这种算法就是本文将要介绍的计数排序。 一、适用情况 这个算法在n个输入元素中每一个都是0到k的范围的整数，其中k也是整数。当k = O(n)时，排序的时间复杂度为Θ(n)。它的性质也就决定了它的运用范围比较窄，但是对于一个待排序的有">
+<meta name="keywords" content="排序算法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="计数排序">
 <meta property="og:url" content="https://lkq185.github.io/2019/12/11/计数排序/index.html">
@@ -16,7 +17,7 @@
 <meta property="og:description" content="我们知道基于比较的排序算法的最好的情况的时间复杂度是O(nlgn)，然而存在一种神奇的排序算法，不是基于比较的，而是空间换时间，使得时间复杂度能够达到线性O(n+k)，这种算法就是本文将要介绍的计数排序。 一、适用情况 这个算法在n个输入元素中每一个都是0到k的范围的整数，其中k也是整数。当k = O(n)时，排序的时间复杂度为Θ(n)。它的性质也就决定了它的运用范围比较窄，但是对于一个待排序的有">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20191211103626706.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-12-11T03:37:54.904Z">
+<meta property="og:updated_time" content="2020-03-10T14:34:53.324Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计数排序">
 <meta name="twitter:description" content="我们知道基于比较的排序算法的最好的情况的时间复杂度是O(nlgn)，然而存在一种神奇的排序算法，不是基于比较的，而是空间换时间，使得时间复杂度能够达到线性O(n+k)，这种算法就是本文将要介绍的计数排序。 一、适用情况 这个算法在n个输入元素中每一个都是0到k的范围的整数，其中k也是整数。当k = O(n)时，排序的时间复杂度为Θ(n)。它的性质也就决定了它的运用范围比较窄，但是对于一个待排序的有">
@@ -49,7 +50,7 @@
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
-			<img src="/img/1.png" class="js-avatar">
+			<img src="https://img-blog.csdnimg.cn/20200310223951546.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" class="js-avatar">
 		</a>
 		<hgroup>
 		  <h1 class="header-author"><a href="/">lkq</a></h1>
@@ -109,7 +110,7 @@
 	<div class="intrude-less">
 		<header id="header" class="inner">
 			<div class="profilepic">
-				<img src="/img/1.png" class="js-avatar">
+				<img src="https://img-blog.csdnimg.cn/20200310223951546.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" class="js-avatar">
 			</div>
 			<hgroup>
 			  <h1 class="header-author js-header-author">lkq</h1>
@@ -227,6 +228,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">排序算法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -426,6 +438,50 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">链表</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">DFS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">回溯</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">排序算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">OS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">堆</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>
