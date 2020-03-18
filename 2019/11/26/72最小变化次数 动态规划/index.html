@@ -9,6 +9,7 @@
   <title>最小单词变化次数 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="最小单词变化次数给定两个单词 word1 和 word2，计算出将 word1 转换成 word2 所使用的最少操作数 。 你可以对一个单词进行如下三种操作： 插入一个字符 删除一个字符 替换一个字符示例 1: 输入: word1 = “horse”, word2 = “ros”输出: 3解释:horse -&amp;gt; rorse (将 ‘h’ 替换为 ‘r’)rorse -&amp;gt; rose (删">
+<meta name="keywords" content="dp">
 <meta property="og:type" content="article">
 <meta property="og:title" content="最小单词变化次数">
 <meta property="og:url" content="https://lkq185.github.io/2019/11/26/72最小变化次数 动态规划/index.html">
@@ -16,7 +17,7 @@
 <meta property="og:description" content="最小单词变化次数给定两个单词 word1 和 word2，计算出将 word1 转换成 word2 所使用的最少操作数 。 你可以对一个单词进行如下三种操作： 插入一个字符 删除一个字符 替换一个字符示例 1: 输入: word1 = “horse”, word2 = “ros”输出: 3解释:horse -&amp;gt; rorse (将 ‘h’ 替换为 ‘r’)rorse -&amp;gt; rose (删">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/2019112610293031.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-11-27T14:56:55.259Z">
+<meta property="og:updated_time" content="2020-03-12T08:44:31.233Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="最小单词变化次数">
 <meta name="twitter:description" content="最小单词变化次数给定两个单词 word1 和 word2，计算出将 word1 转换成 word2 所使用的最少操作数 。 你可以对一个单词进行如下三种操作： 插入一个字符 删除一个字符 替换一个字符示例 1: 输入: word1 = “horse”, word2 = “ros”输出: 3解释:horse -&amp;gt; rorse (将 ‘h’ 替换为 ‘r’)rorse -&amp;gt; rose (删">
@@ -226,6 +227,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">dp</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -439,7 +451,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">堆</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">字符串</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">回溯</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">dp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">位运算</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -455,11 +487,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">排序算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">OS</a>
+                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -467,7 +495,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">堆</a>
+                <a href="javascript:void(0)" class="js-tag color3">排序</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">排序算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">OS</a>
               </li>
             
             <div class="clearfix"></div>

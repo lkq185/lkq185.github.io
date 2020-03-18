@@ -156,6 +156,267 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-148排序链表" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/11/148排序链表/">排序链表</a>
+    </h1>
+  
+
+        
+        <a href="/2019/12/11/148排序链表/" class="archive-article-date">
+  	<time datetime="2019-12-11T03:35:11.834Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在 O(n log n) 时间复杂度和常数级空间复杂度下，对链表进行排序。</p>
+<p>示例 1:</p>
+<p>输入: 4-&gt;2-&gt;1-&gt;3<br>输出: 1-&gt;2-&gt;3-&gt;4</p>
+<p>示例 2:</p>
+<p>输入: -1-&gt;5-&gt;3-&gt;4-&gt;0<br>输出: -1-&gt;0-&gt;3-&gt;4-&gt;5<br><strong>首先归并排序</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/20191211111702962.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">public static void mergeSort(int[] arr) &#123;</span><br><span class="line">    sort(arr, 0, arr.length - 1);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static void sort(int[] arr, int L, int R) &#123;</span><br><span class="line">    if(L == R) &#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    int mid = L + ((R - L) &gt;&gt; 1);</span><br><span class="line">    sort(arr, L, mid);</span><br><span class="line">    sort(arr, mid + 1, R);</span><br><span class="line">    merge(arr, L, mid, R);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static void merge(int[] arr, int L, int mid, int R) &#123;</span><br><span class="line">    int[] temp = new int[R - L + 1];</span><br><span class="line">    int i = 0;</span><br><span class="line">    int p1 = L;</span><br><span class="line">    int p2 = mid + 1;</span><br><span class="line">    // 比较左右两部分的元素，哪个小，把那个元素填入temp中</span><br><span class="line">    while(p1 &lt;= mid &amp;&amp; p2 &lt;= R) &#123;</span><br><span class="line">        temp[i++] = arr[p1] &lt; arr[p2] ? arr[p1++] : arr[p2++];</span><br><span class="line">    &#125;</span><br><span class="line">    // 上面的循环退出后，把剩余的元素依次填入到temp中</span><br><span class="line">    // 以下两个while只有一个会执行</span><br><span class="line">    while(p1 &lt;= mid) &#123;</span><br><span class="line">        temp[i++] = arr[p1++];</span><br><span class="line">    &#125;</span><br><span class="line">    while(p2 &lt;= R) &#123;</span><br><span class="line">        temp[i++] = arr[p2++];</span><br><span class="line">    &#125;</span><br><span class="line">    // 把最终的排序的结果复制给原数组</span><br><span class="line">    for(i = 0; i &lt; temp.length; i++) &#123;</span><br><span class="line">        arr[L + i] = temp[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>那么链表排序呢<br>把每个链表分成一部分，之后连接在一起。<br>注意：要保证存在前驱结点</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public ListNode merry(ListNode left,ListNode right)&#123;</span><br><span class="line">        ListNode pre=new ListNode(0);</span><br><span class="line">        ListNode cur=pre;//pre遍历中所以cur指代pre</span><br><span class="line">        while(left!=null&amp;&amp;right!=null)&#123;</span><br><span class="line">            if(left.val&gt;right.val)&#123;</span><br><span class="line">            pre.next=right;</span><br><span class="line">            right=right.next;</span><br><span class="line">            &#125;</span><br><span class="line">            else&#123;</span><br><span class="line">              pre.next=left;</span><br><span class="line">              left=left.next;</span><br><span class="line">            &#125;</span><br><span class="line">            pre=pre.next;</span><br><span class="line">        &#125;</span><br><span class="line">        if(left==null)  pre.next=right;//把剩余链表整个加入到pre中</span><br><span class="line">        else  pre.next=left;</span><br><span class="line">        return cur.next;</span><br><span class="line">    &#125;</span><br><span class="line">    public ListNode sortList(ListNode head) &#123;</span><br><span class="line">        if(head==null||head.next==null) return head;</span><br><span class="line">        ListNode slow=head;</span><br><span class="line">        ListNode fast=head.next;//头结点后一个结点开始</span><br><span class="line">        while(fast!=null&amp;&amp;fast.next!=null)&#123;</span><br><span class="line">             slow=slow.next;</span><br><span class="line">             fast=fast.next.next;</span><br><span class="line">        &#125;</span><br><span class="line">        ListNode right=slow.next;</span><br><span class="line">        slow.next=null;</span><br><span class="line">        return merry(sortList(head),sortList(right));  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">链表</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/11/148排序链表/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-计数排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/11/计数排序/">计数排序</a>
+    </h1>
+  
+
+        
+        <a href="/2019/12/11/计数排序/" class="archive-article-date">
+  	<time datetime="2019-12-11T02:35:39.892Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>我们知道基于比较的排序算法的最好的情况的时间复杂度是O(nlgn)，然而存在一种神奇的排序算法，不是基于比较的，而是空间换时间，使得时间复杂度能够达到线性O(n+k)，这种算法就是本文将要介绍的计数排序。</p>
+<p>一、适用情况</p>
+<p>这个算法在n个输入元素中每一个都是0到k的范围的整数，其中k也是整数。当k = O(n)时，排序的时间复杂度为Θ(n)。它的性质也就决定了它的运用范围比较窄，但是对于一个待排序的有负数的数组，我们可以将整个数组的整体加上一个整数，使得整个数组的最小值为0，然后就可以使用这个排序算法了。而且这个算法是稳定的。</p>
+<p>二、基本思想<br>对一个一个待排序的元素x，我们可以确定小于等于x的个数i，根据这个个数i，我们就可以把x放到索引i处。那么如何确定小于等于x的个数i呢？我们可以专门开辟一个数组c[]，然后遍历数组，确定数组a中每个元素中出现的频率，然后就可以确定对于a中每个元素x，小于等于这个元素的个数。然后就可以把元素x放到对应位置了。当然元素x的大小是可能重复的，这样就需要我们对数组c的值访问之后减1，保证和x一样大的元素能放在其前面。</p>
+<p>三、运行过程<br><img src="https://img-blog.csdnimg.cn/20191211103626706.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>   1、对于数组A，我们首先统计每个值的个数，将A的值作为C元素索引，值的个数作为C数组的值。比如对于数组A中的元素2，在数组A中出现了2次，所以c[2] = 2，而元素5出现了以此，所以c[5] = 1。</p>
+<p>  2、至此为止，数组C中已经统计了各个元素的出现次数，那么我们就可以根据各个元素的出现次数，累加出比该元素小的元素个数，更新到数组C中。比如a图中，C[0]=2表示出现0的次数为2，C[1]=0表示出现1的次数为0，那么小于等于1的元素个数为C[0]+C[1]=2，我们把C[1]更新为2，同理C[2]=2表示出现2的次数为2，那么小于等于2的元素个数为C[1]+C[2]=4，继续把C[2]更新为4，以此类推…<br> 3、到这里，我们得到了存储小于等于元素的个数的数组C。现在我们开始从尾部到头部遍历数组A，比如首先我们看A[7] = 3，然后查找C[3]，发现C[3] = 7，说明有7个元素小于等于3。我们首先需要做一步C[3] = C[3] - 1，因为这里虽然有7个元素小于等于3，但是B的索引是从0开始的，而且这样减一可以保证下次再找到一个3，可以放在这个3的前面。然后B[C[3]] = 3，就把第一个3放到了对的位置。后面以此类推，直到遍历完数组B。<br> 4、截至到这，我们就获得了一个有序的数组B。</p>
+<p><strong><strong>四、代码实现</strong></strong></p>
+<pre><code>public static void countingSort(int[] a, int[] b, int k){
+    int[] c = new int[k+1];//存放0~k
+    for(int i = 0; i&lt;a.length; i++)
+        c[a[i]] += 1;
+    for(int i = 1; i&lt;=k; i++)
+        c[i] += c[i-1];
+    for(int i = a.length-1; i &gt;= 0; i--){
+        c[a[i]] --;
+        b[c[a[i]]] = a[i];
+    }
+}</code></pre>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">排序算法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/11/计数排序/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-129根到叶子结点的和" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/08/129根到叶子结点的和/">二叉树遍历和</a>
+    </h1>
+  
+
+        
+        <a href="/2019/12/08/129根到叶子结点的和/" class="archive-article-date">
+  	<time datetime="2019-12-08T14:42:51.917Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>给定一个二叉树，它的每个结点都存放一个 0-9 的数字，每条从根到叶子节点的路径都代表一个数字。</p>
+<p>例如，从根到叶子节点路径 1-&gt;2-&gt;3 代表数字 123。</p>
+<p>计算从根到叶子节点生成的所有数字之和。</p>
+<p>说明: 叶子节点是指没有子节点的节点。</p>
+<p>示例 1:</p>
+<p>输入: [1,2,3]</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">  1</span><br><span class="line"> / \</span><br><span class="line">2   3</span><br></pre></td></tr></table></figure>
+
+<p>输出: 25<br>解释:<br>从根到叶子节点路径 1-&gt;2 代表数字 12.<br>从根到叶子节点路径 1-&gt;3 代表数字 13.<br>因此，数字总和 = 12 + 13 = 25.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">if(root.right==null&amp;&amp;root.left==null)&#123;//到叶子结点题都这么写</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    int ans=0;</span><br><span class="line">    public void help(TreeNode root,int cur)&#123;</span><br><span class="line">          if(root==null) return ;</span><br><span class="line">          if(root.right==null&amp;&amp;root.left==null)&#123;//到叶子结点题都这么写</span><br><span class="line">          ans+=cur*10+root.val;</span><br><span class="line">          return;</span><br><span class="line">          &#125;</span><br><span class="line">          help(root.left,cur*10+root.val);</span><br><span class="line">          help(root.right,cur*10+root.val);</span><br><span class="line">    &#125;</span><br><span class="line">    public int sumNumbers(TreeNode root) &#123;</span><br><span class="line">        if(root==null) return 0;</span><br><span class="line">        help(root,0);</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">树</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/08/129根到叶子结点的和/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-114二叉树展开为链表" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -416,244 +677,6 @@
 
 
   
-    <article id="post-876链表删除操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/06/876链表删除操作/">返回中间</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/06/876链表删除操作/" class="archive-article-date">
-  	<time datetime="2019-12-06T14:19:56.137Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>给定一个带有头结点 head 的非空单链表，返回链表的中间结点。</p>
-<p>如果有两个中间结点，则返回第二个中间结点。</p>
-<p>示例 1：</p>
-<p>输入：[1,2,3,4,5]<br>输出：此列表中的结点 3 (序列化形式：[3,4,5])<br>返回的结点值为 3 。 (测评系统对该结点序列化表述是 [3,4,5])。<br>注意，我们返回了一个 ListNode 类型的对象 ans，这样：<br>ans.val = 3, ans.next.val = 4, ans.next.next.val = 5, 以及 ans.next.next.next = NULL.</p>
-<p>正常做法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public ListNode middleNode(ListNode head) &#123;</span><br><span class="line">        int ans=0;</span><br><span class="line">        ListNode pre=head;</span><br><span class="line">        while(pre!=null)&#123;</span><br><span class="line">            pre=pre.next;</span><br><span class="line">            ans++;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i=0;i&lt;ans/2;i++)&#123;</span><br><span class="line">           head=head.next;</span><br><span class="line">        &#125;</span><br><span class="line">        return head;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>双指针</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public ListNode middleNode(ListNode head) &#123;</span><br><span class="line">        ListNode one=head;</span><br><span class="line">        ListNode two=head;</span><br><span class="line">        while(two!=null&amp;&amp;two.next!=null)&#123;</span><br><span class="line">            one=one.next;</span><br><span class="line">            two=two.next;</span><br><span class="line">            two=two.next;</span><br><span class="line">        &#125;</span><br><span class="line">        return one;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/06/876链表删除操作/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-19删除倒数第n个结点" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/04/19删除倒数第n个结点/">链表操作2</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/04/19删除倒数第n个结点/" class="archive-article-date">
-  	<time datetime="2019-12-04T14:57:56.305Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>给定一个链表，删除链表的倒数第 n 个节点，并且返回链表的头结点。</p>
-<p>示例：</p>
-<p>给定一个链表: 1-&gt;2-&gt;3-&gt;4-&gt;5, 和 n = 2.</p>
-<p>当删除了倒数第二个节点后，链表变为 1-&gt;2-&gt;3-&gt;5.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public ListNode removeNthFromEnd(ListNode head, int n) &#123;</span><br><span class="line">        if(head==null) return null;</span><br><span class="line">        ListNode ans=new ListNode(0);//</span><br><span class="line">        ans.next=head;</span><br><span class="line">        ListNode t=head;</span><br><span class="line">        int count=0;</span><br><span class="line">        while(t!=null)&#123;</span><br><span class="line">            t=t.next;</span><br><span class="line">            count++;</span><br><span class="line">        &#125;</span><br><span class="line">        t=ans;</span><br><span class="line">        for(int i=0;i&lt;count-n;i++)&#123;</span><br><span class="line">            t=t.next;</span><br><span class="line">        &#125;</span><br><span class="line">        t.next=t.next.next;</span><br><span class="line">        return ans.next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">链表</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/04/19删除倒数第n个结点/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-40回溯加剪枝算法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/04/40回溯加剪枝算法/">剪枝加回溯</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/04/40回溯加剪枝算法/" class="archive-article-date">
-  	<time datetime="2019-12-04T14:54:46.598Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="剪枝加回溯"><a href="#剪枝加回溯" class="headerlink" title="剪枝加回溯"></a>剪枝加回溯</h2><p>给定一个数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。</p>
-<p>candidates 中的每个数字在每个组合中只能使用一次。</p>
-<p>说明：</p>
-<pre><code>所有数字（包括目标数）都是正整数。
-解集不能包含重复的组合。 </code></pre><p>示例 1:</p>
-<p>输入: candidates = [10,1,2,7,6,1,5], target = 8,<br>所求解集为:<br>[<br>  [1, 7],<br>  [1, 2, 5],<br>  [2, 6],<br>  [1, 1, 6]<br>]</p>
-<p>示例 2:</p>
-<p>输入: candidates = [2,5,2,1,2], target = 5,<br>所求解集为:<br>[<br>  [1,2,2],<br>  [5]<br>]</p>
-<p>剪枝前</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    int target;</span><br><span class="line">    LinkedList&lt;List&lt;Integer&gt;&gt; res=new LinkedList&lt;&gt;();</span><br><span class="line">    public void help(int sum,int first,LinkedList&lt;Integer&gt; cur,int candidates[])&#123;</span><br><span class="line">        if(sum&gt;=target)&#123;</span><br><span class="line">        if(sum==target&amp;&amp;res.contains(cur)==false)</span><br><span class="line">            res.add(new LinkedList&lt;Integer&gt;(cur));</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i=first;i&lt;candidates.length;i++)&#123;</span><br><span class="line">            sum+=candidates[i];</span><br><span class="line">            cur.add(candidates[i]);</span><br><span class="line">            help(sum,i+1,cur,candidates);</span><br><span class="line">            sum-=candidates[i];</span><br><span class="line">            cur.removeLast();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public List&lt;List&lt;Integer&gt;&gt; combinationSum2(int[] candidates, int target) &#123;</span><br><span class="line">        this.target=target;</span><br><span class="line">        Arrays.sort(candidates);</span><br><span class="line">        LinkedList&lt;Integer&gt; cur=new LinkedList&lt;&gt;();</span><br><span class="line">        help(0,0,cur,candidates);</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>剪枝后</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    int target;</span><br><span class="line">    LinkedList&lt;List&lt;Integer&gt;&gt; res=new LinkedList&lt;&gt;();</span><br><span class="line">    public void help(int sum,int first,LinkedList&lt;Integer&gt; cur,int candidates[])&#123;</span><br><span class="line">        if(sum&gt;=target)&#123;//排序好的如大于,直接剪枝</span><br><span class="line">        if(sum==target&amp;&amp;res.contains(cur)==false)</span><br><span class="line">            res.add(new LinkedList&lt;Integer&gt;(cur));</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i=first;i&lt;candidates.length;i++)&#123;</span><br><span class="line">            if(candidates[i]&gt;target)</span><br><span class="line">               break;</span><br><span class="line">            sum+=candidates[i];</span><br><span class="line">            if(sum&gt;target) break;//剪枝</span><br><span class="line">            cur.add(candidates[i]);</span><br><span class="line">            help(sum,i+1,cur,candidates);</span><br><span class="line">            sum-=candidates[i];</span><br><span class="line">            cur.removeLast();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public List&lt;List&lt;Integer&gt;&gt; combinationSum2(int[] candidates, int target) &#123;</span><br><span class="line">        this.target=target;</span><br><span class="line">        Arrays.sort(candidates);</span><br><span class="line">        LinkedList&lt;Integer&gt; cur=new LinkedList&lt;&gt;();</span><br><span class="line">        help(0,0,cur,candidates);</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">回溯</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/04/40回溯加剪枝算法/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
@@ -763,7 +786,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">堆</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">字符串</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">回溯</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">dp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">位运算</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -779,11 +822,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">排序算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">OS</a>
+                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -791,7 +830,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">堆</a>
+                <a href="javascript:void(0)" class="js-tag color3">排序</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">排序算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">OS</a>
               </li>
             
             <div class="clearfix"></div>
