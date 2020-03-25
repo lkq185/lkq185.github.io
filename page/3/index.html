@@ -77,15 +77,7 @@
 		<nav class="header-nav">
 			<div class="social">
 				
-					<a class="github" target="_blank" href="https://github.com/lkq185" title="github"><i class="icon-github"></i></a>
-		        
-					<a class="weibo" target="_blank" href="#" title="weibo"><i class="icon-weibo"></i></a>
-		        
-					<a class="rss" target="_blank" href="#" title="rss"><i class="icon-rss"></i></a>
-		        
-					<a class="zhihu" target="_blank" href="#" title="zhihu"><i class="icon-zhihu"></i></a>
-		        
-					<a class="qq" target="_blank" href="/1090810951" title="qq"><i class="icon-qq"></i></a>
+					<a class="mail" target="_blank" href="mailto:1090810951@qq.com" title="mail"><i class="icon-mail"></i></a>
 		        
 			</div>
 		</nav>
@@ -120,15 +112,7 @@
 			<nav class="header-nav">
 				<div class="social">
 					
-						<a class="github" target="_blank" href="https://github.com/lkq185" title="github"><i class="icon-github"></i></a>
-			        
-						<a class="weibo" target="_blank" href="#" title="weibo"><i class="icon-weibo"></i></a>
-			        
-						<a class="rss" target="_blank" href="#" title="rss"><i class="icon-rss"></i></a>
-			        
-						<a class="zhihu" target="_blank" href="#" title="zhihu"><i class="icon-zhihu"></i></a>
-			        
-						<a class="qq" target="_blank" href="/1090810951" title="qq"><i class="icon-qq"></i></a>
+						<a class="mail" target="_blank" href="mailto:1090810951@qq.com" title="mail"><i class="icon-mail"></i></a>
 			        
 				</div>
 			</nav>
@@ -155,6 +139,158 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-随机化快排找第k大的值215" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/11/随机化快排找第k大的值215/">随机化快排第k大的值</a>
+    </h1>
+  
+
+        
+        <a href="/2019/12/11/随机化快排找第k大的值215/" class="archive-article-date">
+  	<time datetime="2019-12-11T06:23:23.595Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在未排序的数组中找到第 k 个最大的元素。请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。</p>
+<p>示例 1:</p>
+<p>输入: [3,2,1,5,6,4] 和 k = 2<br>输出: 5</p>
+<p>示例 2:</p>
+<p>输入: [3,2,3,1,2,4,5,5,6] 和 k = 4<br>输出: 4<br><img src="https://img-blog.csdnimg.cn/20191211142249227.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>说明:</strong></p>
+<p>你可以假设 k 总是有效的，且 1 ≤ k ≤ 数组的长度。<br>3 2 1 5 6 4<br>随机3为前驱 3和最右交换<br>4 2 1 5 6 【3】 index=left<br>找比p=3小的数,与index交换,index加1<br>2 4 1 5 6 【3】<br>2 1 4 5 6 【3】<br>最后index和right交换<br>2 1 【3】5 6 4<br>k=4,所以只有在3的右面找第k大元素</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    int nums[];</span><br><span class="line">    public void swap(int a,int b)&#123;</span><br><span class="line">        int t=nums[b];</span><br><span class="line">        nums[b]=nums[a];</span><br><span class="line">        nums[a]=t;</span><br><span class="line">    &#125;</span><br><span class="line">    public int per(int left,int right,int p)&#123;</span><br><span class="line">        swap(p,right);//前驱和最右交换</span><br><span class="line">        int index=left;</span><br><span class="line">        for(int i=left;i&lt;right;i++)&#123;</span><br><span class="line">            if(nums[i]&lt;nums[right])&#123;</span><br><span class="line">                swap(i,index);</span><br><span class="line">                index++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        swap(index,right);</span><br><span class="line">        return index;</span><br><span class="line">    &#125;</span><br><span class="line">    public int sort(int left,int right,int k)&#123;</span><br><span class="line">        if(left-right==0) return nums[left];</span><br><span class="line">         Random random= new Random();</span><br><span class="line">        int p= left + random.nextInt(right - left);</span><br><span class="line">        p=per(left,right,p);</span><br><span class="line">        if(p==k)&#123;</span><br><span class="line">            return nums[p];</span><br><span class="line">        &#125;</span><br><span class="line">        else if(p&lt;k)&#123;</span><br><span class="line">           return sort(p+1,right,k);</span><br><span class="line">        &#125;</span><br><span class="line">        else&#123;</span><br><span class="line">          return sort(left,p-1,k);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public int findKthLargest(int[] nums, int k) &#123;</span><br><span class="line">        int n=nums.length;</span><br><span class="line">        this.nums=nums;</span><br><span class="line">        return sort(0,n-1,n-k);//找第k大</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">排序算法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/11/随机化快排找第k大的值215/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-191二进制与查找1的个数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/11/191二进制与查找1的个数/">二进制查找1的个数</a>
+    </h1>
+  
+
+        
+        <a href="/2019/12/11/191二进制与查找1的个数/" class="archive-article-date">
+  	<time datetime="2019-12-11T04:16:28.801Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>编写一个函数，输入是一个无符号整数，返回其二进制表达式中数字位数为 ‘1’ 的个数（也被称为汉明重量）。</p>
+<p>示例 1：</p>
+<p>输入：00000000000000000000000000001011<br>输出：3<br>解释：输入的二进制串 00000000000000000000000000001011 中，共有三位为 ‘1’。</p>
+<p>示例 2：</p>
+<p>输入：00000000000000000000000010000000<br>输出：1<br>解释：输入的二进制串 00000000000000000000000010000000 中，共有一位为 ‘1’。</p>
+<p>示例 3：</p>
+<p>输入：11111111111111111111111111111101<br>输出：31<br>解释：输入的二进制串 11111111111111111111111111111101 中，共有 31 位为 ‘1’。<br>如1100<br>n-1操作把末位0变成1,1变成0。<br>n&amp;n-1这样每次数中减一个1<br>当n变成0时结束循环<br>1100&amp;1011=1000<br>1000&amp;0111=0000</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class Solution &#123;</span><br><span class="line">    // you need to treat n as an unsigned value</span><br><span class="line">    public int hammingWeight(int n) &#123;</span><br><span class="line">    int sum = 0;</span><br><span class="line">    while (n != 0) &#123;</span><br><span class="line">        sum++;</span><br><span class="line">        n &amp;= (n - 1);//最后一位变成0</span><br><span class="line">    &#125;</span><br><span class="line">    return sum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/11/191二进制与查找1的个数/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-148排序链表" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -500,186 +636,9 @@
 
 
   
-    <article id="post-112 113路径总和" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/08/112 113路径总和/">二叉树求和</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/08/112 113路径总和/" class="archive-article-date">
-  	<time datetime="2019-12-08T14:33:24.722Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>给定一个二叉树和一个目标和，判断该树中是否存在根节点到叶子节点的路径，这条路径上所有节点值相加等于目标和。<strong>(存在路径就返回true）</strong></p>
-<p>说明: 叶子节点是指没有子节点的节点。</p>
-<p>示例:<br>给定如下二叉树，以及目标和 sum = 22，</p>
-<pre><code>      5
-     / \
-    4   8
-   /   / \
-  11  13  4
- /  \      \
-7    2      1</code></pre><p>返回 true, 因为存在目标和为 22 的根节点到叶子节点的路径<br><strong>递归</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">  public boolean hasPathSum(TreeNode root, int sum) &#123;</span><br><span class="line">    if (root == null)</span><br><span class="line">      return false;</span><br><span class="line">    sum -= root.val;</span><br><span class="line">    if (root.left == null&amp;&amp;root.right == null)</span><br><span class="line">      return sum == 0;//sum=0则，有路径。最后一定为真</span><br><span class="line">    return hasPathSum(root.left, sum) || hasPathSum(root.right, sum);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>迭代</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">  public boolean hasPathSum(TreeNode root, int sum) &#123;</span><br><span class="line">    if (root == null)</span><br><span class="line">      return false;</span><br><span class="line"></span><br><span class="line">    LinkedList&lt;TreeNode&gt; node_stack = new LinkedList();</span><br><span class="line">    LinkedList&lt;Integer&gt; sum_stack = new LinkedList();</span><br><span class="line">    node_stack.add(root);</span><br><span class="line">    sum_stack.add(sum - root.val);</span><br><span class="line"></span><br><span class="line">    TreeNode node;</span><br><span class="line">    int curr_sum;</span><br><span class="line">    while ( !node_stack.isEmpty() ) &#123;</span><br><span class="line">      node = node_stack.pollLast();</span><br><span class="line">      curr_sum = sum_stack.pollLast();</span><br><span class="line">      if ((node.right == null) &amp;&amp; (node.left == null) &amp;&amp; (curr_sum == 0))</span><br><span class="line">        return true;</span><br><span class="line"></span><br><span class="line">      if (node.right != null) &#123;</span><br><span class="line">        node_stack.add(node.right);</span><br><span class="line">        sum_stack.add(curr_sum - node.right.val);</span><br><span class="line">      &#125;</span><br><span class="line">      if (node.left != null) &#123;</span><br><span class="line">        node_stack.add(node.left);</span><br><span class="line">        sum_stack.add(curr_sum - node.left.val);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return false;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>给定一个二叉树和一个目标和，找到所有从根节点到叶子节点路径总和等于给定目标和的路径（<strong>到叶子结点和为sum的路径结果集</strong>）</p>
-<p>说明: 叶子节点是指没有子节点的节点。</p>
-<p>示例:<br>给定如下二叉树，以及目标和 sum = 22，</p>
-<pre><code>      5
-     / \
-    4   8
-   /   / \
-  11  13  4
- /  \    / \
-7    2  5   1</code></pre><p>返回:</p>
-<p>[<br>   [5,4,11,2],<br>   [5,8,4,5]<br>]<br><strong>回溯递归</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt; res=new LinkedList&lt;&gt;();</span><br><span class="line">    public void help(TreeNode root,LinkedList&lt;Integer&gt; cur,int sum)&#123;</span><br><span class="line">       if(root==null) return;//root为空,直接返回</span><br><span class="line">       if(root.left==null&amp;&amp;root.right==null)&#123;//root左子树和右子树都为空,则为叶子结点</span><br><span class="line">          if((sum-root.val)==0)&#123;//如果为0,加入结果集</span><br><span class="line">             cur.add(root.val);</span><br><span class="line">             res.add(new LinkedList&lt;Integer&gt;(cur));             </span><br><span class="line">             cur.removeLast();</span><br><span class="line">             return;</span><br><span class="line">          &#125;</span><br><span class="line">          else&#123;</span><br><span class="line">             return;</span><br><span class="line">          &#125;</span><br><span class="line">       &#125;</span><br><span class="line">          cur.add(root.val);</span><br><span class="line">          help(root.left,cur,sum-root.val);</span><br><span class="line">          help(root.right,cur,sum-root.val);</span><br><span class="line">          cur.removeLast();//回溯</span><br><span class="line">       &#125;</span><br><span class="line">    public List&lt;List&lt;Integer&gt;&gt; pathSum(TreeNode root, int sum) &#123;</span><br><span class="line">        help(root,new LinkedList&lt;Integer&gt;(),sum);</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/08/112 113路径总和/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-111 二叉树的最小深度" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/07/111 二叉树的最小深度/">求最小深度</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/07/111 二叉树的最小深度/" class="archive-article-date">
-  	<time datetime="2019-12-07T06:52:23.893Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>给定一个二叉树，找出其最小深度。</p>
-<p>最小深度是从根节点到最近叶子节点的最短路径上的节点数量。</p>
-<p>说明: 叶子节点是指没有子节点的节点。</p>
-<p>示例:</p>
-<p>给定二叉树 [3,9,20,null,null,15,7],</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  3</span><br><span class="line"> / \</span><br><span class="line">9  20</span><br><span class="line">  /  \</span><br><span class="line"> 15   7</span><br></pre></td></tr></table></figure>
-
-<p>返回它的最小深度  2.</p>
-<p><strong>思路：一层一层遍历，若左右儿子都为空，则结束遍历</strong><br>迭代</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int minDepth(TreeNode root) &#123;</span><br><span class="line">        if(root==null) return 0;</span><br><span class="line">        Queue&lt;TreeNode&gt; q=new LinkedList&lt;&gt;();</span><br><span class="line">        q.add(root);</span><br><span class="line">        int ans=1;</span><br><span class="line">        int k=0;</span><br><span class="line">        while(!q.isEmpty())&#123;</span><br><span class="line">            int n=q.size();</span><br><span class="line">            for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">                TreeNode t=q.poll();</span><br><span class="line">                if(t.left==null&amp;&amp;t.right==null)&#123;</span><br><span class="line">                   k=1;</span><br><span class="line">                   break;</span><br><span class="line">                &#125;</span><br><span class="line">                if(t.left!=null) q.add(t.left);</span><br><span class="line">                if(t.right!=null) q.add(t.right);`在这里插入代码片`</span><br><span class="line">            &#125;</span><br><span class="line">            if(k==1) break;</span><br><span class="line">            ans++;</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>递归</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int minDepth(TreeNode root) &#123;</span><br><span class="line">        if(root == null) return 0;</span><br><span class="line">        //这道题递归条件里分为三种情况</span><br><span class="line">        //1.左孩子和有孩子都为空的情况，说明到达了叶子节点，直接返回1即可</span><br><span class="line">        if(root.left == null &amp;&amp; root.right == null) return 1;</span><br><span class="line">        //2.如果左孩子和由孩子其中一个为空，那么需要返回比较大的那个孩子的深度        </span><br><span class="line">        int m1 = minDepth(root.left);</span><br><span class="line">        int m2 = minDepth(root.right);</span><br><span class="line">        //这里其中一个节点为空，说明m1和m2有一个必然为0，所以可以返回m1 + m2 + 1;</span><br><span class="line">        if(root.left == null || root.right == null) return m1 + m2 + 1;</span><br><span class="line">        </span><br><span class="line">        //3.最后一种情况，也就是左右孩子都不为空，返回最小深度+1即可</span><br><span class="line">        return Math.min(m1,m2) + 1; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">树</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/07/111 二叉树的最小深度/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
     </nav>
   
 
@@ -839,6 +798,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">OS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
             
             <div class="clearfix"></div>
