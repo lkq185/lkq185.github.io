@@ -140,368 +140,65 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-1160map数组形式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-盒子模型" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/25/1160map数组形式/">数组型map</a>
+      <a class="article-title" href="/2020/05/02/盒子模型/">盒子模型</a>
     </h1>
   
 
         
-        <a href="/2019/11/25/1160map数组形式/" class="archive-article-date">
-  	<time datetime="2019-11-25T08:28:56.333Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-25</time>
+        <a href="/2020/05/02/盒子模型/" class="archive-article-date">
+  	<time datetime="2020-05-02T11:56:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-02</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="拼写单词"><a href="#拼写单词" class="headerlink" title="拼写单词"></a>拼写单词</h2><p>给你一份『词汇表』（字符串数组） words 和一张『字母表』（字符串） chars。</p>
-<p>假如你可以用 chars 中的『字母』（字符）拼写出 words 中的某个『单词』（字符串），那么我们就认为你掌握了这个单词。</p>
-<p>注意：每次拼写时，chars 中的每个字母都只能用一次。</p>
-<p>返回词汇表 words 中你掌握的所有单词的 长度之和。</p>
-<p>示例 1：</p>
-<p>输入：words = [“cat”,”bt”,”hat”,”tree”], chars = “atach”<br>输出：6<br>解释：<br>可以形成字符串 “cat” 和 “hat”，所以答案是 3 + 3 = 6。</p>
-<p>示例 2：</p>
-<p>输入：words = [“hello”,”world”,”leetcode”], chars = “welldonehoneyr”<br>输出：10<br>解释：<br>可以形成字符串 “hello” 和 “world”，所以答案是 5 + 5 = 10。</p>
-<p>提示：</p>
-<pre><code>1 &lt;= words.length &lt;= 1000
-1 &lt;= words[i].length, chars.length &lt;= 100
-所有字符串中都仅包含小写英文字母</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;//数值型map使用</span><br><span class="line">    public int countCharacters(String[] words, String chars) &#123;</span><br><span class="line">        if(words.length==0||chars.length()==0)return 0;</span><br><span class="line">        int map[]=new int[26];</span><br><span class="line">        for(int i=0;i&lt;chars.length();i++)&#123;</span><br><span class="line">            map[chars.charAt(i)-&apos;a&apos;]++;</span><br><span class="line">        &#125;</span><br><span class="line">        int ans=0;</span><br><span class="line">        for(int i=0;i&lt;words.length;i++)&#123;</span><br><span class="line">            int len=0;</span><br><span class="line">            int[] map2=Arrays.copyOf(map,map.length);</span><br><span class="line">            for(int j=0;j&lt;words[i].length();j++)&#123;</span><br><span class="line">               if(map2[words[i].charAt(j)-&apos;a&apos;]&gt;0)&#123;</span><br><span class="line">                 len++;</span><br><span class="line">                 map2[words[i].charAt(j)-&apos;a&apos;]--;</span><br><span class="line">               &#125;</span><br><span class="line">               else break;</span><br><span class="line">            &#125;</span><br><span class="line">            if(len==words[i].length())</span><br><span class="line">            ans+=len;</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h2 id="盒子模型组成"><a href="#盒子模型组成" class="headerlink" title="盒子模型组成"></a>盒子模型组成</h2><blockquote>
+<p>border：边框<br>content：内容<br>padding：内边距<br>margin: 外边距</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20200502143716372.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="边框：border"><a href="#边框：border" class="headerlink" title="边框：border"></a>边框：border</h2><ul>
+<li>会撑大盒子</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">    div &#123;</span><br><span class="line">        width: <span class="number">300</span>px;</span><br><span class="line">        height: <span class="number">200</span>px;</span><br><span class="line">        <span class="comment">//边框颜色</span></span><br><span class="line">        border-color: pink;</span><br><span class="line">        <span class="comment">//边框粗细</span></span><br><span class="line">        border-width: <span class="number">5</span>px;</span><br><span class="line">        <span class="comment">//虚线</span></span><br><span class="line">        border-style: dotted;</span><br><span class="line">        <span class="comment">//简写</span></span><br><span class="line">        border：<span class="number">1</span>px pink solid;<span class="comment">//无顺序</span></span><br><span class="line">        <span class="comment">//只要上边框 left左 right 右</span></span><br><span class="line">        border-top：<span class="number">5</span>px solid pink;</span><br><span class="line">        <span class="comment">//只要下边框</span></span><br><span class="line">        border-bottom:</span><br><span class="line">    &#125;</span><br><span class="line">&lt;<span class="regexp">/style&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>首先题中要求chars 中的每个字母都只能用一次。<br>其次要每次拷贝map2数组函数 int[] <code>map2=Arrays.copyOf(map,map.length);</code><br>初始化</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">map[chars.charAt(i)-&apos;a&apos;]++或 map[chars.charAt(i)-97]++;</span><br></pre></td></tr></table></figure>
+<p><strong>表格</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/20200502145254248.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">    &lt;meta name=<span class="string">"viewport"</span> content=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">    &lt;style&gt;</span></span><br><span class="line"><span class="regexp">        table &#123;</span></span><br><span class="line"><span class="regexp">            width: 700px;</span></span><br><span class="line"><span class="regexp">            height: 600px;</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">        th &#123;</span></span><br><span class="line"><span class="regexp">            height: 100px;</span></span><br><span class="line"><span class="regexp">            width: 100px;</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">        table,td,th&#123;</span></span><br><span class="line"><span class="regexp">            border: 1px solid black;</span></span><br><span class="line"><span class="regexp">            /</span>* 合并边框 *<span class="regexp">/</span></span><br><span class="line"><span class="regexp">            border-collapse: collapse;</span></span><br><span class="line"><span class="regexp">            /</span>* 居中 *<span class="regexp">/</span></span><br><span class="line"><span class="regexp">            text-align: center;</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>style&gt;</span><br><span class="line">&lt;<span class="regexp">/head&gt;</span></span><br><span class="line"><span class="regexp">&lt;body&gt;</span></span><br><span class="line"><span class="regexp">    &lt;table align="center" cellspacing="0x"&gt;</span></span><br><span class="line"><span class="regexp">       &lt;thead&gt;</span></span><br><span class="line"><span class="regexp">       &lt;tr&gt;</span></span><br><span class="line"><span class="regexp">           &lt;th&gt;排名&lt;/</span>th&gt;</span><br><span class="line">           &lt;th&gt;关键词&lt;<span class="regexp">/th&gt;</span></span><br><span class="line"><span class="regexp">           &lt;th&gt;趋势&lt;/</span>th&gt;</span><br><span class="line">           &lt;th&gt;进入搜索&lt;<span class="regexp">/th&gt;</span></span><br><span class="line"><span class="regexp">           &lt;th&gt;最近七日&lt;/</span>th&gt;</span><br><span class="line">           &lt;th&gt;相关连接&lt;<span class="regexp">/th&gt;</span></span><br><span class="line"><span class="regexp">       &lt;/</span>tr&gt;</span><br><span class="line">      &lt;<span class="regexp">/thead&gt;</span></span><br><span class="line"><span class="regexp">      &lt;tbody&gt;</span></span><br><span class="line"><span class="regexp">       &lt;tr&gt;</span></span><br><span class="line"><span class="regexp">           &lt;td&gt;1&lt;/</span>td&gt;</span><br><span class="line">           &lt;td&gt;规程&lt;<span class="regexp">/td&gt;</span></span><br><span class="line"><span class="regexp">           &lt;td&gt;&lt;img src="imge/</span>大头娃娃<span class="number">1.</span>gif<span class="string">" width=100 &gt;&lt;/td&gt;</span></span><br><span class="line"><span class="string">           &lt;td&gt;456&lt;/td&gt;</span></span><br><span class="line"><span class="string">           &lt;td&gt;123&lt;/td&gt;</span></span><br><span class="line">           &lt;td&gt;&lt;a href="#"&gt;贴吧&lt;/a&gt;&lt;/td&gt;</span><br><span class="line">       &lt;<span class="regexp">/tr&gt;</span></span><br><span class="line"><span class="regexp">        &lt;tr&gt;</span></span><br><span class="line"><span class="regexp">            &lt;td&gt;1&lt;/</span>td&gt;</span><br><span class="line">            &lt;td&gt;规程&lt;<span class="regexp">/td&gt;</span></span><br><span class="line"><span class="regexp">            &lt;td&gt;&lt;img src="imge/</span>大头娃娃<span class="number">1.</span>gif<span class="string">" width=100 &gt;&lt;/td&gt;</span></span><br><span class="line"><span class="string">            &lt;td&gt;456&lt;/td&gt;</span></span><br><span class="line"><span class="string">            &lt;td&gt;123&lt;/td&gt;</span></span><br><span class="line">            &lt;td&gt;&lt;a href="#"&gt;贴吧&lt;/a&gt;&lt;/td&gt;</span><br><span class="line">        &lt;<span class="regexp">/tr&gt;</span></span><br><span class="line"><span class="regexp">        &lt;tr&gt;</span></span><br><span class="line"><span class="regexp">            &lt;td&gt;1&lt;/</span>td&gt;</span><br><span class="line">            &lt;td&gt;规程&lt;<span class="regexp">/td&gt;</span></span><br><span class="line"><span class="regexp">            &lt;td&gt;&lt;img src="imge/</span>大头娃娃<span class="number">1.</span>gif<span class="string">" width=100 &gt;&lt;/td&gt;</span></span><br><span class="line"><span class="string">            &lt;td&gt;456&lt;/td&gt;</span></span><br><span class="line"><span class="string">            &lt;td&gt;123&lt;/td&gt;</span></span><br><span class="line">            &lt;td&gt;&lt;a href="#"&gt;贴吧&lt;/a&gt;&lt;/td&gt;</span><br><span class="line">        &lt;<span class="regexp">/tr&gt;</span></span><br><span class="line"><span class="regexp">       &lt;tr&gt;</span></span><br><span class="line"><span class="regexp">        &lt;td&gt;1&lt;/</span>td&gt;</span><br><span class="line">        &lt;td&gt;规程&lt;<span class="regexp">/td&gt;</span></span><br><span class="line"><span class="regexp">        &lt;td&gt;&lt;img src="imge/</span>大头娃娃<span class="number">1.</span>gif<span class="string">" width=100 &gt;&lt;/td&gt;</span></span><br><span class="line"><span class="string">        &lt;td&gt;456&lt;/td&gt;</span></span><br><span class="line"><span class="string">        &lt;td&gt;123&lt;/td&gt;</span></span><br><span class="line">        &lt;td&gt;&lt;a href="#"&gt;贴吧&lt;/a&gt;&lt;/td&gt;</span><br><span class="line">       &lt;<span class="regexp">/tr&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>tbody&gt;</span><br><span class="line">    &lt;<span class="regexp">/table&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>body&gt;</span><br><span class="line">&lt;<span class="regexp">/html&gt;</span></span><br></pre></td></tr></table></figure>
 
+<h2 id="padding：内边距"><a href="#padding：内边距" class="headerlink" title="padding：内边距"></a>padding：内边距</h2><p>文字与盒子边框的距离</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">div &#123;</span><br><span class="line">    <span class="comment">/* 上下左右都是5px */</span></span><br><span class="line">    padding: <span class="number">5</span>px;</span><br><span class="line">    <span class="comment">/* 上下5px 左右10px */</span></span><br><span class="line">    padding: <span class="number">5</span>px <span class="number">10</span>px;</span><br><span class="line">    <span class="comment">/* 上5px 左右10px 下20px */</span></span><br><span class="line">    padding: <span class="number">5</span>px <span class="number">10</span>px <span class="number">20</span>px;</span><br><span class="line">    <span class="comment">/* 上上右下左,顺时针 */</span></span><br><span class="line">    padding: <span class="number">5</span>px <span class="number">10</span>px <span class="number">20</span>px <span class="number">30</span>px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-      
+<blockquote>
+<p>重点：内边距会加大盒子大小<br>所以盒子宽和高需要减去padding的距离乘2<br>用padding保证与作用盒子距离相等。</p>
+</blockquote>
+<p>导航栏<br><img src="https://img-blog.csdnimg.cn/20200502151650574.png" alt="在这里插入图片描述"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">    &lt;meta name=<span class="string">"viewport"</span> content=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">    &lt;style&gt;</span></span><br><span class="line"><span class="regexp">        .nav &#123;</span></span><br><span class="line"><span class="regexp">            height: 41px;</span></span><br><span class="line"><span class="regexp">            border-top: 3px solid orange;</span></span><br><span class="line"><span class="regexp">            border-bottom: 1px solid black;</span></span><br><span class="line"><span class="regexp">            background-color: white;</span></span><br><span class="line"><span class="regexp">            /</span>* 行高等于高垂直居中 *<span class="regexp">/</span></span><br><span class="line"><span class="regexp">            line-height: 41px;</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">        .nav a&#123;</span></span><br><span class="line"><span class="regexp">            /</span>* a是行内元素 必须转化为行内块元素 既有高度 可以一行多个 *<span class="regexp">/</span></span><br><span class="line"><span class="regexp">            font-size: 14px;</span></span><br><span class="line"><span class="regexp">            color: grey;</span></span><br><span class="line"><span class="regexp">            /</span>* 上下<span class="number">0</span>像素 左右<span class="number">20</span>像素 *<span class="regexp">/</span></span><br><span class="line"><span class="regexp">            padding: 0 20px;</span></span><br><span class="line"><span class="regexp">            text-emphasis: none;</span></span><br><span class="line"><span class="regexp">            display: inline-block;</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">        /</span>* 伪类选择器 *<span class="regexp">/</span></span><br><span class="line"><span class="regexp">        .nav a:hover &#123;</span></span><br><span class="line"><span class="regexp">            background-color: orange;</span></span><br><span class="line"><span class="regexp">            color:white;</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>style&gt;</span><br><span class="line">&lt;<span class="regexp">/head&gt;</span></span><br><span class="line"><span class="regexp">&lt;body&gt;</span></span><br><span class="line"><span class="regexp">    &lt;div class="nav"&gt;</span></span><br><span class="line"><span class="regexp">         &lt;a href="#"&gt;新浪导航&lt;/</span>a&gt;</span><br><span class="line">         &lt;a href=<span class="string">"#"</span>&gt;手机新浪网&lt;<span class="regexp">/a&gt;</span></span><br><span class="line"><span class="regexp">         &lt;a href="#"&gt;移动端&lt;/</span>a&gt;</span><br><span class="line">         &lt;a href=<span class="string">"#"</span>&gt;微博&lt;<span class="regexp">/a&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>div&gt;</span><br><span class="line">&lt;<span class="regexp">/body&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>html&gt;</span><br></pre></td></tr></table></figure>
 
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
+<blockquote>
+<p>如果没设置width或者height大小，padding-weight或者height不会加大盒子大小</p>
+</blockquote>
+<h2 id="margin-外边距"><a href="#margin-外边距" class="headerlink" title="margin: 外边距"></a>margin: 外边距</h2><p>盒子间的距离。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">.two&#123;</span><br><span class="line">    <span class="comment">/* 上下左右都是30px */</span></span><br><span class="line">    margin: <span class="number">30</span>px;</span><br><span class="line">    <span class="comment">/* 上5px 左右30px  */</span></span><br><span class="line">    margin: <span class="number">5</span>px <span class="number">30</span>px;</span><br><span class="line">    <span class="comment">/* 上5px 左右10px 下30px */</span></span><br><span class="line">    margin: <span class="number">5</span>px <span class="number">10</span>px <span class="number">30</span>px;</span><br><span class="line">    <span class="comment">/* 顺时针上下左右 */</span></span><br><span class="line">    margin: <span class="number">5</span>px <span class="number">10</span>px <span class="number">20</span>px <span class="number">30</span>px;</span><br><span class="line">    <span class="comment">/* 上下没外边距，左右auto，居中 */</span></span><br><span class="line">    margin: <span class="number">0</span> auto;</span><br><span class="line">    <span class="comment">/* 让行内块元素居中，把父亲加这个语句 */</span></span><br><span class="line">    text-align: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/25/1160map数组形式/">展开全文 >></a>
-        </p>
-      
+<blockquote>
+<p>父盒子里子盒子如何下移？<br>父亲加一个边框</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.father &#123;</span><br><span class="line"><span class="comment">//加一个1px透明边框</span></span><br><span class="line"> border：<span class="number">1</span>px solid transparent</span><br><span class="line"><span class="comment">//加一个1px内边距</span></span><br><span class="line">  padding：<span class="number">1</span>px</span><br><span class="line"><span class="comment">//加这句话，不会撑大盒子</span></span><br><span class="line">   overflow: hidden</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-1143最长公共子序列" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/25/1143最长公共子序列/">最长公共子序列</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/25/1143最长公共子序列/" class="archive-article-date">
-  	<time datetime="2019-11-25T07:48:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="最长公共子序列"><a href="#最长公共子序列" class="headerlink" title="最长公共子序列"></a>最长公共子序列</h2><p>给定两个字符串 text1 和 text2，返回这两个字符串的最长公共子序列。</p>
-<p>一个字符串的 子序列 是指这样一个新的字符串：它是由原字符串在不改变字符的相对顺序的情况下删除某些字符（也可以不删除任何字符）后组成的新字符串。<br>例如，”ace” 是 “abcde” 的子序列，但 “aec” 不是 “abcde” 的子序列。两个字符串的「公共子序列」是这两个字符串所共同拥有的子序列。</p>
-<p>若这两个字符串没有公共子序列，则返回 0。</p>
-<p>示例 1:</p>
-<p>输入：text1 = “abcde”, text2 = “ace”<br>输出：3<br>解释：最长公共子序列是 “ace”，它的长度为 3。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int longestCommonSubsequence(String text1, String text2) &#123;</span><br><span class="line">        int n=text1.length();</span><br><span class="line">        int m=text2.length();</span><br><span class="line">        int dp[][]=new int[n+1][m+1];</span><br><span class="line">        for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">            for(int j=0;j&lt;m;j++)&#123;</span><br><span class="line">               if(text1.charAt(i)==text2.charAt(j))</span><br><span class="line">                 dp[i+1][j+1]=dp[i][j]+1;</span><br><span class="line">               else</span><br><span class="line">                 dp[i+1][j+1]=Math.max(dp[i+1][j],dp[i][j+1]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[n][m];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://img-blog.csdnimg.cn/20191125221914474.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>1.注意定义dp数组时加1<br>2. 若text1的第i个字符和text2的第j个字符相同，则<br>    dp[i+1][j+1]=dp[i][j]+1;<br>   否则<br>    dp[i+1][j+1]=Math.max(dp[i+1][j],dp[i][j+1]);</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/算法与数据结构//" class="article-tag-list-link color3">算法与数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/25/1143最长公共子序列/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-654基础递归建树" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/24/654基础递归建树/">基础递归建树</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/24/654基础递归建树/" class="archive-article-date">
-  	<time datetime="2019-11-24T15:03:34.906Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="654-最大二叉树"><a href="#654-最大二叉树" class="headerlink" title="654. 最大二叉树"></a>654. 最大二叉树</h2><p>给定一个不含重复元素的整数数组。一个以此数组构建的最大二叉树定义如下：</p>
-<pre><code>二叉树的根是数组中的最大元素。
-左子树是通过数组中最大值左边部分构造出的最大二叉树。
-右子树是通过数组中最大值右边部分构造出的最大二叉树。</code></pre><p>通过给定的数组构建最大二叉树，并且输出这个树的根节点。</p>
-<p>示例 ：</p>
-<p>输入：[3,2,1,6,0,5]<br>输出：返回下面这棵树的根节点：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">   6</span><br><span class="line"> /   \</span><br><span class="line">3     5</span><br><span class="line"> \    / </span><br><span class="line">  2  0   </span><br><span class="line">    \</span><br><span class="line">     1</span><br></pre></td></tr></table></figure>
-
-
-
-<p>提示：</p>
-<pre><code>给定的数组的大小在 [1, 1000] 之间。</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public TreeNode dfs(int first,int end,int nums[])&#123;</span><br><span class="line">        if(first&gt;end) return null;</span><br><span class="line">        int max=-9999,k=0;//不能用第一个元素</span><br><span class="line">        for(int i=first;i&lt;=end;i++)&#123;//不能小于只能小于等于</span><br><span class="line">            if(nums[i]&gt;max)&#123;</span><br><span class="line">                max=nums[i];</span><br><span class="line">                k=i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        TreeNode root=new TreeNode(max);</span><br><span class="line">        root.left=dfs(first,k-1,nums);</span><br><span class="line">        root.right=dfs(k+1,end,nums);</span><br><span class="line">        return root;</span><br><span class="line">    &#125;</span><br><span class="line">    public TreeNode constructMaximumBinaryTree(int[] nums) &#123;</span><br><span class="line">        if(nums.length==0) return null;</span><br><span class="line">        return dfs(0,nums.length-1,nums);//必须用减1</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>思路就是递归<br><strong>但是注意以下几点，否则会内存超限</strong><br>1.int max=-9999 要设置小元素，不能用nums[first]<br>2.length必须减1<br>3.同时first小于等于end，所以要传给end值length-1</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">树</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/24/654基础递归建树/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-12经典找规律加贪心" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/24/12经典找规律加贪心/">找规律加贪心</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/24/12经典找规律加贪心/" class="archive-article-date">
-  	<time datetime="2019-11-24T07:59:00.948Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="12-整数转罗马数字"><a href="#12-整数转罗马数字" class="headerlink" title="12. 整数转罗马数字"></a>12. 整数转罗马数字</h2><p>罗马数字包含以下七种字符： I， V， X， L，C，D 和 M。</p>
-<p>字符          数值<br>I             1<br>V             5<br>X             10<br>L             50<br>C             100<br>D             500<br>M             1000</p>
-<p>例如， 罗马数字 2 写做 II ，即为两个并列的 1。12 写做 XII ，即为 X + II 。 27 写做  XXVII, 即为 XX + V + II 。</p>
-<p>通常情况下，罗马数字中小的数字在大的数字的右边。但也存在特例，例如 4 不写做 IIII，而是 IV。数字 1 在数字 5 的左边，所表示的数等于大数 5 减小数 1 得到的数值 4 。同样地，数字 9 表示为 IX。这个特殊的规则只适用于以下六种情况：</p>
-<pre><code>I 可以放在 V (5) 和 X (10) 的左边，来表示 4 和 9。
-X 可以放在 L (50) 和 C (100) 的左边，来表示 40 和 90。 
-C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。</code></pre><p>给定一个整数，将其转为罗马数字。输入确保在 1 到 3999 的范围内。</p>
-<p>示例 1:</p>
-<p>输入: 3<br>输出: “III”</p>
-<p>示例 2:</p>
-<p>输入: 4<br>输出: “IV”</p>
-<p>示例 3:</p>
-<p>输入: 9<br>输出: “IX”</p>
-<p>示例 4:</p>
-<p>输入: 58<br>输出: “LVIII”<br>解释: L = 50, V = 5, III = 3.</p>
-<p>示例 5:</p>
-<p>输入: 1994<br>输出: “MCMXCIV”<br>解释: M = 1000, CM = 900, XC = 90, IV = 4.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public class Solution &#123;</span><br><span class="line">    public String intToRoman(int num) &#123;</span><br><span class="line">        // 把阿拉伯数字与罗马数字可能出现的所有情况和对应关系，放在两个数组中</span><br><span class="line">        // 并且按照阿拉伯数字的大小降序排列，这是贪心选择思想</span><br><span class="line">        int[] nums = &#123;1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1&#125;;</span><br><span class="line">        String[] romans = &#123;&quot;M&quot;, &quot;CM&quot;, &quot;D&quot;, &quot;CD&quot;, &quot;C&quot;, &quot;XC&quot;, &quot;L&quot;, &quot;XL&quot;, &quot;X&quot;, &quot;IX&quot;, &quot;V&quot;, &quot;IV&quot;, &quot;I&quot;&#125;;</span><br><span class="line">        int i=0;</span><br><span class="line">        StringBuffer ans=new StringBuffer();</span><br><span class="line">        while(i&lt;13)&#123;</span><br><span class="line">            while(nums[i]&lt;=num)&#123;</span><br><span class="line">                ans.append(romans[i]);</span><br><span class="line">                num-=nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line">        return ans.toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/24/12经典找规律加贪心/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-46 47 22全排列和括号生成" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/24/46 47 22全排列和括号生成/">回溯求全排列和全排列变形(括号生成)</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/24/46 47 22全排列和括号生成/" class="archive-article-date">
-  	<time datetime="2019-11-24T01:42:52.723Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="全排列46"><a href="#全排列46" class="headerlink" title="全排列46"></a>全排列46</h2><p>给定一个没有重复数字的序列，返回其所有可能的全排列。</p>
-<p>示例:</p>
-<p>输入: [1,2,3]<br>输出:<br>[<br>  [1,2,3],<br>  [1,3,2],<br>  [2,1,3],<br>  [2,3,1],<br>  [3,1,2],<br>  [3,2,1]<br>]</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt; res= new LinkedList();</span><br><span class="line">    int n;</span><br><span class="line">    public void back(int nums[],LinkedList&lt;Integer&gt; cur,int h[])&#123;</span><br><span class="line">        if(cur.size()==n)&#123;</span><br><span class="line">           res.add(new LinkedList(cur));</span><br><span class="line">           return;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">           if(h[i]!=0)</span><br><span class="line">           continue;</span><br><span class="line">           cur.add(nums[i]);</span><br><span class="line">           h[i]=1;</span><br><span class="line">           back(nums,cur,h);</span><br><span class="line">           h[i]=0;</span><br><span class="line">           cur.removeLast(); //除去最后一个元素</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public List&lt;List&lt;Integer&gt;&gt; permute(int[] nums) &#123;</span><br><span class="line">        int n=nums.length;</span><br><span class="line">        this.n=n; //全局变量设置</span><br><span class="line">        int used[]=new int[n]; </span><br><span class="line">        back(nums,new LinkedList&lt;Integer&gt;(),used);</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://img-blog.csdnimg.cn/20191119225124487.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">以n叉树的思想就行递归和回溯</p>
-<h2 id="47有重复数全排列"><a href="#47有重复数全排列" class="headerlink" title="47有重复数全排列"></a>47有重复数全排列</h2><p>给定一个可包含重复数字的序列，返回所有不重复的全排列。</p>
-<p>示例:</p>
-<p>输入: [1,1,2]<br>输出:<br>[<br>  [1,1,2],<br>  [1,2,1],<br>  [2,1,1]<br>]</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt; res= new LinkedList();</span><br><span class="line">    int n;</span><br><span class="line">    int h[]=new int[100];</span><br><span class="line">    public void init(int n)&#123;</span><br><span class="line">        this.n=n;</span><br><span class="line">    &#125;</span><br><span class="line">    public void back(int nums[],LinkedList&lt;Integer&gt; cur)&#123;</span><br><span class="line">        if(cur.size()==n&amp;&amp;res.contains(cur)==false)&#123;</span><br><span class="line">           res.add(new LinkedList(cur));</span><br><span class="line">           return;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">           if(h[i]!=0)</span><br><span class="line">           continue;</span><br><span class="line">           cur.add(nums[i]);</span><br><span class="line">           h[i]=1;</span><br><span class="line">           back(nums,cur);</span><br><span class="line">           h[i]=0;</span><br><span class="line">           cur.removeLast();//除去最后一个元素</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public List&lt;List&lt;Integer&gt;&gt; permuteUnique(int[] nums) &#123;</span><br><span class="line">        int n=nums.length;</span><br><span class="line">        init(n);</span><br><span class="line">        back(nums,new LinkedList&lt;Integer&gt;());</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="22-括号生成"><a href="#22-括号生成" class="headerlink" title="22. 括号生成"></a>22. 括号生成</h2><p>给出 n 代表生成括号的对数，请你写出一个函数，使其能够生成所有可能的并且有效的括号组合。</p>
-<p>例如，给出 n = 3，生成结果为：</p>
-<p>[<br>  “((()))”,<br>  “(()())”,<br>  “(())()”,<br>  “()(())”,<br>  “()()()”<br>]</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;//必须有左括号才能右括号，只要右括号数小于左括号，总有左括号和右括号匹配</span><br><span class="line">    List&lt;String&gt; res=new ArrayList&lt;&gt;();</span><br><span class="line">    public void dfs(String t,int left,int right)&#123;</span><br><span class="line">         if(left==0&amp;&amp;right==0)&#123;</span><br><span class="line">             res.add(t);</span><br><span class="line">             return;</span><br><span class="line">         &#125;</span><br><span class="line">         if(left&gt;0)&#123;</span><br><span class="line">           dfs(t+&quot;(&quot;,left-1,right);</span><br><span class="line">         &#125;</span><br><span class="line">         if(right&gt;left)&#123;//right剩余比left多，保证left永远比right值小</span><br><span class="line">             dfs(t+&quot;)&quot;,left,right-1);</span><br><span class="line">         &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public List&lt;String&gt; generateParenthesis(int n) &#123;</span><br><span class="line">        dfs(&quot;&quot;,n,n);</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>清楚内外边距，让abcd左对齐</p>
+<blockquote>
+<p>用通配符选择器</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20200502164007529.png" alt="在这里插入图片描述"><img src="https://img-blog.csdnimg.cn/20200502164104266.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200502164318243.png" alt="在这里插入图片描述"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">  * &#123;</span><br><span class="line">      margin: <span class="number">0</span>;<span class="comment">//清楚内边框</span></span><br><span class="line">      padding: <span class="number">0</span>;<span class="comment">//清楚外边框</span></span><br><span class="line">  &#125;</span><br><span class="line">&lt;<span class="regexp">/style&gt;</span></span><br></pre></td></tr></table></figure>
 
 
       
@@ -516,7 +213,7 @@ C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。</code><
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">回溯</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CSS</a>
         		</li>
       		
 		</ul>
@@ -526,7 +223,7 @@ C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。</code><
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/24/46 47 22全排列和括号生成/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/05/02/盒子模型/">展开全文 >></a>
         </p>
       
 
@@ -556,34 +253,57 @@ C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。</code><
 
 
   
-    <article id="post-128最长连续序列" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-CSS三大特性" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/23/128最长连续序列/">最长连续序列</a>
+      <a class="article-title" href="/2020/05/02/CSS三大特性/">CSS三大特性</a>
     </h1>
   
 
         
-        <a href="/2019/11/23/128最长连续序列/" class="archive-article-date">
-  	<time datetime="2019-11-23T15:24:27.539Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-23</time>
+        <a href="/2020/05/02/CSS三大特性/" class="archive-article-date">
+  	<time datetime="2020-05-02T05:56:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-02</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="128-最长连续序列"><a href="#128-最长连续序列" class="headerlink" title="128. 最长连续序列"></a>128. 最长连续序列</h2><p>给定一个未排序的整数数组，找出最长连续序列的长度。</p>
-<p>要求算法的时间复杂度为 O(n)。</p>
-<p>示例:</p>
-<p>输入: [100, 4, 200, 1, 3, 2]<br>输出: 4<br>解释: 最长连续序列是 [1, 2, 3, 4]。它的长度为 4。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int longestConsecutive(int[] nums) &#123;</span><br><span class="line">        if(nums.length==0) return 0;</span><br><span class="line">        int n=nums.length;</span><br><span class="line">        Arrays.sort(nums);</span><br><span class="line">        Map&lt;Integer,Integer&gt; map=new HashMap&lt;&gt;();</span><br><span class="line">        for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">            map.put(nums[i],1);</span><br><span class="line">        &#125;</span><br><span class="line">        int maxn=1;</span><br><span class="line">        int len=1;</span><br><span class="line">        for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">            int t=nums[i];</span><br><span class="line">            len=0;</span><br><span class="line">            while(map.get(t)!=null)&#123;</span><br><span class="line">               len++;</span><br><span class="line">               t++;</span><br><span class="line">            &#125;</span><br><span class="line">            if(len&gt;maxn)</span><br><span class="line">            maxn=len;</span><br><span class="line">        &#125;</span><br><span class="line">        return maxn;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h2 id="层叠性："><a href="#层叠性：" class="headerlink" title="层叠性："></a>层叠性：</h2><p>最后为粉色：就近原则或者覆盖了红色。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">div &#123;</span><br><span class="line">    color: red;</span><br><span class="line">&#125;</span><br><span class="line">div &#123;</span><br><span class="line">    pink: pink;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>思路：先排序，然后用每一个元素加1，直到不在这个序列中。<br>找到最大值</p>
-<p>尽管在 for 循环中嵌套了一个 while 循环，时间复杂度看起来像是二次方级别的。但其实它是线性的算法。因为只有当 nums[i] 遇到了一个序列的开始， while 循环才会被执行。 while 循环在整个运行过程中只会被迭代 n 次。这意味着尽管看起来时间复杂度为<br>空间复杂度：O(n)</p>
+<h2 id="继承性"><a href="#继承性" class="headerlink" title="继承性"></a>继承性</h2><p>p继承div的属性<br>儿子继承父子继承的属性<br>可以把body选择为一个颜色。<br><strong>但也只是继承一部分特点：只有关于文字关系的可以继承。</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">    div &#123;</span><br><span class="line">        color: pink;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;<span class="regexp">/style&gt;</span></span><br><span class="line"><span class="regexp">&lt;div&gt;</span></span><br><span class="line"><span class="regexp">    &lt;p&gt;2&lt;/</span>p&gt;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>行高的继承</strong></p>
+</blockquote>
+<p>让子元素font-size行高为1.5倍<br>如子类font-size ：12px 则子类为12乘1.5</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//父类</span></span><br><span class="line">font: <span class="number">12</span>px/<span class="number">1.5</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="优先性"><a href="#优先性" class="headerlink" title="优先性"></a>优先性</h2><blockquote>
+<p>div选择.d还是div</p>
+</blockquote>
+<p>答案：选择red色 因为类选择器大于元素选择器<br>id选择器永远大于类选择器<br>id（#开头）&gt;类&gt;元素选择器</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">    &lt;style&gt;</span><br><span class="line">        div &#123;</span><br><span class="line">            color: pink;</span><br><span class="line">        &#125;</span><br><span class="line">        .d &#123;</span><br><span class="line">           color: red;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;<span class="regexp">/style&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"d"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&lt;<span class="regexp">/body&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>红还是粉</p>
+</blockquote>
+<p>最后为红色<br>尽管id选择器大于元素选择器<br>首先p继承了父类div后权重降为0<br>所以元素选择大于id选择器，最后为red（类选择器）<br>注：看什么颜色看是不是直接被选择颜色，而不是继承来的颜色。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">    &lt;style&gt;</span><br><span class="line">        #father &#123;</span><br><span class="line">            color: pink;</span><br><span class="line">        &#125;</span><br><span class="line">        p &#123;</span><br><span class="line">           color: red;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;<span class="regexp">/style&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div id=<span class="string">"father"</span>&gt;</span><br><span class="line">        &lt;p&gt;hhh&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>div&gt;</span><br><span class="line">&lt;<span class="regexp">/body&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>超链接类选择器设置颜色为blue色所以当让boby变颜色时，a herf颜色不变，还是蓝色。<br> 因为a继承了boby权重为0，还是遵从自己的蓝颜色。</p>
+</blockquote>
+<p>复合选择器 权重相加让后比较<br>如俩个类选择器0，0，0，1相加变为0，0，0，2<br>但不会进位。<br>4组一个单位，不会进位。</p>
+<blockquote>
+<p><strong>:hover</strong>伪类选择器为10<br>div ul li= 0 0 0 3<br>.nav ul li=0 0 1 2<br>a:hover=0 0 1 1<br>.nav a=0 0 1 1</p>
+</blockquote>
 
       
 
@@ -592,11 +312,395 @@ C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。</code><
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CSS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/23/128最长连续序列/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/05/02/CSS三大特性/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-背景图片和五彩导航栏" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/02/背景图片和五彩导航栏/">背景图片和五彩导航栏</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/02/背景图片和五彩导航栏/" class="archive-article-date">
+  	<time datetime="2020-05-02T05:39:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>背景图片url适合logo<br><strong>方位</strong>：left top center  right bottom 前后顺序无影响<br> <strong>background-repeat: no-repeat</strong>:背景图片是否平铺<br> <strong>background-position</strong>： 20px,40px;一定先x后<strong>background-attachment</strong>：默认scroll(随着页面滚动)，设为固定fixed。<br> 可复合一行使用顺序为：</p>
+<blockquote>
+<p> background tansparent url(img.jpg) reapt fixed top</p>
+</blockquote>
+<p><strong>背景颜色透明：</strong> background: rgba(0,0,0,0.5)也可以写.5,省去0。<br><strong>IE9以上可以使用</strong><br>三个0表示黑色，第四个表示黑色纯度，百分之50是纯黑色。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">  div &#123;</span><br><span class="line">           width: <span class="number">1000</span>px;</span><br><span class="line">           height:<span class="number">1000</span>px;</span><br><span class="line">           background-color: orange;</span><br><span class="line">           background-image: url(imge/大头娃娃<span class="number">1.</span>gif);</span><br><span class="line">           background-repeat: no-repeat;</span><br><span class="line">           background-position: center top;</span><br><span class="line">           background-position： <span class="number">20</span>px,<span class="number">40</span>px;</span><br><span class="line">           background-attachment：fixed;</span><br><span class="line">           background: rgba(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0.5</span>)</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/style&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>鼠标点击后更换为摸头效果</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">    &lt;meta name=<span class="string">"viewport"</span> content=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">    &lt;style&gt;</span></span><br><span class="line"><span class="regexp">        .nav a &#123;</span></span><br><span class="line"><span class="regexp">            /</span>* 转化为行内块 *<span class="regexp">/</span></span><br><span class="line"><span class="regexp">          display: inline-block;</span></span><br><span class="line"><span class="regexp">          width: 300px;</span></span><br><span class="line"><span class="regexp">          height: 300px;</span></span><br><span class="line"><span class="regexp">          background-color: pink;</span></span><br><span class="line"><span class="regexp">          text-align: center;</span></span><br><span class="line"><span class="regexp">          /</span>* 垂直居中 height=line-height *<span class="regexp">/</span></span><br><span class="line"><span class="regexp">          line-height: 300px;</span></span><br><span class="line"><span class="regexp">          color: black;</span></span><br><span class="line"><span class="regexp">          font-size: 50px;</span></span><br><span class="line"><span class="regexp">          /</span>* 下划线无*<span class="regexp">/</span></span><br><span class="line"><span class="regexp">          text-emphasis: none;</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">        .nav .bg1 &#123;</span></span><br><span class="line"><span class="regexp">            background: url(imge/</span>大头娃娃<span class="number">1.</span>gif) no-repeat   ;</span><br><span class="line">        &#125;</span><br><span class="line">        .nav .bg2 &#123;</span><br><span class="line">            background: url(imge/大头娃娃<span class="number">1.</span>gif) no-repeat   ;</span><br><span class="line">        &#125;</span><br><span class="line">        .nav .bg3 &#123;</span><br><span class="line">            background: url(imge/大头娃娃<span class="number">1.</span>gif) no-repeat   ;</span><br><span class="line">        &#125;</span><br><span class="line">        .nav .bg4 &#123;</span><br><span class="line">            background: url(imge/大头娃娃<span class="number">1.</span>gif) no-repeat   ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">/* 鼠标碰后变了 */</span></span><br><span class="line">        .nav .bg2:hover &#123;</span><br><span class="line">            background: url(imge/<span class="number">2.</span>gif) no-repeat ;</span><br><span class="line">        &#125;</span><br><span class="line">        .nav .bg3:hover &#123;</span><br><span class="line">            background: url(imge/<span class="number">2.</span>gif) no-repeat ;</span><br><span class="line">        &#125;</span><br><span class="line">        .nav .bg4:hover &#123;</span><br><span class="line">            background: url(imge/<span class="number">2.</span>gif) no-repeat ;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;<span class="regexp">/style&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"nav"</span>&gt;</span><br><span class="line">        &lt;a href=<span class="string">"#"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"bg1"</span>&gt;五彩导航&lt;<span class="regexp">/a&gt;</span></span><br><span class="line"><span class="regexp">        &lt;a href="#" class="bg2"&gt;五彩导航&lt;/</span>a&gt;</span><br><span class="line">        &lt;a href=<span class="string">"#"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"bg3"</span>&gt;五彩导航&lt;<span class="regexp">/a&gt;</span></span><br><span class="line"><span class="regexp">        &lt;a href="#" class="bg4"&gt;五彩导航&lt;/</span>a&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>body&gt;</span><br><span class="line">&lt;<span class="regexp">/html&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20200502131718564.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CSS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/02/背景图片和五彩导航栏/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-CSS元素显示模式和盒子样式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/01/CSS元素显示模式和盒子样式/">CSS元素显示模式和盒子样式</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/01/CSS元素显示模式和盒子样式/" class="archive-article-date">
+  	<time datetime="2020-05-01T15:39:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1.重点：<strong>p里不可以包含div</strong>（行级不可包含块级）<br>2.行级元素，如p<strong>一行放多个</strong>，而<strong>块一行只能有一个</strong>。理论上不显示宽度和高度。<br>   块级元素：一行只有一个，有高度宽度<br>3.特殊：a里不能放a，但是a里可以放块元素。<br><strong>4.块元素转化为行元素</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">div &#123;</span><br><span class="line">       display: inline;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>5.块元素转化为行元素</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> div &#123;</span><br><span class="line">        display: block;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>6.转化为行内快:一行放多个，可以有高度和宽度</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">span &#123;</span><br><span class="line">        display: inline-block;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>7.行高小于盒子：上空隙偏小，文字偏上<br>  行高大于盒子高度：下空隙偏小，文字偏下。</p>
+<p><strong>8.实例</strong></p>
+<h2 id="小米盒子"><a href="#小米盒子" class="headerlink" title="小米盒子"></a>小米盒子</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">    &lt;meta name=<span class="string">"viewport"</span> content=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">    &lt;style&gt;</span></span><br><span class="line"><span class="regexp">        /</span>* <span class="number">1.</span>转化为块级元素 *<span class="regexp">/</span></span><br><span class="line"><span class="regexp">        a &#123;</span></span><br><span class="line"><span class="regexp">            display: block;</span></span><br><span class="line"><span class="regexp">            width: 118px;</span></span><br><span class="line"><span class="regexp">            height: 40px;</span></span><br><span class="line"><span class="regexp">            /</span>* 当height和line-height相等时垂直居中 *<span class="regexp">/</span></span><br><span class="line"><span class="regexp">            line-height: 40px;</span></span><br><span class="line"><span class="regexp">            background-color: #55585a;</span></span><br><span class="line"><span class="regexp">            /</span>* 字体大小 *<span class="regexp">/</span></span><br><span class="line"><span class="regexp">            font-size: 14px;</span></span><br><span class="line"><span class="regexp">            color: #ffffff;</span></span><br><span class="line"><span class="regexp">            /</span>* 下划线 *<span class="regexp">/</span></span><br><span class="line"><span class="regexp">            text-decoration: none;</span></span><br><span class="line"><span class="regexp">            /</span>* 首行缩进 *<span class="regexp">/</span></span><br><span class="line"><span class="regexp">            text-indent: 2em;</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">        /</span>* 鼠标碰后变为某颜色 *<span class="regexp">/</span></span><br><span class="line"><span class="regexp">        a:hover&#123;</span></span><br><span class="line"><span class="regexp">            background-color: orange;</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>style&gt;</span><br><span class="line">&lt;<span class="regexp">/head&gt;</span></span><br><span class="line"><span class="regexp">&lt;body&gt;</span></span><br><span class="line"><span class="regexp">    &lt;a href="#"&gt;手机&lt;/</span>a&gt;</span><br><span class="line">    &lt;a href=<span class="string">"#"</span>&gt;电视&lt;<span class="regexp">/a&gt;</span></span><br><span class="line"><span class="regexp">    &lt;a href="#"&gt;笔记本&lt;/</span>a&gt;</span><br><span class="line">    &lt;a href=<span class="string">"#"</span>&gt;出行&lt;<span class="regexp">/a&gt;</span></span><br><span class="line"><span class="regexp">    &lt;a href="#"&gt;智能&lt;/</span>a&gt;</span><br><span class="line">    &lt;a href=<span class="string">"#"</span>&gt;耳机&lt;<span class="regexp">/a&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>body&gt;</span><br><span class="line">&lt;<span class="regexp">/html&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20200502000640670.png" alt="在这里插入图片描述"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CSS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/01/CSS元素显示模式和盒子样式/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-CSS选择器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/01/CSS选择器/">CSS选择器</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/01/CSS选择器/" class="archive-article-date">
+  	<time datetime="2020-05-01T15:22:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="选择器"><a href="#选择器" class="headerlink" title="选择器"></a>选择器</h2><p>id选择器和class选择器的区别<br>id选择器： 只允许一个调用。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">#lkq &#123;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>类选择器：可以被多次调用。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">.lkq &#123; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>标签选择器：把所有的变成红色·</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">  p &#123;//p标签</span><br><span class="line">   color: red;</span><br><span class="line">  &#125;</span><br><span class="line">  p标签。</span><br><span class="line"></span><br><span class="line">boby&#123;//body标签里所有东西</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>字体<code>font-weight=700px</code>等于加粗 bold<br>        <code>font-weight=400px</code> 等于正常 normal</p>
+<p>字体样式 font-style：倾斜字体 <code>italic</code><br>复合属性</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">div &#123;</span><br><span class="line">          font: italic 700 16px <span class="string">'HEITIE'</span></span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+
+<p>假如第用第三个 不用第4个属性，失效。<br>只用第四个，则可以。</p>
+<p>首行缩进俩个字</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">text-indent：2em</span><br></pre></td></tr></table></figure>
+
+<p>行间距。<br>由文字，上间距和下间距组成。<br>上间距+下间距+文本=16px；</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">line-height：16px;</span><br></pre></td></tr></table></figure>
+
+<h2 id="CSS复合选择器"><a href="#CSS复合选择器" class="headerlink" title="CSS复合选择器"></a>CSS复合选择器</h2><p><strong>后代选择器</strong><br>ol里的li全变为粉色<br>ol是li的父亲</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ol li &#123;</span><br><span class="line">    color：pink</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>子选择器</strong><br>只选择亲儿子</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">.class&gt;a&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>并集选择器</strong><br>div和p都改为粉色</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">div,p&#123;</span><br><span class="line"> color: pink;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>链接伪类选择器</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/* 未访问的连接选出来 */</span><br><span class="line">a:link &#123;</span><br><span class="line">   columns: <span class="comment">#333333;</span></span><br><span class="line">   text-decoration: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/*选择点击过的链接*/</span><br><span class="line">a:link &#123;</span><br><span class="line">   columns: <span class="comment">#333333;</span></span><br><span class="line">   text-decoration: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>需要按照link visted hover(选出鼠标经过的) active顺序</p>
+<blockquote>
+<p><strong>LVHA</strong></p>
+</blockquote>
+<p>伪类选择器<br><strong>光标点击后变为红色</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">input focus&#123;</span><br><span class="line">background-color:yello</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CSS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/01/CSS选择器/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-html学习综合" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/30/html学习综合/">HTML学习综合</a>
+    </h1>
+  
+
+        
+        <a href="/2020/04/30/html学习综合/" class="archive-article-date">
+  	<time datetime="2020-04-30T10:56:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="合并单元格"><a href="#合并单元格" class="headerlink" title="合并单元格"></a>合并单元格</h2><p><img src="https://img-blog.csdnimg.cn/20200502195724192.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">    &lt;meta name=<span class="string">"viewport"</span> content=<span class="string">"width=t, initial-scale=1.0"</span>&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;table width=<span class="string">"500"</span> height=<span class="string">"249"</span> cellspacing=<span class="string">"0"</span> border=<span class="string">"1"</span>&gt;</span><br><span class="line">      &lt;tr&gt;</span><br><span class="line">         &lt;td&gt;<span class="xml"><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span></span><br><span class="line">         &lt;td colspan=<span class="string">"2"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span></span><br><span class="line">      &lt;<span class="regexp">/tr&gt;</span></span><br><span class="line"><span class="regexp">      &lt;tr&gt;</span></span><br><span class="line"><span class="regexp">        &lt;td rowspan="2"&gt;&lt;/</span>td&gt;</span><br><span class="line">        &lt;td&gt;<span class="xml"><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span></span><br><span class="line">        &lt;td&gt;<span class="xml"><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span></span><br><span class="line">      &lt;<span class="regexp">/tr&gt;</span></span><br><span class="line"><span class="regexp">      &lt;tr&gt;</span></span><br><span class="line"><span class="regexp">      </span></span><br><span class="line"><span class="regexp">        &lt;td&gt;&lt;/</span>td&gt;</span><br><span class="line">        &lt;td&gt;<span class="xml"><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span></span><br><span class="line">      &lt;<span class="regexp">/tr&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>table&gt;</span><br><span class="line">&lt;<span class="regexp">/body&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>html&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="排名列表"><a href="#排名列表" class="headerlink" title="排名列表"></a>排名列表</h2><p><img src="https://img-blog.csdnimg.cn/20200502200754414.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">    &lt;meta name=<span class="string">"viewport"</span> content=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">    &lt;style&gt;</span></span><br><span class="line"><span class="regexp">        table &#123;</span></span><br><span class="line"><span class="regexp">            width: 700px;</span></span><br><span class="line"><span class="regexp">            height: 600px;</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">        th &#123;</span></span><br><span class="line"><span class="regexp">            height: 100px;</span></span><br><span class="line"><span class="regexp">            width: 100px;</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">        table,td,th&#123;</span></span><br><span class="line"><span class="regexp">            border: 1px solid black;</span></span><br><span class="line"><span class="regexp">            /</span>* 合并边框 *<span class="regexp">/</span></span><br><span class="line"><span class="regexp">            border-collapse: collapse;</span></span><br><span class="line"><span class="regexp">            /</span>* 居中 *<span class="regexp">/</span></span><br><span class="line"><span class="regexp">            text-align: center;</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>style&gt;</span><br><span class="line">&lt;<span class="regexp">/head&gt;</span></span><br><span class="line"><span class="regexp">&lt;body&gt;</span></span><br><span class="line"><span class="regexp">    &lt;table align="center" cellspacing="0x"&gt;</span></span><br><span class="line"><span class="regexp">       &lt;thead&gt;</span></span><br><span class="line"><span class="regexp">       &lt;tr&gt;</span></span><br><span class="line"><span class="regexp">           &lt;th&gt;排名&lt;/</span>th&gt;</span><br><span class="line">           &lt;th&gt;关键词&lt;<span class="regexp">/th&gt;</span></span><br><span class="line"><span class="regexp">           &lt;th&gt;趋势&lt;/</span>th&gt;</span><br><span class="line">           &lt;th&gt;进入搜索&lt;<span class="regexp">/th&gt;</span></span><br><span class="line"><span class="regexp">           &lt;th&gt;最近七日&lt;/</span>th&gt;</span><br><span class="line">           &lt;th&gt;相关连接&lt;<span class="regexp">/th&gt;</span></span><br><span class="line"><span class="regexp">       &lt;/</span>tr&gt;</span><br><span class="line">      &lt;<span class="regexp">/thead&gt;</span></span><br><span class="line"><span class="regexp">      &lt;tbody&gt;</span></span><br><span class="line"><span class="regexp">       &lt;tr&gt;</span></span><br><span class="line"><span class="regexp">           &lt;td&gt;1&lt;/</span>td&gt;</span><br><span class="line">           &lt;td&gt;规程&lt;<span class="regexp">/td&gt;</span></span><br><span class="line"><span class="regexp">           &lt;td&gt;&lt;img src="imge/</span>大头娃娃<span class="number">1.</span>gif<span class="string">" width=100 &gt;&lt;/td&gt;</span></span><br><span class="line"><span class="string">           &lt;td&gt;456&lt;/td&gt;</span></span><br><span class="line"><span class="string">           &lt;td&gt;123&lt;/td&gt;</span></span><br><span class="line">           &lt;td&gt;&lt;a href="#"&gt;贴吧&lt;/a&gt;&lt;/td&gt;</span><br><span class="line">       &lt;<span class="regexp">/tr&gt;</span></span><br><span class="line"><span class="regexp">        &lt;tr&gt;</span></span><br><span class="line"><span class="regexp">            &lt;td&gt;1&lt;/</span>td&gt;</span><br><span class="line">            &lt;td&gt;规程&lt;<span class="regexp">/td&gt;</span></span><br><span class="line"><span class="regexp">            &lt;td&gt;&lt;img src="imge/</span>大头娃娃<span class="number">1.</span>gif<span class="string">" width=100 &gt;&lt;/td&gt;</span></span><br><span class="line"><span class="string">            &lt;td&gt;456&lt;/td&gt;</span></span><br><span class="line"><span class="string">            &lt;td&gt;123&lt;/td&gt;</span></span><br><span class="line">            &lt;td&gt;&lt;a href="#"&gt;贴吧&lt;/a&gt;&lt;/td&gt;</span><br><span class="line">        &lt;<span class="regexp">/tr&gt;</span></span><br><span class="line"><span class="regexp">        &lt;tr&gt;</span></span><br><span class="line"><span class="regexp">            &lt;td&gt;1&lt;/</span>td&gt;</span><br><span class="line">            &lt;td&gt;规程&lt;<span class="regexp">/td&gt;</span></span><br><span class="line"><span class="regexp">            &lt;td&gt;&lt;img src="imge/</span>大头娃娃<span class="number">1.</span>gif<span class="string">" width=100 &gt;&lt;/td&gt;</span></span><br><span class="line"><span class="string">            &lt;td&gt;456&lt;/td&gt;</span></span><br><span class="line"><span class="string">            &lt;td&gt;123&lt;/td&gt;</span></span><br><span class="line">            &lt;td&gt;&lt;a href="#"&gt;贴吧&lt;/a&gt;&lt;/td&gt;</span><br><span class="line">        &lt;<span class="regexp">/tr&gt;</span></span><br><span class="line"><span class="regexp">       &lt;tr&gt;</span></span><br><span class="line"><span class="regexp">        &lt;td&gt;1&lt;/</span>td&gt;</span><br><span class="line">        &lt;td&gt;规程&lt;<span class="regexp">/td&gt;</span></span><br><span class="line"><span class="regexp">        &lt;td&gt;&lt;img src="imge/</span>大头娃娃<span class="number">1.</span>gif<span class="string">" width=100 &gt;&lt;/td&gt;</span></span><br><span class="line"><span class="string">        &lt;td&gt;456&lt;/td&gt;</span></span><br><span class="line"><span class="string">        &lt;td&gt;123&lt;/td&gt;</span></span><br><span class="line">        &lt;td&gt;&lt;a href="#"&gt;贴吧&lt;/a&gt;&lt;/td&gt;</span><br><span class="line">       &lt;<span class="regexp">/tr&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>tbody&gt;</span><br><span class="line">    &lt;<span class="regexp">/table&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>body&gt;</span><br><span class="line">&lt;<span class="regexp">/html&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="列表1"><a href="#列表1" class="headerlink" title="列表1"></a>列表1</h2><p><img src="https://img-blog.csdnimg.cn/2020050220111910.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">    &lt;meta name=<span class="string">"viewport"</span> content=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;form action=<span class="string">"demo.php"</span> method=<span class="string">"GET"</span> name=<span class="string">"name1"</span>&gt;</span><br><span class="line">        用户名:&lt;input type="text" name="username" value="请输汝用户名" maxlength="6"&gt; &lt;br&gt;</span><br><span class="line">        密码：&lt;input type="password" name="pwd"&gt;&lt;br&gt;</span><br><span class="line">        &lt;!-- 圆圈用radio --&gt;</span><br><span class="line">        &lt;!-- check=checked默认选择 --&gt;</span><br><span class="line">        性别：男 &lt;input type="radio" name="sex" value="男" checked="checked"&gt; 女 &lt;input type="radio" name="sex" value="女"&gt; &lt;br&gt;</span><br><span class="line">        爱好：吃饭&lt;input type="checkbox" name="hobby"&gt; 打篮球&lt;input type="checkbox" name="hobby"&gt;&lt;br&gt;</span><br><span class="line">        &lt;input type="submit" value="免费注册"&gt;</span><br><span class="line">        &lt;input type="reset" value="重置"&gt;</span><br><span class="line">        &lt;input type="button" value="获取短信"&gt;&lt;br&gt;</span><br><span class="line">        上传头像：&lt;input type="file"&gt;</span><br><span class="line">        </span><br><span class="line">    &lt;/form&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="新闻报道"><a href="#新闻报道" class="headerlink" title="新闻报道"></a>新闻报道</h2><p><img src="https://img-blog.csdnimg.cn/20200502201216770.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">    &lt;meta name=<span class="string">"viewport"</span> content=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">    &lt;style&gt;</span></span><br><span class="line"><span class="regexp">        body&#123;</span></span><br><span class="line"><span class="regexp">            /</span>* 字大小和行高，不改标题 *<span class="regexp">/</span></span><br><span class="line"><span class="regexp">            font: 16px/</span><span class="number">28</span>px <span class="string">'Microsoft YaHei'</span></span><br><span class="line">        &#125;</span><br><span class="line">        h1 &#123;</span><br><span class="line">            <span class="comment">/* 不加粗 水平居中*/</span></span><br><span class="line">            font-weight: <span class="number">700</span>;</span><br><span class="line">            text-align: center;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        .gray &#123;</span><br><span class="line">            color: #888888;</span><br><span class="line">            text-align:center;</span><br><span class="line">        &#125;</span><br><span class="line">        .btn &#123;</span><br><span class="line">            font-weight: <span class="number">700</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        p &#123;</span><br><span class="line">            text-indent: <span class="number">2</span>em;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;<span class="regexp">/style&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;h1&gt;沈阳化工大学学子在中国高校计算机大赛竞赛中获佳绩&lt;<span class="regexp">/h1&gt;</span></span><br><span class="line"><span class="regexp">      &lt;div class="gray"&gt;2019-04-19 11:07:21　</span></span><br><span class="line"><span class="regexp">        来源:&lt;a href="#"&gt;未来网&lt;/</span>a&gt; <span class="xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">vaule</span>=<span class="string">"请输入"</span>&gt;</span><span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">"btn"</span>&gt;</span>搜索<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">     &lt;hr/&gt;</span><br><span class="line">     &lt;p&gt;未来网高校频道<span class="number">4</span>月<span class="number">19</span>日讯（记者 安鑫 通讯员 林钊宇）<span class="number">3</span>月<span class="number">30</span>日，</span><br><span class="line">         第四届“中国高校计算机大赛-团体程序设计天梯赛”总决赛在全国<span class="number">35</span>个城市<span class="number">38</span>个赛点同时举行，</span><br><span class="line">         来自北京大学等全国<span class="number">291</span>所高校学生代表队参加了本届比赛。沈阳化工大学计算机科学与技术学院</span><br><span class="line">         派出<span class="number">1</span>支队伍参加了东北赛区的比赛。 </span><br><span class="line">   　该学院高度重视该项赛事&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">　 　&lt;p&gt;选派了计算机专业卢宏凯、刘凯强、荀伟涵、翟晓楠、于海跃、</span></span><br><span class="line"><span class="regexp">     朱媛媛、王飞月、王辛维、王正、郭洪利等10名学生组成参赛队</span></span><br><span class="line"><span class="regexp">    伍，由王雅娜老师担任指导教师。参赛队员赛前积极备战，刻苦训练</span></span><br><span class="line"><span class="regexp">    ；赛场上勇于拼搏，团结协作。经过3个小时的激烈角逐，最终荣获“团队奖三等奖”。通过参加</span></span><br><span class="line"><span class="regexp">    此次比赛，学生在计算机程序设计能力、</span></span><br><span class="line"><span class="regexp">    创新能力与团队合作能力等多方面都得到了充分锻炼，综合能力得到了有效提升。 </span></span><br><span class="line"><span class="regexp">    　　据悉，中国高校计算机大赛——团体程序设计天梯赛（Group Programming Ladde</span></span><br><span class="line"><span class="regexp">    r Tournament）旨在提升学生计算机问题求解水平，增强学生程序设计能力，培养团队</span></span><br><span class="line"><span class="regexp">    合作精神，提高大学生的综合素质，提高全国高校的程序设计教学水平。 &lt;/</span>p&gt;</span><br><span class="line"></span><br><span class="line">&lt;<span class="regexp">/body&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>html&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="注册列表"><a href="#注册列表" class="headerlink" title="注册列表"></a>注册列表</h2><p><img src="https://img-blog.csdnimg.cn/20200502201252335.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">    &lt;meta name=<span class="string">"viewport"</span> content=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;!-- w3school --&gt;</span><br><span class="line">    &lt;h4&gt;青春不常在，抓紧哈哈哈哈哈哈&lt;<span class="regexp">/h4&gt;</span></span><br><span class="line"><span class="regexp">    &lt;table wdith="500"&gt;</span></span><br><span class="line"><span class="regexp">        &lt;!-- tr是列 --&gt;</span></span><br><span class="line"><span class="regexp">        &lt;tr&gt;</span></span><br><span class="line"><span class="regexp">           &lt;td&gt;性别：&lt;/</span>td&gt;</span><br><span class="line">           &lt;td&gt;</span><br><span class="line">               &lt;!-- 加name=sex保证 <span class="number">2</span>选<span class="number">1</span>--&gt;</span><br><span class="line">               &lt;input type=<span class="string">"radio"</span> name=<span class="string">"sex"</span> id=<span class="string">"nan"</span>&gt; 男 &lt;label <span class="keyword">for</span>=<span class="string">"nan"</span>&gt;<span class="xml"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"imge/大头娃娃1.gif"</span> <span class="attr">width</span>=<span class="string">"25"</span> <span class="attr">height</span>=<span class="string">"25"</span>&gt;</span><span class="tag">&lt;/<span class="name">label</span>&gt;</span></span></span><br><span class="line">               &lt;input type=<span class="string">"radio"</span> name=<span class="string">"sex"</span> id=<span class="string">"nv"</span>&gt; 女 &lt;label <span class="keyword">for</span>=<span class="string">"nv"</span>&gt;<span class="xml"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"imge/大头娃娃1.gif"</span> <span class="attr">width</span>=<span class="string">"25"</span> <span class="attr">height</span>=<span class="string">"25"</span>&gt;</span><span class="tag">&lt;/<span class="name">label</span>&gt;</span></span></span><br><span class="line">            &lt;<span class="regexp">/td&gt;</span></span><br><span class="line"><span class="regexp">       &lt;/</span>tr&gt;</span><br><span class="line">       &lt;!-- 第二行 --&gt;</span><br><span class="line">       &lt;tr&gt;</span><br><span class="line">           &lt;td&gt;生日：&lt;<span class="regexp">/td&gt;</span></span><br><span class="line"><span class="regexp">           &lt;td&gt;</span></span><br><span class="line"><span class="regexp">               &lt;select name="" id=""&gt;</span></span><br><span class="line"><span class="regexp">                   &lt;option &gt;请输入年份&lt;/</span>option&gt;</span><br><span class="line">                   &lt;option&gt;<span class="number">2001</span>&lt;<span class="regexp">/option&gt;</span></span><br><span class="line"><span class="regexp">                   &lt;option&gt;2002&lt;/</span>option&gt;</span><br><span class="line">                   &lt;option&gt;<span class="number">2003</span>&lt;<span class="regexp">/option&gt;</span></span><br><span class="line"><span class="regexp">               &lt;/</span>select&gt;</span><br><span class="line">               &lt;select name=<span class="string">""</span> id=<span class="string">""</span>&gt;</span><br><span class="line">                &lt;option &gt;请输入月份&lt;<span class="regexp">/option&gt;</span></span><br><span class="line"><span class="regexp">                &lt;option&gt;12&lt;/</span>option&gt;</span><br><span class="line">                &lt;option&gt;<span class="number">11</span>&lt;<span class="regexp">/option&gt;</span></span><br><span class="line"><span class="regexp">                &lt;option&gt;10&lt;/</span>option&gt;</span><br><span class="line">               &lt;<span class="regexp">/select&gt;</span></span><br><span class="line"><span class="regexp">               &lt;select name="" id=""&gt;</span></span><br><span class="line"><span class="regexp">                &lt;option &gt;请输入日份&lt;/</span>option&gt;</span><br><span class="line">                &lt;option&gt;<span class="number">2</span>&lt;<span class="regexp">/option&gt;</span></span><br><span class="line"><span class="regexp">                &lt;option&gt;3&lt;/</span>option&gt;</span><br><span class="line">                &lt;option&gt;<span class="number">4</span>&lt;<span class="regexp">/option&gt;</span></span><br><span class="line"><span class="regexp">               &lt;/</span>select&gt;</span><br><span class="line">           &lt;<span class="regexp">/td&gt;</span></span><br><span class="line"><span class="regexp">       &lt;/</span>tr&gt;</span><br><span class="line">       &lt;!-- 第三行 --&gt;</span><br><span class="line">       &lt;tr&gt;</span><br><span class="line">           &lt;td&gt;所在地区&lt;<span class="regexp">/td&gt;</span></span><br><span class="line"><span class="regexp">           &lt;td&gt;&lt;input type="text"&gt;&lt;/</span>td&gt;</span><br><span class="line">       &lt;<span class="regexp">/tr&gt;</span></span><br><span class="line"><span class="regexp">       &lt;!-- 第四行 --&gt;</span></span><br><span class="line"><span class="regexp">       &lt;tr&gt;</span></span><br><span class="line"><span class="regexp">           &lt;td&gt;婚姻状态&lt;/</span>td&gt;</span><br><span class="line">           &lt;td&gt;</span><br><span class="line">               &lt;input type=<span class="string">"radio"</span> name=<span class="string">"ed"</span> id=<span class="string">"yihun"</span>&gt;已婚&lt;label <span class="keyword">for</span>=<span class="string">"yihun"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">label</span>&gt;</span></span></span><br><span class="line">               &lt;input type=<span class="string">"radio"</span> name=<span class="string">"ed"</span> id=<span class="string">"weihun"</span>&gt;未婚&lt;label <span class="keyword">for</span>=<span class="string">"weihun"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">label</span>&gt;</span></span></span><br><span class="line">               &lt;input type=<span class="string">"radio"</span> name=<span class="string">"ed"</span> id=<span class="string">"lihun"</span>&gt;离婚&lt;label <span class="keyword">for</span>=<span class="string">"lihun"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">label</span>&gt;</span></span></span><br><span class="line">           &lt;<span class="regexp">/td&gt;</span></span><br><span class="line"><span class="regexp">        &lt;!-- 第五行 --&gt;</span></span><br><span class="line"><span class="regexp">        &lt;tr&gt;</span></span><br><span class="line"><span class="regexp">            &lt;td&gt;学历:&lt;/</span>td&gt;</span><br><span class="line">            &lt;td&gt;</span><br><span class="line">                &lt;input type=<span class="string">"学历"</span> value=<span class="string">"本科"</span>&gt;</span><br><span class="line">            &lt;<span class="regexp">/td&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>tr&gt;</span><br><span class="line">        &lt;!-- 第六行 --&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">            &lt;td&gt;你喜欢类型：&lt;<span class="regexp">/td&gt;</span></span><br><span class="line"><span class="regexp">            &lt;td&gt;</span></span><br><span class="line"><span class="regexp">                &lt;input type="checkbox" name="love"&gt; 可爱的</span></span><br><span class="line"><span class="regexp">                &lt;input type="checkbox" name="love"&gt; 好看的</span></span><br><span class="line"><span class="regexp">                &lt;input type="checkbox" name="love"&gt; 瘦瘦的</span></span><br><span class="line"><span class="regexp">                &lt;input type="checkbox" name="love"&gt; 动人的</span></span><br><span class="line"><span class="regexp">                &lt;input type="checkbox" name="love"&gt; 帅气的</span></span><br><span class="line"><span class="regexp">            &lt;/</span>td&gt;</span><br><span class="line">        &lt;<span class="regexp">/tr&gt;</span></span><br><span class="line"><span class="regexp">        &lt;!-- 第七行 --&gt;</span></span><br><span class="line"><span class="regexp">        &lt;tr&gt;</span></span><br><span class="line"><span class="regexp">            &lt;td&gt;个人介绍&lt;/</span>td&gt;</span><br><span class="line">            &lt;td&gt;</span><br><span class="line">                &lt;textarea name=<span class="string">""</span> id=<span class="string">""</span> cols=<span class="string">"18"</span> rows=<span class="string">"3"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span></span><br><span class="line">            &lt;<span class="regexp">/td&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>tr&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">            &lt;td&gt;<span class="xml"><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span></span><br><span class="line">            &lt;td&gt;</span><br><span class="line">               &lt;input type=<span class="string">"submit"</span> value=<span class="string">"免费注册"</span>&gt;</span><br><span class="line">            &lt;<span class="regexp">/td&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>tr&gt;</span><br><span class="line">        &lt;!-- 第八行 --&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">            &lt;td&gt; <span class="xml"><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span></span><br><span class="line">            &lt;td&gt;</span><br><span class="line">                &lt;input type=<span class="string">"checkbox"</span> checked=<span class="string">"checked"</span>&gt;我同意注册</span><br><span class="line">            &lt;<span class="regexp">/td&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>tr&gt;</span><br><span class="line">        &lt;!-- 第九行 --&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">            &lt;td&gt;<span class="xml"><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span></span><br><span class="line">            &lt;td&gt;</span><br><span class="line">                &lt;a href=<span class="string">"#"</span>&gt;我是会员，立刻注册&lt;<span class="regexp">/a&gt;</span></span><br><span class="line"><span class="regexp">            &lt;/</span>td&gt;</span><br><span class="line">        &lt;<span class="regexp">/tr&gt;</span></span><br><span class="line"><span class="regexp">        &lt;!-- 第十行 --&gt;</span></span><br><span class="line"><span class="regexp">        &lt;tr&gt;</span></span><br><span class="line"><span class="regexp">            &lt;td&gt; &lt;/</span>td&gt;</span><br><span class="line">            &lt;td&gt;</span><br><span class="line">                &lt;h5&gt;我承诺&lt;<span class="regexp">/h5&gt;</span></span><br><span class="line"><span class="regexp">                &lt;ul&gt;</span></span><br><span class="line"><span class="regexp">                    &lt;li&gt;  年满18 &lt;/</span>li&gt;</span><br><span class="line">                    &lt;li&gt;  承诺&lt;<span class="regexp">/li&gt;</span></span><br><span class="line"><span class="regexp">                &lt;/u</span>l&gt;</span><br><span class="line">            &lt;<span class="regexp">/td&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>tr&gt;</span><br><span class="line">    &lt;<span class="regexp">/table&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>body&gt;</span><br><span class="line">&lt;<span class="regexp">/html&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">HTML</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/30/html学习综合/">展开全文 >></a>
         </p>
       
 
@@ -628,7 +732,7 @@ C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。</code><
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/6/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/8/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/6/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/8/">Next &raquo;</a>
     </nav>
   
 
@@ -755,7 +859,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CSS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -767,11 +883,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
+                <a href="javascript:void(0)" class="js-tag color4">Vue</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -779,7 +895,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTML</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">JVM</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">前端综合</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">排序算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -788,14 +924,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">OS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">排序算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -140,33 +140,31 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-77回溯" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-equals和==的区别" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/17/77回溯/">回溯</a>
+      <a class="article-title" href="/2020/01/17/equals和==的区别/">equals和==的区别与关系</a>
     </h1>
   
 
         
-        <a href="/2019/11/17/77回溯/" class="archive-article-date">
-  	<time datetime="2019-11-17T15:13:21.264Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-17</time>
+        <a href="/2020/01/17/equals和==的区别/" class="archive-article-date">
+  	<time datetime="2020-01-17T07:16:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-17</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>给定两个整数 n 和 k，返回 1 … n 中所有可能的 k 个数的组合。</p>
-<p>示例:</p>
-<p>输入: n = 4, k = 2<br>输出:<br>[<br>  [2,4],<br>  [3,4],<br>  [2,3],<br>  [1,2],<br>  [1,3],<br>  [1,4],<br>]</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">  List&lt;List&lt;Integer&gt;&gt; output = new LinkedList();</span><br><span class="line">  int n;//全局变量</span><br><span class="line">  int k;</span><br><span class="line"></span><br><span class="line">  public void backtrack(int first, LinkedList&lt;Integer&gt; curr) &#123;</span><br><span class="line">    // if the combination is done</span><br><span class="line">    if (curr.size()==k)&#123;</span><br><span class="line">      output.add(new LinkedList(curr));//先new一个新的LinkList,然后把curr加到其中</span><br><span class="line">      return;</span><br><span class="line">      &#125;</span><br><span class="line">      for(int i=first;i&lt;=n;i++)&#123;</span><br><span class="line">      curr.add(i);</span><br><span class="line">      backtrack(i+1,curr);</span><br><span class="line">      curr.removeLast();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  public List&lt;List&lt;Integer&gt;&gt; combine(int n, int k) &#123;</span><br><span class="line">    this.n = n;</span><br><span class="line">    this.k = k;</span><br><span class="line">    backtrack(1, new LinkedList&lt;Integer&gt;());</span><br><span class="line">    return output;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>List&lt;List<integer>&gt; output = new LinkedList();<br> int n;<strong>//全局变量</strong><br> int k;</integer></p>
-<p>new LinkedList(curr)<br>//表示先new一个新的LinkList,然后把LinkedList<integer> curr加到其中</integer></p>
+        <h2 id="区别："><a href="#区别：" class="headerlink" title="区别："></a>区别：</h2><p>==：可以比较值，引用类型比较地址。<br><strong>equals</strong>：继承自Object。比较引用对象，不能比较基本类型。重写的话可以比较引用对象。<br>如：String类重写equala()方法，使其比较的是字符的内容，而不再是内存地址。</p>
+<h2 id="equals-与hashCode-方法："><a href="#equals-与hashCode-方法：" class="headerlink" title="equals()与hashCode()方法："></a>equals()与hashCode()方法：</h2><p>不同对象的hashacode基本是不相同的，不过也有很小概率相同。这是需要用equals了<br>equals不相同，hashcode一定不相同<br>hashcode相同，equals不一定相同(因为不同对象hashcode可能相同)</p>
+<h2 id="为什么重写一个对象的equals方法，就必须重写他的hashCode方法"><a href="#为什么重写一个对象的equals方法，就必须重写他的hashCode方法" class="headerlink" title="为什么重写一个对象的equals方法，就必须重写他的hashCode方法"></a>为什么重写一个对象的equals方法，就必须重写他的hashCode方法</h2><p>Student s1=new Student(“小明”,18);</p>
+<p>Student s2=new Student(“小明”,18);</p>
+<p>如果s1.equals(s2)==true<br>由于默认的hashcode方法是根据对象的内存地址经哈希算法得来的，显然此时s1!=s2,故两者的hashcode不一定相等。</p>
 
       
 
@@ -180,7 +178,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">回溯</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Java基础</a>
         		</li>
       		
 		</ul>
@@ -190,7 +188,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/17/77回溯/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/01/17/equals和==的区别/">展开全文 >></a>
         </p>
       
 
@@ -220,43 +218,29 @@
 
 
   
-    <article id="post-20栈的应用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-什么是Java虚拟机？为什么Java被称作是“平台无关的编程语言" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/14/20栈的应用/">栈的应用</a>
+      <a class="article-title" href="/2020/01/17/什么是Java虚拟机？为什么Java被称作是“平台无关的编程语言/">什么是JAVA虚拟机，JDK与JRE</a>
     </h1>
   
 
         
-        <a href="/2019/11/14/20栈的应用/" class="archive-article-date">
-  	<time datetime="2019-11-14T14:41:34.094Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-14</time>
+        <a href="/2020/01/17/什么是Java虚拟机？为什么Java被称作是“平台无关的编程语言/" class="archive-article-date">
+  	<time datetime="2020-01-17T07:16:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-17</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>给定一个只包括 ‘(‘，’)’，’{‘，’}’，’[‘，’]’ 的字符串，判断字符串是否有效。</p>
-<p>有效字符串需满足：</p>
-<pre><code>左括号必须用相同类型的右括号闭合。
-左括号必须以正确的顺序闭合。</code></pre><p>注意空字符串可被认为是有效字符串。</p>
-<p>示例 1:</p>
-<p>输入: “()”<br>输出: true</p>
-<p>示例 2:</p>
-<p>输入: “()[]{}”<br>输出: true</p>
-<p>示例 3:</p>
-<p>输入: “(]”<br>输出: false</p>
-<p>示例 4:</p>
-<p>输入: “([)]”<br>输出: false</p>
-<p>示例 5:</p>
-<p>输入: “{[]}”<br>输出: true</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public boolean isValid(String s) &#123;</span><br><span class="line">        if(s.length()&lt;1)</span><br><span class="line">        return true;</span><br><span class="line">        if(s.charAt(0)==&apos;]&apos;||s.charAt(0)==&apos;)&apos;||s.charAt(0)==&apos;&#125;&apos;) //</span><br><span class="line">          return false;</span><br><span class="line">        Stack&lt;Character&gt;q=new Stack&lt;&gt;();</span><br><span class="line">        Map&lt;Character,Character&gt; map=new HashMap&lt;&gt;();</span><br><span class="line">        map.put(&apos;(&apos;,&apos;)&apos;);</span><br><span class="line">        map.put(&apos;&#123;&apos;,&apos;&#125;&apos;);</span><br><span class="line">        map.put(&apos;[&apos;,&apos;]&apos;);</span><br><span class="line">        int len=s.length();</span><br><span class="line">        int k=1;</span><br><span class="line">        for(int i=0;i&lt;len;i++)&#123;//要从0开始，否则可能出现map的空指针</span><br><span class="line">            char c=s.charAt(i);</span><br><span class="line">            if(c==&apos;(&apos;||c==&apos;&#123;&apos;||c==&apos;[&apos;)&#123;//防止map空指针</span><br><span class="line">                q.push(c);</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line">            if(!q.empty()&amp;&amp;map.get(q.peek())==s.charAt(i))&#123;//map.get get方法   //栈不能为空          </span><br><span class="line">              q.pop();   </span><br><span class="line">              continue;</span><br><span class="line">              &#125;</span><br><span class="line">              return false;//不是左符号还未匹配</span><br><span class="line">            &#125;</span><br><span class="line">             if(q.empty())</span><br><span class="line">             return true;</span><br><span class="line">             else</span><br><span class="line">              return false;</span><br><span class="line">              //栈里不能有] &#125; ) 否则map空指针异常</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>栈初始化:Stack<character>q=new Stack&lt;&gt;();<br>栈头(等于top）q.peek<br>栈空q.empty()<br>弹栈q.pop()</character></p>
+        <h2 id="Java虚拟机"><a href="#Java虚拟机" class="headerlink" title="Java虚拟机"></a>Java虚拟机</h2><p>是一个可以执行Java字节码的虚拟机进程，Java源文件被编译成能被Java虚拟机执行的字节码文件。<br>Java虚拟机知道底层硬件平台的指令长度和其他特性。<br>java的跨平台不是java源程序的跨平台。java源程序先经过javac编译器编译成二进制的.class字节码文件（java的跨平台指的就是.class字节码文件的跨平台，.class字节码文件是与平台无关的），.class文件再运行在jvm上，java解释器（jvm的一部分）会将其解释成对应平台的机器码执行，所以java所谓的跨平台就是在不同平台上安装了不同的jvm，而在不同平台上生成的.class文件都是一样的，而.class文件再由对应平台的jvm解释成对应平台的机器码执行。 </p>
+<h2 id="机器码和字节码的区别"><a href="#机器码和字节码的区别" class="headerlink" title="机器码和字节码的区别"></a>机器码和字节码的区别</h2><p>一，机器码，完全依附硬件而存在～并且不同硬件由于内嵌指令集不同，即使相同的0 1代码 意思也可能是不同的～换句话说，根本不存在跨平台性～比如～不同型号的CPU,你给他个指令10001101，他们可能会解析为不同的结果～<br>二，我们知道JAVA是跨平台的，为什么呢？因为他有一个jvm,不论哪种硬件，只要你装有jvm,那么他就认识这个JAVA字节码～～～～至于底层的机器码，咱不用管，有jvm搞定，他会把字节码再翻译成所在机器认识的机器码～～～</p>
+<h2 id="JDK和JRE的区别是什么？"><a href="#JDK和JRE的区别是什么？" class="headerlink" title="JDK和JRE的区别是什么？"></a>JDK和JRE的区别是什么？</h2><p>JRE：Java Runtime Environment<br>JDK：Java Development Kit<br>JRE顾名思义是java运行时环境，包含了java虚拟机，java基础类库。是使用java语言编写的程序运行所需要的软件环境，是提供给想运行java程序的用户使用的。<br>JDK顾名思义是java开发工具包，是程序员使用java语言编写java程序所需的开发工具包，是提供给程序员使用的。JDK包含了JRE，同时还包含了编译java源码的编译器javac，还包含了很多java程序调试和分析的工具：jconsole，jvisualvm等工具软件，还包含了java程序编写所需的文档和demo例子程序。<br>如果你需要运行java程序，只需安装JRE就可以了。如果你需要编写java程序，需要安装JDK。<br>JRE根据不同操作系统（如：windows，linux等）和不同JRE提供商（IBM,ORACLE等）有很多版本 </p>
 
       
 
@@ -265,11 +249,22 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JVM</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/14/20栈的应用/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/01/17/什么是Java虚拟机？为什么Java被称作是“平台无关的编程语言/">展开全文 >></a>
         </p>
       
 
@@ -299,38 +294,262 @@
 
 
   
-    <article id="post-136map操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-常用单例模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/14/136map操作/">map操作或者位运算</a>
+      <a class="article-title" href="/2020/01/15/常用单例模式/">常用单例模式</a>
     </h1>
   
 
         
-        <a href="/2019/11/14/136map操作/" class="archive-article-date">
-  	<time datetime="2019-11-14T14:36:59.144Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-14</time>
+        <a href="/2020/01/15/常用单例模式/" class="archive-article-date">
+  	<time datetime="2020-01-15T07:16:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-15</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。</p>
-<p>说明：</p>
-<p>你的算法应该具有线性时间复杂度。 你可以不使用额外空间来实现吗？</p>
-<p>示例 1:</p>
-<p>输入: [2,2,1]<br>输出: 1</p>
-<p>示例 2:</p>
-<p>输入: [4,1,2,1,2]<br>输出: 4</p>
-<h2 id="map操作"><a href="#map操作" class="headerlink" title="map操作"></a>map操作</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int singleNumber(int[] nums) &#123;</span><br><span class="line">        HashMap&lt;Integer,Integer&gt; map=new HashMap&lt;&gt;();</span><br><span class="line">        int n=nums.length;</span><br><span class="line">        for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">            if(map.get(nums[i])==null)</span><br><span class="line">               map.put(nums[i],1);</span><br><span class="line">            else&#123;</span><br><span class="line">            int count=map.get(nums[i]);</span><br><span class="line">            map.put(nums[i],2);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        int i;</span><br><span class="line">        for(i=0;i&lt;n;i++)&#123;</span><br><span class="line">            if(map.get(nums[i])==1)</span><br><span class="line">              break;</span><br><span class="line">        &#125;</span><br><span class="line">        return nums[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p><strong>单例模式</strong>：一个类只有一个实例(static并且构造器private)。提供一个访问该实例的全局访问点(public的get方法)。<br>如电脑里回收站只有一个，还比如只有一个配置器和Spring里的Bean。获取俩个对象是相同的。<br>优点：减少系统开销。<br>饿汉式：线程安全，效率高，不能延时加载。浪费空间。<br> <img src="https://img-blog.csdnimg.cn/20200310231249119.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>懒汉式：线程安全，效率不高，可以延时加载。解决浪费空间，但是效率低。<br><img src="https://img-blog.csdnimg.cn/20200310231302698.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>DCL懒汉式：可能出现问题，不建议使用。解决效率低。<br><img src="https://img-blog.csdnimg.cn/20200310231321898.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>静态内部类(饿汉式改进):线程安全，调用效率高，可以延时加载。但是被反射干扰。<br><img src="https://img-blog.csdnimg.cn/20200310231332101.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>枚举单例：线程安全，效率高，不能延时加载。不会被反射干扰。但是不能延时加载。<br> <img src="https://img-blog.csdnimg.cn/20200310231345861.png" alt="在这里插入图片描述"></p>
 
-<p>map操作<br>初始化：HashMap&lt;Integer,Integer&gt; map=new HashMap&lt;&gt;();<br>赋值：map.put(xx,xx）；<br>取key的val值map.get(xx);<br>注意当key没有val时，val为空</p>
-<h2 id="位运算"><a href="#位运算" class="headerlink" title="位运算"></a>位运算</h2><p>时间复杂度O(n)<br>不借助辅助空间</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int singleNumber(int[] nums) &#123;</span><br><span class="line">        <span class="keyword">if</span>(nums.length==1) <span class="built_in">return</span> nums[0];</span><br><span class="line">        int ans=nums[0];</span><br><span class="line">        <span class="keyword">for</span>(int i=1;i&lt;nums.length;i++)&#123;</span><br><span class="line">            ans^=nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/01/15/常用单例模式/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Redis的持久化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/01/12/Redis的持久化/">Redis持久化</a>
+    </h1>
+  
+
+        
+        <a href="/2020/01/12/Redis的持久化/" class="archive-article-date">
+  	<time datetime="2020-01-12T12:16:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Redis是内存型数据库，为了保证数据在断电后不会丢失，需要将内存中的数据持久化到硬盘上。<br><strong>RDB 持久化</strong><br>将某个时间点的所有数据都存放到硬盘上。可以将快照复制到其它服务器从而创建具有相同数据的服务器副本。如果系统发生故障，将会丢失最后一次创建快照之后的数据。如果数据量很大，保存快照的时间会很长。<br><strong>AOF 持久化</strong><br>将写命令添加到 AOF 文件（Append Only File）的末尾。使用 AOF 持久化需要设置同步选项，从而确保写命令什么时候会同步到磁盘文件上。这是因为对文件进行写入并不会马上将内容同步到磁盘上，而是先存储到缓冲区，然后由操作系统决定什么时候同步到磁盘。<br>随着服务器写请求的增多，AOF 文件会越来越大。Redis 提供了一种将 AOF 重写的特性，能够去除 AOF 文件中的冗余写命令。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/01/12/Redis的持久化/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Redis基础与常用数据结构" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/01/11/Redis基础与常用数据结构/">Redis基础和常用数据结构</a>
+    </h1>
+  
+
+        
+        <a href="/2020/01/11/Redis基础与常用数据结构/" class="archive-article-date">
+  	<time datetime="2020-01-11T12:10:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h2><p>Redis 是速度非常快的非关系型（<strong>NoSQL</strong>）内存键值数据库，可以存储键和五种不同类型的值之间的映射。<br><code>键的类型只能为字符串，</code>值支持五种数据类型：字符串、列表、集合、散列表、有序集合。</p>
+<h2 id="二、使用命令"><a href="#二、使用命令" class="headerlink" title="二、使用命令"></a>二、使用命令</h2><p><code>redis-cli</code> 启动redis（默认端口 6379）<br><strong>String</strong><br><code>set key value</code> 设置key和value<br><code>get key</code>           得到key<br><code>del key</code>    删除key</p>
+<p><strong>List</strong><br><code>rpush list-key value</code> 设置list的value<br><code>lrange list-key 0 -1</code> 输出List所有元素</p>
+<h2 id="三、数据类型"><a href="#三、数据类型" class="headerlink" title="三、数据类型"></a>三、数据类型</h2><p>key为String类型<br>value为String set zset Hash List</p>
+<h2 id="四、应用"><a href="#四、应用" class="headerlink" title="四、应用"></a>四、应用</h2><p>计数器：内存数据库读写性能高，很适合用做频繁读写的计数量(用String)、<br>缓存：将热点数据存到内存中，并设置最大使用量和淘汰策略。<br>查找表：利用了Redis快速查找的特性。如存储DNS。<br>消息队列：可以List双向链表类型。<br>会话缓存：存储多台应用服务器的会话信息。<br>分布式锁：可以用Redis自带的SETNX实现分布式锁。<br>交集并集实现共同好友：利用Set(不重复值集合)<br>有序性操作实现排行榜:利用Zset(排序的set)</p>
+<h2 id="五、与-Memchached-的比较。"><a href="#五、与-Memchached-的比较。" class="headerlink" title="五、与 Memchached 的比较。"></a>五、与 Memchached 的比较。</h2><p><img src="https://img-blog.csdnimg.cn/20200310214039815.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="六、优点"><a href="#六、优点" class="headerlink" title="六、优点"></a>六、优点</h2><p>1.Redis是<strong>单线程</strong>的，并且线程安全。<br>2.<strong>内存</strong>数据库，速度快，也支持数据的持久化，可以将内存中的数据保存在磁盘中，重启的时候可以再次加载进行使用。<br>3.Redis支持<strong>事务</strong><br>4.Redis的所有操作都是<strong>原子性</strong>的</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/01/11/Redis基础与常用数据结构/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-LRU" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/01/07/LRU/">LRU算法</a>
+    </h1>
+  
+
+        
+        <a href="/2020/01/07/LRU/" class="archive-article-date">
+  	<time datetime="2020-01-07T07:16:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">package Node;</span><br><span class="line"></span><br><span class="line">class DoubleList &#123;  </span><br><span class="line">    private Node head, tail; // 头尾虚节点</span><br><span class="line">    private int size; // 链表元素数</span><br><span class="line"></span><br><span class="line">    public DoubleList() &#123;</span><br><span class="line">        head = new Node(0, 0);</span><br><span class="line">        tail = new Node(0, 0);</span><br><span class="line">        head.next = tail;</span><br><span class="line">        tail.prev = head;</span><br><span class="line">        size = 0;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 在链表头部添加节点 x</span><br><span class="line">    public void addFirst(Node x) &#123;</span><br><span class="line">        x.next = head.next;</span><br><span class="line">        x.prev = head;</span><br><span class="line">        head.next.prev = x;</span><br><span class="line">        head.next = x;</span><br><span class="line">        size++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 删除链表中的 x 节点（x 一定存在）</span><br><span class="line">    public void remove(Node x) &#123;</span><br><span class="line">        x.prev.next = x.next;</span><br><span class="line">        x.next.prev = x.prev;</span><br><span class="line">        size--;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 删除链表中最后一个节点，并返回该节点</span><br><span class="line">    public Node removeLast() &#123;</span><br><span class="line">        if (tail.prev == head)</span><br><span class="line">            return null;</span><br><span class="line">        Node last = tail.prev;</span><br><span class="line">        remove(last);</span><br><span class="line">        return last;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 返回链表长度</span><br><span class="line">    public int size() &#123; return size; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">package Node;</span><br><span class="line">import java.util.*;</span><br><span class="line">class LRUCache &#123;</span><br><span class="line">    // key -&gt; Node(key, val)</span><br><span class="line">    private HashMap&lt;Integer, Node&gt; map;</span><br><span class="line">    // Node(k1, v1) &lt;-&gt; Node(k2, v2)...</span><br><span class="line">    private DoubleList cache;</span><br><span class="line">    // 最大容量</span><br><span class="line">    private int cap;</span><br><span class="line">    </span><br><span class="line">    public LRUCache(int capacity) &#123;</span><br><span class="line">        this.cap = capacity;</span><br><span class="line">        map = new HashMap&lt;&gt;();</span><br><span class="line">        cache = new DoubleList();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public int get(int key) &#123;</span><br><span class="line">        if (!map.containsKey(key))</span><br><span class="line">            return -1;</span><br><span class="line">        int val = map.get(key).val;</span><br><span class="line">        // 利用 put 方法把该数据提前</span><br><span class="line">        put(key, val);</span><br><span class="line">        return val;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public void put(int key, int val) &#123;</span><br><span class="line">        // 先把新节点 x 做出来</span><br><span class="line">        Node x = new Node(key, val);</span><br><span class="line">        </span><br><span class="line">        if (map.containsKey(key)==true) &#123;</span><br><span class="line">            // 删除旧的节点，新的插到头部</span><br><span class="line">            cache.remove(map.get(key));</span><br><span class="line">            cache.addFirst(x);</span><br><span class="line">            // 更新 map 中对应的数据</span><br><span class="line">            map.put(key, x);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            if (cap == cache.size()) &#123;</span><br><span class="line">                // 删除链表最后一个数据</span><br><span class="line">                Node last = cache.removeLast();</span><br><span class="line">                map.remove(last.key);</span><br><span class="line">            &#125;</span><br><span class="line">            // 直接添加到头部</span><br><span class="line">            cache.addFirst(x);</span><br><span class="line">            map.put(key, x);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">package Node;</span><br><span class="line">class Node &#123;</span><br><span class="line">    public int key, val;</span><br><span class="line">    public Node next, prev;</span><br><span class="line">    public Node(int k, int v) &#123;</span><br><span class="line">        this.key = k;</span><br><span class="line">        this.val = v;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
       
@@ -345,7 +564,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">位运算</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">链表</a>
         		</li>
       		
 		</ul>
@@ -355,241 +574,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/14/136map操作/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-102队列遍历二叉树" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/14/102队列遍历二叉树/">二叉树BFS</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/14/102队列遍历二叉树/" class="archive-article-date">
-  	<time datetime="2019-11-14T14:31:14.526Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>给定一个二叉树，返回其按层次遍历的节点值。 （即逐层地，从左到右访问所有节点）。</p>
-<p>例如:<br>给定二叉树: [3,9,20,null,null,15,7],</p>
-<pre><code>3</code></pre><p>   / <br>  9  20<br>    /  <br>   15   7</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public List&lt;List&lt;Integer&gt;&gt; levelOrder(TreeNode root) &#123;</span><br><span class="line">        List&lt;List&lt;Integer&gt;&gt; res=new ArrayList&lt;&gt;();</span><br><span class="line">        if(root==null) return res;  </span><br><span class="line">        Queue&lt;TreeNode&gt; queue=new LinkedList&lt;&gt;();</span><br><span class="line">        queue.add(root);</span><br><span class="line">        while(!queue.isEmpty())&#123;</span><br><span class="line">           List&lt;Integer&gt; p=new ArrayList&lt;&gt;();</span><br><span class="line">           int n=queue.size();</span><br><span class="line">           for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">            TreeNode top=queue.poll();</span><br><span class="line">            p.add(top.val);</span><br><span class="line">           if(top.left!=null)</span><br><span class="line">              queue.add(top.left);</span><br><span class="line">           if(top.right!=null)</span><br><span class="line">             queue.add(top.right);</span><br><span class="line">         &#125;</span><br><span class="line">         res.add(p);</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>队列操作<br>制造队列：Queue<treenode> queue=new LinkedList&lt;&gt;();<br>队列长度：queue.size();<br>队首：queue.poll();<br>判断：!queue.isEmpty()</treenode></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/14/102队列遍历二叉树/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-200岛屿" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/14/200岛屿/">基础DFS</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/14/200岛屿/" class="archive-article-date">
-  	<time datetime="2019-11-14T14:23:45.950Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>给定一个由 ‘1’（陆地）和 ‘0’（水）组成的的二维网格，计算岛屿的数量。一个岛被水包围，并且它是通过水平方向或垂直方向上相邻的陆地连接而成的。你可以假设网格的四个边均被水包围。</p>
-<p>示例 1:</p>
-<p>输入:<br>11110<br>11010<br>11000<br>00000</p>
-<p>输出: 1</p>
-<p>示例 2:</p>
-<p>输入:<br>11000<br>11000<br>00100<br>00011</p>
-<p>输出: 3</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public void dfs(int a[][],char grid[][],int l,int w,int x,int y)&#123;</span><br><span class="line">        grid[x][y]=&apos;0&apos;;</span><br><span class="line">        for(int i=0;i&lt;4;i++)&#123;</span><br><span class="line">            int xx=x+a[i][0];</span><br><span class="line">            int yy=y+a[i][1];</span><br><span class="line">            if(xx&gt;=0&amp;&amp;yy&gt;=0&amp;&amp;xx&lt;l&amp;&amp;yy&lt;w&amp;&amp;grid[xx][yy]==&apos;1&apos;)&#123;</span><br><span class="line">                dfs(a,grid,l,w,xx,yy);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public int numIslands(char[][] grid) &#123;</span><br><span class="line">        if (grid.length == 0) &#123;</span><br><span class="line">               return 0;</span><br><span class="line">        &#125;//不写会出现异常</span><br><span class="line">        int l=grid.length;</span><br><span class="line">        int w=grid[0].length;</span><br><span class="line">        int ans=0;</span><br><span class="line">        int a[][]=&#123;&#123;0,1&#125;,&#123;1,0&#125;,&#123;-1,0&#125;,&#123;0,-1&#125;&#125;;</span><br><span class="line">        for(int i=0;i&lt;l;i++)&#123;</span><br><span class="line">            for(int j=0;j&lt;w;j++)&#123;</span><br><span class="line">                if(grid[i][j]==&apos;1&apos;)&#123;</span><br><span class="line">                dfs(a,grid,l,w,i,j);</span><br><span class="line">                ans++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">DFS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/14/200岛屿/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-38字符串操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/13/38字符串操作/">字符串操作</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/13/38字符串操作/" class="archive-article-date">
-  	<time datetime="2019-11-13T14:50:18.240Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>报数序列是一个整数序列，按照其中的整数的顺序进行报数，得到下一个数。其前五项如下：</p>
-<ol>
-<li>1</li>
-<li>11</li>
-<li>21</li>
-<li>1211</li>
-<li>111221</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">   	 public String countAndSay(int n) &#123;</span><br><span class="line">	        String str=&quot;1&quot;;</span><br><span class="line">	        for(int i=2;i&lt;=n;i++)&#123;</span><br><span class="line">	            StringBuilder bulid=new StringBuilder();</span><br><span class="line">	            char c=str.charAt(0);</span><br><span class="line">	            int count=1;</span><br><span class="line">	            for(int j=1;j&lt;str.length();j++)&#123;</span><br><span class="line">	            	char t=str.charAt(j);</span><br><span class="line">	                if(c==t)</span><br><span class="line">	                   count++;</span><br><span class="line">	                else&#123;	                    </span><br><span class="line">                        bulid.append(count).append(c);</span><br><span class="line">                        count=1;</span><br><span class="line">	                    c=t;</span><br><span class="line">	                &#125;</span><br><span class="line">	            &#125;</span><br><span class="line">                bulid.append(count).append(c);</span><br><span class="line">	            str=bulid.toString();</span><br><span class="line">	        &#125;</span><br><span class="line">	        return str;</span><br><span class="line">	    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>字符串操作<br>每次new一个新的new StringBuilder();<br>在后面加上字符串用append<br>变成字符串用toString()<br>本题思路就是不断更新字符串</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">字符串</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/13/38字符串操作/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/01/07/LRU/">展开全文 >></a>
         </p>
       
 
@@ -621,7 +606,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/8/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/10/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/8/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/10/">Next &raquo;</a>
     </nav>
   
 
@@ -748,7 +733,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CSS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -760,11 +757,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
+                <a href="javascript:void(0)" class="js-tag color4">Vue</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -772,7 +769,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTML</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">JVM</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">前端综合</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">排序算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -781,14 +798,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">OS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">排序算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">

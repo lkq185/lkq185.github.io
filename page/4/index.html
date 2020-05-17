@@ -140,35 +140,91 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-191二进制与查找1的个数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Vue学习和本地应用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/11/191二进制与查找1的个数/">二进制查找1的个数</a>
+      <a class="article-title" href="/2020/05/08/Vue学习和本地应用/">Vue学习和基础本地应用</a>
     </h1>
   
 
         
-        <a href="/2019/12/11/191二进制与查找1的个数/" class="archive-article-date">
-  	<time datetime="2019-12-11T04:16:28.801Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-11</time>
+        <a href="/2020/05/08/Vue学习和本地应用/" class="archive-article-date">
+  	<time datetime="2020-05-08T13:56:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-08</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>编写一个函数，输入是一个无符号整数，返回其二进制表达式中数字位数为 ‘1’ 的个数（也被称为汉明重量）。</p>
-<p>示例 1：</p>
-<p>输入：00000000000000000000000000001011<br>输出：3<br>解释：输入的二进制串 00000000000000000000000000001011 中，共有三位为 ‘1’。</p>
-<p>示例 2：</p>
-<p>输入：00000000000000000000000010000000<br>输出：1<br>解释：输入的二进制串 00000000000000000000000010000000 中，共有一位为 ‘1’。</p>
-<p>示例 3：</p>
-<p>输入：11111111111111111111111111111101<br>输出：31<br>解释：输入的二进制串 11111111111111111111111111111101 中，共有 31 位为 ‘1’。<br>如1100<br>n-1操作把末位0变成1,1变成0。<br>n&amp;n-1这样每次数中减一个1<br>当n变成0时结束循环<br>1100&amp;1011=1000<br>1000&amp;0111=0000</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class Solution &#123;</span><br><span class="line">    // you need to treat n as an unsigned value</span><br><span class="line">    public int hammingWeight(int n) &#123;</span><br><span class="line">    int sum = 0;</span><br><span class="line">    while (n != 0) &#123;</span><br><span class="line">        sum++;</span><br><span class="line">        n &amp;= (n - 1);//最后一位变成0</span><br><span class="line">    &#125;</span><br><span class="line">    return sum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h2 id="Vue特点"><a href="#Vue特点" class="headerlink" title="Vue特点"></a>Vue特点</h2><ul>
+<li>JavaScript框架</li>
+<li>简化Dom操作</li>
+<li>响应式数据驱动</li>
+</ul>
+<h2 id="第一个Vue程序"><a href="#第一个Vue程序" class="headerlink" title="第一个Vue程序"></a>第一个Vue程序</h2><ol>
+<li>导入   <code>&lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&quot;&gt;&lt;/script&gt;</code></li>
+<li>设置el和data。用#app管理id叫app的元素。</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">   &#123;&#123;message&#125;&#125;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;script src="https:/</span><span class="regexp">/cdn.jsdelivr.net/</span>npm/vue/dist/vue.js<span class="string">"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="string">&lt;script&gt;</span></span><br><span class="line"><span class="string">    var app=new Vue(&#123;</span></span><br><span class="line"><span class="string">        // #是id选择器，告诉el去管理id叫做app的元素</span></span><br><span class="line">        el:"#app",</span><br><span class="line">        data:&#123;</span><br><span class="line">            message:<span class="string">"Hello Vue!"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
 
+<blockquote>
+<p>Vue实例作用范围?<br>是否可以使用其他选择器？<br>是否可以设置其他dom元素（除了div）</p>
+</blockquote>
+<ol>
+<li>只在标签里面可以或者标签里的子孙。</li>
+<li>可以使用其他选择器。建议用id选择器。</li>
+<li>不能用单标签。双标签不可以的情况：<code>html</code>或者<code>body</code></li>
+</ol>
+<h2 id="data数据"><a href="#data数据" class="headerlink" title="data数据"></a>data数据</h2><blockquote>
+<p>其他数据类型的使用</p>
+</blockquote>
+<ul>
+<li><p>对象使用</p>
+   
+</li>
+<li><p>数组使用</p>
+   
+
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> app=<span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    <span class="comment">// #是id选择器，告诉el去管理id叫做app的元素</span></span><br><span class="line">    el:<span class="string">"#app"</span>,</span><br><span class="line">    data:&#123;</span><br><span class="line">        message:<span class="string">"Hello Vue!"</span>,</span><br><span class="line">        school:&#123;</span><br><span class="line">            name:<span class="string">"大学生"</span>,</span><br><span class="line">            mobile:<span class="string">"13334"</span></span><br><span class="line">        &#125;,</span><br><span class="line">        array:[<span class="string">"沈阳"</span>,<span class="string">"大连"</span>]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="本地应用"><a href="#本地应用" class="headerlink" title="本地应用"></a>本地应用</h2><h2 id="1-v-text"><a href="#1-v-text" class="headerlink" title="1.v-text"></a>1.v-text</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;h2 v-text=<span class="string">"message"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line">&lt;h2&gt;&#123;&#123;message&#125;&#125;&lt;<span class="regexp">/h2&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20200508193421114.png" alt="在这里插入图片描述"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;h2 v-text=<span class="string">"message"</span>&gt;hhh&lt;<span class="regexp">/h2&gt;</span></span><br><span class="line"><span class="regexp">&lt;h2&gt;&#123;&#123;message&#125;&#125;hhh&lt;/</span>h2&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>字符串拼接</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20200508193750315.png" alt="在这里插入图片描述"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;h2 v-text=<span class="string">"message+'hh'"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line">&lt;h2&gt;&#123;&#123;message+<span class="string">'hhh'</span>&#125;&#125;&lt;<span class="regexp">/h2&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-v-html"><a href="#2-v-html" class="headerlink" title="2.v-html"></a>2.v-html</h2><ul>
+<li>三种形式一模一样。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">   &lt;h2 v-html=<span class="string">"message"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line">   &lt;h2 v-text=<span class="string">"message"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line">   &lt;h2&gt;&#123;&#123;message&#125;&#125;&lt;<span class="regexp">/h2&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>div&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>放链接，text不能渲染标签内容，如链接a。<img src="https://img-blog.csdnimg.cn/20200508194455352.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">   &lt;h2 v-html=<span class="string">"message"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line">   &lt;h2 v-text=<span class="string">"message"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line">   &lt;h2&gt;&#123;&#123;message&#125;&#125;&lt;<span class="regexp">/h2&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>div&gt;</span><br><span class="line">&lt;script src=<span class="string">"https://cdn.jsdelivr.net/npm/vue/dist/vue.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">var</span> app=<span class="keyword">new</span> Vue(&#123;</span><br><span class="line">      el:<span class="string">"#app"</span>,</span><br><span class="line">      data: &#123;</span><br><span class="line">          message:<span class="string">"&lt;a href='https://www.baidu.com'&gt;百度&lt;/a&gt;"</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-v-on"><a href="#3-v-on" class="headerlink" title="3. v-on"></a>3. v-on</h2><ul>
+<li>含义：点击按钮后，出现method方法里内容。<code>@click</code>和v-<code>on:click</code>都是点击一次之后，实现<code>methods</code>方法。<code>@dblclick</code>则是双击之后实现函数方法。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">   &lt;input type=<span class="string">"button"</span> value=<span class="string">"v-on指令"</span> v-on:click=<span class="string">"doIt"</span>&gt;</span><br><span class="line">   &lt;input type=<span class="string">"button"</span> value=<span class="string">"v-on简写"</span> @click=<span class="string">"doIt"</span>&gt;</span><br><span class="line">   &lt;input type=<span class="string">"button"</span> value=<span class="string">"双击事件"</span> @dblclick=<span class="string">"doIt"</span>&gt;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;script&gt;</span></span><br><span class="line"><span class="regexp">    var app=new Vue(&#123;</span></span><br><span class="line"><span class="regexp">      el:"#app",</span></span><br><span class="line"><span class="regexp">      methods:&#123;</span></span><br><span class="line"><span class="regexp">          doIt:function()&#123;</span></span><br><span class="line"><span class="regexp">              alert("做it");</span></span><br><span class="line"><span class="regexp">          &#125;,</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">    &#125;)</span></span><br><span class="line"><span class="regexp">&lt;/</span>script&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>左键单击一次出现出现很好吃，俩次就是蛋炒饭很好吃很好吃。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">   &lt;h2 @click=<span class="string">"changeFood"</span>&gt;&#123;&#123;food&#125;&#125;&lt;<span class="regexp">/h2&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>div&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">var</span> app=<span class="keyword">new</span> Vue(&#123;</span><br><span class="line">      el:<span class="string">"#app"</span>,</span><br><span class="line">      data:&#123;</span><br><span class="line">          food:<span class="string">"蛋炒饭"</span></span><br><span class="line">      &#125;,</span><br><span class="line">      changeFood:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="comment">// console.log(this.food);</span></span><br><span class="line">        <span class="keyword">this</span>.food+=<span class="string">"很好吃"</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20200508201000515.png" alt="在这里插入图片描述"></p>
 
       
 
@@ -177,11 +233,22 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Vue</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/11/191二进制与查找1的个数/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/05/08/Vue学习和本地应用/">展开全文 >></a>
         </p>
       
 
@@ -211,36 +278,89 @@
 
 
   
-    <article id="post-148排序链表" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-ES6的内置对象扩展" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/11/148排序链表/">排序链表</a>
+      <a class="article-title" href="/2020/05/08/ES6的内置对象扩展/">ES6的内置对象扩展</a>
     </h1>
   
 
         
-        <a href="/2019/12/11/148排序链表/" class="archive-article-date">
-  	<time datetime="2019-12-11T03:35:11.834Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-11</time>
+        <a href="/2020/05/08/ES6的内置对象扩展/" class="archive-article-date">
+  	<time datetime="2020-05-08T07:33:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-08</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在 O(n log n) 时间复杂度和常数级空间复杂度下，对链表进行排序。</p>
-<p>示例 1:</p>
-<p>输入: 4-&gt;2-&gt;1-&gt;3<br>输出: 1-&gt;2-&gt;3-&gt;4</p>
-<p>示例 2:</p>
-<p>输入: -1-&gt;5-&gt;3-&gt;4-&gt;0<br>输出: -1-&gt;0-&gt;3-&gt;4-&gt;5<br><strong>首先归并排序</strong></p>
-<p><img src="https://img-blog.csdnimg.cn/20191211111702962.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">public static void mergeSort(int[] arr) &#123;</span><br><span class="line">    sort(arr, 0, arr.length - 1);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static void sort(int[] arr, int L, int R) &#123;</span><br><span class="line">    if(L == R) &#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    int mid = L + ((R - L) &gt;&gt; 1);</span><br><span class="line">    sort(arr, L, mid);</span><br><span class="line">    sort(arr, mid + 1, R);</span><br><span class="line">    merge(arr, L, mid, R);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static void merge(int[] arr, int L, int mid, int R) &#123;</span><br><span class="line">    int[] temp = new int[R - L + 1];</span><br><span class="line">    int i = 0;</span><br><span class="line">    int p1 = L;</span><br><span class="line">    int p2 = mid + 1;</span><br><span class="line">    // 比较左右两部分的元素，哪个小，把那个元素填入temp中</span><br><span class="line">    while(p1 &lt;= mid &amp;&amp; p2 &lt;= R) &#123;</span><br><span class="line">        temp[i++] = arr[p1] &lt; arr[p2] ? arr[p1++] : arr[p2++];</span><br><span class="line">    &#125;</span><br><span class="line">    // 上面的循环退出后，把剩余的元素依次填入到temp中</span><br><span class="line">    // 以下两个while只有一个会执行</span><br><span class="line">    while(p1 &lt;= mid) &#123;</span><br><span class="line">        temp[i++] = arr[p1++];</span><br><span class="line">    &#125;</span><br><span class="line">    while(p2 &lt;= R) &#123;</span><br><span class="line">        temp[i++] = arr[p2++];</span><br><span class="line">    &#125;</span><br><span class="line">    // 把最终的排序的结果复制给原数组</span><br><span class="line">    for(i = 0; i &lt; temp.length; i++) &#123;</span><br><span class="line">        arr[L + i] = temp[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h2 id="Array的扩展方法"><a href="#Array的扩展方法" class="headerlink" title="Array的扩展方法"></a>Array的扩展方法</h2><p><strong>扩展运算符</strong></p>
+<ul>
+<li>扩展运算符可以将数组或者对象转为用对象分割的参数列表。</li>
+<li>逗号会被当做参数分隔符。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line"><span class="built_in">console</span>.log(...ary);<span class="comment">//输出1 2 3。没有逗号。</span></span><br></pre></td></tr></table></figure>
 
-<p><strong>那么链表排序呢<br>把每个链表分成一部分，之后连接在一起。<br>注意：要保证存在前驱结点</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public ListNode merry(ListNode left,ListNode right)&#123;</span><br><span class="line">        ListNode pre=new ListNode(0);</span><br><span class="line">        ListNode cur=pre;//pre遍历中所以cur指代pre</span><br><span class="line">        while(left!=null&amp;&amp;right!=null)&#123;</span><br><span class="line">            if(left.val&gt;right.val)&#123;</span><br><span class="line">            pre.next=right;</span><br><span class="line">            right=right.next;</span><br><span class="line">            &#125;</span><br><span class="line">            else&#123;</span><br><span class="line">              pre.next=left;</span><br><span class="line">              left=left.next;</span><br><span class="line">            &#125;</span><br><span class="line">            pre=pre.next;</span><br><span class="line">        &#125;</span><br><span class="line">        if(left==null)  pre.next=right;//把剩余链表整个加入到pre中</span><br><span class="line">        else  pre.next=left;</span><br><span class="line">        return cur.next;</span><br><span class="line">    &#125;</span><br><span class="line">    public ListNode sortList(ListNode head) &#123;</span><br><span class="line">        if(head==null||head.next==null) return head;</span><br><span class="line">        ListNode slow=head;</span><br><span class="line">        ListNode fast=head.next;//头结点后一个结点开始</span><br><span class="line">        while(fast!=null&amp;&amp;fast.next!=null)&#123;</span><br><span class="line">             slow=slow.next;</span><br><span class="line">             fast=fast.next.next;</span><br><span class="line">        &#125;</span><br><span class="line">        ListNode right=slow.next;</span><br><span class="line">        slow.next=null;</span><br><span class="line">        return merry(sortList(head),sortList(right));  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>扩展运算符应用于数组合并</p>
+<p><img src="https://img-blog.csdnimg.cn/20200508144216831.png" alt="在这里插入图片描述"></p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a1=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line"><span class="keyword">let</span> a2=[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>];</span><br><span class="line"><span class="comment">//方法一</span></span><br><span class="line"><span class="keyword">let</span> a3=[...a1,...a2];</span><br><span class="line"><span class="built_in">console</span>.log(a3);</span><br><span class="line"><span class="comment">//方法2</span></span><br><span class="line">a1.push(...a2);</span><br><span class="line"><span class="built_in">console</span>.log(a1);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>将类数组或可遍历对象转化为真正的数组。这样就可以调用<strong>数组下的方法了</strong>。<br><img src="https://img-blog.csdnimg.cn/20200508145032935.png" alt="在这里插入图片描述"></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div&gt;<span class="number">2</span>&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    &lt;div&gt;3&lt;/</span>div&gt;</span><br><span class="line">    &lt;div&gt;<span class="number">5</span>&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    &lt;div&gt;6&lt;/</span>div&gt;</span><br><span class="line">    &lt;div&gt;<span class="number">1</span>&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    &lt;div&gt;4&lt;/</span>div&gt;</span><br><span class="line">   &lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">      <span class="keyword">var</span> divs=<span class="built_in">document</span>.getElementsByTagName(<span class="string">'div'</span>);</span><br><span class="line">      <span class="built_in">console</span>.log(divs);</span><br><span class="line">      <span class="keyword">var</span> a=[...divs];</span><br><span class="line">      <span class="built_in">console</span>.log(a);</span><br><span class="line">   &lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>body&gt;</span><br></pre></td></tr></table></figure>
+
+<p>方法二<br><img src="https://img-blog.csdnimg.cn/20200508145339212.png" alt="在这里插入图片描述"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">   <span class="keyword">var</span> a=&#123;</span><br><span class="line">       <span class="string">"0"</span>:<span class="string">"zhangsan"</span>,</span><br><span class="line">       <span class="string">"1"</span>:<span class="string">"lisi"</span>,</span><br><span class="line">       <span class="string">"length"</span>:<span class="number">3</span></span><br><span class="line">   &#125;</span><br><span class="line">   <span class="built_in">console</span>.log(a);</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="built_in">Array</span>.from(a));</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Array的find方法"><a href="#Array的find方法" class="headerlink" title="Array的find方法"></a>Array的find方法</h2><ul>
+<li><strong>查找数组中元素</strong>，没找到返回undefine</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/2020050814581841.png" alt="在这里插入图片描述"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ary=[&#123;<span class="attr">id</span>:<span class="number">1</span>,<span class="attr">name</span>:<span class="string">'张三'</span>&#125;,&#123;<span class="attr">id</span>:<span class="number">2</span>,<span class="attr">name</span>:<span class="string">'李四'</span>&#125;];</span><br><span class="line"><span class="built_in">console</span>.log(ary.find(<span class="function"><span class="params">item</span>=&gt;</span>item.id==<span class="number">2</span>));</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>findindex()</strong></p>
+</blockquote>
+<p>找出第一个符合条件的数组成员方法，没找到返回-1。</p>
+<p><img src="https://img-blog.csdnimg.cn/20200508150619837.png" alt="在这里插入图片描述"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">   <span class="keyword">var</span> a=[<span class="number">10</span>,<span class="number">20</span>,<span class="number">30</span>];</span><br><span class="line">   <span class="keyword">let</span> index=a.findIndex(<span class="function"><span class="params">item</span>=&gt;</span>item&gt;<span class="number">23</span>);</span><br><span class="line">   <span class="built_in">console</span>.log(index);</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>include方法</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20200508150840761.png" alt="在这里插入图片描述"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a=[<span class="string">'a'</span>,<span class="string">'b'</span>];</span><br><span class="line"><span class="built_in">console</span>.log(a.includes(<span class="string">'a'</span>));</span><br><span class="line"><span class="built_in">console</span>.log(a.includes(<span class="string">'c'</span>));</span><br></pre></td></tr></table></figure>
+
+<h2 id="模板字符串"><a href="#模板字符串" class="headerlink" title="模板字符串"></a>模板字符串</h2><ul>
+<li>模板字符串可以解析变量。</li>
+<li>注意符号不同 `</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20200508151755125.png" alt="在这里插入图片描述"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> name=<span class="string">`张三`</span>;</span><br><span class="line"><span class="keyword">let</span> sayhello=<span class="string">`我的名字叫<span class="subst">$&#123;name&#125;</span>`</span>;</span><br><span class="line"><span class="built_in">console</span>.log(sayhello);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>模板字符串内部可以换行</li>
+<li>模板字符串可以调用函数</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20200508152157101.png" alt="在这里插入图片描述"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fn=<span class="function"><span class="params">()</span>=&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'我是fn函数'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> html=<span class="string">`我是模板字符串<span class="subst">$&#123;fn()&#125;</span>`</span>;</span><br><span class="line"><span class="built_in">console</span>.log(html);</span><br></pre></td></tr></table></figure>
+
+<p>startsWith和endsWith判断是否以原字符串开头和以原字符串结尾。</p>
+<p><img src="https://img-blog.csdnimg.cn/20200508152533456.png" alt="在这里插入图片描述"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str=<span class="string">"hello ddd 2016"</span></span><br><span class="line"><span class="built_in">console</span>.log(str.startsWith(<span class="string">'hello'</span>));</span><br><span class="line"><span class="built_in">console</span>.log(str.endsWith(<span class="string">'2016'</span>));</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>repeat()，将字符串重复俩次。str.repeat(2)。str是lkq，输出lkqlkq</li>
+</ul>
+<h2 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> s1=<span class="keyword">new</span> <span class="built_in">Set</span>();</span><br><span class="line"><span class="built_in">console</span>.log(s1,size);<span class="comment">//0</span></span><br><span class="line"><span class="keyword">const</span> s2=<span class="keyword">new</span> <span class="built_in">Set</span>([<span class="string">"a"</span>,<span class="string">"b"</span>]);</span><br><span class="line"><span class="built_in">console</span>.log(s2,size);<span class="comment">//2</span></span><br><span class="line"><span class="keyword">const</span> s3=<span class="keyword">new</span> <span class="built_in">Set</span>([<span class="string">"a"</span>,<span class="string">"a"</span>,<span class="string">"b"</span>,<span class="string">"b"</span>]);</span><br><span class="line"><span class="built_in">console</span>.log(s3,size);<span class="comment">//2</span></span><br><span class="line"><span class="keyword">const</span> ary=[...s3];</span><br><span class="line"><span class="built_in">console</span>.log(ary);<span class="comment">//a,b</span></span><br><span class="line"><span class="keyword">const</span> s4=<span class="keyword">new</span> <span class="built_in">Set</span>();</span><br><span class="line">s4.add(<span class="string">'a'</span>).add(b);</span><br><span class="line"><span class="built_in">console</span>.log(s4.size);<span class="comment">//a,b</span></span><br><span class="line">s4.delete(<span class="string">'a'</span>);<span class="comment">//true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'s4.size'</span>)<span class="comment">//1;</span></span><br><span class="line">s4.has(b); <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">const</span> s5=<span class="keyword">new</span> <span class="built_in">Set</span>([<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>]);</span><br><span class="line">s5.forEach(<span class="function"><span class="params">value</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(value);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
 
       
@@ -255,7 +375,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">链表</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
         		</li>
       		
 		</ul>
@@ -265,7 +385,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/11/148排序链表/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/05/08/ES6的内置对象扩展/">展开全文 >></a>
         </p>
       
 
@@ -295,212 +415,136 @@
 
 
   
-    <article id="post-计数排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-ES6新增语法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/11/计数排序/">计数排序</a>
+      <a class="article-title" href="/2020/05/08/ES6新增语法/">ES6新增语法</a>
     </h1>
   
 
         
-        <a href="/2019/12/11/计数排序/" class="archive-article-date">
-  	<time datetime="2019-12-11T02:35:39.892Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-11</time>
+        <a href="/2020/05/08/ES6新增语法/" class="archive-article-date">
+  	<time datetime="2020-05-08T06:33:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-08</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>我们知道基于比较的排序算法的最好的情况的时间复杂度是O(nlgn)，然而存在一种神奇的排序算法，不是基于比较的，而是空间换时间，使得时间复杂度能够达到线性O(n+k)，这种算法就是本文将要介绍的计数排序。</p>
-<p>一、适用情况</p>
-<p>这个算法在n个输入元素中每一个都是0到k的范围的整数，其中k也是整数。当k = O(n)时，排序的时间复杂度为Θ(n)。它的性质也就决定了它的运用范围比较窄，但是对于一个待排序的有负数的数组，我们可以将整个数组的整体加上一个整数，使得整个数组的最小值为0，然后就可以使用这个排序算法了。而且这个算法是稳定的。</p>
-<p>二、基本思想<br>对一个一个待排序的元素x，我们可以确定小于等于x的个数i，根据这个个数i，我们就可以把x放到索引i处。那么如何确定小于等于x的个数i呢？我们可以专门开辟一个数组c[]，然后遍历数组，确定数组a中每个元素中出现的频率，然后就可以确定对于a中每个元素x，小于等于这个元素的个数。然后就可以把元素x放到对应位置了。当然元素x的大小是可能重复的，这样就需要我们对数组c的值访问之后减1，保证和x一样大的元素能放在其前面。</p>
-<p>三、运行过程<br><img src="https://img-blog.csdnimg.cn/20191211103626706.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p>   1、对于数组A，我们首先统计每个值的个数，将A的值作为C元素索引，值的个数作为C数组的值。比如对于数组A中的元素2，在数组A中出现了2次，所以c[2] = 2，而元素5出现了以此，所以c[5] = 1。</p>
-<p>  2、至此为止，数组C中已经统计了各个元素的出现次数，那么我们就可以根据各个元素的出现次数，累加出比该元素小的元素个数，更新到数组C中。比如a图中，C[0]=2表示出现0的次数为2，C[1]=0表示出现1的次数为0，那么小于等于1的元素个数为C[0]+C[1]=2，我们把C[1]更新为2，同理C[2]=2表示出现2的次数为2，那么小于等于2的元素个数为C[1]+C[2]=4，继续把C[2]更新为4，以此类推…<br> 3、到这里，我们得到了存储小于等于元素的个数的数组C。现在我们开始从尾部到头部遍历数组A，比如首先我们看A[7] = 3，然后查找C[3]，发现C[3] = 7，说明有7个元素小于等于3。我们首先需要做一步C[3] = C[3] - 1，因为这里虽然有7个元素小于等于3，但是B的索引是从0开始的，而且这样减一可以保证下次再找到一个3，可以放在这个3的前面。然后B[C[3]] = 3，就把第一个3放到了对的位置。后面以此类推，直到遍历完数组B。<br> 4、截至到这，我们就获得了一个有序的数组B。</p>
-<p><strong><strong>四、代码实现</strong></strong></p>
-<pre><code>public static void countingSort(int[] a, int[] b, int k){
-    int[] c = new int[k+1];//存放0~k
-    for(int i = 0; i&lt;a.length; i++)
-        c[a[i]] += 1;
-    for(int i = 1; i&lt;=k; i++)
-        c[i] += c[i-1];
-    for(int i = a.length-1; i &gt;= 0; i--){
-        c[a[i]] --;
-        b[c[a[i]]] = a[i];
-    }
-}</code></pre>
-      
+        <h2 id="ES6"><a href="#ES6" class="headerlink" title="ES6"></a>ES6</h2><blockquote>
+<p>什么是ES6？</p>
+</blockquote>
+<p>ES全称ECMAScript，一项脚本语言的标准化规范。</p>
+<blockquote>
+<p>为什么用ES6</p>
+</blockquote>
+<ul>
+<li>变量提升特性怎额国家了程序运行的不可预测性</li>
+<li>语法过于松散，实现不同功能。不同人代码不同。</li>
+</ul>
+<h2 id="let"><a href="#let" class="headerlink" title="let"></a>let</h2><p>ES6中新增的用于声明变量的关键字。</p>
+<ul>
+<li><p>let声明的变量只在所处块级有效,块外访问不到，且报错a is not define。(块级作用域，括号里的作用域）。</p>
+</li>
+<li><p>不允许重复声明变量。</p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="literal">true</span>) &#123;</span><br><span class="line"><span class="keyword">let</span> a=<span class="number">10</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(a)</span><br></pre></td></tr></table></figure>
 
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">排序算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
+<ul>
+<li>不存在变量提升（先输出后定义）</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.let(a)</span><br><span class="line"><span class="keyword">let</span> a=<span class="number">10</span>;</span><br></pre></td></tr></table></figure>
 
-      
+<ul>
+<li>暂时性死区。t和if语句绑定。外面定义var没有用。会报错先输出后定义。t is not define。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> t=<span class="number">123</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">  t=<span class="string">'abc'</span></span><br><span class="line">  <span class="keyword">let</span> t;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/11/计数排序/">展开全文 >></a>
-        </p>
-      
+<h2 id="let习题"><a href="#let习题" class="headerlink" title="let习题"></a>let习题</h2><blockquote>
+<p>输出几？</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">var</span> arr=[];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="number">2</span>;i++) &#123;</span><br><span class="line">        arr[i]=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    arr[<span class="number">0</span>]();</span><br><span class="line">    arr[<span class="number">1</span>]();</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
 
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
+<p>输出的都为2。<br>题解：</p>
+<ul>
+<li>变量i是全局的，函数执行时输出的都是全局作用域下i的值。<ul>
+<li>就是数组里存的是console（i）。现在i=2，所以都输出2。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">``</span><span class="string">`javascript</span></span><br><span class="line"><span class="string">    &lt;script&gt;</span></span><br><span class="line"><span class="string">        var arr=[];</span></span><br><span class="line"><span class="string">        for(var i=0;i&lt;2;i++) &#123;</span></span><br><span class="line"><span class="string">            arr[i]=function()&#123;</span></span><br><span class="line"><span class="string">                console.log(i);</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">        arr[0]();</span></span><br><span class="line"><span class="string">        arr[1]();</span></span><br><span class="line"><span class="string">    &lt;/script&gt;</span></span><br></pre></td></tr></table></figure>
 
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
+<p>输出0和1<br>题解：</p>
+<ul>
+<li>let声明是块级作用域。</li>
+<li><strong>每个循环产生一个块级作用域</strong>。每个块级作用域中变量是不同的，函数执行时输出的是循环产生的块级作用域下的值。</li>
+<li></li>
+</ul>
+<h2 id="常量const"><a href="#常量const" class="headerlink" title="常量const"></a>常量const</h2><blockquote>
+<p>const作用</p>
+</blockquote>
+<p>声明常量，常量就是值（内存地址）不能变化的量。</p>
+<ul>
+<li>具有块级作用域。</li>
+<li>不允许重复声明变量。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="literal">true</span>) &#123;</span><br><span class="line"><span class="keyword">const</span> a=<span class="number">10</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(a) <span class="comment">//报错 a is not define</span></span><br></pre></td></tr></table></figure>
 
-
-
-
-  
-    <article id="post-129根到叶子结点的和" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/08/129根到叶子结点的和/">二叉树遍历和</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/08/129根到叶子结点的和/" class="archive-article-date">
-  	<time datetime="2019-12-08T14:42:51.917Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>给定一个二叉树，它的每个结点都存放一个 0-9 的数字，每条从根到叶子节点的路径都代表一个数字。</p>
-<p>例如，从根到叶子节点路径 1-&gt;2-&gt;3 代表数字 123。</p>
-<p>计算从根到叶子节点生成的所有数字之和。</p>
-<p>说明: 叶子节点是指没有子节点的节点。</p>
-<p>示例 1:</p>
-<p>输入: [1,2,3]</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">  1</span><br><span class="line"> / \</span><br><span class="line">2   3</span><br></pre></td></tr></table></figure>
-
-<p>输出: 25<br>解释:<br>从根到叶子节点路径 1-&gt;2 代表数字 12.<br>从根到叶子节点路径 1-&gt;3 代表数字 13.<br>因此，数字总和 = 12 + 13 = 25.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">if(root.right==null&amp;&amp;root.left==null)&#123;//到叶子结点题都这么写</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    int ans=0;</span><br><span class="line">    public void help(TreeNode root,int cur)&#123;</span><br><span class="line">          if(root==null) return ;</span><br><span class="line">          if(root.right==null&amp;&amp;root.left==null)&#123;//到叶子结点题都这么写</span><br><span class="line">          ans+=cur*10+root.val;</span><br><span class="line">          return;</span><br><span class="line">          &#125;</span><br><span class="line">          help(root.left,cur*10+root.val);</span><br><span class="line">          help(root.right,cur*10+root.val);</span><br><span class="line">    &#125;</span><br><span class="line">    public int sumNumbers(TreeNode root) &#123;</span><br><span class="line">        if(root==null) return 0;</span><br><span class="line">        help(root,0);</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">树</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/08/129根到叶子结点的和/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
+<ul>
+<li>必须赋初始值。否则Missing initializer in const declaration</li>
+</ul>
+<ul>
+<li>声明常量赋值后，值（内存地址）不能变化。复杂数据类型，如数组值可以改变，地址不能变。否则报错assignment to constant variable。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">   <span class="keyword">const</span> p=<span class="number">3.14</span></span><br><span class="line">   p=<span class="number">100</span>;<span class="comment">//改变了值，报错。</span></span><br><span class="line">   <span class="keyword">const</span> a=[<span class="number">100</span>,<span class="number">200</span>];</span><br><span class="line">   arr[<span class="number">0</span>]=<span class="string">'a'</span>;<span class="comment">//不报错</span></span><br><span class="line">   arr[<span class="number">1</span>]=<span class="string">'b'</span>;<span class="comment">//不报错</span></span><br><span class="line">   ary[<span class="string">'a'</span>,<span class="string">'b'</span>] <span class="comment">//改变了地址，报错</span></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
 
 
 
+<h2 id="let、const、var的区别"><a href="#let、const、var的区别" class="headerlink" title="let、const、var的区别"></a>let、const、var的区别</h2><ol>
+<li>使用var声明的变量，作用域为该语句所在函数，且存在变量提升现象。</li>
+<li>使用let声明变量，作用域为所在代码块，不存在变量提升。</li>
+<li>使用const声明的是常量，作用域为所在代码块，不存在变量提升。在后面代码块中不能修改该常量的值。</li>
+<li>let和const都不允许重复声明变量，否则会报错。</li>
+</ol>
+<h2 id="解构赋值"><a href="#解构赋值" class="headerlink" title="解构赋值"></a>解构赋值</h2><p>ES6中允许从数组中提取值，按照对应位置，对变量赋值。对象也可以实现<strong>解构</strong>。</p>
+<p><strong><code>数组解构</code></strong>：允许我们按照一对一对应的关系从数组中提取值并赋值于变量。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> [a,b,c]=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line"><span class="built_in">console</span>.log(a);</span><br><span class="line"><span class="built_in">console</span>.log(b);</span><br><span class="line"><span class="built_in">console</span>.log(c);</span><br></pre></td></tr></table></figure>
 
-  
-    <article id="post-114二叉树展开为链表" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/08/114二叉树展开为链表/">二叉树与链表</a>
-    </h1>
-  
+<p>如果变量数量和数字长度不能一对一对应，超出部分是undefine的。</p>
+<p>对象解构</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">   <span class="keyword">let</span> person=&#123;<span class="attr">name</span>:<span class="string">'zhangsan'</span>,<span class="attr">age</span>:<span class="number">20</span>&#125;</span><br><span class="line">   <span class="comment">//ES6之前 </span></span><br><span class="line">   <span class="keyword">var</span> age=preson.age;</span><br><span class="line">   <span class="keyword">var</span> name=person.name;</span><br><span class="line">   <span class="comment">//ES6 1.</span></span><br><span class="line">   <span class="keyword">let</span> &#123;name,age&#125;=person;</span><br><span class="line">   <span class="built_in">console</span>.log(name);<span class="comment">//zhangsan</span></span><br><span class="line">   <span class="built_in">console</span>.log(age); <span class="comment">//20</span></span><br><span class="line">   <span class="comment">//ES6 2.</span></span><br><span class="line">   <span class="keyword">let</span> &#123;<span class="attr">name</span>:myname,<span class="attr">age</span>:myage&#125;=person</span><br><span class="line">   <span class="built_in">console</span>.log(myage);</span><br><span class="line">   <span class="built_in">console</span>.log(myname);</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
 
-        
-        <a href="/2019/12/08/114二叉树展开为链表/" class="archive-article-date">
-  	<time datetime="2019-12-08T14:37:29.167Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>给定一个二叉树，原地将它展开为链表。</p>
-<p>例如，给定二叉树</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">    1</span><br><span class="line">   / \</span><br><span class="line">  2   5</span><br><span class="line"> / \   \</span><br><span class="line">3   4   6</span><br></pre></td></tr></table></figure>
+<h2 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h2><p>新增定义函数方法。</p>
+<ul>
+<li>并且代码的执行结果就是函数的返回值 函数体大括号可以省略。</li>
+<li>如果形参只有一个，形参外侧小括号可以省略。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">   <span class="keyword">const</span> fn=<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">       <span class="built_in">console</span>.log(<span class="number">123</span>);</span><br><span class="line">   &#125;</span><br><span class="line">   fn();</span><br><span class="line">   <span class="comment">//传统函数和箭头函数，如果函数体中只有一句代码。</span></span><br><span class="line">   <span class="comment">//并且代码的执行结果就是函数的返回值 函数体大括号可以省略。</span></span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">a,b</span>)</span>&#123;</span><br><span class="line">       <span class="keyword">return</span> a+b;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">const</span> sum=<span class="function">(<span class="params">a,b</span>)=&gt;</span>&#123;</span><br><span class="line">       <span class="keyword">return</span> a+b;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">const</span> sum=<span class="function">(<span class="params">a,b</span>)=&gt;</span>a+b;</span><br><span class="line"> <span class="comment">//如果形参只有一个，形参外侧小括号可以省略</span></span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">v</span>)</span>&#123;</span><br><span class="line">       <span class="keyword">return</span> v;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">const</span> fn=<span class="function"><span class="params">v</span>=&gt;</span>&#123;</span><br><span class="line">       alert(v);<span class="comment">//浏览器弹出</span></span><br><span class="line">   &#125;</span><br><span class="line">   fn(<span class="number">20</span>);</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>将其展开为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line"> \</span><br><span class="line">  2</span><br><span class="line">   \</span><br><span class="line">    3</span><br><span class="line">     \</span><br><span class="line">      4</span><br><span class="line">       \</span><br><span class="line">        5</span><br><span class="line">         \</span><br><span class="line">          6</span><br></pre></td></tr></table></figure>
+<p>箭头函数不绑定this关键字，箭头函数中的this，指的是<code>函数位置的上下文this。</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span></span>&#123;</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">   <span class="keyword">return</span><span class="function"><span class="params">()</span>=&gt;</span> &#123;</span><br><span class="line">       <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> obj =&#123;<span class="attr">name</span>:<span class="string">'Zhangsan'</span>&#125;;</span><br><span class="line"><span class="keyword">const</span> res=fn.call(obj);</span><br><span class="line">res();</span><br></pre></td></tr></table></figure>
 
-<p><strong>思路：用队列保存层次遍历结果，然后把root的right更改，left指向空</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public void flatten(TreeNode root) &#123;//先序用栈,层次用队列</span><br><span class="line">       if(root==null) return ;</span><br><span class="line">        Stack&lt;TreeNode&gt; q1=new Stack&lt;&gt;();</span><br><span class="line">        Queue&lt;TreeNode&gt; q2=new LinkedList&lt;&gt;();</span><br><span class="line">        q1.add(root);</span><br><span class="line">        while(!q1.isEmpty())&#123;</span><br><span class="line">           TreeNode t=q1.pop();</span><br><span class="line">           q2.add(t);</span><br><span class="line">           if(t.right!=null) q1.add(t.right);</span><br><span class="line">           if(t.left!=null) q1.add(t.left);</span><br><span class="line">        &#125;</span><br><span class="line">        TreeNode cur; </span><br><span class="line">        q2.poll();</span><br><span class="line">        while(!q2.isEmpty())&#123;</span><br><span class="line">            root.left=null;</span><br><span class="line">            root.right=q2.poll();</span><br><span class="line">            root=root.right;       </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>箭头函数this不指向window。而是谁用到了this就指向谁。所以指向fn的this，就是obj。</p>
+<h2 id="练习题"><a href="#练习题" class="headerlink" title="练习题"></a>练习题</h2><ul>
+<li>obj是个对象，不是函数，不产生作用域。实际箭头函数定义在全局作用域下，指向window，window没有age值，所以是undefine。</li>
+<li>若在全局里设置对象，则输出全局下100。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"> &lt;script&gt;</span><br><span class="line">    <span class="keyword">var</span> obj=&#123;</span><br><span class="line">        age:<span class="number">20</span>,</span><br><span class="line">        say:<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            alert(<span class="keyword">this</span>.age);<span class="comment">//undefine</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    obj.say();</span><br><span class="line">=================</span><br><span class="line">     <span class="keyword">var</span> age=<span class="number">100</span>;</span><br><span class="line">      <span class="keyword">var</span> obj=&#123;</span><br><span class="line">        age:<span class="number">20</span>,</span><br><span class="line">        say:<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            alert(<span class="keyword">this</span>.age);<span class="comment">//100</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    obj.say();</span><br><span class="line"> &lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="剩余参数"><a href="#剩余参数" class="headerlink" title="剩余参数"></a>剩余参数</h2><blockquote>
+<p>什么是剩余参数？</p>
+</blockquote>
+<p>剩余参数语法允许我们将一个不定数量的参数表示为一个数组。<br><img src="https://img-blog.csdnimg.cn/20200508143115365.png" alt="在这里插入图片描述"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">   <span class="keyword">const</span> sum=<span class="function">(<span class="params">...args</span>)=&gt;</span>&#123;</span><br><span class="line">       <span class="keyword">let</span> total=<span class="number">0</span>;</span><br><span class="line">       <span class="comment">//只要一个形参，省略了item的括号</span></span><br><span class="line">       args.forEach(<span class="function"><span class="params">item</span>=&gt;</span>total+=item);</span><br><span class="line">       <span class="keyword">return</span> total;</span><br><span class="line">   &#125;;</span><br><span class="line">   <span class="built_in">console</span>.log(sum(<span class="number">10</span>,<span class="number">20</span>));</span><br><span class="line">   <span class="built_in">console</span>.log(sum(<span class="number">10</span>,<span class="number">20</span>,<span class="number">30</span>));</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>剩余参数和解构配合使用。</strong><br>解决了数组解构必须一对一的问题。</p>
+<p><img src="https://img-blog.csdnimg.cn/2020050814360451.png" alt="在这里插入图片描述"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a=[<span class="string">'张三'</span>,<span class="string">'李四'</span>,<span class="string">'王五'</span>];</span><br><span class="line"><span class="keyword">let</span> [s1,...s2]=a;</span><br><span class="line"><span class="built_in">console</span>.log(s1);</span><br><span class="line"><span class="built_in">console</span>.log(s2);</span><br></pre></td></tr></table></figure>
 
 
       
@@ -515,7 +559,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">树</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
         		</li>
       		
 		</ul>
@@ -525,7 +569,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/08/114二叉树展开为链表/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/05/08/ES6新增语法/">展开全文 >></a>
         </p>
       
 
@@ -555,53 +599,214 @@
 
 
   
-    <article id="post-112 113路径总和" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-品优购项目二" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/08/112 113路径总和/">二叉树求和</a>
+      <a class="article-title" href="/2020/05/07/品优购项目二/">品优购电商项目学习一(头部界面)</a>
     </h1>
   
 
         
-        <a href="/2019/12/08/112 113路径总和/" class="archive-article-date">
-  	<time datetime="2019-12-08T14:33:24.722Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-08</time>
+        <a href="/2020/05/07/品优购项目二/" class="archive-article-date">
+  	<time datetime="2020-05-07T11:31:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-07</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>给定一个二叉树和一个目标和，判断该树中是否存在根节点到叶子节点的路径，这条路径上所有节点值相加等于目标和。<strong>(存在路径就返回true）</strong></p>
-<p>说明: 叶子节点是指没有子节点的节点。</p>
-<p>示例:<br>给定如下二叉树，以及目标和 sum = 22，</p>
-<pre><code>      5
-     / \
-    4   8
-   /   / \
-  11  13  4
- /  \      \
-7    2      1</code></pre><p>返回 true, 因为存在目标和为 22 的根节点到叶子节点的路径<br><strong>递归</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">  public boolean hasPathSum(TreeNode root, int sum) &#123;</span><br><span class="line">    if (root == null)</span><br><span class="line">      return false;</span><br><span class="line">    sum -= root.val;</span><br><span class="line">    if (root.left == null&amp;&amp;root.right == null)</span><br><span class="line">      return sum == 0;//sum=0则，有路径。最后一定为真</span><br><span class="line">    return hasPathSum(root.left, sum) || hasPathSum(root.right, sum);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h2 id="nav范围"><a href="#nav范围" class="headerlink" title="nav范围"></a>nav范围</h2><p><img src="https://img-blog.csdnimg.cn/20200506224552523.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="nav布局"><a href="#nav布局" class="headerlink" title="nav布局"></a>nav布局</h2><ol>
+<li>一个大盒子里俩个小盒子</li>
+<li>左边盒子里装俩个盒子dt和dd俩个盒子。上面是dt,下面是dd。然后dt和父亲一边大就把dd挤下来了。</li>
+</ol>
+<p><img src="https://img-blog.csdnimg.cn/20200506225855672.png" alt="在这里插入图片描述"></p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"dropdown fl"</span> &gt;</span><br><span class="line">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"dt"</span>&gt;全部商品分类&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    &lt;div class="dd"&gt;哒哒哒&lt;/</span>div&gt;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/css====================</span></span><br><span class="line"><span class="regexp">    width: 100%;</span></span><br><span class="line"><span class="regexp">    height: 100%;</span></span><br></pre></td></tr></table></figure>
 
-<p>迭代</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">  public boolean hasPathSum(TreeNode root, int sum) &#123;</span><br><span class="line">    if (root == null)</span><br><span class="line">      return false;</span><br><span class="line"></span><br><span class="line">    LinkedList&lt;TreeNode&gt; node_stack = new LinkedList();</span><br><span class="line">    LinkedList&lt;Integer&gt; sum_stack = new LinkedList();</span><br><span class="line">    node_stack.add(root);</span><br><span class="line">    sum_stack.add(sum - root.val);</span><br><span class="line"></span><br><span class="line">    TreeNode node;</span><br><span class="line">    int curr_sum;</span><br><span class="line">    while ( !node_stack.isEmpty() ) &#123;</span><br><span class="line">      node = node_stack.pollLast();</span><br><span class="line">      curr_sum = sum_stack.pollLast();</span><br><span class="line">      if ((node.right == null) &amp;&amp; (node.left == null) &amp;&amp; (curr_sum == 0))</span><br><span class="line">        return true;</span><br><span class="line"></span><br><span class="line">      if (node.right != null) &#123;</span><br><span class="line">        node_stack.add(node.right);</span><br><span class="line">        sum_stack.add(curr_sum - node.right.val);</span><br><span class="line">      &#125;</span><br><span class="line">      if (node.left != null) &#123;</span><br><span class="line">        node_stack.add(node.left);</span><br><span class="line">        sum_stack.add(curr_sum - node.left.val);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return false;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>div里放12个<code>li</code> 。每个<code>li</code>后面放<code>i</code> 存<code>&gt;</code></li>
+<li>鼠标变白只变<code>li</code>，不变<code>&gt;</code><br><img src="https://img-blog.csdnimg.cn/20200506232541670.png" alt="在这里插入图片描述"></li>
+</ol>
+<ol start="5">
+<li>加一个内边距，防止浮动元素<code>&gt;</code>靠最右面。</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">padding：<span class="number">0</span> <span class="number">10</span>px</span><br></pre></td></tr></table></figure>
 
-<p>给定一个二叉树和一个目标和，找到所有从根节点到叶子节点路径总和等于给定目标和的路径（<strong>到叶子结点和为sum的路径结果集</strong>）</p>
-<p>说明: 叶子节点是指没有子节点的节点。</p>
-<p>示例:<br>给定如下二叉树，以及目标和 sum = 22，</p>
-<pre><code>      5
-     / \
-    4   8
-   /   / \
-  11  13  4
- /  \    / \
-7    2  5   1</code></pre><p>返回:</p>
-<p>[<br>   [5,4,11,2],<br>   [5,8,4,5]<br>]<br><strong>回溯递归</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt; res=new LinkedList&lt;&gt;();</span><br><span class="line">    public void help(TreeNode root,LinkedList&lt;Integer&gt; cur,int sum)&#123;</span><br><span class="line">       if(root==null) return;//root为空,直接返回</span><br><span class="line">       if(root.left==null&amp;&amp;root.right==null)&#123;//root左子树和右子树都为空,则为叶子结点</span><br><span class="line">          if((sum-root.val)==0)&#123;//如果为0,加入结果集</span><br><span class="line">             cur.add(root.val);</span><br><span class="line">             res.add(new LinkedList&lt;Integer&gt;(cur));             </span><br><span class="line">             cur.removeLast();</span><br><span class="line">             return;</span><br><span class="line">          &#125;</span><br><span class="line">          else&#123;</span><br><span class="line">             return;</span><br><span class="line">          &#125;</span><br><span class="line">       &#125;</span><br><span class="line">          cur.add(root.val);</span><br><span class="line">          help(root.left,cur,sum-root.val);</span><br><span class="line">          help(root.right,cur,sum-root.val);</span><br><span class="line">          cur.removeLast();//回溯</span><br><span class="line">       &#125;</span><br><span class="line">    public List&lt;List&lt;Integer&gt;&gt; pathSum(TreeNode root, int sum) &#123;</span><br><span class="line">        help(root,new LinkedList&lt;Integer&gt;(),sum);</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>6.<code>div</code>的<code>ul</code>的8个<code>li</code>。大小给<code>a</code>。用padding撑开<br><img src="https://img-blog.csdnimg.cn/20200506234004761.png" alt="在这里插入图片描述"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.navitems li a&#123;</span><br><span class="line">    display: block;</span><br><span class="line">    height:<span class="number">45</span>px;</span><br><span class="line">    line-height: <span class="number">45</span>px;</span><br><span class="line">    padding: <span class="number">0</span> <span class="number">25</span>px;</span><br><span class="line">    font-size: <span class="number">16</span>px;</span><br><span class="line">    color:#333;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="底部footer"><a href="#底部footer" class="headerlink" title="底部footer"></a>底部footer</h2><ol>
+<li>底部footer制作，因为底部和头部是共享的。都用common.css.</li>
+<li>利用精灵图存放图片。一个<code>li</code>里放一个<code>i</code>和一个<code>div</code>。然后根据精灵图方位求图片。精灵图：就是把图片存放在一起，然后移动距离。浮动的盒子可以直接给大小，所以<code>i</code>不需要转换为块元素。</li>
+<li>列表用dl里放<code>dt</code>（标题）和<code>dd</code>（列表）<br><img src="https://img-blog.csdnimg.cn/20200507131553940.png" alt="在这里插入图片描述"></li>
+<li>底部栏。<code>div</code>里放俩个小<code>p</code>。</li>
+</ol>
+<h2 id="主体设计"><a href="#主体设计" class="headerlink" title="主体设计"></a>主体设计</h2><ol>
+<li>一个大div里面放左右俩个小div</li>
+</ol>
+<p><img src="https://img-blog.csdnimg.cn/20200507141719229.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<pre><code>2. 焦点图。垂直居中，先走高度一半。然后往回走height一半。一堆小li来回切换，所以是链接。</code></pre><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">ul&gt;li&gt;a&gt;img</span><br><span class="line"><span class="comment">//==============</span></span><br><span class="line">            &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"focus fl"</span>&gt;</span><br><span class="line">                &lt;a href=<span class="string">"#"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"arrow-l"</span>&gt; <span class="xml"><span class="tag">&lt; &lt;/<span class="attr">a</span>&gt;</span></span></span><br><span class="line">                &lt;a href=<span class="string">"#"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"arrow-r"</span>&gt; &gt; <span class="xml"><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span></span><br><span class="line">                &lt;ul&gt;</span><br><span class="line">                    &lt;li&gt;<span class="xml"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">""</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"upload/banner1.jpg"</span> <span class="attr">class</span>=<span class="string">"main-img"</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">                &lt;<span class="regexp">/ul&gt;</span></span><br><span class="line"><span class="regexp">            &lt;/</span>div&gt;</span><br><span class="line"><span class="comment">//================================</span></span><br><span class="line">.arrow-l&#123;</span><br><span class="line">    position: absolute;</span><br><span class="line">    top:<span class="number">50</span>%;</span><br><span class="line">    margin-top: <span class="number">-20</span>px;</span><br><span class="line">    width: <span class="number">24</span>px;</span><br><span class="line">    height: <span class="number">40</span>px;</span><br><span class="line">    background-color: pink;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>小圆圈<code>ol&lt;li*4</code></li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">.circle li &#123;</span><br><span class="line">.circle li &#123;</span><br><span class="line">    float: left;</span><br><span class="line">    width: <span class="number">8</span>px;</span><br><span class="line">    height: <span class="number">8</span>px;</span><br><span class="line">    margin: <span class="number">0</span> <span class="number">3</span>px;</span><br><span class="line">    border: 1px solid #fff;</span><br><span class="line">    border-radius: <span class="number">50</span>%;</span><br><span class="line">    <span class="comment">/* 鼠标经过小手 */</span></span><br><span class="line">    cursor: pointer;</span><br><span class="line">    <span class="comment">/* background-color: #fff; */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p><strong>newsflash</strong>。一个大<code>div</code>放三个小<code>div</code><br>品优购快报：上下俩个<code>div</code>。下面<code>div&gt;li*5</code><br>中间：<code>ul&gt;li*12</code><br><img src="https://img-blog.csdnimg.cn/20200507145026342.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+</li>
+<li><p>一行装不下4个<code>li</code>怎么办。保证<code>li</code>父亲<code>ul</code>能装4个<code>li</code>。保证比250px大。为了防止<code>ul</code>比父盒子大，露出一部分，会隐藏溢出。<code>.lifeservice</code>加<code>overflow-hidden</code>。但是最后一个盒子就小了一点，不会影响大局。<br><img src="https://img-blog.csdnimg.cn/20200507155344755.png" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20200507151705336.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+</li>
+<li><p>每一个块（<code>li</code>）里面装一个<code>a</code>转化为block并和父亲一样宽。a里面放<code>i</code>和<code>p</code>。</p>
+</li>
+<li><p>解决块级元素外边距合并，加<code>overlow：hidden</code></p>
+</li>
+<li><p>注意使用精灵图的时候，<code>css</code>中<code>.service-ico</code>必须放在<code>.service-ico-huafei</code>前面，否则会发生层叠。前面的失效。</p>
+<h2 id="推荐模块"><a href="#推荐模块" class="headerlink" title="推荐模块"></a>推荐模块</h2><p><img src="https://img-blog.csdnimg.cn/20200507155544141.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+</li>
+<li><p>一个大<code>div</code>里面俩个小<code>div</code>，左面<code>div</code>放<code>h3</code>和<code>img</code></p>
+</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">前端综合</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/07/品优购项目二/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-品优购电商项目学习一(头部界面)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/06/品优购电商项目学习一(头部界面)/">品优购电商项目学习一(头部界面)</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/06/品优购电商项目学习一(头部界面)/" class="archive-article-date">
+  	<time datetime="2020-05-06T14:49:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="设计目标"><a href="#设计目标" class="headerlink" title="设计目标"></a>设计目标</h2><ul>
+<li>保证浏览器IE7以上，火狐，360，chrome等。</li>
+<li>熟悉CSS+DIV布局，页面的搭建工作</li>
+<li>了解电商网站的布局模式</li>
+<li>为后期品优购移动端做铺垫</li>
+</ul>
+<h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2><ul>
+<li>开发工具sublime、photoshop、主流浏览器</li>
+<li>技术栈：HTML结构+CSS技术  布局</li>
+</ul>
+<h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><ul>
+<li>能会引入ico图标</li>
+<li>可简单看懂优化三大标签</li>
+<li>能使用字体图标</li>
+<li>能说出css熟悉书写顺序</li>
+</ul>
+<h2 id="代码规范"><a href="#代码规范" class="headerlink" title="代码规范"></a>代码规范</h2><p>  <strong>HTML规范：</strong></p>
+<ul>
+<li>DOCTYPE声明。<!DOCTYPE html></li>
+<li>HTML5规范</li>
+<li>UTF-8并且中文zh-CN</li>
+<li>属性用双引号</li>
+<li>大于号和小于号用&amp;gt</li>
+<li>代码缩进四个空格</li>
+<li>段落元素内部只嵌套内联元素</li>
+<li>用JPEG格式，小于200kb</li>
+<li>不使用ID选择器。</li>
+</ul>
+<p> <strong>CSS规范：</strong></p>
+<ul>
+<li>顺序为布局定位属性、自身属性、文本属性、其他属性。</li>
+<li>命名规范：项目名字pinyougou，脚本img，脚本js，样式文件夹css。</li>
+<li>类名：必须以字母开头且小写。如.nav_top。不用广告词作为类名，不用敏感词。</li>
+</ul>
+<h2 id="前期准备工作"><a href="#前期准备工作" class="headerlink" title="前期准备工作"></a>前期准备工作</h2><p>实现结构和样式相分离的模式<br>把公共的放入同一个文件夹</p>
+<h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2><p>品优购-综合购物网站-正品低价、品质保障、轻松购物</p>
+<h2 id="网站说明"><a href="#网站说明" class="headerlink" title="网站说明"></a>网站说明</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta name=<span class="string">"description"</span> content=<span class="string">"专业的综合网上购物商城,销售家电、数码通讯、电脑、家居百货"</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20200506190213552.png" alt="在这里插入图片描述"></p>
+<h2 id="字体图标"><a href="#字体图标" class="headerlink" title="字体图标"></a>字体图标</h2><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p><img src="https://img-blog.csdnimg.cn/20200506185914970.png" alt="在这里插入图片描述"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel=<span class="string">"shortcut icon"</span> href=<span class="string">"pin.ico"</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>关键词</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta name=<span class="string">"keywords"</span> content=<span class="string">"家用电器,电脑办公,手机,图书,团购,金融,我的购物车"</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="logo优化"><a href="#logo优化" class="headerlink" title="logo优化"></a>logo优化</h2><ul>
+<li><strong>logo优化</strong>：点击logo回到第一个界面（index.html)。</li>
+<li>放一个h1里面的a和父亲一样大，并且<strong>转化为块元素</strong>。因为a没有大小。</li>
+<li>在h1写一个文字。目的：<strong>搜索引擎认为这个很重要</strong>。但是不现实出来。</li>
+<li>文字偏离盒子，然后溢出隐藏。这样就看不见了。<code>text-indent: -999px。overflow: hidden</code>。</li>
+<li>京东隐藏h1做法：<code>font-size</code>=0</li>
+<li>鼠标点击后显示名字：<code>d</code></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">        &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"logo"</span>&gt;</span><br><span class="line">             &lt;h1&gt;</span><br><span class="line">                 &lt;a href=<span class="string">"index.html"</span> title=<span class="string">"品优购"</span>&gt;品优购&lt;<span class="regexp">/a&gt;</span></span><br><span class="line"><span class="regexp">             &lt;/</span>h1&gt;</span><br><span class="line">        &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    /</span><span class="regexp">/====================</span></span><br><span class="line"><span class="regexp">    /</span>* a需要大小，和父亲一样大 *<span class="regexp">/</span></span><br><span class="line"><span class="regexp">    overflow: hidden;</span></span><br><span class="line"><span class="regexp">    display: block;</span></span><br><span class="line"><span class="regexp">    width: 175px;</span></span><br><span class="line"><span class="regexp">    height: 56px;</span></span><br><span class="line"><span class="regexp">    background: url(../img</span><span class="regexp">/logo.png) no-repeat;</span></span><br><span class="line"><span class="regexp">    text-indent: -999px;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="购物车"><a href="#购物车" class="headerlink" title="购物车"></a>购物车</h2><p><img src="https://img-blog.csdnimg.cn/20200506224102402.png" alt="在这里插入图片描述"></p>
+<ul>
+<li>div里面一个div存购物车</li>
+<li>输入文字</li>
+<li>一个 i 输入8，改变line-height让8上去，否则文字大小和盒子一样大。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">.count&#123;</span><br><span class="line">    position: absolute;</span><br><span class="line">    top: <span class="number">0</span>;</span><br><span class="line">    left: <span class="number">100</span>px;</span><br><span class="line">    <span class="comment">/* 应该是左侧对齐，才能往右走 */</span></span><br><span class="line">    background-color: #e60012;</span><br><span class="line">    height:<span class="number">14</span>px;</span><br><span class="line">    padding: <span class="number">0</span> <span class="number">3</span>px;</span><br><span class="line">    <span class="comment">/* 让8上去，否则行高默认父亲行高34px*/</span></span><br><span class="line">    line-height: <span class="number">14</span>px;</span><br><span class="line">    color: #fff;</span><br><span class="line">    border-radius: <span class="number">7</span>px <span class="number">7</span>px <span class="number">7</span>px <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
       
@@ -611,11 +816,232 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">前端综合</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/08/112 113路径总和/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/05/06/品优购电商项目学习一(头部界面)/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-正则表达式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/06/正则表达式/">JavaScript中正则表达式和应用</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/06/正则表达式/" class="archive-article-date">
+  	<time datetime="2020-05-06T08:21:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h2><blockquote>
+<p>什么是正则表达式</p>
+</blockquote>
+<p><strong>正则表达式</strong>用于匹配字符串中字符组合的模式。在JavaScript中，正则表达式也是<strong>对象</strong>。</p>
+<blockquote>
+<p>正则表达式作用</p>
+</blockquote>
+<ol>
+<li>表单验证：匹配我们想要的字符串和文本</li>
+<li>过滤敏感词并且替换。</li>
+<li>输入关键词，根据关键词提取相关的内容显示。</li>
+</ol>
+<blockquote>
+<p>正则表达式特点</p>
+</blockquote>
+<p>优点</p>
+<ol>
+<li>灵活，逻辑性，功能性强。</li>
+<li>可以迅速并且简单得到字符串控制</li>
+</ol>
+<p>缺点：</p>
+<ol>
+<li>有点复杂。可以直接复制，但是要修改。</li>
+</ol>
+<blockquote>
+<p>创建正则表达式</p>
+</blockquote>
+<ol>
+<li>调用RegExp对象的构造函数创建</li>
+<li>利用字面量创建</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.调用RegExp对象的构造函数创建</span></span><br><span class="line"><span class="keyword">var</span> str1=<span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="regexp">/123/</span>);</span><br><span class="line"><span class="built_in">console</span>.log(reg);</span><br><span class="line"><span class="comment">//2.利用字面量创建</span></span><br><span class="line"><span class="keyword">var</span> str2=<span class="regexp">/123/</span>;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>测试正则表达式</p>
+</blockquote>
+<ul>
+<li>检测字符串是否符合正则表达式用test()。返回true或者false。其参数是测试字符串。</li>
+<li>只要含有字符串123，就是true，如1123，111233。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">regexObj.text(str)</span><br><span class="line">        <span class="keyword">var</span> str2=<span class="regexp">/123/</span>;</span><br><span class="line">        <span class="built_in">console</span>.log(str2.test(<span class="number">123</span>));</span><br></pre></td></tr></table></figure>
+
+
+
+<ol>
+<li>regexObj是正则表达式</li>
+<li>str是我们要检测的文本</li>
+<li>检测str文本是否符合正则表达式规范</li>
+</ol>
+<blockquote>
+<p>正则表达式组成</p>
+</blockquote>
+<p>组成：正则表达式可以由简单的字符构成，如/abc/，也可以是简单特殊的字符组合。比如/ab*c/。其中特殊字符也被称为元字符，在正则表达式具有特殊意义的专用符号，如^、$、+</p>
+<h2 id="边界符-和"><a href="#边界符-和" class="headerlink" title="边界符^和$"></a>边界符^和$</h2><blockquote>
+<p><strong>/^abc/</strong></p>
+</blockquote>
+<p>必须以abc开头才为false</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> &lt;script&gt;</span><br><span class="line">    <span class="keyword">var</span> str=<span class="regexp">/^abc/</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(str.test(<span class="string">'abc'</span>));<span class="comment">//true</span></span><br><span class="line">    <span class="built_in">console</span>.log(str.test(<span class="string">'abcd'</span>));<span class="comment">//true</span></span><br><span class="line">    <span class="built_in">console</span>.log(str.test(<span class="string">'aabcd'</span>));<span class="comment">//false</span></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>/^abc$/</strong></p>
+</blockquote>
+<p>必须以abc开头，abc<strong>结尾</strong>。则这个字符串必须为abc。</p>
+<blockquote>
+<p>/[abc]/</p>
+</blockquote>
+<p>只要包含abc中的一个字符就返true。</p>
+<blockquote>
+<p>   /^ [abc] $ /</p>
+</blockquote>
+<p>表示只有输入a或者输入b或者输入c才返回true。<br>输入aa返回true。</p>
+<blockquote>
+<pre><code>/ ^ [a-z] $ /</code></pre></blockquote>
+<p>输入26个小写字母任意一个都返回true<br>输入a、z返回true</p>
+<blockquote>
+<pre><code>/ ^ [a-zA-Z] $ /</code></pre></blockquote>
+<p>输入任意1个大写或者小写字母都返回true。</p>
+<blockquote>
+<p>   / ^ [a-zA-Z0-9_-] $ /</p>
+</blockquote>
+<p>输入小写字符，大写字母，0-9，-，_。都返回true。<br>多选一，长度为1才可以。</p>
+<blockquote>
+<pre><code>/ ^ [^a-zA-Z0-9_-] $ /</code></pre></blockquote>
+<p>中括里面，表示取反。表示这些符号都不能包含。输入这些都返回false。</p>
+<blockquote>
+<pre><code>/^[a-zA-Z0-9_-]{6,16}$/;</code></pre></blockquote>
+<p>表示可以输入字符数组下划线。且长度在6和16之间。<br>注意：{6,16}之间不能有空格</p>
+<p>总结：</p>
+<ul>
+<li>中括号外^表示边界符，中括号内表示取反。</li>
+<li>[ ]表示多选一。</li>
+</ul>
+<h2 id="量词符"><a href="#量词符" class="headerlink" title="量词符"></a>量词符</h2><ul>
+<li><code>/^a*$/</code>   表示任意次a都可以，包括0次</li>
+<li><code>/^a+$/</code>  表示任意次a都可以，不包括0次</li>
+<li><code>/^a?$/</code>  表示只有出现<strong>0次</strong>或者<strong>1次</strong>a返回true</li>
+<li><code>/^a{3}$/</code>  表示只有<strong>恰好出现3次a</strong>返回true</li>
+<li><code>/^a{3,}$/</code>  表示出现<strong>大于等于</strong>3次a出现true</li>
+<li><code>/^a{3,14}$/</code> 表示在3和14之间个a返回true</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"> &lt;script&gt;</span><br><span class="line">    <span class="keyword">var</span> str=<span class="regexp">/^a*$/</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(str.test(<span class="string">''</span>));<span class="comment">//true</span></span><br><span class="line">    <span class="built_in">console</span>.log(str.test(<span class="string">'a'</span>));<span class="comment">//true</span></span><br><span class="line">    <span class="built_in">console</span>.log(str.test(<span class="string">'aaa'</span>));<span class="comment">//true</span></span><br><span class="line">    <span class="keyword">var</span> str=<span class="regexp">/^a+$/</span></span><br><span class="line">    <span class="built_in">console</span>.log(str.test(<span class="string">''</span>));<span class="comment">//false</span></span><br><span class="line">    <span class="built_in">console</span>.log(str.test(<span class="string">'a'</span>));<span class="comment">//true</span></span><br><span class="line">    <span class="built_in">console</span>.log(str.test(<span class="string">'aaa'</span>));<span class="comment">//true</span></span><br><span class="line">    <span class="keyword">var</span> str=<span class="regexp">/^a?$/</span></span><br><span class="line">    <span class="built_in">console</span>.log(str.test(<span class="string">''</span>));<span class="comment">//true</span></span><br><span class="line">    <span class="built_in">console</span>.log(str.test(<span class="string">'a'</span>));<span class="comment">//true</span></span><br><span class="line">    <span class="built_in">console</span>.log(str.test(<span class="string">'aaa'</span>));<span class="comment">//false</span></span><br><span class="line">    <span class="keyword">var</span> str=<span class="regexp">/^a&#123;3&#125;$/</span></span><br><span class="line">    <span class="built_in">console</span>.log(str.test(<span class="string">''</span>));<span class="comment">//false</span></span><br><span class="line">    <span class="built_in">console</span>.log(str.test(<span class="string">'a'</span>));<span class="comment">//false</span></span><br><span class="line">    <span class="built_in">console</span>.log(str.test(<span class="string">'aaa'</span>));<span class="comment">//true</span></span><br><span class="line">    <span class="keyword">var</span> str=<span class="regexp">/^a&#123;3,&#125;$/</span></span><br><span class="line">    <span class="built_in">console</span>.log(str.test(<span class="string">''</span>));<span class="comment">//false</span></span><br><span class="line">    <span class="built_in">console</span>.log(str.test(<span class="string">'aaaa'</span>));<span class="comment">//true</span></span><br><span class="line">    <span class="built_in">console</span>.log(str.test(<span class="string">'aaa'</span>));<span class="comment">//true</span></span><br><span class="line">    <span class="keyword">var</span> str=<span class="regexp">/^a&#123;3,14&#125;$/</span></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="案列"><a href="#案列" class="headerlink" title="案列"></a>案列</h2><blockquote>
+<p>表单验证。当输入数字字母下划线并且长度在6和16之间时，输出正确的并变为绿色。</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20200506145448599.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">    &lt;meta name=<span class="string">"viewport"</span> content=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">    &lt;style&gt;</span></span><br><span class="line"><span class="regexp">      span&#123;</span></span><br><span class="line"><span class="regexp">        color:#aaa;</span></span><br><span class="line"><span class="regexp">        font-size: 14px;</span></span><br><span class="line"><span class="regexp">      &#125;</span></span><br><span class="line"><span class="regexp">      .right &#123;</span></span><br><span class="line"><span class="regexp">        color: green;</span></span><br><span class="line"><span class="regexp">      &#125;</span></span><br><span class="line"><span class="regexp">      .wrong&#123;</span></span><br><span class="line"><span class="regexp">        color: red;</span></span><br><span class="line"><span class="regexp">      &#125;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>style&gt;</span><br><span class="line">&lt;<span class="regexp">/head&gt;</span></span><br><span class="line"><span class="regexp">&lt;body&gt;</span></span><br><span class="line"><span class="regexp">    &lt;input type="text" class="uname"&gt; &lt;span&gt;请输入用户名&lt;/</span>span&gt;</span><br><span class="line">      &lt;script&gt;</span><br><span class="line">          <span class="keyword">var</span> str= <span class="regexp">/^[a-zA-Z0-9_-]&#123;6,16&#125;$/</span>;</span><br><span class="line">          <span class="keyword">var</span> uname=<span class="built_in">document</span>.querySelector(<span class="string">'.uname'</span>);</span><br><span class="line">          <span class="keyword">var</span> span=<span class="built_in">document</span>.querySelector(<span class="string">'span'</span>);</span><br><span class="line">          <span class="comment">//失去焦点</span></span><br><span class="line">          uname.onblur=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(str.test(<span class="keyword">this</span>.value))&#123;</span><br><span class="line">              <span class="built_in">console</span>.log(<span class="string">'正确的'</span>);</span><br><span class="line">              span.className=<span class="string">'right'</span>;</span><br><span class="line">              span.innerHTML=<span class="string">'用户名格式正确'</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">              <span class="built_in">console</span>.log(<span class="string">'错误的'</span>);</span><br><span class="line">              span.className=<span class="string">'wrong'</span>;</span><br><span class="line">              span.innerHTML=<span class="string">'用户名格式正确'</span>;</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">      &lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>body&gt;</span><br><span class="line">&lt;<span class="regexp">/html&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="括号总结"><a href="#括号总结" class="headerlink" title="括号总结"></a>括号总结</h2><p>在线测试网站：c.runoob.com</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="comment">//a||b||c</span></span><br><span class="line">  <span class="keyword">var</span> str=<span class="regexp">/^[abc]$/</span>;</span><br><span class="line">  <span class="comment">//只让c重复三次 abccc</span></span><br><span class="line">  <span class="keyword">var</span> str=<span class="regexp">/^abc&#123;3&#125;$/</span>;</span><br><span class="line">  <span class="comment">//让abc重复三次 abcabcabc</span></span><br><span class="line">  <span class="keyword">var</span> str=<span class="regexp">/^(abc)&#123;3&#125;$/</span></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="预定义类"><a href="#预定义类" class="headerlink" title="预定义类"></a>预定义类</h2><p><code>\d</code>：只要是数字就可以。<br><code>^\d$</code>:只能一位数字。<br><code>\D</code>：匹配非数字，位数不限。<br><code>\w</code>：匹配任意字母、数字、下划线。<br><code>\W</code>：除了字母数字下划线。<br><code>\s</code>：匹配空格<br><code>\S</code>：匹配非空格<br>都是[ ]，只有一个。</p>
+<blockquote>
+<p>验证号码 010-12345678或者0530-12345678</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/^\d&#123;<span class="number">3</span>&#125;$-\d&#123;<span class="number">8</span>&#125;|\d&#123;<span class="number">4</span>&#125;-\d&#123;<span class="number">7</span>&#125;$/;</span><br><span class="line"><span class="comment">//==============================</span></span><br><span class="line">/^\d&#123;<span class="number">3</span>,<span class="number">4</span>&#125;$-\d&#123;<span class="number">7</span>,<span class="number">8</span>&#125;$/;</span><br></pre></td></tr></table></figure>
+
+<h2 id="正则表达式替换"><a href="#正则表达式替换" class="headerlink" title="正则表达式替换"></a>正则表达式替换</h2><blockquote>
+<p>把red替换为baby<br>只替换第一个符合条件的。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="comment">//1.替换replace</span></span><br><span class="line">  <span class="keyword">var</span> str=<span class="string">'andy和red'</span></span><br><span class="line">  <span class="keyword">var</span> newstr=str.replace(<span class="string">'andy'</span>,<span class="string">'baby'</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(newstr)</span><br><span class="line">  <span class="comment">//2.用正则表达式</span></span><br><span class="line">  <span class="keyword">var</span> newstr=str.replace(<span class="regexp">/andy/</span>,<span class="string">'baby'</span>);</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>/表达式/[switch]</p>
+</blockquote>
+<p>switch(也称为修饰符）按照什么模式匹配</p>
+<ul>
+<li>g：全局匹配</li>
+<li>i：忽略大小写</li>
+<li>gi：忽略大小写并且全局匹配</li>
+</ul>
+<h2 id="案列-1"><a href="#案列-1" class="headerlink" title="案列"></a>案列</h2><blockquote>
+<p>把哈哈和hh替换成**</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/2020050616205537.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">      &lt;textarea name=<span class="string">""</span> id=<span class="string">"message"</span> cols=<span class="string">"30"</span> rows=<span class="string">"10"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span><span class="xml"><span class="tag">&lt;<span class="name">button</span>&gt;</span>提交<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line">      &lt;div&gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">      &lt;script&gt;</span><br><span class="line">         <span class="keyword">var</span> text=<span class="built_in">document</span>.querySelector(<span class="string">'textarea'</span>);</span><br><span class="line">         <span class="keyword">var</span> btn=<span class="built_in">document</span>.querySelector(<span class="string">'button'</span>);</span><br><span class="line">         <span class="keyword">var</span> div=<span class="built_in">document</span>.querySelector(<span class="string">'div'</span>);</span><br><span class="line">         btn.onclick=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            div.innerHTML=text.value.replace(<span class="regexp">/哈哈|hh/g</span>,<span class="string">'**'</span>);</span><br><span class="line">         &#125;</span><br><span class="line">      &lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>body&gt;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/06/正则表达式/">展开全文 >></a>
         </p>
       
 
@@ -647,7 +1073,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
     </nav>
   
 
@@ -774,7 +1200,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CSS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -786,11 +1224,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
+                <a href="javascript:void(0)" class="js-tag color4">Vue</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -798,7 +1236,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTML</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">JVM</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">前端综合</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">排序算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -807,14 +1265,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">OS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">排序算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">

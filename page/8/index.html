@@ -140,55 +140,154 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-62 63像dfs的动态规划" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-垃圾收集器之G1和CMS" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="首先要了解串行和并行的概念"><a href="#首先要了解串行和并行的概念" class="headerlink" title="首先要了解串行和并行的概念"></a>首先要了解串行和并行的概念</h2><blockquote>
+<p>串行和并行： 串行指垃圾回收器与程序交替执行。 并行指垃圾回收器与程序一起执行(只有G1和CMS时串行)</p>
+</blockquote>
+<p>接下来引出俩种常见的垃圾收集器。</p>
+<h2 id="1-G1垃圾收集器。"><a href="#1-G1垃圾收集器。" class="headerlink" title="1.G1垃圾收集器。"></a><strong>1.G1垃圾收集器。</strong></h2><p><strong>在多CPU和大内存有很好的性能。<br>只有G1可以一起回收新生代和老年代。</strong><br><code>初始标记</code>：G1把整个堆分成若干个小部分(新生代和老年代不在隔离),可以单独回收一个小区域。根据每个区域回收空间和回收时间维护一个优先列表，优先回收价值最大的region。<br><code>并发标记：</code>每个 Region 都有一个 Re    membered Set，用来记录该 Region 对象的引用对象所在的 Region。通过使用Remembered Set，在做可达性分析的时候就可以避免全堆扫描。</p>
+<h2 id="回收步骤："><a href="#回收步骤：" class="headerlink" title="回收步骤："></a>回收步骤：</h2><p><code>1、初始标记</code>（它标记了从GC Root开始直接可达的对象）需要停止<br><code>2、并发标记</code>（从GC Roots开始对堆中对象进行可达性分析，找出存活对象）可并行<br><code>3、最终标记</code>（标记那些在并发标记阶段发生变化的对象，将被回收）可并行<br><code>4、筛选回收</code>（首先对各个Regin的回收价值和成本进行排序，根据用户所期待的GC停顿时间指定回收计划，回收一部分Region<br><strong><code>优点</code></strong>：无内存碎片，cpu利用率高。<br><strong>整体是标记整理，局部是复制。有利于连续连续执行，防止产生因为无连续内存产生gc。</strong></p>
+<h2 id="2-CMS-标记清理算法"><a href="#2-CMS-标记清理算法" class="headerlink" title="2.CMS 标记清理算法"></a>2.CMS 标记清理算法</h2><blockquote>
+<p>CMS收集器是一种以获取最短回收停顿时间为目标的收集器。</p>
+</blockquote>
+<p><strong>这是因为CMS收集器工作时，GC工作线程与用户线程可以并发执行，以此来达到降低收集停顿时间的目的。</strong><br>CMS收集器仅作用于老年代的收集，是基于<code>标记-清除</code>算法的，它的运作过程分为4个步骤：<br><code>初始标记</code>：记录GCroot到达的对象 <strong>STW</strong><br><code>并发标记</code>：进行GCrootTracing过程，耗时最长。<br><code>重新标记</code>：修正这个过程中一些对象引用的更改。<code>STW</code><br><code>并发清除</code>：不需要停顿。<br><strong>优点</strong>：并发收集，低停顿。<br><strong>缺点</strong>：吞吐量低：CPU利用率低。<br>标记清理算法产生内存碎片，会导致老年代无连续内存分配，造成full gc<br><img src="https://img-blog.csdnimg.cn/20200429224541462.png" alt="在这里插入图片描述"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/29/垃圾收集器之G1和CMS/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Java常见集合类—HashMap" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="首先HashMap结构"><a href="#首先HashMap结构" class="headerlink" title="首先HashMap结构"></a>首先HashMap结构</h2><p>底层是数组，当key相同时，是一个链表。<br>JDK8以后，当HashMap采用了拉链法。<br><strong>当数组长度大于64且链表大于8时，链表变为红黑树。</strong><br>因为红黑树查找更快为2的n次方。<br>HashMap长度为2的n次方。</p>
+<h2 id="1-Hashmap长度为啥是2的n次方？"><a href="#1-Hashmap长度为啥是2的n次方？" class="headerlink" title="1.Hashmap长度为啥是2的n次方？"></a>1.Hashmap长度为啥是2的n次方？</h2><p>因为会进行<code>(len-1)&amp;hashcode</code>(等价于取模操作)来确定位置。<br>&amp;运算比取模效率更高。<br>当len是2的n次方时，2的n次方减1最后一位是1(如16-1=15为1111)<br>可以让位置更分散，减少key的碰撞。<br>如果最后一位是0，很多位置取不到。</p>
+<h2 id="2-HashMap-put为null时怎么办？"><a href="#2-HashMap-put为null时怎么办？" class="headerlink" title="2.HashMap put为null时怎么办？"></a>2.HashMap put为null时怎么办？</h2><p>不为null时，定位index，如果key不存在，插在头部，如果key存在，替换新value。<br>在table[0]里找，如果有key=null的，就返回原null的value。并把原来value更新为新的value。<br>如果没有，<code>则插在表头。</code></p>
+<h2 id="3-为什么是0-75-就是到0-75长度就会扩容"><a href="#3-为什么是0-75-就是到0-75长度就会扩容" class="headerlink" title="3.为什么是0.75(就是到0.75长度就会扩容)"></a>3.为什么是0.75(就是到0.75长度就会扩容)</h2><p>平均了时间和空间效率。<br>如果是1。提高了空间效率。但是增加了查询时间成本。<br>如果是0.5。降低了时间效率。提高了空间效率。</p>
+<h2 id="4-怎么设置初始化大小。"><a href="#4-怎么设置初始化大小。" class="headerlink" title="4.怎么设置初始化大小。"></a>4.怎么设置初始化大小。</h2><p>首先扩容非常消耗性能。<br>如果new HashMap(1000) 则会自动设置为1024个<br>但是这样就会进行扩容了。<br>所以必须初始化为2048，保证0.75*2048&gt;1024。<br>即是2的倍数页防止了扩容。</p>
+<h2 id="5-扩容方法和为什么HashMap线程不安全？"><a href="#5-扩容方法和为什么HashMap线程不安全？" class="headerlink" title="5.扩容方法和为什么HashMap线程不安全？"></a>5.扩容方法和为什么HashMap线程不安全？</h2><p>JDK1.7<br>原扩容方式：把数组扩容俩倍。然后重新计算位置（计算index）后，把数组复制到扩容后的数组。<br>缺点：头插法，可能造成死锁（形成环形链表）。线程不安全。网络不安全。<br>JDK8的扩容方式。新的索引要么和原索引相等，要么高位加1。<br>尾插法<br>方法：与原来Hashcode进行&amp;（len-1）运算。<br>比如从1111扩容到11111<br>则 00001&amp;01111=1  00001&amp;11111=1<br>   10001&amp;01111=1  10001&amp;11111=17<br>   原hashcode高位为0索引不变<br>   原hashcode高位为1新索引高位加1</p>
+<p>JDK1.8中为了避免死锁头插改成尾插<br>JDK1.8当put操作时，可能造成数据覆盖。即俩个不同的key会覆盖，由于size++操作。<br>假设当前HashMap的zise大小为10，当线程A执行到第38行代码时，从主内存中获得size的值为10后准备进行+1操作，但是由于时间片耗尽只好让出CPU，线程B快乐的拿到CPU还是从主内存中拿到size的值10进行+1操作，完成了put操作并将size=11写回主内存，然后线程A再次拿到CPU并继续执行(此时size的值仍为10)，当执行完put操作后，还是将size=11写回内存，此时，线程A、B都执行了一次put操作，但是size的值只增加了1</p>
+<h2 id="6-HashMap在JDK8的新特征？"><a href="#6-HashMap在JDK8的新特征？" class="headerlink" title="6.HashMap在JDK8的新特征？"></a>6.HashMap在JDK8的新特征？</h2><p>当链表长度大于8时自动转化为红黑树（且数组必须大于64）<br>红黑树特征？<br>1.每个节点只能是红色或者黑色<br>2.根结点为黑色<br>3.红色结点的叶节点只能是黑色。<br>4.任意结点到其每个叶子结点，包含相同的黑色结点</p>
+<h2 id="7-为什么重写equals方法时，也要重写hashcode方法呢？"><a href="#7-为什么重写equals方法时，也要重写hashcode方法呢？" class="headerlink" title="7.为什么重写equals方法时，也要重写hashcode方法呢？"></a>7.为什么重写equals方法时，也要重写hashcode方法呢？</h2><p>对equals方法进行了重写，建议一定要对hashCode方法重写，以保证相同的对象返回相同的hash值，不同的对象返回不同的hash值。用来区分相同hash值的俩个元素（同一个链表的元素）。</p>
+<h2 id="8-put操作"><a href="#8-put操作" class="headerlink" title="8.put操作"></a>8.put操作</h2><p>确定下标，然后判断是否已经存在键值对。如果存在的话更新这个键值对的value值。</p>
+<h2 id="9-Hash方法为什么右移-16-位，为什么要使用-位异或"><a href="#9-Hash方法为什么右移-16-位，为什么要使用-位异或" class="headerlink" title="9.Hash方法为什么右移 16 位，为什么要使用 ^ 位异或"></a>9.Hash方法为什么右移 16 位，为什么要使用 ^ 位异或</h2><p><strong>首先hashcode算法</strong><br>之所以使用 31， 是因为他是一个奇素数。如果乘数是偶数，并且乘法溢出的话，信息就会丢失，因为与2相乘等价于移位运算（低位补0）。使用素数的好处并不很明显，但是习惯上使用素数来计算散列结果。 31 有个很好的性能，即用移位和减法来代替乘法，可以得到更好的性能： 31 * i == (i &lt;&lt; 5） - i， 现代的 VM 可以自动完成这种优化。这个公式可以很简单的推导出来。</p>
+<p>JDK8 hash（扰动函数）<br>防止index函数出现有规律的情况</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">   5static final int hash(Object key) &#123;</span><br><span class="line">    int h;</span><br><span class="line">    return (key == null) ? 0 : (h = key.hashCode()) ^ (h &gt;&gt;&gt; 16);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>右位移16位，正好是32bit的一半，自己的高半区和低半区做异或，就是为了混合原始哈希码的高16位和低16位，以此来加大低位的随机性。而且混合后的低位掺杂了高位的部分特征，这样高位的信息也被变相保留下来。</strong></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/29/Java常见集合类—HashMap/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-秒杀如何解决超卖？" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/22/62 63像dfs的动态规划/">像dfs的动态规划</a>
+      <a class="article-title" href="/2020/03/01/秒杀如何解决超卖？/">如何解决超卖</a>
     </h1>
   
 
         
-        <a href="/2019/11/22/62 63像dfs的动态规划/" class="archive-article-date">
-  	<time datetime="2019-11-22T15:07:00.940Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-22</time>
+        <a href="/2020/03/01/秒杀如何解决超卖？/" class="archive-article-date">
+  	<time datetime="2020-03-01T07:16:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-01</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="62-不同路径"><a href="#62-不同路径" class="headerlink" title="62. 不同路径"></a>62. 不同路径</h2><p>一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为“Start” ）。</p>
-<p>机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为“Finish”）。</p>
-<p>问总共有多少条不同的路径？</p>
-<p>例如，上图是一个7 x 3 的网格。有多少可能的路径？</p>
-<p>说明：m 和 n 的值均不超过 100。</p>
-<p>示例 1:</p>
-<p>输入: m = 3, n = 2<br>输出: 3<br>解释:<br>从左上角开始，总共有 3 条路径可以到达右下角。</p>
-<ol>
-<li>向右 -&gt; 向右 -&gt; 向下</li>
-<li>向右 -&gt; 向下 -&gt; 向右</li>
-<li>向下 -&gt; 向右 -&gt; 向右</li>
-</ol>
-<p>示例 2:</p>
-<p>输入: m = 7, n = 3<br>输出: 28<br><img src="https://img-blog.csdnimg.cn/20191122230254102.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int uniquePaths(int m, int n) &#123;</span><br><span class="line">        int dp[][]=new int[m+1][n+1];</span><br><span class="line">        for(int i=1;i&lt;=m;i++)</span><br><span class="line">            dp[i][1]=1;//因为只能往下和右走所以边上都只有一种走法</span><br><span class="line">        for(int i=1;i&lt;=n;i++)</span><br><span class="line">            dp[1][i]=1;//因为只能往下和右走所以边上都只有一种走法</span><br><span class="line">        for(int i=2;i&lt;=m;i++)&#123;</span><br><span class="line">            for(int j=2;j&lt;=n;j++)&#123;</span><br><span class="line">                dp[i][j]=dp[i][j-1]+dp[i-1][j];中间等于俩边走法加1</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[m][n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h2 id="如何解决高并发秒杀的超卖问题"><a href="#如何解决高并发秒杀的超卖问题" class="headerlink" title="如何解决高并发秒杀的超卖问题"></a>如何解决高并发秒杀的超卖问题</h2><p>由秒杀引发的一个问题:<br>    <strong>秒杀最大的一个问题就是解决超卖的问题。其中一种解决超卖如下方式：</strong></p>
+<h2 id="一：排他锁"><a href="#一：排他锁" class="headerlink" title="一：排他锁"></a>一：排他锁</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">update goods</span><br><span class="line">set num = num - 1 </span><br><span class="line">WHERE id = 1001 and num &gt; 0</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://img-blog.csdnimg.cn/20191122230343380.png" alt="在这里插入图片描述"></p>
-<h2 id="63-不同路径-II"><a href="#63-不同路径-II" class="headerlink" title="63. 不同路径 II"></a>63. 不同路径 II</h2><p>一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为“Start” ）。</p>
-<p>机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为“Finish”）。</p>
-<p>现在考虑网格中有障碍物。那么从左上角到右下角将会有多少条不同的路径？</p>
-<p>网格中的障碍物和空位置分别用 1 和 0 来表示。</p>
-<p>说明：m 和 n 的值均不超过 100。<br><img src="https://img-blog.csdnimg.cn/20191122230059179.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">示例 1:</p>
-<p>输入:<br>[<br>  [0,0,0],<br>  [0,1,0],<br>  [0,0,0]<br>]<br>输出: 2<br>解释:<br>3x3 网格的正中间有一个障碍物。<br>从左上角到右下角一共有 2 条不同的路径：</p>
-<ol>
-<li>向右 -&gt; 向右 -&gt; 向下 -&gt; 向下</li>
-<li>向下 -&gt; 向下 -&gt; 向右 -&gt; 向右</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int uniquePathsWithObstacles(int[][] obstacleGrid) &#123;</span><br><span class="line">        int n=obstacleGrid.length;</span><br><span class="line">        int m=obstacleGrid[0].length;</span><br><span class="line">        int dp[][]=new int[n][m];</span><br><span class="line">        if(obstacleGrid[0][0]==1) return 0;</span><br><span class="line">        dp[0][0]=1;</span><br><span class="line">        for(int i=1;i&lt;n;i++)&#123;</span><br><span class="line">            if(obstacleGrid[i][0]==0&amp;&amp;dp[i-1][0]==1)//此点不为障碍且前方从来没有障碍，否则无法到达此点</span><br><span class="line">               dp[i][0]=1;                          //则到这个地方方法为1</span><br><span class="line">            else</span><br><span class="line">               dp[i][0]=0;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i=1;i&lt;m;i++)&#123;</span><br><span class="line">            if(dp[0][i-1]==1&amp;&amp;obstacleGrid[0][i]==0)</span><br><span class="line">               dp[0][i]=1;</span><br><span class="line">            else</span><br><span class="line">               dp[0][i]=0;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i=1;i&lt;n;i++)&#123;</span><br><span class="line">            for(int j=1;j&lt;m;j++)&#123;</span><br><span class="line">                if(obstacleGrid[i][j]==1)//有障碍</span><br><span class="line">                  dp[i][j]=0; //到此点方法为0</span><br><span class="line">                else</span><br><span class="line">                  dp[i][j]=dp[i-1][j]+dp[i][j-1];//从小到上和从左到右方法相加</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[n-1][m-1];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们假设现在商品只剩下一件了，此时数据库中 num = 1；但有100个线程同时读取到了这个 num = 1，所以100个线程都开始减库存了。<br> 但你会最终会发觉，其实只有一个线程减库存成功，其他99个线程全部失败。<br> 这就是MySQL中的排他锁起了作用。<br> 排他锁又称为写锁，简称X锁。<br>顾名思义，排他锁就是不能与其他所并存，如一个事务获取了一个数据行的排他锁，其他事务就不能再获取该行的其他锁，包括共享锁和排他锁，但是获取排他锁的事务是可以对数据就行读取和修改。<br>就是类似于我在执行update操作的时候，这一行是一个事务(默认加了排他锁)。这一行不能被任何其他线程修改和读写</p>
+<h2 id="二：乐观锁"><a href="#二：乐观锁" class="headerlink" title="二：乐观锁"></a>二：乐观锁</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1 </span><br><span class="line">select version from goods WHERE id= 1001</span><br><span class="line">2  </span><br><span class="line">update goods set num = num - 1, </span><br><span class="line">version = version + 1 </span><br><span class="line">WHERE id= 1001 AND num &gt; 0</span><br><span class="line">AND version =@version(上面查到的version);</span><br></pre></td></tr></table></figure>
 
+<p> 这种方式采用了版本号的方式，其实也就是CAS的原理。<br> 假设此时version = 100，num = 1;<br>100个线程进入到了这里，同时他们select出来版本号都是version = 100。<br>然后直接update的时候，只有其中一个先update了，同时更新了版本号。<br>那么其他99个在更新的时候，会发觉version并不等于上次select的version，就说明version被其他线程修改过了。那么我就放弃这次update </p>
+<h2 id="三：Redis预减库存"><a href="#三：Redis预减库存" class="headerlink" title="三：Redis预减库存"></a>三：Redis预减库存</h2><p> 利用redis的单线程预减库存。比如商品有100件。那么我在redis存储一个k,v。例如 &lt;gs1001, 100&gt;<br> 每一个用户线程进来，key值就减1，等减到0的时候，全部拒绝剩下的请求。<br> 那么也就是只有100个线程会进入到后续操作。所以一定不会出现超卖的现象</p>
+<h2 id="四：悲观锁"><a href="#四：悲观锁" class="headerlink" title="四：悲观锁"></a>四：悲观锁</h2><p>其他可以加悲观锁：在select语句末尾添加了for update<br>效率很低不用这种方式。</p>
 
       
 
@@ -202,7 +301,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">dp</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">秒杀项目</a>
         		</li>
       		
 		</ul>
@@ -212,7 +311,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/22/62 63像dfs的动态规划/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/03/01/秒杀如何解决超卖？/">展开全文 >></a>
         </p>
       
 
@@ -242,39 +341,28 @@
 
 
   
-    <article id="post-718最长公共子串" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-软链接和硬链接" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/22/718最长公共子串/">最长公共子串(连续的)</a>
+      <a class="article-title" href="/2020/02/06/软链接和硬链接/">软链接和硬链接</a>
     </h1>
   
 
         
-        <a href="/2019/11/22/718最长公共子串/" class="archive-article-date">
-  	<time datetime="2019-11-22T02:57:59.987Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-22</time>
+        <a href="/2020/02/06/软链接和硬链接/" class="archive-article-date">
+  	<time datetime="2020-02-06T07:16:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-06</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>给两个整数数组 A 和 B ，返回两个数组中公共的、长度最长的子数组的长度。(必须是连续的，不连续的叫子序列)</p>
-<p>示例 1:</p>
-<p>输入:<br>A: [1,2,3,2,1]<br>B: [3,2,1,4,7]<br>输出: 3<br>解释:<br>长度最长的公共子数组是 [3, 2, 1]。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int findLength(int[] A, int[] B) &#123;</span><br><span class="line">        int n=A.length;</span><br><span class="line">        int m=B.length;</span><br><span class="line">        int dp[][]=new int[n+1][m+1];</span><br><span class="line">        int ans=0;</span><br><span class="line">        for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">            for(int j=0;j&lt;m;j++)&#123;</span><br><span class="line">                if(A[i]==B[j])</span><br><span class="line">                  dp[i+1][j+1]=dp[i][j]+1;</span><br><span class="line">                else</span><br><span class="line">                  dp[i+1][j+1]=0;</span><br><span class="line">                  ans=Math.max(dp[i+1][j+1],ans);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>算法思路：</p>
-<p>1、把两个字符串分别以行和列组成一个二维矩阵。</p>
-<p>2、比较二维矩阵中每个点对应行列字符中否相等，相等的话值设置为1，否则设置为0。</p>
-<p>3、通过查找出值为1的最长对角线就能找到最长公共子串。</p>
-<p>针对于上面的两个字符串我们可以得到的二维矩阵如下：<br><img src="https://img-blog.csdnimg.cn/20191122105704977.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p>从上图可以看到，str1和str2共有5个公共子串，但最长的公共子串长度为5。</p>
-<p>为了进一步优化算法的效率，我们可以再计算某个二维矩阵的值的时候顺便计算出来当前最长的公共子串的长度，即某个二维矩阵元素的值由record[i][j]=1演变为record[i][j]=1 +record[i-1][j-1]，这样就避免了后续查找对角线长度的操作了。修改后的二维矩阵如下：</p>
-<p><img src="https://img-blog.csdnimg.cn/20191122105647269.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+        <h2 id="硬链接和软链接"><a href="#硬链接和软链接" class="headerlink" title="硬链接和软链接"></a>硬链接和软链接</h2><p>   链接就是l开头的(ll查看)   。对应windows快捷方式<br>   软链接：类似快捷方式，快捷方式方式，源文件就就不能用了<br>   硬链接：源文件或者快捷方式其中一个没了，原文件或者快捷方式可以通过快捷方式访问。<br>   touch创建一个文件。<br>   硬链接  在这里插入图片描述</p>
+<p>   软链接  (   f3是f1的快捷方式)<br>   <img src="https://img-blog.csdnimg.cn/20200325154447396.png" alt="在这里插入图片描述"><br> 蓝色的使软链接<br><img src="https://img-blog.csdnimg.cn/2020032515443137.png" alt="在这里插入图片描述"><br> 删除代表快捷方式失效了（红色）<br> <img src="https://img-blog.csdnimg.cn/2020032515441499.png" alt="在这里插入图片描述"><br>echo可以往文件输入字符串</p>
 
       
 
@@ -288,7 +376,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">dp</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
         		</li>
       		
 		</ul>
@@ -298,7 +386,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/22/718最长公共子串/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/02/06/软链接和硬链接/">展开全文 >></a>
         </p>
       
 
@@ -328,267 +416,29 @@
 
 
   
-    <article id="post-11 16 202双指针" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Linux基础操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/21/11 16 202双指针/">双指针</a>
+      <a class="article-title" href="/2020/02/05/Linux基础操作/">Linux基本操作</a>
     </h1>
   
 
         
-        <a href="/2019/11/21/11 16 202双指针/" class="archive-article-date">
-  	<time datetime="2019-11-21T15:06:21.575Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-21</time>
+        <a href="/2020/02/05/Linux基础操作/" class="archive-article-date">
+  	<time datetime="2020-02-05T07:16:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-05</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="11盛最多水的容器"><a href="#11盛最多水的容器" class="headerlink" title="11盛最多水的容器"></a>11盛最多水的容器</h2><p>给定 n 个非负整数 a1，a2，…，an，每个数代表坐标中的一个点 (i, ai) 。在坐标内画 n 条垂直线，垂直线 i 的两个端点分别为 (i, ai) 和 (i, 0)。找出其中的两条线，使得它们与 x 轴共同构成的容器可以容纳最多的水。</p>
-<p>说明：你不能倾斜容器，且 n 的值至少为 2。</p>
-<p>图中垂直线代表输入数组 [1,8,6,2,5,4,8,3,7]。在此情况下，容器能够容纳水（表示为蓝色部分）的最大值为 49。</p>
-<p>示例:</p>
-<p>输入: [1,8,6,2,5,4,8,3,7]<br>输出: 49</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int maxArea(int[] height) &#123;</span><br><span class="line">        int left=0;</span><br><span class="line">        int right=height.length-1;</span><br><span class="line">        int ans=0;</span><br><span class="line">        while(left&lt;right)&#123;</span><br><span class="line">            if(height[left]&lt;height[right])&#123;</span><br><span class="line">            ans=Math.max(ans,Math.min(height[right],height[left])*(right-left));</span><br><span class="line">            left++;      </span><br><span class="line">            &#125;</span><br><span class="line">            else&#123;</span><br><span class="line">                ans=Math.max(ans,Math.min(height[right],height[left])*(right-left));</span><br><span class="line">                right--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>设每一状态下水槽面积为 S(i,j)S(i, j)S(i,j),(0&lt;=i&lt;j&lt;n)(0 &lt;= i &lt; j &lt; n)(0&lt;=i&lt;j&lt;n)，由于水槽的实际高度由两板中的短板决定，则可得面积公式 S(i,j)=min(h[i],h[j])×(j−i)S(i, j) = min(h[i], h[j]) × (j - i)S(i,j)=min(h[i],h[j])×(j−i)。<br>在每一个状态下，无论长板或短板收窄 111 格，都会导致水槽 底边宽度 −1-1−1：<br> 若向内移动短板，水槽的短板 min(h[i],h[j])min(h[i], h[j])min(h[i],h[j]) 可能变大，因此水槽面积 S(i,j)S(i, j)S(i,j) 可能增大。<br>    若向内移动长板，水槽的短板 min(h[i],h[j])min(h[i], h[j])min(h[i],h[j]) 不变或变小，下个水槽的面积一定小于当前水槽面积。</p>
-<h2 id="16-最接近的三数之和"><a href="#16-最接近的三数之和" class="headerlink" title="16. 最接近的三数之和"></a>16. 最接近的三数之和</h2><p>给定一个包括 n 个整数的数组 nums 和 一个目标值 target。找出 nums 中的三个整数，使得它们的和与 target 最接近。返回这三个数的和。假定每组输入只存在唯一答案。</p>
-<p>例如，给定数组 nums = [-1，2，1，-4], 和 target = 1.</p>
-<p>与 target 最接近的三个数的和为 2. (-1 + 2 + 1 = 2).</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int threeSumClosest(int[] nums, int target) &#123;</span><br><span class="line">        int left=0; int right=nums.length-1;</span><br><span class="line">        Arrays.sort(nums);</span><br><span class="line">        int ans=nums[0]+nums[1]+nums[2];</span><br><span class="line">        for(int i=0;i&lt;nums.length;i++)&#123;</span><br><span class="line">           left=i+1; right=nums.length-1;</span><br><span class="line">           while(left&lt;right)&#123;</span><br><span class="line">               int t=nums[i]+nums[left]+nums[right];</span><br><span class="line">               if(Math.abs(t-target)&lt;Math.abs(ans-target))</span><br><span class="line">                 ans=t;</span><br><span class="line">               if(t&gt;target)</span><br><span class="line">                  right--;</span><br><span class="line">               else if(t&lt;target)</span><br><span class="line">                  left++;</span><br><span class="line">               else</span><br><span class="line">                 return ans;</span><br><span class="line">           &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>三指针分别为最左元素，左右元素(right)和第二左元素(left)<br>首先进行数组排序，时间复杂度 O(nlogn)O(nlogn)O(nlogn)<br>在数组 nums 中，进行遍历，每遍历一个值利用其下标i，形成一个固定值 nums[i]<br>再使用前指针指向 start = i + 1 处，后指针指向 end = nums.length - 1 处，也就是结尾处<br>根据 sum = nums[i] + nums[start] + nums[end] 的结果，判断 sum 与目标 target 的距离，如果更近则更新结果 ans<br>同时判断 sum 与 target 的大小关系，因为数组有序，如果 sum &gt; target 则 end–，如果 sum &lt; target 则 start++，如果 sum == target 则说明距离为 0 直接返回结果<br>整个遍历过程，固定值为 n 次，双指针为 n 次，时间复杂度为 O(n2)O(n^2)O(n2)<br>总时间复杂度：O(nlogn)+O(n2)=O(n2)O(nlogn) + O(n^2) = O(n^2)O(nlogn)+O(n2)=O(n2)</p>
-<h2 id="202-快乐数"><a href="#202-快乐数" class="headerlink" title="202. 快乐数"></a>202. 快乐数</h2><p>编写一个算法来判断一个数是不是“快乐数”。</p>
-<p>一个“快乐数”定义为：对于一个正整数，每一次将该数替换为它每个位置上的数字的平方和，然后重复这个过程直到这个数变为 1，也可能是无限循环但始终变不到 1。如果可以变为 1，那么这个数就是快乐数。</p>
-<p>示例: </p>
-<p>输入: 19<br>输出: true<br>解释:<br>12 + 92 = 82<br>82 + 22 = 68<br>62 + 82 = 100<br>12 + 02 + 02 = 1</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int summ(int n)&#123;</span><br><span class="line">        int sum=0;</span><br><span class="line">        while(n!=0)&#123;//判断各位数和</span><br><span class="line">            int bit=n%10;</span><br><span class="line">            sum+=bit*bit;</span><br><span class="line">            n/=10;</span><br><span class="line">        &#125; </span><br><span class="line">        return sum;</span><br><span class="line">    &#125;</span><br><span class="line">    public boolean isHappy(int n) &#123;</span><br><span class="line">        int fast=n;//快指针</span><br><span class="line">        int slow=n;//慢指针</span><br><span class="line">        fast=summ(fast);</span><br><span class="line">        while(fast!=slow)&#123;</span><br><span class="line">           slow=summ(slow);</span><br><span class="line">           fast=summ(fast);</span><br><span class="line">           fast=summ(fast);</span><br><span class="line">        &#125;</span><br><span class="line">        if(slow==1) return true;</span><br><span class="line">        else return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>使用“快慢指针”思想找出循环：“快指针”每次走两步，“慢指针”每次走一步，当二者相等时，即为一个循环周期。此时，判断是不是因为1引起的循环，是的话就是快乐数，否则不是快乐数。<br>注意：此题不建议用集合记录每次的计算结果来判断是否进入循环，因为这个集合可能大到无法存储；另外，也不建议使用递归，同理，如果递归层次较深，会直接导致调用栈崩溃。不要因为这个题目给出的整数是int型而投机取巧。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/21/11 16 202双指针/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-35二分" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/20/35二分/">基础二分</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/20/35二分/" class="archive-article-date">
-  	<time datetime="2019-11-20T12:02:21.631Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。</p>
-<p>你可以假设数组中无重复元素。</p>
-<p>示例 1:</p>
-<p>输入: [1,3,5,6], 5<br>输出: 2</p>
-<p>示例 2:</p>
-<p>输入: [1,3,5,6], 2<br>输出: 1</p>
-<p>示例 3:</p>
-<p>输入: [1,3,5,6], 7<br>输出: 4</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int searchInsert(int[] nums, int target) &#123;</span><br><span class="line">        int len=nums.length;</span><br><span class="line">        if(target&gt;nums[len-1])</span><br><span class="line">         return len;</span><br><span class="line">        int mid,left=0,right=len-1;           </span><br><span class="line">        while(left&lt;=right)&#123;</span><br><span class="line">            mid=(left+right)/2;</span><br><span class="line">            if(nums[mid]==target)</span><br><span class="line">               return mid;</span><br><span class="line">            else if(nums[mid]&lt;target)</span><br><span class="line">                left=mid+1;</span><br><span class="line">            else</span><br><span class="line">                right=mid-1;</span><br><span class="line">        &#125;</span><br><span class="line">        return left;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/20/35二分/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-171进制转化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/18/171进制转化/">进制转化简化方法</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/18/171进制转化/" class="archive-article-date">
-  	<time datetime="2019-11-18T15:01:50.864Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>给定一个Excel表格中的列名称，返回其相应的列序号。</p>
-<p>例如，</p>
-<pre><code>A - 1
-B - 2
-C - 3
-...
-Z - 26
-AA - 27
-AB - 28 
-...</code></pre><p>示例 1</p>
-<p>输入 A<br>输出 1</p>
-<p>示例 2</p>
-<p>输入 AB<br>输出 28</p>
-<p>示例 3</p>
-<p>输入 ZY<br>输出 701</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int titleToNumber(String s) &#123;</span><br><span class="line">        int ans=0;</span><br><span class="line">        for(int i=0;is.length();i++)&#123;</span><br><span class="line">        int t=s.charAt(i)-&apos;A&apos;+1;</span><br><span class="line">        ans=ans26+t;参考十进制</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/18/171进制转化/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-64动态规划" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/17/64动态规划/">动态规划</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/17/64动态规划/" class="archive-article-date">
-  	<time datetime="2019-11-17T15:20:04.796Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>给定一个包含非负整数的 m x n 网格，请找出一条从左上角到右下角的路径，使得路径上的数字总和为最小。</p>
-<p>说明：每次只能向下或者向右移动一步。</p>
-<p>示例:</p>
-<p>输入:<br>[<br>  [1,3,1],<br>  [1,5,1],<br>  [4,2,1]<br>]<br>输出: 7<br>解释: 因为路径 1→3→1→1→1 的总和最小。<br>方法一</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int minPathSum(int[][] grid) &#123;</span><br><span class="line">        int n=grid.length;</span><br><span class="line">        int m=grid[0].length;</span><br><span class="line">        int dp[][]=new int[n][m];</span><br><span class="line">        for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">            for(int j=0;j&lt;m;j++)&#123;</span><br><span class="line">                if(i==0&amp;&amp;j==0) dp[0][0]=grid[0][0];//防止数组越界 i==-1||j==-1</span><br><span class="line">                else if(i==0) dp[i][j]=dp[i][j-1]+grid[i][j];</span><br><span class="line">                else if(j==0) dp[i][j]=dp[i-1][j]+grid[i][j];</span><br><span class="line">                else dp[i][j]=grid[i][j]+Math.min(dp[i-1][j],dp[i][j-1]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[n-1][m-1];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>方法二</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int minPathSum(int[][] grid) &#123;</span><br><span class="line">        int n=grid.length;</span><br><span class="line">        int m=grid[0].length;</span><br><span class="line">        for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">            for(int j=0;j&lt;m;j++)&#123;</span><br><span class="line">                if(i==0&amp;&amp;j==0)continue;//防止数组越界 i==-1||j==-1</span><br><span class="line">                else if(i==0) grid[i][j]=grid[i][j-1]+grid[i][j];</span><br><span class="line">                else if(j==0) grid[i][j]=grid[i-1][j]+grid[i][j];</span><br><span class="line">                else grid[i][j]=grid[i][j]+Math.min(grid[i-1][j],grid[i][j-1]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return grid[n-1][m-1];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+        <p>1.<strong>守护进程</strong><br>相当于windows的应用程序。<br>2.</p>
+<h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><p>pwd:跳到当前目录<br><img src="https://img-blog.csdnimg.cn/20200325154708454.png" alt="在这里插入图片描述"><br>mkdir -p text2/test3/test4 创建多级目录<br>在test2先创建test3，test下创建test4<br>rmdir删除目录<br>rmdir -p删除多级目录<br>按tab 自动补全<br>cp 把install.sh文件复制到lkq<br> <img src="https://img-blog.csdnimg.cn/2020032515471761.png" alt="在这里插入图片描述"><br>rm删除目录<br>-r删除子目录所有<br>-I 询问是否删除<br>-f 强制删除<br>mv(就是剪切) mv 当前文件 移动到另一个文件<br>-f 强制复制<br>ls -ll<br> <img src="https://img-blog.csdnimg.cn/2020032515465410.png" alt="在这里插入图片描述"><br>后9位<br> <img src="https://img-blog.csdnimg.cn/20200325154645614.png" alt="在这里插入图片描述"><br>首字母表示<br>•    当为[ d ]则是目录<br>•    当为[ - ]则是文件；<br>•    若是[ l ]则表示为链接文档 ( link file )；(快捷方式)<br>•    若是[ b ]则表示为装置文件里面的可供储存的接口设备 ( 可随机存取装置 )；<br>•    若是[ c ]则表示为装置文件里面的串行端口设备，例如键盘、鼠标 ( 一次性读取装置 )。<br>俩个root<br>    属主 :root创建的<br>属组 :只有root能操作</p>
+<h2 id="赋值操作权限"><a href="#赋值操作权限" class="headerlink" title="赋值操作权限"></a>赋值操作权限</h2><p>chmod 777 赋值于操作可读可写可执行<br><img src="https://img-blog.csdnimg.cn/20200325154630266.png" alt="在这里插入图片描述"><br>r:4     w:2         x:1<br>rw- 6<br>r-x 5<br>— 0 不可读不可写不可执行<br> 给lkq最高权限。<br>读取文件<br>     cat 正着读<br>     tac 倒着读<br>     nl自动加行号<br>     more 一页一页看 退出永q<br>     tail查看尾巴几行 tail -20 lkq<br>     head头几行</p>
 
       
 
@@ -602,7 +452,7 @@ AB - 28
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">dp</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
         		</li>
       		
 		</ul>
@@ -612,7 +462,70 @@ AB - 28
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/17/64动态规划/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/02/05/Linux基础操作/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-安装vm12为啥弹出此安装程序不支持降级？该怎么处理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/01/21/安装vm12为啥弹出此安装程序不支持降级？该怎么处理/">如何处理VM12弹出此安装程序不支持降级</a>
+    </h1>
+  
+
+        
+        <a href="/2020/01/21/安装vm12为啥弹出此安装程序不支持降级？该怎么处理/" class="archive-article-date">
+  	<time datetime="2020-01-21T12:38:16.085Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1从网上下载专门针对Wmare的清理工具，如图，在百度中搜索“Windows Installer Clean UP 简体中文版”来下载。<br>2.解压并安装该程序，然后就可以在“开始”-&gt;“所有程序”列表中找到“Windows Installer Clean UP”程序。<br>3.运行该程序，在打开的程序主界面中，选中与“Wmare相关”的部分，如图所示的选择，然后点击“Remove”按钮。<br>4.在弹出的窗口中点击“确定”按钮以授权进行删除操作。<br>5.接下来就可以再次运行“Wmare”虚拟机安装程序了，而且发现安装程序正常运行。（本人亲测，希望对你有所帮助）</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/01/21/安装vm12为啥弹出此安装程序不支持降级？该怎么处理/">展开全文 >></a>
         </p>
       
 
@@ -644,7 +557,7 @@ AB - 28
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/7/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/9/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/7/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/9/">Next &raquo;</a>
     </nav>
   
 
@@ -771,7 +684,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CSS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -783,11 +708,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
+                <a href="javascript:void(0)" class="js-tag color4">Vue</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -795,7 +720,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTML</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">JVM</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">前端综合</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">排序算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -804,14 +749,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">OS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">排序算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
