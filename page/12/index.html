@@ -140,54 +140,26 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-112 113路径总和" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Java常见集合类—HashMap" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/08/112 113路径总和/">二叉树求和</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/08/112 113路径总和/" class="archive-article-date">
-  	<time datetime="2019-12-08T14:33:24.722Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-08</time>
-</a>
-        
-      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>给定一个二叉树和一个目标和，判断该树中是否存在根节点到叶子节点的路径，这条路径上所有节点值相加等于目标和。<strong>(存在路径就返回true）</strong></p>
-<p>说明: 叶子节点是指没有子节点的节点。</p>
-<p>示例:<br>给定如下二叉树，以及目标和 sum = 22，</p>
-<pre><code>      5
-     / \
-    4   8
-   /   / \
-  11  13  4
- /  \      \
-7    2      1</code></pre><p>返回 true, 因为存在目标和为 22 的根节点到叶子节点的路径<br><strong>递归</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">  public boolean hasPathSum(TreeNode root, int sum) &#123;</span><br><span class="line">    if (root == null)</span><br><span class="line">      return false;</span><br><span class="line">    sum -= root.val;</span><br><span class="line">    if (root.left == null&amp;&amp;root.right == null)</span><br><span class="line">      return sum == 0;//sum=0则，有路径。最后一定为真</span><br><span class="line">    return hasPathSum(root.left, sum) || hasPathSum(root.right, sum);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h2 id="首先HashMap结构"><a href="#首先HashMap结构" class="headerlink" title="首先HashMap结构"></a>首先HashMap结构</h2><p>底层是数组，当key相同时，是一个链表。<br>JDK8以后，当HashMap采用了拉链法。<br><strong>当数组长度大于64且链表大于8时，链表变为红黑树。</strong><br>因为红黑树查找更快为2的n次方。<br>HashMap长度为2的n次方。</p>
+<h2 id="1-Hashmap长度为啥是2的n次方？"><a href="#1-Hashmap长度为啥是2的n次方？" class="headerlink" title="1.Hashmap长度为啥是2的n次方？"></a>1.Hashmap长度为啥是2的n次方？</h2><p>因为会进行<code>(len-1)&amp;hashcode</code>(等价于取模操作)来确定位置。<br>&amp;运算比取模效率更高。<br>当len是2的n次方时，2的n次方减1最后一位是1(如16-1=15为1111)<br>可以让位置更分散，减少key的碰撞。<br>如果最后一位是0，很多位置取不到。</p>
+<h2 id="2-HashMap-put为null时怎么办？"><a href="#2-HashMap-put为null时怎么办？" class="headerlink" title="2.HashMap put为null时怎么办？"></a>2.HashMap put为null时怎么办？</h2><p>不为null时，定位index，如果key不存在，插在头部，如果key存在，替换新value。<br>在table[0]里找，如果有key=null的，就返回原null的value。并把原来value更新为新的value。<br>如果没有，<code>则插在表头。</code></p>
+<h2 id="3-为什么是0-75-就是到0-75长度就会扩容"><a href="#3-为什么是0-75-就是到0-75长度就会扩容" class="headerlink" title="3.为什么是0.75(就是到0.75长度就会扩容)"></a>3.为什么是0.75(就是到0.75长度就会扩容)</h2><p>平均了时间和空间效率。<br>如果是1。提高了空间效率。但是增加了查询时间成本。<br>如果是0.5。降低了时间效率。提高了空间效率。</p>
+<h2 id="4-怎么设置初始化大小。"><a href="#4-怎么设置初始化大小。" class="headerlink" title="4.怎么设置初始化大小。"></a>4.怎么设置初始化大小。</h2><p>首先扩容非常消耗性能。<br>如果new HashMap(1000) 则会自动设置为1024个<br>但是这样就会进行扩容了。<br>所以必须初始化为2048，保证0.75*2048&gt;1024。<br>即是2的倍数页防止了扩容。</p>
+<h2 id="5-扩容方法和为什么HashMap线程不安全？"><a href="#5-扩容方法和为什么HashMap线程不安全？" class="headerlink" title="5.扩容方法和为什么HashMap线程不安全？"></a>5.扩容方法和为什么HashMap线程不安全？</h2><p>JDK1.7<br>原扩容方式：把数组扩容俩倍。然后重新计算位置（计算index）后，把数组复制到扩容后的数组。<br>缺点：头插法，可能造成死锁（形成环形链表）。线程不安全。网络不安全。<br>JDK8的扩容方式。新的索引要么和原索引相等，要么高位加1。<br>尾插法<br>方法：与原来Hashcode进行&amp;（len-1）运算。<br>比如从1111扩容到11111<br>则 00001&amp;01111=1  00001&amp;11111=1<br>   10001&amp;01111=1  10001&amp;11111=17<br>   原hashcode高位为0索引不变<br>   原hashcode高位为1新索引高位加1</p>
+<p>JDK1.8中为了避免死锁头插改成尾插<br>JDK1.8当put操作时，可能造成数据覆盖。即俩个不同的key会覆盖，由于size++操作。<br>假设当前HashMap的zise大小为10，当线程A执行到第38行代码时，从主内存中获得size的值为10后准备进行+1操作，但是由于时间片耗尽只好让出CPU，线程B快乐的拿到CPU还是从主内存中拿到size的值10进行+1操作，完成了put操作并将size=11写回主内存，然后线程A再次拿到CPU并继续执行(此时size的值仍为10)，当执行完put操作后，还是将size=11写回内存，此时，线程A、B都执行了一次put操作，但是size的值只增加了1</p>
+<h2 id="6-HashMap在JDK8的新特征？"><a href="#6-HashMap在JDK8的新特征？" class="headerlink" title="6.HashMap在JDK8的新特征？"></a>6.HashMap在JDK8的新特征？</h2><p>当链表长度大于8时自动转化为红黑树（且数组必须大于64）<br>红黑树特征？<br>1.每个节点只能是红色或者黑色<br>2.根结点为黑色<br>3.红色结点的叶节点只能是黑色。<br>4.任意结点到其每个叶子结点，包含相同的黑色结点</p>
+<h2 id="7-为什么重写equals方法时，也要重写hashcode方法呢？"><a href="#7-为什么重写equals方法时，也要重写hashcode方法呢？" class="headerlink" title="7.为什么重写equals方法时，也要重写hashcode方法呢？"></a>7.为什么重写equals方法时，也要重写hashcode方法呢？</h2><p>对equals方法进行了重写，建议一定要对hashCode方法重写，以保证相同的对象返回相同的hash值，不同的对象返回不同的hash值。用来区分相同hash值的俩个元素（同一个链表的元素）。</p>
+<h2 id="8-put操作"><a href="#8-put操作" class="headerlink" title="8.put操作"></a>8.put操作</h2><p>确定下标，然后判断是否已经存在键值对。如果存在的话更新这个键值对的value值。</p>
+<h2 id="9-Hash方法为什么右移-16-位，为什么要使用-位异或"><a href="#9-Hash方法为什么右移-16-位，为什么要使用-位异或" class="headerlink" title="9.Hash方法为什么右移 16 位，为什么要使用 ^ 位异或"></a>9.Hash方法为什么右移 16 位，为什么要使用 ^ 位异或</h2><p><strong>首先hashcode算法</strong><br>之所以使用 31， 是因为他是一个奇素数。如果乘数是偶数，并且乘法溢出的话，信息就会丢失，因为与2相乘等价于移位运算（低位补0）。使用素数的好处并不很明显，但是习惯上使用素数来计算散列结果。 31 有个很好的性能，即用移位和减法来代替乘法，可以得到更好的性能： 31 * i == (i &lt;&lt; 5） - i， 现代的 VM 可以自动完成这种优化。这个公式可以很简单的推导出来。</p>
+<p>JDK8 hash（扰动函数）<br>防止index函数出现有规律的情况</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">   5static final int hash(Object key) &#123;</span><br><span class="line">    int h;</span><br><span class="line">    return (key == null) ? 0 : (h = key.hashCode()) ^ (h &gt;&gt;&gt; 16);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>迭代</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">  public boolean hasPathSum(TreeNode root, int sum) &#123;</span><br><span class="line">    if (root == null)</span><br><span class="line">      return false;</span><br><span class="line"></span><br><span class="line">    LinkedList&lt;TreeNode&gt; node_stack = new LinkedList();</span><br><span class="line">    LinkedList&lt;Integer&gt; sum_stack = new LinkedList();</span><br><span class="line">    node_stack.add(root);</span><br><span class="line">    sum_stack.add(sum - root.val);</span><br><span class="line"></span><br><span class="line">    TreeNode node;</span><br><span class="line">    int curr_sum;</span><br><span class="line">    while ( !node_stack.isEmpty() ) &#123;</span><br><span class="line">      node = node_stack.pollLast();</span><br><span class="line">      curr_sum = sum_stack.pollLast();</span><br><span class="line">      if ((node.right == null) &amp;&amp; (node.left == null) &amp;&amp; (curr_sum == 0))</span><br><span class="line">        return true;</span><br><span class="line"></span><br><span class="line">      if (node.right != null) &#123;</span><br><span class="line">        node_stack.add(node.right);</span><br><span class="line">        sum_stack.add(curr_sum - node.right.val);</span><br><span class="line">      &#125;</span><br><span class="line">      if (node.left != null) &#123;</span><br><span class="line">        node_stack.add(node.left);</span><br><span class="line">        sum_stack.add(curr_sum - node.left.val);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return false;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>给定一个二叉树和一个目标和，找到所有从根节点到叶子节点路径总和等于给定目标和的路径（<strong>到叶子结点和为sum的路径结果集</strong>）</p>
-<p>说明: 叶子节点是指没有子节点的节点。</p>
-<p>示例:<br>给定如下二叉树，以及目标和 sum = 22，</p>
-<pre><code>      5
-     / \
-    4   8
-   /   / \
-  11  13  4
- /  \    / \
-7    2  5   1</code></pre><p>返回:</p>
-<p>[<br>   [5,4,11,2],<br>   [5,8,4,5]<br>]<br><strong>回溯递归</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt; res=new LinkedList&lt;&gt;();</span><br><span class="line">    public void help(TreeNode root,LinkedList&lt;Integer&gt; cur,int sum)&#123;</span><br><span class="line">       if(root==null) return;//root为空,直接返回</span><br><span class="line">       if(root.left==null&amp;&amp;root.right==null)&#123;//root左子树和右子树都为空,则为叶子结点</span><br><span class="line">          if((sum-root.val)==0)&#123;//如果为0,加入结果集</span><br><span class="line">             cur.add(root.val);</span><br><span class="line">             res.add(new LinkedList&lt;Integer&gt;(cur));             </span><br><span class="line">             cur.removeLast();</span><br><span class="line">             return;</span><br><span class="line">          &#125;</span><br><span class="line">          else&#123;</span><br><span class="line">             return;</span><br><span class="line">          &#125;</span><br><span class="line">       &#125;</span><br><span class="line">          cur.add(root.val);</span><br><span class="line">          help(root.left,cur,sum-root.val);</span><br><span class="line">          help(root.right,cur,sum-root.val);</span><br><span class="line">          cur.removeLast();//回溯</span><br><span class="line">       &#125;</span><br><span class="line">    public List&lt;List&lt;Integer&gt;&gt; pathSum(TreeNode root, int sum) &#123;</span><br><span class="line">        help(root,new LinkedList&lt;Integer&gt;(),sum);</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<p><strong>右位移16位，正好是32bit的一半，自己的高半区和低半区做异或，就是为了混合原始哈希码的高16位和低16位，以此来加大低位的随机性。而且混合后的低位掺杂了高位的部分特征，这样高位的信息也被变相保留下来。</strong></p>
 
       
 
@@ -200,7 +172,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/08/112 113路径总和/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/04/29/Java常见集合类—HashMap/">展开全文 >></a>
         </p>
       
 
@@ -230,40 +202,35 @@
 
 
   
-    <article id="post-111 二叉树的最小深度" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-秒杀如何解决超卖？" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/07/111 二叉树的最小深度/">求最小深度</a>
+      <a class="article-title" href="/2020/03/01/秒杀如何解决超卖？/">如何解决超卖</a>
     </h1>
   
 
         
-        <a href="/2019/12/07/111 二叉树的最小深度/" class="archive-article-date">
-  	<time datetime="2019-12-07T06:52:23.893Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-07</time>
+        <a href="/2020/03/01/秒杀如何解决超卖？/" class="archive-article-date">
+  	<time datetime="2020-03-01T07:16:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-01</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>给定一个二叉树，找出其最小深度。</p>
-<p>最小深度是从根节点到最近叶子节点的最短路径上的节点数量。</p>
-<p>说明: 叶子节点是指没有子节点的节点。</p>
-<p>示例:</p>
-<p>给定二叉树 [3,9,20,null,null,15,7],</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  3</span><br><span class="line"> / \</span><br><span class="line">9  20</span><br><span class="line">  /  \</span><br><span class="line"> 15   7</span><br></pre></td></tr></table></figure>
+        <h2 id="如何解决高并发秒杀的超卖问题"><a href="#如何解决高并发秒杀的超卖问题" class="headerlink" title="如何解决高并发秒杀的超卖问题"></a>如何解决高并发秒杀的超卖问题</h2><p>由秒杀引发的一个问题:<br>    <strong>秒杀最大的一个问题就是解决超卖的问题。其中一种解决超卖如下方式：</strong></p>
+<h2 id="一：排他锁"><a href="#一：排他锁" class="headerlink" title="一：排他锁"></a>一：排他锁</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">update goods</span><br><span class="line">set num = num - 1 </span><br><span class="line">WHERE id = 1001 and num &gt; 0</span><br></pre></td></tr></table></figure>
 
-<p>返回它的最小深度  2.</p>
-<p><strong>思路：一层一层遍历，若左右儿子都为空，则结束遍历</strong><br>迭代</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int minDepth(TreeNode root) &#123;</span><br><span class="line">        if(root==null) return 0;</span><br><span class="line">        Queue&lt;TreeNode&gt; q=new LinkedList&lt;&gt;();</span><br><span class="line">        q.add(root);</span><br><span class="line">        int ans=1;</span><br><span class="line">        int k=0;</span><br><span class="line">        while(!q.isEmpty())&#123;</span><br><span class="line">            int n=q.size();</span><br><span class="line">            for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">                TreeNode t=q.poll();</span><br><span class="line">                if(t.left==null&amp;&amp;t.right==null)&#123;</span><br><span class="line">                   k=1;</span><br><span class="line">                   break;</span><br><span class="line">                &#125;</span><br><span class="line">                if(t.left!=null) q.add(t.left);</span><br><span class="line">                if(t.right!=null) q.add(t.right);`在这里插入代码片`</span><br><span class="line">            &#125;</span><br><span class="line">            if(k==1) break;</span><br><span class="line">            ans++;</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们假设现在商品只剩下一件了，此时数据库中 num = 1；但有100个线程同时读取到了这个 num = 1，所以100个线程都开始减库存了。<br> 但你会最终会发觉，其实只有一个线程减库存成功，其他99个线程全部失败。<br> 这就是MySQL中的排他锁起了作用。<br> 排他锁又称为写锁，简称X锁。<br>顾名思义，排他锁就是不能与其他所并存，如一个事务获取了一个数据行的排他锁，其他事务就不能再获取该行的其他锁，包括共享锁和排他锁，但是获取排他锁的事务是可以对数据就行读取和修改。<br>就是类似于我在执行update操作的时候，这一行是一个事务(默认加了排他锁)。这一行不能被任何其他线程修改和读写</p>
+<h2 id="二：乐观锁"><a href="#二：乐观锁" class="headerlink" title="二：乐观锁"></a>二：乐观锁</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1 </span><br><span class="line">select version from goods WHERE id= 1001</span><br><span class="line">2  </span><br><span class="line">update goods set num = num - 1, </span><br><span class="line">version = version + 1 </span><br><span class="line">WHERE id= 1001 AND num &gt; 0</span><br><span class="line">AND version =@version(上面查到的version);</span><br></pre></td></tr></table></figure>
 
-<p>递归</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int minDepth(TreeNode root) &#123;</span><br><span class="line">        if(root == null) return 0;</span><br><span class="line">        //这道题递归条件里分为三种情况</span><br><span class="line">        //1.左孩子和有孩子都为空的情况，说明到达了叶子节点，直接返回1即可</span><br><span class="line">        if(root.left == null &amp;&amp; root.right == null) return 1;</span><br><span class="line">        //2.如果左孩子和由孩子其中一个为空，那么需要返回比较大的那个孩子的深度        </span><br><span class="line">        int m1 = minDepth(root.left);</span><br><span class="line">        int m2 = minDepth(root.right);</span><br><span class="line">        //这里其中一个节点为空，说明m1和m2有一个必然为0，所以可以返回m1 + m2 + 1;</span><br><span class="line">        if(root.left == null || root.right == null) return m1 + m2 + 1;</span><br><span class="line">        </span><br><span class="line">        //3.最后一种情况，也就是左右孩子都不为空，返回最小深度+1即可</span><br><span class="line">        return Math.min(m1,m2) + 1; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<p> 这种方式采用了版本号的方式，其实也就是CAS的原理。<br> 假设此时version = 100，num = 1;<br>100个线程进入到了这里，同时他们select出来版本号都是version = 100。<br>然后直接update的时候，只有其中一个先update了，同时更新了版本号。<br>那么其他99个在更新的时候，会发觉version并不等于上次select的version，就说明version被其他线程修改过了。那么我就放弃这次update </p>
+<h2 id="三：Redis预减库存"><a href="#三：Redis预减库存" class="headerlink" title="三：Redis预减库存"></a>三：Redis预减库存</h2><p> 利用redis的单线程预减库存。比如商品有100件。那么我在redis存储一个k,v。例如 &lt;gs1001, 100&gt;<br> 每一个用户线程进来，key值就减1，等减到0的时候，全部拒绝剩下的请求。<br> 那么也就是只有100个线程会进入到后续操作。所以一定不会出现超卖的现象</p>
+<h2 id="四：悲观锁"><a href="#四：悲观锁" class="headerlink" title="四：悲观锁"></a>四：悲观锁</h2><p>其他可以加悲观锁：在select语句末尾添加了for update<br>效率很低不用这种方式。</p>
 
       
 
@@ -277,7 +244,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">树</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">秒杀项目</a>
         		</li>
       		
 		</ul>
@@ -287,7 +254,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/07/111 二叉树的最小深度/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/03/01/秒杀如何解决超卖？/">展开全文 >></a>
         </p>
       
 
@@ -317,104 +284,28 @@
 
 
   
-    <article id="post-876链表删除操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-软链接和硬链接" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/06/876链表删除操作/">返回中间</a>
+      <a class="article-title" href="/2020/02/06/软链接和硬链接/">软链接和硬链接</a>
     </h1>
   
 
         
-        <a href="/2019/12/06/876链表删除操作/" class="archive-article-date">
-  	<time datetime="2019-12-06T14:19:56.137Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-06</time>
+        <a href="/2020/02/06/软链接和硬链接/" class="archive-article-date">
+  	<time datetime="2020-02-06T07:16:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-06</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>给定一个带有头结点 head 的非空单链表，返回链表的中间结点。</p>
-<p>如果有两个中间结点，则返回第二个中间结点。</p>
-<p>示例 1：</p>
-<p>输入：[1,2,3,4,5]<br>输出：此列表中的结点 3 (序列化形式：[3,4,5])<br>返回的结点值为 3 。 (测评系统对该结点序列化表述是 [3,4,5])。<br>注意，我们返回了一个 ListNode 类型的对象 ans，这样：<br>ans.val = 3, ans.next.val = 4, ans.next.next.val = 5, 以及 ans.next.next.next = NULL.</p>
-<p>正常做法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public ListNode middleNode(ListNode head) &#123;</span><br><span class="line">        int ans=0;</span><br><span class="line">        ListNode pre=head;</span><br><span class="line">        while(pre!=null)&#123;</span><br><span class="line">            pre=pre.next;</span><br><span class="line">            ans++;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i=0;i&lt;ans/2;i++)&#123;</span><br><span class="line">           head=head.next;</span><br><span class="line">        &#125;</span><br><span class="line">        return head;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>双指针</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public ListNode middleNode(ListNode head) &#123;</span><br><span class="line">        ListNode one=head;</span><br><span class="line">        ListNode two=head;</span><br><span class="line">        while(two!=null&amp;&amp;two.next!=null)&#123;</span><br><span class="line">            one=one.next;</span><br><span class="line">            two=two.next;</span><br><span class="line">            two=two.next;</span><br><span class="line">        &#125;</span><br><span class="line">        return one;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/06/876链表删除操作/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-19删除倒数第n个结点" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/04/19删除倒数第n个结点/">链表操作2</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/04/19删除倒数第n个结点/" class="archive-article-date">
-  	<time datetime="2019-12-04T14:57:56.305Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>给定一个链表，删除链表的倒数第 n 个节点，并且返回链表的头结点。</p>
-<p>示例：</p>
-<p>给定一个链表: 1-&gt;2-&gt;3-&gt;4-&gt;5, 和 n = 2.</p>
-<p>当删除了倒数第二个节点后，链表变为 1-&gt;2-&gt;3-&gt;5.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public ListNode removeNthFromEnd(ListNode head, int n) &#123;</span><br><span class="line">        if(head==null) return null;</span><br><span class="line">        ListNode ans=new ListNode(0);//</span><br><span class="line">        ans.next=head;</span><br><span class="line">        ListNode t=head;</span><br><span class="line">        int count=0;</span><br><span class="line">        while(t!=null)&#123;</span><br><span class="line">            t=t.next;</span><br><span class="line">            count++;</span><br><span class="line">        &#125;</span><br><span class="line">        t=ans;</span><br><span class="line">        for(int i=0;i&lt;count-n;i++)&#123;</span><br><span class="line">            t=t.next;</span><br><span class="line">        &#125;</span><br><span class="line">        t.next=t.next.next;</span><br><span class="line">        return ans.next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+        <h2 id="硬链接和软链接"><a href="#硬链接和软链接" class="headerlink" title="硬链接和软链接"></a>硬链接和软链接</h2><p>   链接就是l开头的(ll查看)   。对应windows快捷方式<br>   软链接：类似快捷方式，快捷方式方式，源文件就就不能用了<br>   硬链接：源文件或者快捷方式其中一个没了，原文件或者快捷方式可以通过快捷方式访问。<br>   touch创建一个文件。<br>   硬链接  在这里插入图片描述</p>
+<p>   软链接  (   f3是f1的快捷方式)<br>   <img src="https://img-blog.csdnimg.cn/20200325154447396.png" alt="在这里插入图片描述"><br> 蓝色的使软链接<br><img src="https://img-blog.csdnimg.cn/2020032515443137.png" alt="在这里插入图片描述"><br> 删除代表快捷方式失效了（红色）<br> <img src="https://img-blog.csdnimg.cn/2020032515441499.png" alt="在这里插入图片描述"><br>echo可以往文件输入字符串</p>
 
       
 
@@ -428,7 +319,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">链表</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
         		</li>
       		
 		</ul>
@@ -438,7 +329,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/04/19删除倒数第n个结点/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/02/06/软链接和硬链接/">展开全文 >></a>
         </p>
       
 
@@ -468,40 +359,29 @@
 
 
   
-    <article id="post-40回溯加剪枝算法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Linux基础操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/04/40回溯加剪枝算法/">剪枝加回溯</a>
+      <a class="article-title" href="/2020/02/05/Linux基础操作/">Linux基本操作</a>
     </h1>
   
 
         
-        <a href="/2019/12/04/40回溯加剪枝算法/" class="archive-article-date">
-  	<time datetime="2019-12-04T14:54:46.598Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-04</time>
+        <a href="/2020/02/05/Linux基础操作/" class="archive-article-date">
+  	<time datetime="2020-02-05T07:16:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-05</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="剪枝加回溯"><a href="#剪枝加回溯" class="headerlink" title="剪枝加回溯"></a>剪枝加回溯</h2><p>给定一个数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。</p>
-<p>candidates 中的每个数字在每个组合中只能使用一次。</p>
-<p>说明：</p>
-<pre><code>所有数字（包括目标数）都是正整数。
-解集不能包含重复的组合。 </code></pre><p>示例 1:</p>
-<p>输入: candidates = [10,1,2,7,6,1,5], target = 8,<br>所求解集为:<br>[<br>  [1, 7],<br>  [1, 2, 5],<br>  [2, 6],<br>  [1, 1, 6]<br>]</p>
-<p>示例 2:</p>
-<p>输入: candidates = [2,5,2,1,2], target = 5,<br>所求解集为:<br>[<br>  [1,2,2],<br>  [5]<br>]</p>
-<p>剪枝前</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    int target;</span><br><span class="line">    LinkedList&lt;List&lt;Integer&gt;&gt; res=new LinkedList&lt;&gt;();</span><br><span class="line">    public void help(int sum,int first,LinkedList&lt;Integer&gt; cur,int candidates[])&#123;</span><br><span class="line">        if(sum&gt;=target)&#123;</span><br><span class="line">        if(sum==target&amp;&amp;res.contains(cur)==false)</span><br><span class="line">            res.add(new LinkedList&lt;Integer&gt;(cur));</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i=first;i&lt;candidates.length;i++)&#123;</span><br><span class="line">            sum+=candidates[i];</span><br><span class="line">            cur.add(candidates[i]);</span><br><span class="line">            help(sum,i+1,cur,candidates);</span><br><span class="line">            sum-=candidates[i];</span><br><span class="line">            cur.removeLast();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public List&lt;List&lt;Integer&gt;&gt; combinationSum2(int[] candidates, int target) &#123;</span><br><span class="line">        this.target=target;</span><br><span class="line">        Arrays.sort(candidates);</span><br><span class="line">        LinkedList&lt;Integer&gt; cur=new LinkedList&lt;&gt;();</span><br><span class="line">        help(0,0,cur,candidates);</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>剪枝后</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    int target;</span><br><span class="line">    LinkedList&lt;List&lt;Integer&gt;&gt; res=new LinkedList&lt;&gt;();</span><br><span class="line">    public void help(int sum,int first,LinkedList&lt;Integer&gt; cur,int candidates[])&#123;</span><br><span class="line">        if(sum&gt;=target)&#123;//排序好的如大于,直接剪枝</span><br><span class="line">        if(sum==target&amp;&amp;res.contains(cur)==false)</span><br><span class="line">            res.add(new LinkedList&lt;Integer&gt;(cur));</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i=first;i&lt;candidates.length;i++)&#123;</span><br><span class="line">            if(candidates[i]&gt;target)</span><br><span class="line">               break;</span><br><span class="line">            sum+=candidates[i];</span><br><span class="line">            if(sum&gt;target) break;//剪枝</span><br><span class="line">            cur.add(candidates[i]);</span><br><span class="line">            help(sum,i+1,cur,candidates);</span><br><span class="line">            sum-=candidates[i];</span><br><span class="line">            cur.removeLast();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public List&lt;List&lt;Integer&gt;&gt; combinationSum2(int[] candidates, int target) &#123;</span><br><span class="line">        this.target=target;</span><br><span class="line">        Arrays.sort(candidates);</span><br><span class="line">        LinkedList&lt;Integer&gt; cur=new LinkedList&lt;&gt;();</span><br><span class="line">        help(0,0,cur,candidates);</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+        <p>1.<strong>守护进程</strong><br>相当于windows的应用程序。<br>2.</p>
+<h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><p>pwd:跳到当前目录<br><img src="https://img-blog.csdnimg.cn/20200325154708454.png" alt="在这里插入图片描述"><br>mkdir -p text2/test3/test4 创建多级目录<br>在test2先创建test3，test下创建test4<br>rmdir删除目录<br>rmdir -p删除多级目录<br>按tab 自动补全<br>cp 把install.sh文件复制到lkq<br> <img src="https://img-blog.csdnimg.cn/2020032515471761.png" alt="在这里插入图片描述"><br>rm删除目录<br>-r删除子目录所有<br>-I 询问是否删除<br>-f 强制删除<br>mv(就是剪切) mv 当前文件 移动到另一个文件<br>-f 强制复制<br>ls -ll<br> <img src="https://img-blog.csdnimg.cn/2020032515465410.png" alt="在这里插入图片描述"><br>后9位<br> <img src="https://img-blog.csdnimg.cn/20200325154645614.png" alt="在这里插入图片描述"><br>首字母表示<br>•    当为[ d ]则是目录<br>•    当为[ - ]则是文件；<br>•    若是[ l ]则表示为链接文档 ( link file )；(快捷方式)<br>•    若是[ b ]则表示为装置文件里面的可供储存的接口设备 ( 可随机存取装置 )；<br>•    若是[ c ]则表示为装置文件里面的串行端口设备，例如键盘、鼠标 ( 一次性读取装置 )。<br>俩个root<br>    属主 :root创建的<br>属组 :只有root能操作</p>
+<h2 id="赋值操作权限"><a href="#赋值操作权限" class="headerlink" title="赋值操作权限"></a>赋值操作权限</h2><p>chmod 777 赋值于操作可读可写可执行<br><img src="https://img-blog.csdnimg.cn/20200325154630266.png" alt="在这里插入图片描述"><br>r:4     w:2         x:1<br>rw- 6<br>r-x 5<br>— 0 不可读不可写不可执行<br> 给lkq最高权限。<br>读取文件<br>     cat 正着读<br>     tac 倒着读<br>     nl自动加行号<br>     more 一页一页看 退出永q<br>     tail查看尾巴几行 tail -20 lkq<br>     head头几行</p>
 
       
 
@@ -515,7 +395,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">回溯</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
         		</li>
       		
 		</ul>
@@ -525,7 +405,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/04/40回溯加剪枝算法/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/02/05/Linux基础操作/">展开全文 >></a>
         </p>
       
 
@@ -555,37 +435,27 @@
 
 
   
-    <article id="post-226反转二叉树" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-安装vm12为啥弹出此安装程序不支持降级？该怎么处理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/03/226反转二叉树/">反转二叉树(镜像)</a>
+      <a class="article-title" href="/2020/01/21/安装vm12为啥弹出此安装程序不支持降级？该怎么处理/">如何处理VM12弹出此安装程序不支持降级</a>
     </h1>
   
 
         
-        <a href="/2019/12/03/226反转二叉树/" class="archive-article-date">
-  	<time datetime="2019-12-03T07:56:05.257Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-03</time>
+        <a href="/2020/01/21/安装vm12为啥弹出此安装程序不支持降级？该怎么处理/" class="archive-article-date">
+  	<time datetime="2020-01-21T12:38:16.085Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-21</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>示例：</p>
-<p>输入：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">     4</span><br><span class="line">   /   \</span><br><span class="line">  2     7</span><br><span class="line"> / \   / \</span><br><span class="line">1   3 6   9</span><br></pre></td></tr></table></figure>
-
-<p>输出：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">     4</span><br><span class="line">   /   \</span><br><span class="line">  7     2</span><br><span class="line"> / \   / \</span><br><span class="line">9   6 3   1</span><br></pre></td></tr></table></figure>
-
-<h2 id="迭代"><a href="#迭代" class="headerlink" title="迭代"></a>迭代</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition for a binary tree node.</span><br><span class="line"> * public class TreeNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     TreeNode left;</span><br><span class="line"> *     TreeNode right;</span><br><span class="line"> *     TreeNode(int x) &#123; val = x; &#125;</span><br><span class="line"> * &#125;</span><br><span class="line"> */</span><br><span class="line">class Solution &#123;</span><br><span class="line">    public TreeNode invertTree(TreeNode root) &#123;</span><br><span class="line">        if(root==null) return null;</span><br><span class="line">        Stack&lt;TreeNode&gt; stack=new Stack&lt;&gt;();</span><br><span class="line">        stack.add(root);</span><br><span class="line">        while(!stack.isEmpty())&#123;</span><br><span class="line">            TreeNode t=stack.pop();</span><br><span class="line">            TreeNode temp=t.right;</span><br><span class="line">            t.right=t.left;</span><br><span class="line">            t.left=temp;</span><br><span class="line">            if(t.left!=null) stack.add(t.left);</span><br><span class="line">            if(t.right!=null) stack.add(t.right);</span><br><span class="line">        &#125;</span><br><span class="line">        return root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public TreeNode invertTree(TreeNode root) &#123;</span><br><span class="line">        help(root);</span><br><span class="line">        return root;</span><br><span class="line">    &#125;</span><br><span class="line">    public void help(TreeNode root)&#123;</span><br><span class="line">        if(root==null) return;</span><br><span class="line">        TreeNode t=root.left;</span><br><span class="line">        root.left=root.right;</span><br><span class="line">        root.right=t;</span><br><span class="line">        help(root.left);</span><br><span class="line">        help(root.right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+        <p>1从网上下载专门针对Wmare的清理工具，如图，在百度中搜索“Windows Installer Clean UP 简体中文版”来下载。<br>2.解压并安装该程序，然后就可以在“开始”-&gt;“所有程序”列表中找到“Windows Installer Clean UP”程序。<br>3.运行该程序，在打开的程序主界面中，选中与“Wmare相关”的部分，如图所示的选择，然后点击“Remove”按钮。<br>4.在弹出的窗口中点击“确定”按钮以授权进行删除操作。<br>5.接下来就可以再次运行“Wmare”虚拟机安装程序了，而且发现安装程序正常运行。（本人亲测，希望对你有所帮助）</p>
 
       
 
@@ -598,7 +468,85 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/03/226反转二叉树/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/01/21/安装vm12为啥弹出此安装程序不支持降级？该怎么处理/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-equals和==的区别" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/01/17/equals和==的区别/">equals和==的区别与关系</a>
+    </h1>
+  
+
+        
+        <a href="/2020/01/17/equals和==的区别/" class="archive-article-date">
+  	<time datetime="2020-01-17T07:16:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="区别："><a href="#区别：" class="headerlink" title="区别："></a>区别：</h2><p>==：可以比较值，引用类型比较地址。<br><strong>equals</strong>：继承自Object。比较引用对象，不能比较基本类型。重写的话可以比较引用对象。<br>如：String类重写equala()方法，使其比较的是字符的内容，而不再是内存地址。</p>
+<h2 id="equals-与hashCode-方法："><a href="#equals-与hashCode-方法：" class="headerlink" title="equals()与hashCode()方法："></a>equals()与hashCode()方法：</h2><p>不同对象的hashacode基本是不相同的，不过也有很小概率相同。这是需要用equals了<br>equals不相同，hashcode一定不相同<br>hashcode相同，equals不一定相同(因为不同对象hashcode可能相同)</p>
+<h2 id="为什么重写一个对象的equals方法，就必须重写他的hashCode方法"><a href="#为什么重写一个对象的equals方法，就必须重写他的hashCode方法" class="headerlink" title="为什么重写一个对象的equals方法，就必须重写他的hashCode方法"></a>为什么重写一个对象的equals方法，就必须重写他的hashCode方法</h2><p>Student s1=new Student(“小明”,18);</p>
+<p>Student s2=new Student(“小明”,18);</p>
+<p>如果s1.equals(s2)==true<br>由于默认的hashcode方法是根据对象的内存地址经哈希算法得来的，显然此时s1!=s2,故两者的hashcode不一定相等。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Java基础</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/01/17/equals和==的区别/">展开全文 >></a>
         </p>
       
 
@@ -630,7 +578,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/11/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/13/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/11/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/13/">Next &raquo;</a>
     </nav>
   
 
@@ -729,11 +677,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">位运算</a>
+                <a href="javascript:void(0)" class="js-tag color3">链表</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">链表</a>
+                <a href="javascript:void(0)" class="js-tag color4">位运算</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -745,11 +693,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">字符串</a>
+                <a href="javascript:void(0)" class="js-tag color3">回溯</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">回溯</a>
+                <a href="javascript:void(0)" class="js-tag color4">字符串</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -757,11 +705,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
+                <a href="javascript:void(0)" class="js-tag color4">CSS</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CSS</a>
+                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -773,7 +721,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+                <a href="javascript:void(0)" class="js-tag color3">JavaScript复习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -785,7 +733,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Vue</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">前端综合</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">前端总共和</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -793,7 +757,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
+                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -802,10 +766,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">JVM</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">前端综合</a>
               </li>
              
               <li class="article-tag-list-item">

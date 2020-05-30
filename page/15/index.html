@@ -140,34 +140,35 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-128最长连续序列" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-191二进制与查找1的个数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/23/128最长连续序列/">最长连续序列</a>
+      <a class="article-title" href="/2019/12/11/191二进制与查找1的个数/">二进制查找1的个数</a>
     </h1>
   
 
         
-        <a href="/2019/11/23/128最长连续序列/" class="archive-article-date">
-  	<time datetime="2019-11-23T15:24:27.539Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-23</time>
+        <a href="/2019/12/11/191二进制与查找1的个数/" class="archive-article-date">
+  	<time datetime="2019-12-11T04:16:28.801Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-11</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="128-最长连续序列"><a href="#128-最长连续序列" class="headerlink" title="128. 最长连续序列"></a>128. 最长连续序列</h2><p>给定一个未排序的整数数组，找出最长连续序列的长度。</p>
-<p>要求算法的时间复杂度为 O(n)。</p>
-<p>示例:</p>
-<p>输入: [100, 4, 200, 1, 3, 2]<br>输出: 4<br>解释: 最长连续序列是 [1, 2, 3, 4]。它的长度为 4。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int longestConsecutive(int[] nums) &#123;</span><br><span class="line">        if(nums.length==0) return 0;</span><br><span class="line">        int n=nums.length;</span><br><span class="line">        Arrays.sort(nums);</span><br><span class="line">        Map&lt;Integer,Integer&gt; map=new HashMap&lt;&gt;();</span><br><span class="line">        for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">            map.put(nums[i],1);</span><br><span class="line">        &#125;</span><br><span class="line">        int maxn=1;</span><br><span class="line">        int len=1;</span><br><span class="line">        for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">            int t=nums[i];</span><br><span class="line">            len=0;</span><br><span class="line">            while(map.get(t)!=null)&#123;</span><br><span class="line">               len++;</span><br><span class="line">               t++;</span><br><span class="line">            &#125;</span><br><span class="line">            if(len&gt;maxn)</span><br><span class="line">            maxn=len;</span><br><span class="line">        &#125;</span><br><span class="line">        return maxn;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p>编写一个函数，输入是一个无符号整数，返回其二进制表达式中数字位数为 ‘1’ 的个数（也被称为汉明重量）。</p>
+<p>示例 1：</p>
+<p>输入：00000000000000000000000000001011<br>输出：3<br>解释：输入的二进制串 00000000000000000000000000001011 中，共有三位为 ‘1’。</p>
+<p>示例 2：</p>
+<p>输入：00000000000000000000000010000000<br>输出：1<br>解释：输入的二进制串 00000000000000000000000010000000 中，共有一位为 ‘1’。</p>
+<p>示例 3：</p>
+<p>输入：11111111111111111111111111111101<br>输出：31<br>解释：输入的二进制串 11111111111111111111111111111101 中，共有 31 位为 ‘1’。<br>如1100<br>n-1操作把末位0变成1,1变成0。<br>n&amp;n-1这样每次数中减一个1<br>当n变成0时结束循环<br>1100&amp;1011=1000<br>1000&amp;0111=0000</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class Solution &#123;</span><br><span class="line">    // you need to treat n as an unsigned value</span><br><span class="line">    public int hammingWeight(int n) &#123;</span><br><span class="line">    int sum = 0;</span><br><span class="line">    while (n != 0) &#123;</span><br><span class="line">        sum++;</span><br><span class="line">        n &amp;= (n - 1);//最后一位变成0</span><br><span class="line">    &#125;</span><br><span class="line">    return sum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>思路：先排序，然后用每一个元素加1，直到不在这个序列中。<br>找到最大值</p>
-<p>尽管在 for 循环中嵌套了一个 while 循环，时间复杂度看起来像是二次方级别的。但其实它是线性的算法。因为只有当 nums[i] 遇到了一个序列的开始， while 循环才会被执行。 while 循环在整个运行过程中只会被迭代 n 次。这意味着尽管看起来时间复杂度为<br>空间复杂度：O(n)</p>
 
       
 
@@ -180,7 +181,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/23/128最长连续序列/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/12/11/191二进制与查找1的个数/">展开全文 >></a>
         </p>
       
 
@@ -210,54 +211,36 @@
 
 
   
-    <article id="post-62 63像dfs的动态规划" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-148排序链表" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/22/62 63像dfs的动态规划/">像dfs的动态规划</a>
+      <a class="article-title" href="/2019/12/11/148排序链表/">排序链表</a>
     </h1>
   
 
         
-        <a href="/2019/11/22/62 63像dfs的动态规划/" class="archive-article-date">
-  	<time datetime="2019-11-22T15:07:00.940Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-22</time>
+        <a href="/2019/12/11/148排序链表/" class="archive-article-date">
+  	<time datetime="2019-12-11T03:35:11.834Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-11</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="62-不同路径"><a href="#62-不同路径" class="headerlink" title="62. 不同路径"></a>62. 不同路径</h2><p>一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为“Start” ）。</p>
-<p>机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为“Finish”）。</p>
-<p>问总共有多少条不同的路径？</p>
-<p>例如，上图是一个7 x 3 的网格。有多少可能的路径？</p>
-<p>说明：m 和 n 的值均不超过 100。</p>
+        <p>在 O(n log n) 时间复杂度和常数级空间复杂度下，对链表进行排序。</p>
 <p>示例 1:</p>
-<p>输入: m = 3, n = 2<br>输出: 3<br>解释:<br>从左上角开始，总共有 3 条路径可以到达右下角。</p>
-<ol>
-<li>向右 -&gt; 向右 -&gt; 向下</li>
-<li>向右 -&gt; 向下 -&gt; 向右</li>
-<li>向下 -&gt; 向右 -&gt; 向右</li>
-</ol>
+<p>输入: 4-&gt;2-&gt;1-&gt;3<br>输出: 1-&gt;2-&gt;3-&gt;4</p>
 <p>示例 2:</p>
-<p>输入: m = 7, n = 3<br>输出: 28<br><img src="https://img-blog.csdnimg.cn/20191122230254102.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int uniquePaths(int m, int n) &#123;</span><br><span class="line">        int dp[][]=new int[m+1][n+1];</span><br><span class="line">        for(int i=1;i&lt;=m;i++)</span><br><span class="line">            dp[i][1]=1;//因为只能往下和右走所以边上都只有一种走法</span><br><span class="line">        for(int i=1;i&lt;=n;i++)</span><br><span class="line">            dp[1][i]=1;//因为只能往下和右走所以边上都只有一种走法</span><br><span class="line">        for(int i=2;i&lt;=m;i++)&#123;</span><br><span class="line">            for(int j=2;j&lt;=n;j++)&#123;</span><br><span class="line">                dp[i][j]=dp[i][j-1]+dp[i-1][j];中间等于俩边走法加1</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[m][n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输入: -1-&gt;5-&gt;3-&gt;4-&gt;0<br>输出: -1-&gt;0-&gt;3-&gt;4-&gt;5<br><strong>首先归并排序</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/20191211111702962.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">public static void mergeSort(int[] arr) &#123;</span><br><span class="line">    sort(arr, 0, arr.length - 1);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static void sort(int[] arr, int L, int R) &#123;</span><br><span class="line">    if(L == R) &#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    int mid = L + ((R - L) &gt;&gt; 1);</span><br><span class="line">    sort(arr, L, mid);</span><br><span class="line">    sort(arr, mid + 1, R);</span><br><span class="line">    merge(arr, L, mid, R);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static void merge(int[] arr, int L, int mid, int R) &#123;</span><br><span class="line">    int[] temp = new int[R - L + 1];</span><br><span class="line">    int i = 0;</span><br><span class="line">    int p1 = L;</span><br><span class="line">    int p2 = mid + 1;</span><br><span class="line">    // 比较左右两部分的元素，哪个小，把那个元素填入temp中</span><br><span class="line">    while(p1 &lt;= mid &amp;&amp; p2 &lt;= R) &#123;</span><br><span class="line">        temp[i++] = arr[p1] &lt; arr[p2] ? arr[p1++] : arr[p2++];</span><br><span class="line">    &#125;</span><br><span class="line">    // 上面的循环退出后，把剩余的元素依次填入到temp中</span><br><span class="line">    // 以下两个while只有一个会执行</span><br><span class="line">    while(p1 &lt;= mid) &#123;</span><br><span class="line">        temp[i++] = arr[p1++];</span><br><span class="line">    &#125;</span><br><span class="line">    while(p2 &lt;= R) &#123;</span><br><span class="line">        temp[i++] = arr[p2++];</span><br><span class="line">    &#125;</span><br><span class="line">    // 把最终的排序的结果复制给原数组</span><br><span class="line">    for(i = 0; i &lt; temp.length; i++) &#123;</span><br><span class="line">        arr[L + i] = temp[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://img-blog.csdnimg.cn/20191122230343380.png" alt="在这里插入图片描述"></p>
-<h2 id="63-不同路径-II"><a href="#63-不同路径-II" class="headerlink" title="63. 不同路径 II"></a>63. 不同路径 II</h2><p>一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为“Start” ）。</p>
-<p>机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为“Finish”）。</p>
-<p>现在考虑网格中有障碍物。那么从左上角到右下角将会有多少条不同的路径？</p>
-<p>网格中的障碍物和空位置分别用 1 和 0 来表示。</p>
-<p>说明：m 和 n 的值均不超过 100。<br><img src="https://img-blog.csdnimg.cn/20191122230059179.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">示例 1:</p>
-<p>输入:<br>[<br>  [0,0,0],<br>  [0,1,0],<br>  [0,0,0]<br>]<br>输出: 2<br>解释:<br>3x3 网格的正中间有一个障碍物。<br>从左上角到右下角一共有 2 条不同的路径：</p>
-<ol>
-<li>向右 -&gt; 向右 -&gt; 向下 -&gt; 向下</li>
-<li>向下 -&gt; 向下 -&gt; 向右 -&gt; 向右</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int uniquePathsWithObstacles(int[][] obstacleGrid) &#123;</span><br><span class="line">        int n=obstacleGrid.length;</span><br><span class="line">        int m=obstacleGrid[0].length;</span><br><span class="line">        int dp[][]=new int[n][m];</span><br><span class="line">        if(obstacleGrid[0][0]==1) return 0;</span><br><span class="line">        dp[0][0]=1;</span><br><span class="line">        for(int i=1;i&lt;n;i++)&#123;</span><br><span class="line">            if(obstacleGrid[i][0]==0&amp;&amp;dp[i-1][0]==1)//此点不为障碍且前方从来没有障碍，否则无法到达此点</span><br><span class="line">               dp[i][0]=1;                          //则到这个地方方法为1</span><br><span class="line">            else</span><br><span class="line">               dp[i][0]=0;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i=1;i&lt;m;i++)&#123;</span><br><span class="line">            if(dp[0][i-1]==1&amp;&amp;obstacleGrid[0][i]==0)</span><br><span class="line">               dp[0][i]=1;</span><br><span class="line">            else</span><br><span class="line">               dp[0][i]=0;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i=1;i&lt;n;i++)&#123;</span><br><span class="line">            for(int j=1;j&lt;m;j++)&#123;</span><br><span class="line">                if(obstacleGrid[i][j]==1)//有障碍</span><br><span class="line">                  dp[i][j]=0; //到此点方法为0</span><br><span class="line">                else</span><br><span class="line">                  dp[i][j]=dp[i-1][j]+dp[i][j-1];//从小到上和从左到右方法相加</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[n-1][m-1];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>那么链表排序呢<br>把每个链表分成一部分，之后连接在一起。<br>注意：要保证存在前驱结点</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public ListNode merry(ListNode left,ListNode right)&#123;</span><br><span class="line">        ListNode pre=new ListNode(0);</span><br><span class="line">        ListNode cur=pre;//pre遍历中所以cur指代pre</span><br><span class="line">        while(left!=null&amp;&amp;right!=null)&#123;</span><br><span class="line">            if(left.val&gt;right.val)&#123;</span><br><span class="line">            pre.next=right;</span><br><span class="line">            right=right.next;</span><br><span class="line">            &#125;</span><br><span class="line">            else&#123;</span><br><span class="line">              pre.next=left;</span><br><span class="line">              left=left.next;</span><br><span class="line">            &#125;</span><br><span class="line">            pre=pre.next;</span><br><span class="line">        &#125;</span><br><span class="line">        if(left==null)  pre.next=right;//把剩余链表整个加入到pre中</span><br><span class="line">        else  pre.next=left;</span><br><span class="line">        return cur.next;</span><br><span class="line">    &#125;</span><br><span class="line">    public ListNode sortList(ListNode head) &#123;</span><br><span class="line">        if(head==null||head.next==null) return head;</span><br><span class="line">        ListNode slow=head;</span><br><span class="line">        ListNode fast=head.next;//头结点后一个结点开始</span><br><span class="line">        while(fast!=null&amp;&amp;fast.next!=null)&#123;</span><br><span class="line">             slow=slow.next;</span><br><span class="line">             fast=fast.next.next;</span><br><span class="line">        &#125;</span><br><span class="line">        ListNode right=slow.next;</span><br><span class="line">        slow.next=null;</span><br><span class="line">        return merry(sortList(head),sortList(right));  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
       
@@ -272,7 +255,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">dp</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">链表</a>
         		</li>
       		
 		</ul>
@@ -282,7 +265,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/22/62 63像dfs的动态规划/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/12/11/148排序链表/">展开全文 >></a>
         </p>
       
 
@@ -312,39 +295,130 @@
 
 
   
-    <article id="post-718最长公共子串" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-计数排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/22/718最长公共子串/">最长公共子串(连续的)</a>
+      <a class="article-title" href="/2019/12/11/计数排序/">计数排序</a>
     </h1>
   
 
         
-        <a href="/2019/11/22/718最长公共子串/" class="archive-article-date">
-  	<time datetime="2019-11-22T02:57:59.987Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-22</time>
+        <a href="/2019/12/11/计数排序/" class="archive-article-date">
+  	<time datetime="2019-12-11T02:35:39.892Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-11</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>给两个整数数组 A 和 B ，返回两个数组中公共的、长度最长的子数组的长度。(必须是连续的，不连续的叫子序列)</p>
-<p>示例 1:</p>
-<p>输入:<br>A: [1,2,3,2,1]<br>B: [3,2,1,4,7]<br>输出: 3<br>解释:<br>长度最长的公共子数组是 [3, 2, 1]。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int findLength(int[] A, int[] B) &#123;</span><br><span class="line">        int n=A.length;</span><br><span class="line">        int m=B.length;</span><br><span class="line">        int dp[][]=new int[n+1][m+1];</span><br><span class="line">        int ans=0;</span><br><span class="line">        for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">            for(int j=0;j&lt;m;j++)&#123;</span><br><span class="line">                if(A[i]==B[j])</span><br><span class="line">                  dp[i+1][j+1]=dp[i][j]+1;</span><br><span class="line">                else</span><br><span class="line">                  dp[i+1][j+1]=0;</span><br><span class="line">                  ans=Math.max(dp[i+1][j+1],ans);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p>我们知道基于比较的排序算法的最好的情况的时间复杂度是O(nlgn)，然而存在一种神奇的排序算法，不是基于比较的，而是空间换时间，使得时间复杂度能够达到线性O(n+k)，这种算法就是本文将要介绍的计数排序。</p>
+<p>一、适用情况</p>
+<p>这个算法在n个输入元素中每一个都是0到k的范围的整数，其中k也是整数。当k = O(n)时，排序的时间复杂度为Θ(n)。它的性质也就决定了它的运用范围比较窄，但是对于一个待排序的有负数的数组，我们可以将整个数组的整体加上一个整数，使得整个数组的最小值为0，然后就可以使用这个排序算法了。而且这个算法是稳定的。</p>
+<p>二、基本思想<br>对一个一个待排序的元素x，我们可以确定小于等于x的个数i，根据这个个数i，我们就可以把x放到索引i处。那么如何确定小于等于x的个数i呢？我们可以专门开辟一个数组c[]，然后遍历数组，确定数组a中每个元素中出现的频率，然后就可以确定对于a中每个元素x，小于等于这个元素的个数。然后就可以把元素x放到对应位置了。当然元素x的大小是可能重复的，这样就需要我们对数组c的值访问之后减1，保证和x一样大的元素能放在其前面。</p>
+<p>三、运行过程<br><img src="https://img-blog.csdnimg.cn/20191211103626706.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>   1、对于数组A，我们首先统计每个值的个数，将A的值作为C元素索引，值的个数作为C数组的值。比如对于数组A中的元素2，在数组A中出现了2次，所以c[2] = 2，而元素5出现了以此，所以c[5] = 1。</p>
+<p>  2、至此为止，数组C中已经统计了各个元素的出现次数，那么我们就可以根据各个元素的出现次数，累加出比该元素小的元素个数，更新到数组C中。比如a图中，C[0]=2表示出现0的次数为2，C[1]=0表示出现1的次数为0，那么小于等于1的元素个数为C[0]+C[1]=2，我们把C[1]更新为2，同理C[2]=2表示出现2的次数为2，那么小于等于2的元素个数为C[1]+C[2]=4，继续把C[2]更新为4，以此类推…<br> 3、到这里，我们得到了存储小于等于元素的个数的数组C。现在我们开始从尾部到头部遍历数组A，比如首先我们看A[7] = 3，然后查找C[3]，发现C[3] = 7，说明有7个元素小于等于3。我们首先需要做一步C[3] = C[3] - 1，因为这里虽然有7个元素小于等于3，但是B的索引是从0开始的，而且这样减一可以保证下次再找到一个3，可以放在这个3的前面。然后B[C[3]] = 3，就把第一个3放到了对的位置。后面以此类推，直到遍历完数组B。<br> 4、截至到这，我们就获得了一个有序的数组B。</p>
+<p><strong><strong>四、代码实现</strong></strong></p>
+<pre><code>public static void countingSort(int[] a, int[] b, int k){
+    int[] c = new int[k+1];//存放0~k
+    for(int i = 0; i&lt;a.length; i++)
+        c[a[i]] += 1;
+    for(int i = 1; i&lt;=k; i++)
+        c[i] += c[i-1];
+    for(int i = a.length-1; i &gt;= 0; i--){
+        c[a[i]] --;
+        b[c[a[i]]] = a[i];
+    }
+}</code></pre>
+      
 
-<p>算法思路：</p>
-<p>1、把两个字符串分别以行和列组成一个二维矩阵。</p>
-<p>2、比较二维矩阵中每个点对应行列字符中否相等，相等的话值设置为1，否则设置为0。</p>
-<p>3、通过查找出值为1的最长对角线就能找到最长公共子串。</p>
-<p>针对于上面的两个字符串我们可以得到的二维矩阵如下：<br><img src="https://img-blog.csdnimg.cn/20191122105704977.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p>从上图可以看到，str1和str2共有5个公共子串，但最长的公共子串长度为5。</p>
-<p>为了进一步优化算法的效率，我们可以再计算某个二维矩阵的值的时候顺便计算出来当前最长的公共子串的长度，即某个二维矩阵元素的值由record[i][j]=1演变为record[i][j]=1 +record[i-1][j-1]，这样就避免了后续查找对角线长度的操作了。修改后的二维矩阵如下：</p>
-<p><img src="https://img-blog.csdnimg.cn/20191122105647269.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">排序算法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/11/计数排序/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-129根到叶子结点的和" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/08/129根到叶子结点的和/">二叉树遍历和</a>
+    </h1>
+  
+
+        
+        <a href="/2019/12/08/129根到叶子结点的和/" class="archive-article-date">
+  	<time datetime="2019-12-08T14:42:51.917Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>给定一个二叉树，它的每个结点都存放一个 0-9 的数字，每条从根到叶子节点的路径都代表一个数字。</p>
+<p>例如，从根到叶子节点路径 1-&gt;2-&gt;3 代表数字 123。</p>
+<p>计算从根到叶子节点生成的所有数字之和。</p>
+<p>说明: 叶子节点是指没有子节点的节点。</p>
+<p>示例 1:</p>
+<p>输入: [1,2,3]</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">  1</span><br><span class="line"> / \</span><br><span class="line">2   3</span><br></pre></td></tr></table></figure>
+
+<p>输出: 25<br>解释:<br>从根到叶子节点路径 1-&gt;2 代表数字 12.<br>从根到叶子节点路径 1-&gt;3 代表数字 13.<br>因此，数字总和 = 12 + 13 = 25.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">if(root.right==null&amp;&amp;root.left==null)&#123;//到叶子结点题都这么写</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    int ans=0;</span><br><span class="line">    public void help(TreeNode root,int cur)&#123;</span><br><span class="line">          if(root==null) return ;</span><br><span class="line">          if(root.right==null&amp;&amp;root.left==null)&#123;//到叶子结点题都这么写</span><br><span class="line">          ans+=cur*10+root.val;</span><br><span class="line">          return;</span><br><span class="line">          &#125;</span><br><span class="line">          help(root.left,cur*10+root.val);</span><br><span class="line">          help(root.right,cur*10+root.val);</span><br><span class="line">    &#125;</span><br><span class="line">    public int sumNumbers(TreeNode root) &#123;</span><br><span class="line">        if(root==null) return 0;</span><br><span class="line">        help(root,0);</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
       
 
@@ -358,7 +432,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">dp</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">树</a>
         		</li>
       		
 		</ul>
@@ -368,7 +442,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/22/718最长公共子串/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/12/08/129根到叶子结点的和/">展开全文 >></a>
         </p>
       
 
@@ -398,47 +472,36 @@
 
 
   
-    <article id="post-11 16 202双指针" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-114二叉树展开为链表" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/21/11 16 202双指针/">双指针</a>
+      <a class="article-title" href="/2019/12/08/114二叉树展开为链表/">二叉树与链表</a>
     </h1>
   
 
         
-        <a href="/2019/11/21/11 16 202双指针/" class="archive-article-date">
-  	<time datetime="2019-11-21T15:06:21.575Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-21</time>
+        <a href="/2019/12/08/114二叉树展开为链表/" class="archive-article-date">
+  	<time datetime="2019-12-08T14:37:29.167Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-08</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="11盛最多水的容器"><a href="#11盛最多水的容器" class="headerlink" title="11盛最多水的容器"></a>11盛最多水的容器</h2><p>给定 n 个非负整数 a1，a2，…，an，每个数代表坐标中的一个点 (i, ai) 。在坐标内画 n 条垂直线，垂直线 i 的两个端点分别为 (i, ai) 和 (i, 0)。找出其中的两条线，使得它们与 x 轴共同构成的容器可以容纳最多的水。</p>
-<p>说明：你不能倾斜容器，且 n 的值至少为 2。</p>
-<p>图中垂直线代表输入数组 [1,8,6,2,5,4,8,3,7]。在此情况下，容器能够容纳水（表示为蓝色部分）的最大值为 49。</p>
-<p>示例:</p>
-<p>输入: [1,8,6,2,5,4,8,3,7]<br>输出: 49</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int maxArea(int[] height) &#123;</span><br><span class="line">        int left=0;</span><br><span class="line">        int right=height.length-1;</span><br><span class="line">        int ans=0;</span><br><span class="line">        while(left&lt;right)&#123;</span><br><span class="line">            if(height[left]&lt;height[right])&#123;</span><br><span class="line">            ans=Math.max(ans,Math.min(height[right],height[left])*(right-left));</span><br><span class="line">            left++;      </span><br><span class="line">            &#125;</span><br><span class="line">            else&#123;</span><br><span class="line">                ans=Math.max(ans,Math.min(height[right],height[left])*(right-left));</span><br><span class="line">                right--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p>给定一个二叉树，原地将它展开为链表。</p>
+<p>例如，给定二叉树</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">    1</span><br><span class="line">   / \</span><br><span class="line">  2   5</span><br><span class="line"> / \   \</span><br><span class="line">3   4   6</span><br></pre></td></tr></table></figure>
 
-<p>设每一状态下水槽面积为 S(i,j)S(i, j)S(i,j),(0&lt;=i&lt;j&lt;n)(0 &lt;= i &lt; j &lt; n)(0&lt;=i&lt;j&lt;n)，由于水槽的实际高度由两板中的短板决定，则可得面积公式 S(i,j)=min(h[i],h[j])×(j−i)S(i, j) = min(h[i], h[j]) × (j - i)S(i,j)=min(h[i],h[j])×(j−i)。<br>在每一个状态下，无论长板或短板收窄 111 格，都会导致水槽 底边宽度 −1-1−1：<br> 若向内移动短板，水槽的短板 min(h[i],h[j])min(h[i], h[j])min(h[i],h[j]) 可能变大，因此水槽面积 S(i,j)S(i, j)S(i,j) 可能增大。<br>    若向内移动长板，水槽的短板 min(h[i],h[j])min(h[i], h[j])min(h[i],h[j]) 不变或变小，下个水槽的面积一定小于当前水槽面积。</p>
-<h2 id="16-最接近的三数之和"><a href="#16-最接近的三数之和" class="headerlink" title="16. 最接近的三数之和"></a>16. 最接近的三数之和</h2><p>给定一个包括 n 个整数的数组 nums 和 一个目标值 target。找出 nums 中的三个整数，使得它们的和与 target 最接近。返回这三个数的和。假定每组输入只存在唯一答案。</p>
-<p>例如，给定数组 nums = [-1，2，1，-4], 和 target = 1.</p>
-<p>与 target 最接近的三个数的和为 2. (-1 + 2 + 1 = 2).</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int threeSumClosest(int[] nums, int target) &#123;</span><br><span class="line">        int left=0; int right=nums.length-1;</span><br><span class="line">        Arrays.sort(nums);</span><br><span class="line">        int ans=nums[0]+nums[1]+nums[2];</span><br><span class="line">        for(int i=0;i&lt;nums.length;i++)&#123;</span><br><span class="line">           left=i+1; right=nums.length-1;</span><br><span class="line">           while(left&lt;right)&#123;</span><br><span class="line">               int t=nums[i]+nums[left]+nums[right];</span><br><span class="line">               if(Math.abs(t-target)&lt;Math.abs(ans-target))</span><br><span class="line">                 ans=t;</span><br><span class="line">               if(t&gt;target)</span><br><span class="line">                  right--;</span><br><span class="line">               else if(t&lt;target)</span><br><span class="line">                  left++;</span><br><span class="line">               else</span><br><span class="line">                 return ans;</span><br><span class="line">           &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>将其展开为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line"> \</span><br><span class="line">  2</span><br><span class="line">   \</span><br><span class="line">    3</span><br><span class="line">     \</span><br><span class="line">      4</span><br><span class="line">       \</span><br><span class="line">        5</span><br><span class="line">         \</span><br><span class="line">          6</span><br></pre></td></tr></table></figure>
 
-<p>三指针分别为最左元素，左右元素(right)和第二左元素(left)<br>首先进行数组排序，时间复杂度 O(nlogn)O(nlogn)O(nlogn)<br>在数组 nums 中，进行遍历，每遍历一个值利用其下标i，形成一个固定值 nums[i]<br>再使用前指针指向 start = i + 1 处，后指针指向 end = nums.length - 1 处，也就是结尾处<br>根据 sum = nums[i] + nums[start] + nums[end] 的结果，判断 sum 与目标 target 的距离，如果更近则更新结果 ans<br>同时判断 sum 与 target 的大小关系，因为数组有序，如果 sum &gt; target 则 end–，如果 sum &lt; target 则 start++，如果 sum == target 则说明距离为 0 直接返回结果<br>整个遍历过程，固定值为 n 次，双指针为 n 次，时间复杂度为 O(n2)O(n^2)O(n2)<br>总时间复杂度：O(nlogn)+O(n2)=O(n2)O(nlogn) + O(n^2) = O(n^2)O(nlogn)+O(n2)=O(n2)</p>
-<h2 id="202-快乐数"><a href="#202-快乐数" class="headerlink" title="202. 快乐数"></a>202. 快乐数</h2><p>编写一个算法来判断一个数是不是“快乐数”。</p>
-<p>一个“快乐数”定义为：对于一个正整数，每一次将该数替换为它每个位置上的数字的平方和，然后重复这个过程直到这个数变为 1，也可能是无限循环但始终变不到 1。如果可以变为 1，那么这个数就是快乐数。</p>
-<p>示例: </p>
-<p>输入: 19<br>输出: true<br>解释:<br>12 + 92 = 82<br>82 + 22 = 68<br>62 + 82 = 100<br>12 + 02 + 02 = 1</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int summ(int n)&#123;</span><br><span class="line">        int sum=0;</span><br><span class="line">        while(n!=0)&#123;//判断各位数和</span><br><span class="line">            int bit=n%10;</span><br><span class="line">            sum+=bit*bit;</span><br><span class="line">            n/=10;</span><br><span class="line">        &#125; </span><br><span class="line">        return sum;</span><br><span class="line">    &#125;</span><br><span class="line">    public boolean isHappy(int n) &#123;</span><br><span class="line">        int fast=n;//快指针</span><br><span class="line">        int slow=n;//慢指针</span><br><span class="line">        fast=summ(fast);</span><br><span class="line">        while(fast!=slow)&#123;</span><br><span class="line">           slow=summ(slow);</span><br><span class="line">           fast=summ(fast);</span><br><span class="line">           fast=summ(fast);</span><br><span class="line">        &#125;</span><br><span class="line">        if(slow==1) return true;</span><br><span class="line">        else return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>思路：用队列保存层次遍历结果，然后把root的right更改，left指向空</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public void flatten(TreeNode root) &#123;//先序用栈,层次用队列</span><br><span class="line">       if(root==null) return ;</span><br><span class="line">        Stack&lt;TreeNode&gt; q1=new Stack&lt;&gt;();</span><br><span class="line">        Queue&lt;TreeNode&gt; q2=new LinkedList&lt;&gt;();</span><br><span class="line">        q1.add(root);</span><br><span class="line">        while(!q1.isEmpty())&#123;</span><br><span class="line">           TreeNode t=q1.pop();</span><br><span class="line">           q2.add(t);</span><br><span class="line">           if(t.right!=null) q1.add(t.right);</span><br><span class="line">           if(t.left!=null) q1.add(t.left);</span><br><span class="line">        &#125;</span><br><span class="line">        TreeNode cur; </span><br><span class="line">        q2.poll();</span><br><span class="line">        while(!q2.isEmpty())&#123;</span><br><span class="line">            root.left=null;</span><br><span class="line">            root.right=q2.poll();</span><br><span class="line">            root=root.right;       </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>使用“快慢指针”思想找出循环：“快指针”每次走两步，“慢指针”每次走一步，当二者相等时，即为一个循环周期。此时，判断是不是因为1引起的循环，是的话就是快乐数，否则不是快乐数。<br>注意：此题不建议用集合记录每次的计算结果来判断是否进入循环，因为这个集合可能大到无法存储；另外，也不建议使用递归，同理，如果递归层次较深，会直接导致调用栈崩溃。不要因为这个题目给出的整数是int型而投机取巧。</p>
 
       
 
@@ -447,11 +510,22 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">树</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/21/11 16 202双指针/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/12/08/114二叉树展开为链表/">展开全文 >></a>
         </p>
       
 
@@ -481,35 +555,53 @@
 
 
   
-    <article id="post-35二分" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-112 113路径总和" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/20/35二分/">基础二分</a>
+      <a class="article-title" href="/2019/12/08/112 113路径总和/">二叉树求和</a>
     </h1>
   
 
         
-        <a href="/2019/11/20/35二分/" class="archive-article-date">
-  	<time datetime="2019-11-20T12:02:21.631Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-20</time>
+        <a href="/2019/12/08/112 113路径总和/" class="archive-article-date">
+  	<time datetime="2019-12-08T14:33:24.722Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-08</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。</p>
-<p>你可以假设数组中无重复元素。</p>
-<p>示例 1:</p>
-<p>输入: [1,3,5,6], 5<br>输出: 2</p>
-<p>示例 2:</p>
-<p>输入: [1,3,5,6], 2<br>输出: 1</p>
-<p>示例 3:</p>
-<p>输入: [1,3,5,6], 7<br>输出: 4</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int searchInsert(int[] nums, int target) &#123;</span><br><span class="line">        int len=nums.length;</span><br><span class="line">        if(target&gt;nums[len-1])</span><br><span class="line">         return len;</span><br><span class="line">        int mid,left=0,right=len-1;           </span><br><span class="line">        while(left&lt;=right)&#123;</span><br><span class="line">            mid=(left+right)/2;</span><br><span class="line">            if(nums[mid]==target)</span><br><span class="line">               return mid;</span><br><span class="line">            else if(nums[mid]&lt;target)</span><br><span class="line">                left=mid+1;</span><br><span class="line">            else</span><br><span class="line">                right=mid-1;</span><br><span class="line">        &#125;</span><br><span class="line">        return left;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p>给定一个二叉树和一个目标和，判断该树中是否存在根节点到叶子节点的路径，这条路径上所有节点值相加等于目标和。<strong>(存在路径就返回true）</strong></p>
+<p>说明: 叶子节点是指没有子节点的节点。</p>
+<p>示例:<br>给定如下二叉树，以及目标和 sum = 22，</p>
+<pre><code>      5
+     / \
+    4   8
+   /   / \
+  11  13  4
+ /  \      \
+7    2      1</code></pre><p>返回 true, 因为存在目标和为 22 的根节点到叶子节点的路径<br><strong>递归</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">  public boolean hasPathSum(TreeNode root, int sum) &#123;</span><br><span class="line">    if (root == null)</span><br><span class="line">      return false;</span><br><span class="line">    sum -= root.val;</span><br><span class="line">    if (root.left == null&amp;&amp;root.right == null)</span><br><span class="line">      return sum == 0;//sum=0则，有路径。最后一定为真</span><br><span class="line">    return hasPathSum(root.left, sum) || hasPathSum(root.right, sum);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>迭代</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">  public boolean hasPathSum(TreeNode root, int sum) &#123;</span><br><span class="line">    if (root == null)</span><br><span class="line">      return false;</span><br><span class="line"></span><br><span class="line">    LinkedList&lt;TreeNode&gt; node_stack = new LinkedList();</span><br><span class="line">    LinkedList&lt;Integer&gt; sum_stack = new LinkedList();</span><br><span class="line">    node_stack.add(root);</span><br><span class="line">    sum_stack.add(sum - root.val);</span><br><span class="line"></span><br><span class="line">    TreeNode node;</span><br><span class="line">    int curr_sum;</span><br><span class="line">    while ( !node_stack.isEmpty() ) &#123;</span><br><span class="line">      node = node_stack.pollLast();</span><br><span class="line">      curr_sum = sum_stack.pollLast();</span><br><span class="line">      if ((node.right == null) &amp;&amp; (node.left == null) &amp;&amp; (curr_sum == 0))</span><br><span class="line">        return true;</span><br><span class="line"></span><br><span class="line">      if (node.right != null) &#123;</span><br><span class="line">        node_stack.add(node.right);</span><br><span class="line">        sum_stack.add(curr_sum - node.right.val);</span><br><span class="line">      &#125;</span><br><span class="line">      if (node.left != null) &#123;</span><br><span class="line">        node_stack.add(node.left);</span><br><span class="line">        sum_stack.add(curr_sum - node.left.val);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return false;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>给定一个二叉树和一个目标和，找到所有从根节点到叶子节点路径总和等于给定目标和的路径（<strong>到叶子结点和为sum的路径结果集</strong>）</p>
+<p>说明: 叶子节点是指没有子节点的节点。</p>
+<p>示例:<br>给定如下二叉树，以及目标和 sum = 22，</p>
+<pre><code>      5
+     / \
+    4   8
+   /   / \
+  11  13  4
+ /  \    / \
+7    2  5   1</code></pre><p>返回:</p>
+<p>[<br>   [5,4,11,2],<br>   [5,8,4,5]<br>]<br><strong>回溯递归</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt; res=new LinkedList&lt;&gt;();</span><br><span class="line">    public void help(TreeNode root,LinkedList&lt;Integer&gt; cur,int sum)&#123;</span><br><span class="line">       if(root==null) return;//root为空,直接返回</span><br><span class="line">       if(root.left==null&amp;&amp;root.right==null)&#123;//root左子树和右子树都为空,则为叶子结点</span><br><span class="line">          if((sum-root.val)==0)&#123;//如果为0,加入结果集</span><br><span class="line">             cur.add(root.val);</span><br><span class="line">             res.add(new LinkedList&lt;Integer&gt;(cur));             </span><br><span class="line">             cur.removeLast();</span><br><span class="line">             return;</span><br><span class="line">          &#125;</span><br><span class="line">          else&#123;</span><br><span class="line">             return;</span><br><span class="line">          &#125;</span><br><span class="line">       &#125;</span><br><span class="line">          cur.add(root.val);</span><br><span class="line">          help(root.left,cur,sum-root.val);</span><br><span class="line">          help(root.right,cur,sum-root.val);</span><br><span class="line">          cur.removeLast();//回溯</span><br><span class="line">       &#125;</span><br><span class="line">    public List&lt;List&lt;Integer&gt;&gt; pathSum(TreeNode root, int sum) &#123;</span><br><span class="line">        help(root,new LinkedList&lt;Integer&gt;(),sum);</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
       
@@ -523,84 +615,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/20/35二分/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-171进制转化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/18/171进制转化/">进制转化简化方法</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/18/171进制转化/" class="archive-article-date">
-  	<time datetime="2019-11-18T15:01:50.864Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>给定一个Excel表格中的列名称，返回其相应的列序号。</p>
-<p>例如，</p>
-<pre><code>A - 1
-B - 2
-C - 3
-...
-Z - 26
-AA - 27
-AB - 28 
-...</code></pre><p>示例 1</p>
-<p>输入 A<br>输出 1</p>
-<p>示例 2</p>
-<p>输入 AB<br>输出 28</p>
-<p>示例 3</p>
-<p>输入 ZY<br>输出 701</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int titleToNumber(String s) &#123;</span><br><span class="line">        int ans=0;</span><br><span class="line">        for(int i=0;is.length();i++)&#123;</span><br><span class="line">        int t=s.charAt(i)-&apos;A&apos;+1;</span><br><span class="line">        ans=ans26+t;参考十进制</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/18/171进制转化/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/12/08/112 113路径总和/">展开全文 >></a>
         </p>
       
 
@@ -632,7 +647,7 @@ AB - 28
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/14/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/16/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/14/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/16/">Next &raquo;</a>
     </nav>
   
 
@@ -731,11 +746,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">位运算</a>
+                <a href="javascript:void(0)" class="js-tag color3">链表</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">链表</a>
+                <a href="javascript:void(0)" class="js-tag color4">位运算</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -747,11 +762,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">字符串</a>
+                <a href="javascript:void(0)" class="js-tag color3">回溯</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">回溯</a>
+                <a href="javascript:void(0)" class="js-tag color4">字符串</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -759,11 +774,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
+                <a href="javascript:void(0)" class="js-tag color4">CSS</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CSS</a>
+                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -775,7 +790,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+                <a href="javascript:void(0)" class="js-tag color3">JavaScript复习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -787,7 +802,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Vue</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">前端综合</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">前端总共和</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -795,7 +826,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
+                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -804,10 +835,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">JVM</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">前端综合</a>
               </li>
              
               <li class="article-tag-list-item">
