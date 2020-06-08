@@ -140,6 +140,403 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-二叉树镜像，深度，按层次输出" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/07/二叉树镜像，深度，按层次输出/">二叉树镜像，深度，按层次输出</a>
+    </h1>
+  
+
+        
+        <a href="/2019/11/07/二叉树镜像，深度，按层次输出/" class="archive-article-date">
+  	<time datetime="2019-11-07T14:49:44.146Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="https://img-blog.csdnimg.cn/20191031151137459.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="二叉树镜像"><a href="#二叉树镜像" class="headerlink" title="二叉树镜像"></a><strong>二叉树镜像</strong></h2><p>思路：递归</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public static void Mirror(node root) &#123;//镜像</span><br><span class="line">        if(root == null)</span><br><span class="line">            return;</span><br><span class="line">        node temp = root.left;</span><br><span class="line">        root.left = root.right;</span><br><span class="line">        root.right = temp;</span><br><span class="line">        Mirror(root.left);</span><br><span class="line">        Mirror(root.right);</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20191107224419145.png" alt="在这里插入图片描述"></p>
+<h2 id="二叉树按层数遍历"><a href="#二叉树按层数遍历" class="headerlink" title="二叉树按层数遍历"></a>二叉树按层数遍历</h2><p>思路：队列</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">public static void printf(node S)&#123;</span><br><span class="line">		Queue&lt;node&gt; q=new LinkedBlockingQueue&lt;node&gt;();</span><br><span class="line">		q.add(S);</span><br><span class="line">		int a=1; //操作前队列中元素个数</span><br><span class="line">	    int b=0; //当层已操作队列元素个数</span><br><span class="line">	    int i=1;  //记录层数</span><br><span class="line">	    System.out.print(&quot;第1层：&quot;);</span><br><span class="line">		while(!q.isEmpty())&#123;</span><br><span class="line">			node top=q.poll();</span><br><span class="line">			a--;</span><br><span class="line">			System.out.print(top.value+&quot; &quot;);</span><br><span class="line">			if(top.left!=null)&#123;</span><br><span class="line">				b++;</span><br><span class="line">				q.add(top.left);</span><br><span class="line">			&#125;</span><br><span class="line">			if(top.right!=null)&#123;</span><br><span class="line">				b++;</span><br><span class="line">				q.add(top.right);</span><br><span class="line">			&#125;</span><br><span class="line">			if(a==0)&#123;//如果a为0，即此层遍历结束</span><br><span class="line">				a=b;//当层未操作元素个数</span><br><span class="line">				b=0;//当层已操作元素个数</span><br><span class="line">				System.out.println();</span><br><span class="line">				i++;</span><br><span class="line">				System.out.print(&quot;第&quot;+i+&quot;层：&quot;);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println();</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20191107224610930.png" alt="在这里插入图片描述">二叉树深度<br>思路：基础dfs</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public static void dfs(node S,int deep)&#123;</span><br><span class="line">		    if(S==null)</span><br><span class="line">		    	return;</span><br><span class="line">	    	if(max&lt;deep)&#123;</span><br><span class="line">	    		max=deep;</span><br><span class="line">	    	&#125;</span><br><span class="line">	    	deep++;</span><br><span class="line">	    	dfs(S.left,deep);</span><br><span class="line">	    	dfs(S.right,deep);</span><br><span class="line">	    	deep--;</span><br><span class="line">	  &#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20191107224733429.png" alt="在这里插入图片描述"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">树</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/07/二叉树镜像，深度，按层次输出/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-随机化快排" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/07/随机化快排/">随机化快排</a>
+    </h1>
+  
+
+        
+        <a href="/2019/11/07/随机化快排/" class="archive-article-date">
+  	<time datetime="2019-11-07T14:38:33.437Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="随机化快排"><a href="#随机化快排" class="headerlink" title="随机化快排"></a><strong>随机化快排</strong></h2><p>当快速排序的序列为有序时，则并不会起到分治效果，时间复杂度为n*n<br>则可以改为随机化快速排序。<br>步骤 如 4 6 9 3 7 5<br>        取6为基准，6和5互换<br>        4 5 9 3 7【6】<br>        依旧找左大右小的，从右开始<br>        找比6小的元素…重复快排序方法<br>         4 5 3【6】7 9<br>         重复此操作<br>代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">package lkq;</span><br><span class="line">import java.util.*;</span><br><span class="line">import java.math.*;</span><br><span class="line">public class randSort &#123;</span><br><span class="line">   public static int randsort2(int []arr,int left,int right)&#123;</span><br><span class="line">	    int x=arr[right];</span><br><span class="line">	    int p=left - 1;</span><br><span class="line">	    for (int i=left;i&lt;right;i++) &#123;</span><br><span class="line">	        if (arr[i]&lt;=x) &#123;</span><br><span class="line">	            p++;</span><br><span class="line">	            swap(arr,p,i);</span><br><span class="line">	        &#125;</span><br><span class="line">	    &#125;</span><br><span class="line">	    swap(arr,p+1,right);</span><br><span class="line">	    return p+1;</span><br><span class="line">   &#125;</span><br><span class="line">   public static void randsort(int arr[],int left,int right)&#123;</span><br><span class="line">	   if (left &lt; right)&#123;//重点，否则会出现异常</span><br><span class="line">	   int p1=left+(int)(Math.random()*(right-left+1));</span><br><span class="line">	   swap(arr,right,p1);</span><br><span class="line">	   int p2=randsort2(arr,left,right);</span><br><span class="line">	   randsort(arr,left,p2-1);</span><br><span class="line">	   randsort(arr,p2+1,right);</span><br><span class="line">	   &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   public static void swap(int []arr,int a,int b)&#123;</span><br><span class="line">	   int t;</span><br><span class="line">	   t=arr[b];</span><br><span class="line">	   arr[b]=arr[a];</span><br><span class="line">	   arr[a]=t;</span><br><span class="line">   &#125;</span><br><span class="line">   public static void main(String[] args) &#123;</span><br><span class="line">	  int arr[]=new int[]&#123;4,6,9,3,7,5&#125;;</span><br><span class="line">	  randsort(arr,0,5);</span><br><span class="line">	  for(int num:arr)&#123;</span><br><span class="line">		  System.out.print(num+&quot; &quot;);</span><br><span class="line">	  &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">排序算法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/07/随机化快排/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-二叉树中序先序转后序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/06/二叉树中序先序转后序/">二叉树根据中序先序写出后序遍历结果</a>
+    </h1>
+  
+
+        
+        <a href="/2019/11/06/二叉树中序先序转后序/" class="archive-article-date">
+  	<time datetime="2019-11-06T14:42:14.963Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>如图，此二叉树<br>先序遍历为426315<br>中序遍历为623415<br>求后序遍历结果</p>
+<p><img src="https://img-blog.csdnimg.cn/20191106222235989.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;string&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">string a1=&quot;&quot;,a2=&quot;&quot;,a3=&quot;&quot;;</span><br><span class="line">int PreIn2Post(string Preorder, string Inorder)</span><br><span class="line">&#123;</span><br><span class="line">	int length = Preorder.length();</span><br><span class="line">	if (length &lt;= 0)return 0;</span><br><span class="line">	char Root = Preorder[0];</span><br><span class="line">	int i = 0;</span><br><span class="line">	for (;i&lt;length;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		if (Root == Inorder[i])</span><br><span class="line">			break;</span><br><span class="line">	&#125;</span><br><span class="line">    a1+=Root;</span><br><span class="line">	PreIn2Post(Preorder.substr(1, i), Inorder.substr(0, i));//递归访问左子树</span><br><span class="line">    a2+=Root;</span><br><span class="line">	PreIn2Post(Preorder.substr(i + 1, length - i), Inorder.substr(i + 1, length - i));//递归访问右子树</span><br><span class="line">	a3+=Root;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	string Preorder, Inorder;</span><br><span class="line">	cin &gt;&gt; Preorder &gt;&gt; Inorder;</span><br><span class="line">	PreIn2Post(Preorder, Inorder);</span><br><span class="line">	cout&lt;&lt;&quot;先序遍历：&quot;&lt;&lt;a1&lt;&lt;endl&lt;&lt;&quot;中序遍历：&quot;&lt;&lt;a2&lt;&lt;endl&lt;&lt;&quot;后序遍历：&quot;&lt;&lt;a3&lt;&lt;endl;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出：<img src="https://img-blog.csdnimg.cn/20191106223243411.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><strong>步骤</strong><br>426315<br>623415<br>4为根节点，则中序分为623【4】15<br>左子树623的跟为先序【2】6315的2<br>则6和3为2的左儿子和右儿子。。。<br>发现一直重复这一过程，则实行递归进程</p>
+<p><strong>函数解析</strong><br>   PreIn2Post(Preorder.substr(1, i), Inorder.substr(0, i));<br>   i为根节点<br>   则先序从第2个元素开始长度为i的字符串<br>   和中序第第一个元素开始长度为i字符串<br>   继续递归此操作</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/06/二叉树中序先序转后序/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-排序1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/04/排序1/">排序1</a>
+    </h1>
+  
+
+        
+        <a href="/2019/11/04/排序1/" class="archive-article-date">
+  	<time datetime="2019-11-04T00:49:08.562Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1.冒泡排序<br>时间复杂度最好和最坏均为n*n</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">package lkq;</span><br><span class="line">import java.util.*;</span><br><span class="line">public class MaoPao &#123;</span><br><span class="line">	public static void sort(int arr[],int n)&#123;</span><br><span class="line">		int t;</span><br><span class="line">		for(int i=0;i&lt;n-1;i++)&#123;</span><br><span class="line">			for(int j=0;j&lt;n-i-1;j++)&#123;</span><br><span class="line">				if(arr[j]&gt;arr[j+1])&#123;</span><br><span class="line">					t=arr[j];</span><br><span class="line">					arr[j]=arr[j+1];</span><br><span class="line">					arr[j+1]=t;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">		Scanner in=new Scanner(System.in);</span><br><span class="line">		int n=in.nextInt();</span><br><span class="line">		int arr[]=new int[n];</span><br><span class="line">		for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">			arr[i]=(int)(15*Math.random()+1);</span><br><span class="line">		&#125;</span><br><span class="line">		sort(arr,n);</span><br><span class="line">		for(int num:arr)&#123;</span><br><span class="line">            System.out.print(num+&quot; &quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">package lkq;</span><br><span class="line">import java.util.*;</span><br><span class="line">public class ChaRu &#123;</span><br><span class="line">	public static void charu(int s[])&#123;</span><br><span class="line">        int j;</span><br><span class="line">		for(int i=1;i&lt;s.length;i++)&#123;</span><br><span class="line">			int t=s[i];</span><br><span class="line">			for(j=i-1;j&gt;=0&amp;&amp;s[j]&gt;t;j--)&#123;//先写j&gt;=0 否则会出现数组索引异常</span><br><span class="line">				s[j+1]=s[j];</span><br><span class="line">			&#125;</span><br><span class="line">			s[j+1]=t;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Scanner in=new Scanner(System.in);</span><br><span class="line">		int n=in.nextInt();</span><br><span class="line">		int s[]=new int[n];</span><br><span class="line">		for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">			s[i]=(int)(100*Math.random()+1);</span><br><span class="line">		&#125;</span><br><span class="line">		charu(s);</span><br><span class="line">		for(int k=0;k&lt;n;k++)</span><br><span class="line">            System.out.print(s[k]+&quot; &quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>3<br>首先快速排序是一种不稳定的排序算法<br>首先其最好情况下时间复杂度为nlog2n<br>最差情况下为n*n<br>快速排序有多种方法<br>这里用的是其中一种<br>比如有如下序列 4 6 9 3 7 5<br>则我们以4为基准p<br>i=0(left) j=n-1(right)<br>先从j开始找比基准p小的数，找不到了停止<br>再从i开始找比基准p大的数，找不到了停止<br>交换arr[i]和arr[j](这样左边都比基准p小，右边都比基准p大）<br>最后当i与j碰面时 基准p与i与j碰面的位置互换<br>则第一次<br>              4 6 9 3 7 5<br>              4 3 9 6 7 5<br>              3 【4】 9 6 7 5<br>第二种方法<br>i与j同时在头的位置(i==0&amp;&amp;j==0)<br>当j找到比到比p=5小的数时停止<br>arr[i+1]与arr[j]互换<br>则第一次<br>              4 6 9 3 7 5<br>              4 6 9 3 7 5<br>              4 3 9 6 7 5<br>              4 3 【5】 6 7 9</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">package lkq;</span><br><span class="line">import java.util.*;</span><br><span class="line">public class QuickSort&#123;</span><br><span class="line">	public static void sort(int arr[],int left,int right)&#123;</span><br><span class="line">		 if(left&gt;right) return;</span><br><span class="line">	     int i=left;</span><br><span class="line">	     int j=right;</span><br><span class="line">	     int p=arr[left];</span><br><span class="line">	     int t;</span><br><span class="line">	     while(i!=j)&#123;</span><br><span class="line">	    	 while(arr[j]&gt;=p&amp;&amp;i&lt;j)&#123;</span><br><span class="line">	    		 j--;</span><br><span class="line">	    	 &#125;	 </span><br><span class="line">	         while(arr[i]&lt;=p&amp;&amp;i&lt;j)&#123;</span><br><span class="line">	        	 i++;</span><br><span class="line">	         &#125;</span><br><span class="line">	         if(i&lt;j)&#123;</span><br><span class="line">	        	t=arr[i]; </span><br><span class="line">	        	arr[i]=arr[j];</span><br><span class="line">	        	arr[j]=t;</span><br><span class="line">	         &#125;</span><br><span class="line">	     &#125;</span><br><span class="line">	     arr[left]=arr[i];</span><br><span class="line">	     arr[i]=p;</span><br><span class="line">	     sort(arr,i+1,right);</span><br><span class="line">	     sort(arr,left,i-1);</span><br><span class="line">	&#125;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">		Scanner in=new Scanner(System.in);</span><br><span class="line">		int n=in.nextInt();</span><br><span class="line">		int arr[]=new int[n];</span><br><span class="line">		for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">			arr[i]=(int)(15*Math.random()+1);</span><br><span class="line">		&#125;</span><br><span class="line">		sort(arr,0,n-1);</span><br><span class="line">		for(int num:arr)&#123;</span><br><span class="line">            System.out.print(num+&quot; &quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">排序算法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/04/排序1/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Servle学习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/01/Servle学习/">Servlet学习</a>
+    </h1>
+  
+
+        
+        <a href="/2019/11/01/Servle学习/" class="archive-article-date">
+  	<time datetime="2019-11-01T15:13:37.521Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Servlet学习记录"><a href="#Servlet学习记录" class="headerlink" title="Servlet学习记录"></a>Servlet学习记录</h1><p>今天web课学习了Servlet课，对其有了新的学习与认识。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;web-app&gt;</span><br><span class="line"> </span><br><span class="line">    &lt;servlet&gt;</span><br><span class="line">        &lt;servlet-name&gt;HelloServlet&lt;/servlet-name&gt;</span><br><span class="line">        &lt;servlet-class&gt;HelloServlet&lt;/servlet-class&gt;</span><br><span class="line">    &lt;/servlet&gt;</span><br><span class="line"> </span><br><span class="line">    &lt;servlet-mapping&gt;</span><br><span class="line">        &lt;servlet-name&gt;HelloServlet&lt;/servlet-name&gt;</span><br><span class="line">        &lt;url-pattern&gt;/hello&lt;/url-pattern&gt;</span><br><span class="line">    &lt;/servlet-mapping&gt;</span><br><span class="line"> </span><br><span class="line">&lt;/web-app&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; &lt;servlet&gt; 标签下的 &lt;servlet-name&gt; 与</span><br><span class="line">&gt; &lt;servlet-mapping&gt; 标签下的 &lt;servlet-name&gt;</span><br><span class="line">&gt; 必须一样</span><br><span class="line">&gt; </span><br><span class="line">&gt; &lt;servlet-name&gt;与&lt;servlet-class&gt;可以不一样，</span><br><span class="line">&gt; 但是为了便于理解与维护，一般都会写的一样。</span><br></pre></td></tr></table></figure>
+
+<p>eclipse(导包）<br>1.首先建空包 在下面写方法<br>2.建web文件夹web-inf文件夹web.xml(配置映射）<br>3.首先在WEB-INF下创建classes目录<br>把项目的class文件输出由原来的 j2ee/bin 设置到 j2ee/web/WEB-INF/classes下<br>步骤:<br>项目右键-&gt;properties-&gt;Java Build Path-&gt;Source-&gt;右下角的 Brower-&gt; 指定位置是 j2ee/web/WEB-INF/classes。</p>
+<ol start="4">
+<li>tomcat下conf下serve.xml写</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;Context path=&quot;/&quot; docBase=&quot;e:\\project\\j2ee\\web&quot; debug=&quot;0&quot; reloadable=&quot;false&quot; /&gt;</span><br><span class="line">5.启动tomcat</span><br></pre></td></tr></table></figure>
+
+<p>6.注意写加上.html(如login.html）</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">web</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/01/Servle学习/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-二叉排序树" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -189,379 +586,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/10/31/二叉排序树/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-操作系统学习10月30日" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/30/操作系统学习10月30日/">操作系统学习</a>
-    </h1>
-  
-
-        
-        <a href="/2019/10/30/操作系统学习10月30日/" class="archive-article-date">
-  	<time datetime="2019-10-30T07:51:06.852Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="操作系统学习记录"><a href="#操作系统学习记录" class="headerlink" title="操作系统学习记录"></a>操作系统学习记录</h1><h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a><strong>死锁</strong></h2><p><strong>1.何为死锁</strong><br>死锁是指多个进程争夺资源而处于的僵持状态<br><strong>2.产生原因</strong><br>系统资源不足。竞争资源和进程间推进顺序非法<br><strong>3.解决死锁的四种方法</strong><br>预防 避免 解除 检测<br><strong>4.产生死锁的条件</strong><br>　　1.互斥条件：一个资源每次只能被一个进程使用<br>　　2.不可剥夺条件：进程已获得资源，在未使用完之前，不能被其他进程强行剥夺，只能主动释放<br>　　3.请求和保持条件：进程已经保持了至少一个资源，但又提出了新的资源请求，而该资源已被其他进程占有，此时请求进程被阻塞，但对自己已获得的资源保持不放。<br>　　4.循环等待条件：即进程集合{p0,p1,p2,p3…..pn};p0正在等待p1占用的资源，p1正在等待p2占用的资源，pn正在等待p0占用的资源。<br><strong>4.预防死锁具体方法</strong><br>1.当一个占有资源进程请求新任务时，如果系统不能满足，进程应该释放当前所有的资源才可以重新申请。<br>2.如果系统有足够的资源，系统一次性把资源分配给进程需要的资源<br>3.按照顺序严格的分配进程顺序，按照类型排序序号排序，进程对资源请求必须按照序号递增的次序提出</p>
-<h2 id="进程和线程"><a href="#进程和线程" class="headerlink" title="进程和线程"></a>进程和线程</h2><p><strong>1.进程</strong>：一个程序即一个线程，即一个程序运行时的实例。分配系统资源的最小单位<br><strong>线程：</strong>系统分配处理器时间资源的基本单元，或者说进程之内独立执行的一个单元执行流。<strong>进程——资源分配的最小单位，线程——程序执行的最小单位。</strong></p>
-<p><strong>2.简单来记：</strong></p>
-<p>1) 简而言之,一个程序至少有一个进程,一个进程至少有一个线程.</p>
-<p>2) 线程的划分尺度小于进程，使得多线程程序的并发性高。</p>
-<p>3) 另外，进程在执行过程中拥有独立的内存单元，而多个线程共享内存，从而极大地提高了程序的运行效率。</p>
-<p>4) 线程在执行过程中与进程还是有区别的。每个独立的线程有一个程序运行的入口、顺序执行序列和程序的出口。但是线程不能够独立执行，必须依存在应用程序中，由应用程序提供多个线程执行控制。<br>5) 从逻辑角度来看，多线程的意义在于一个应用程序中，有多个执行部分可以同时执行。但操作系统并没有将多个线程看做多个独立的应用，来实现进程的调度和管理以及资源分配。这就是进程和线程的重要区别。</p>
-<p><strong>3 优缺点：</strong></p>
-<p>线程开销小，但不利于资源的管理和保护；进程与之相反。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">OS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/30/操作系统学习10月30日/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-如何写博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/30/如何写博客/">文章部署方法</a>
-    </h1>
-  
-
-        
-        <a href="/2019/10/30/如何写博客/" class="archive-article-date">
-  	<time datetime="2019-10-30T02:28:52.107Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <center>如何发布文章到自己搭建的hexo博客上</center>
-
-<p><strong>1.csdn导入</strong><br>2.选择Git Bash Here，输入 hexo g (完整命令为hexo generate)，<br>3 然后 输入 hexo s(完整命令为hexo server)，用于启动服务器<br>4.主要用来本地预览；完成后 打开浏览器输入 localhost:4000，会发现多了你刚写的那篇博客<br>5 最后输入hexo d(hexo deploy)，用于将本地文件发布到github等git仓库上；</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/30/如何写博客/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Dijkstra" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/22/Dijkstra/">Dijkstra</a>
-    </h1>
-  
-
-        
-        <a href="/2019/09/22/Dijkstra/" class="archive-article-date">
-  	<time datetime="2019-09-22T07:16:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="https://img-blog.csdnimg.cn/20200318190729337.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">       </p>
-<p><img src="https://img-blog.csdnimg.cn/20200318192224667.png" alt="在这里插入图片描述"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">#define INF 0x3f3f3f3;</span><br><span class="line">int map[110][110],dis[110],visited[110];</span><br><span class="line">int n;</span><br><span class="line">void Dijkstra()</span><br><span class="line">&#123;</span><br><span class="line">    int i,p,j,min;</span><br><span class="line">    for (i=1;i&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        dis[i]=map[1][i];</span><br><span class="line">        visited[i]=0;</span><br><span class="line">    &#125;</span><br><span class="line">    visited[1]=1;</span><br><span class="line">    for (i=1;i&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        min=INF;</span><br><span class="line">        for (j=1;j&lt;=n;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            if(!visited[j] &amp;&amp; dis[j]&lt;min)</span><br><span class="line">            &#123;</span><br><span class="line">                p=j;</span><br><span class="line">                min=dis[j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        visited[p]=1;</span><br><span class="line">        for (j=1;j&lt;=n;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            if(!visited[j] &amp;&amp; dis[p]+map[p][j]&lt;dis[j])</span><br><span class="line">            &#123;</span><br><span class="line">                    dis[j]=dis[p]+map[p][j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int m,i,j,a,b,t;</span><br><span class="line">    while(scanf(&quot;%d%d&quot;,&amp;n,&amp;m)!=EOF,n+m)</span><br><span class="line">    &#123;</span><br><span class="line">        for (i=1;i&lt;=n;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            for (j=1;j&lt;=n;j++)</span><br><span class="line">            &#123;</span><br><span class="line">                map[i][j]=INF;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        for(i=1;i&lt;=m;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            scanf(&quot;%d%d%d&quot;,&amp;a,&amp;b,&amp;t);</span><br><span class="line">            map[a][b]=t;</span><br><span class="line">        &#125;</span><br><span class="line">        Dijkstra();</span><br><span class="line">        for(int i=1;i&lt;=n;i++)&#123;</span><br><span class="line">        cout&lt;&lt;&quot;1到&quot;&lt;&lt;i&lt;&lt;&quot;最远距离&quot;;</span><br><span class="line">        printf(&quot;%d\n&quot;,dis[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://img-blog.csdnimg.cn/20200318192548463.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>6 8<br>2 3 5<br>1 3 10<br>1 6 100<br>1 5 30<br>3 4 50<br>4 6 10<br>5 4 20<br>5 6 60<br>1到1最远距离66319347<br>1到2最远距离66319347<br>1到3最远距离10<br>1到4最远距离50<br>1到5最远距离30<br>1到6最远距离60</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">图</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/09/22/Dijkstra/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-第一篇博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/18/第一篇博客/">第一篇博客</a>
-    </h1>
-  
-
-        
-        <a href="/2019/09/18/第一篇博客/" class="archive-article-date">
-  	<time datetime="2019-09-18T07:16:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <center>第一篇博客</center>
- 在用hexo搭建博客一个月后第一次用markdown写博客，希望以后每天分享自己学到的知识，加油，为梦想奋斗。
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/09/18/第一篇博客/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-我的小可爱朱媛媛" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/17/我的小可爱朱媛媛/">我的小可爱朱媛媛</a>
-    </h1>
-  
-
-        
-        <a href="/2019/09/17/我的小可爱朱媛媛/" class="archive-article-date">
-  	<time datetime="2019-09-17T14:23:38.187Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/09/17/我的小可爱朱媛媛/">展开全文 >></a>
         </p>
       
 
@@ -692,11 +716,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">链表</a>
+                <a href="javascript:void(0)" class="js-tag color4">位运算</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">位运算</a>
+                <a href="javascript:void(0)" class="js-tag color3">链表</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -708,11 +732,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">回溯</a>
+                <a href="javascript:void(0)" class="js-tag color4">字符串</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">字符串</a>
+                <a href="javascript:void(0)" class="js-tag color3">回溯</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -720,11 +744,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CSS</a>
+                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
+                <a href="javascript:void(0)" class="js-tag color4">CSS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -744,15 +768,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Vue</a>
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -760,15 +780,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Vue</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">前端总共和</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -784,15 +808,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">排序</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">排序算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">排序</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -805,6 +829,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">浏览器</a>
               </li>
             
             <div class="clearfix"></div>

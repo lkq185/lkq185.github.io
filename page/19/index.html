@@ -140,6 +140,414 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-1143最长公共子序列" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/25/1143最长公共子序列/">最长公共子序列</a>
+    </h1>
+  
+
+        
+        <a href="/2019/11/25/1143最长公共子序列/" class="archive-article-date">
+  	<time datetime="2019-11-25T07:48:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="最长公共子序列"><a href="#最长公共子序列" class="headerlink" title="最长公共子序列"></a>最长公共子序列</h2><p>给定两个字符串 text1 和 text2，返回这两个字符串的最长公共子序列。</p>
+<p>一个字符串的 子序列 是指这样一个新的字符串：它是由原字符串在不改变字符的相对顺序的情况下删除某些字符（也可以不删除任何字符）后组成的新字符串。<br>例如，”ace” 是 “abcde” 的子序列，但 “aec” 不是 “abcde” 的子序列。两个字符串的「公共子序列」是这两个字符串所共同拥有的子序列。</p>
+<p>若这两个字符串没有公共子序列，则返回 0。</p>
+<p>示例 1:</p>
+<p>输入：text1 = “abcde”, text2 = “ace”<br>输出：3<br>解释：最长公共子序列是 “ace”，它的长度为 3。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int longestCommonSubsequence(String text1, String text2) &#123;</span><br><span class="line">        int n=text1.length();</span><br><span class="line">        int m=text2.length();</span><br><span class="line">        int dp[][]=new int[n+1][m+1];</span><br><span class="line">        for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">            for(int j=0;j&lt;m;j++)&#123;</span><br><span class="line">               if(text1.charAt(i)==text2.charAt(j))</span><br><span class="line">                 dp[i+1][j+1]=dp[i][j]+1;</span><br><span class="line">               else</span><br><span class="line">                 dp[i+1][j+1]=Math.max(dp[i+1][j],dp[i][j+1]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[n][m];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20191125221914474.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>1.注意定义dp数组时加1<br>2. 若text1的第i个字符和text2的第j个字符相同，则<br>    dp[i+1][j+1]=dp[i][j]+1;<br>   否则<br>    dp[i+1][j+1]=Math.max(dp[i+1][j],dp[i][j+1]);</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/算法与数据结构//" class="article-tag-list-link color3">算法与数据结构</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/25/1143最长公共子序列/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-654基础递归建树" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/24/654基础递归建树/">基础递归建树</a>
+    </h1>
+  
+
+        
+        <a href="/2019/11/24/654基础递归建树/" class="archive-article-date">
+  	<time datetime="2019-11-24T15:03:34.906Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="654-最大二叉树"><a href="#654-最大二叉树" class="headerlink" title="654. 最大二叉树"></a>654. 最大二叉树</h2><p>给定一个不含重复元素的整数数组。一个以此数组构建的最大二叉树定义如下：</p>
+<pre><code>二叉树的根是数组中的最大元素。
+左子树是通过数组中最大值左边部分构造出的最大二叉树。
+右子树是通过数组中最大值右边部分构造出的最大二叉树。</code></pre><p>通过给定的数组构建最大二叉树，并且输出这个树的根节点。</p>
+<p>示例 ：</p>
+<p>输入：[3,2,1,6,0,5]<br>输出：返回下面这棵树的根节点：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">   6</span><br><span class="line"> /   \</span><br><span class="line">3     5</span><br><span class="line"> \    / </span><br><span class="line">  2  0   </span><br><span class="line">    \</span><br><span class="line">     1</span><br></pre></td></tr></table></figure>
+
+
+
+<p>提示：</p>
+<pre><code>给定的数组的大小在 [1, 1000] 之间。</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public TreeNode dfs(int first,int end,int nums[])&#123;</span><br><span class="line">        if(first&gt;end) return null;</span><br><span class="line">        int max=-9999,k=0;//不能用第一个元素</span><br><span class="line">        for(int i=first;i&lt;=end;i++)&#123;//不能小于只能小于等于</span><br><span class="line">            if(nums[i]&gt;max)&#123;</span><br><span class="line">                max=nums[i];</span><br><span class="line">                k=i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        TreeNode root=new TreeNode(max);</span><br><span class="line">        root.left=dfs(first,k-1,nums);</span><br><span class="line">        root.right=dfs(k+1,end,nums);</span><br><span class="line">        return root;</span><br><span class="line">    &#125;</span><br><span class="line">    public TreeNode constructMaximumBinaryTree(int[] nums) &#123;</span><br><span class="line">        if(nums.length==0) return null;</span><br><span class="line">        return dfs(0,nums.length-1,nums);//必须用减1</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>思路就是递归<br><strong>但是注意以下几点，否则会内存超限</strong><br>1.int max=-9999 要设置小元素，不能用nums[first]<br>2.length必须减1<br>3.同时first小于等于end，所以要传给end值length-1</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">树</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/24/654基础递归建树/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-12经典找规律加贪心" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/24/12经典找规律加贪心/">找规律加贪心</a>
+    </h1>
+  
+
+        
+        <a href="/2019/11/24/12经典找规律加贪心/" class="archive-article-date">
+  	<time datetime="2019-11-24T07:59:00.948Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="12-整数转罗马数字"><a href="#12-整数转罗马数字" class="headerlink" title="12. 整数转罗马数字"></a>12. 整数转罗马数字</h2><p>罗马数字包含以下七种字符： I， V， X， L，C，D 和 M。</p>
+<p>字符          数值<br>I             1<br>V             5<br>X             10<br>L             50<br>C             100<br>D             500<br>M             1000</p>
+<p>例如， 罗马数字 2 写做 II ，即为两个并列的 1。12 写做 XII ，即为 X + II 。 27 写做  XXVII, 即为 XX + V + II 。</p>
+<p>通常情况下，罗马数字中小的数字在大的数字的右边。但也存在特例，例如 4 不写做 IIII，而是 IV。数字 1 在数字 5 的左边，所表示的数等于大数 5 减小数 1 得到的数值 4 。同样地，数字 9 表示为 IX。这个特殊的规则只适用于以下六种情况：</p>
+<pre><code>I 可以放在 V (5) 和 X (10) 的左边，来表示 4 和 9。
+X 可以放在 L (50) 和 C (100) 的左边，来表示 40 和 90。 
+C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。</code></pre><p>给定一个整数，将其转为罗马数字。输入确保在 1 到 3999 的范围内。</p>
+<p>示例 1:</p>
+<p>输入: 3<br>输出: “III”</p>
+<p>示例 2:</p>
+<p>输入: 4<br>输出: “IV”</p>
+<p>示例 3:</p>
+<p>输入: 9<br>输出: “IX”</p>
+<p>示例 4:</p>
+<p>输入: 58<br>输出: “LVIII”<br>解释: L = 50, V = 5, III = 3.</p>
+<p>示例 5:</p>
+<p>输入: 1994<br>输出: “MCMXCIV”<br>解释: M = 1000, CM = 900, XC = 90, IV = 4.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public class Solution &#123;</span><br><span class="line">    public String intToRoman(int num) &#123;</span><br><span class="line">        // 把阿拉伯数字与罗马数字可能出现的所有情况和对应关系，放在两个数组中</span><br><span class="line">        // 并且按照阿拉伯数字的大小降序排列，这是贪心选择思想</span><br><span class="line">        int[] nums = &#123;1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1&#125;;</span><br><span class="line">        String[] romans = &#123;&quot;M&quot;, &quot;CM&quot;, &quot;D&quot;, &quot;CD&quot;, &quot;C&quot;, &quot;XC&quot;, &quot;L&quot;, &quot;XL&quot;, &quot;X&quot;, &quot;IX&quot;, &quot;V&quot;, &quot;IV&quot;, &quot;I&quot;&#125;;</span><br><span class="line">        int i=0;</span><br><span class="line">        StringBuffer ans=new StringBuffer();</span><br><span class="line">        while(i&lt;13)&#123;</span><br><span class="line">            while(nums[i]&lt;=num)&#123;</span><br><span class="line">                ans.append(romans[i]);</span><br><span class="line">                num-=nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line">        return ans.toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/24/12经典找规律加贪心/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-46 47 22全排列和括号生成" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/24/46 47 22全排列和括号生成/">回溯求全排列和全排列变形(括号生成)</a>
+    </h1>
+  
+
+        
+        <a href="/2019/11/24/46 47 22全排列和括号生成/" class="archive-article-date">
+  	<time datetime="2019-11-24T01:42:52.723Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="全排列46"><a href="#全排列46" class="headerlink" title="全排列46"></a>全排列46</h2><p>给定一个没有重复数字的序列，返回其所有可能的全排列。</p>
+<p>示例:</p>
+<p>输入: [1,2,3]<br>输出:<br>[<br>  [1,2,3],<br>  [1,3,2],<br>  [2,1,3],<br>  [2,3,1],<br>  [3,1,2],<br>  [3,2,1]<br>]</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt; res= new LinkedList();</span><br><span class="line">    int n;</span><br><span class="line">    public void back(int nums[],LinkedList&lt;Integer&gt; cur,int h[])&#123;</span><br><span class="line">        if(cur.size()==n)&#123;</span><br><span class="line">           res.add(new LinkedList(cur));</span><br><span class="line">           return;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">           if(h[i]!=0)</span><br><span class="line">           continue;</span><br><span class="line">           cur.add(nums[i]);</span><br><span class="line">           h[i]=1;</span><br><span class="line">           back(nums,cur,h);</span><br><span class="line">           h[i]=0;</span><br><span class="line">           cur.removeLast(); //除去最后一个元素</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public List&lt;List&lt;Integer&gt;&gt; permute(int[] nums) &#123;</span><br><span class="line">        int n=nums.length;</span><br><span class="line">        this.n=n; //全局变量设置</span><br><span class="line">        int used[]=new int[n]; </span><br><span class="line">        back(nums,new LinkedList&lt;Integer&gt;(),used);</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20191119225124487.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">以n叉树的思想就行递归和回溯</p>
+<h2 id="47有重复数全排列"><a href="#47有重复数全排列" class="headerlink" title="47有重复数全排列"></a>47有重复数全排列</h2><p>给定一个可包含重复数字的序列，返回所有不重复的全排列。</p>
+<p>示例:</p>
+<p>输入: [1,1,2]<br>输出:<br>[<br>  [1,1,2],<br>  [1,2,1],<br>  [2,1,1]<br>]</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt; res= new LinkedList();</span><br><span class="line">    int n;</span><br><span class="line">    int h[]=new int[100];</span><br><span class="line">    public void init(int n)&#123;</span><br><span class="line">        this.n=n;</span><br><span class="line">    &#125;</span><br><span class="line">    public void back(int nums[],LinkedList&lt;Integer&gt; cur)&#123;</span><br><span class="line">        if(cur.size()==n&amp;&amp;res.contains(cur)==false)&#123;</span><br><span class="line">           res.add(new LinkedList(cur));</span><br><span class="line">           return;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">           if(h[i]!=0)</span><br><span class="line">           continue;</span><br><span class="line">           cur.add(nums[i]);</span><br><span class="line">           h[i]=1;</span><br><span class="line">           back(nums,cur);</span><br><span class="line">           h[i]=0;</span><br><span class="line">           cur.removeLast();//除去最后一个元素</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public List&lt;List&lt;Integer&gt;&gt; permuteUnique(int[] nums) &#123;</span><br><span class="line">        int n=nums.length;</span><br><span class="line">        init(n);</span><br><span class="line">        back(nums,new LinkedList&lt;Integer&gt;());</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="22-括号生成"><a href="#22-括号生成" class="headerlink" title="22. 括号生成"></a>22. 括号生成</h2><p>给出 n 代表生成括号的对数，请你写出一个函数，使其能够生成所有可能的并且有效的括号组合。</p>
+<p>例如，给出 n = 3，生成结果为：</p>
+<p>[<br>  “((()))”,<br>  “(()())”,<br>  “(())()”,<br>  “()(())”,<br>  “()()()”<br>]</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;//必须有左括号才能右括号，只要右括号数小于左括号，总有左括号和右括号匹配</span><br><span class="line">    List&lt;String&gt; res=new ArrayList&lt;&gt;();</span><br><span class="line">    public void dfs(String t,int left,int right)&#123;</span><br><span class="line">         if(left==0&amp;&amp;right==0)&#123;</span><br><span class="line">             res.add(t);</span><br><span class="line">             return;</span><br><span class="line">         &#125;</span><br><span class="line">         if(left&gt;0)&#123;</span><br><span class="line">           dfs(t+&quot;(&quot;,left-1,right);</span><br><span class="line">         &#125;</span><br><span class="line">         if(right&gt;left)&#123;//right剩余比left多，保证left永远比right值小</span><br><span class="line">             dfs(t+&quot;)&quot;,left,right-1);</span><br><span class="line">         &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public List&lt;String&gt; generateParenthesis(int n) &#123;</span><br><span class="line">        dfs(&quot;&quot;,n,n);</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">回溯</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/24/46 47 22全排列和括号生成/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-128最长连续序列" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/23/128最长连续序列/">最长连续序列</a>
+    </h1>
+  
+
+        
+        <a href="/2019/11/23/128最长连续序列/" class="archive-article-date">
+  	<time datetime="2019-11-23T15:24:27.539Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="128-最长连续序列"><a href="#128-最长连续序列" class="headerlink" title="128. 最长连续序列"></a>128. 最长连续序列</h2><p>给定一个未排序的整数数组，找出最长连续序列的长度。</p>
+<p>要求算法的时间复杂度为 O(n)。</p>
+<p>示例:</p>
+<p>输入: [100, 4, 200, 1, 3, 2]<br>输出: 4<br>解释: 最长连续序列是 [1, 2, 3, 4]。它的长度为 4。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int longestConsecutive(int[] nums) &#123;</span><br><span class="line">        if(nums.length==0) return 0;</span><br><span class="line">        int n=nums.length;</span><br><span class="line">        Arrays.sort(nums);</span><br><span class="line">        Map&lt;Integer,Integer&gt; map=new HashMap&lt;&gt;();</span><br><span class="line">        for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">            map.put(nums[i],1);</span><br><span class="line">        &#125;</span><br><span class="line">        int maxn=1;</span><br><span class="line">        int len=1;</span><br><span class="line">        for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">            int t=nums[i];</span><br><span class="line">            len=0;</span><br><span class="line">            while(map.get(t)!=null)&#123;</span><br><span class="line">               len++;</span><br><span class="line">               t++;</span><br><span class="line">            &#125;</span><br><span class="line">            if(len&gt;maxn)</span><br><span class="line">            maxn=len;</span><br><span class="line">        &#125;</span><br><span class="line">        return maxn;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>思路：先排序，然后用每一个元素加1，直到不在这个序列中。<br>找到最大值</p>
+<p>尽管在 for 循环中嵌套了一个 while 循环，时间复杂度看起来像是二次方级别的。但其实它是线性的算法。因为只有当 nums[i] 遇到了一个序列的开始， while 循环才会被执行。 while 循环在整个运行过程中只会被迭代 n 次。这意味着尽管看起来时间复杂度为<br>空间复杂度：O(n)</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/23/128最长连续序列/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-62 63像dfs的动态规划" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -213,406 +621,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/11/22/62 63像dfs的动态规划/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-718最长公共子串" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/22/718最长公共子串/">最长公共子串(连续的)</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/22/718最长公共子串/" class="archive-article-date">
-  	<time datetime="2019-11-22T02:57:59.987Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>给两个整数数组 A 和 B ，返回两个数组中公共的、长度最长的子数组的长度。(必须是连续的，不连续的叫子序列)</p>
-<p>示例 1:</p>
-<p>输入:<br>A: [1,2,3,2,1]<br>B: [3,2,1,4,7]<br>输出: 3<br>解释:<br>长度最长的公共子数组是 [3, 2, 1]。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int findLength(int[] A, int[] B) &#123;</span><br><span class="line">        int n=A.length;</span><br><span class="line">        int m=B.length;</span><br><span class="line">        int dp[][]=new int[n+1][m+1];</span><br><span class="line">        int ans=0;</span><br><span class="line">        for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">            for(int j=0;j&lt;m;j++)&#123;</span><br><span class="line">                if(A[i]==B[j])</span><br><span class="line">                  dp[i+1][j+1]=dp[i][j]+1;</span><br><span class="line">                else</span><br><span class="line">                  dp[i+1][j+1]=0;</span><br><span class="line">                  ans=Math.max(dp[i+1][j+1],ans);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>算法思路：</p>
-<p>1、把两个字符串分别以行和列组成一个二维矩阵。</p>
-<p>2、比较二维矩阵中每个点对应行列字符中否相等，相等的话值设置为1，否则设置为0。</p>
-<p>3、通过查找出值为1的最长对角线就能找到最长公共子串。</p>
-<p>针对于上面的两个字符串我们可以得到的二维矩阵如下：<br><img src="https://img-blog.csdnimg.cn/20191122105704977.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p>从上图可以看到，str1和str2共有5个公共子串，但最长的公共子串长度为5。</p>
-<p>为了进一步优化算法的效率，我们可以再计算某个二维矩阵的值的时候顺便计算出来当前最长的公共子串的长度，即某个二维矩阵元素的值由record[i][j]=1演变为record[i][j]=1 +record[i-1][j-1]，这样就避免了后续查找对角线长度的操作了。修改后的二维矩阵如下：</p>
-<p><img src="https://img-blog.csdnimg.cn/20191122105647269.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">dp</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/22/718最长公共子串/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-11 16 202双指针" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/21/11 16 202双指针/">双指针</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/21/11 16 202双指针/" class="archive-article-date">
-  	<time datetime="2019-11-21T15:06:21.575Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="11盛最多水的容器"><a href="#11盛最多水的容器" class="headerlink" title="11盛最多水的容器"></a>11盛最多水的容器</h2><p>给定 n 个非负整数 a1，a2，…，an，每个数代表坐标中的一个点 (i, ai) 。在坐标内画 n 条垂直线，垂直线 i 的两个端点分别为 (i, ai) 和 (i, 0)。找出其中的两条线，使得它们与 x 轴共同构成的容器可以容纳最多的水。</p>
-<p>说明：你不能倾斜容器，且 n 的值至少为 2。</p>
-<p>图中垂直线代表输入数组 [1,8,6,2,5,4,8,3,7]。在此情况下，容器能够容纳水（表示为蓝色部分）的最大值为 49。</p>
-<p>示例:</p>
-<p>输入: [1,8,6,2,5,4,8,3,7]<br>输出: 49</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int maxArea(int[] height) &#123;</span><br><span class="line">        int left=0;</span><br><span class="line">        int right=height.length-1;</span><br><span class="line">        int ans=0;</span><br><span class="line">        while(left&lt;right)&#123;</span><br><span class="line">            if(height[left]&lt;height[right])&#123;</span><br><span class="line">            ans=Math.max(ans,Math.min(height[right],height[left])*(right-left));</span><br><span class="line">            left++;      </span><br><span class="line">            &#125;</span><br><span class="line">            else&#123;</span><br><span class="line">                ans=Math.max(ans,Math.min(height[right],height[left])*(right-left));</span><br><span class="line">                right--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>设每一状态下水槽面积为 S(i,j)S(i, j)S(i,j),(0&lt;=i&lt;j&lt;n)(0 &lt;= i &lt; j &lt; n)(0&lt;=i&lt;j&lt;n)，由于水槽的实际高度由两板中的短板决定，则可得面积公式 S(i,j)=min(h[i],h[j])×(j−i)S(i, j) = min(h[i], h[j]) × (j - i)S(i,j)=min(h[i],h[j])×(j−i)。<br>在每一个状态下，无论长板或短板收窄 111 格，都会导致水槽 底边宽度 −1-1−1：<br> 若向内移动短板，水槽的短板 min(h[i],h[j])min(h[i], h[j])min(h[i],h[j]) 可能变大，因此水槽面积 S(i,j)S(i, j)S(i,j) 可能增大。<br>    若向内移动长板，水槽的短板 min(h[i],h[j])min(h[i], h[j])min(h[i],h[j]) 不变或变小，下个水槽的面积一定小于当前水槽面积。</p>
-<h2 id="16-最接近的三数之和"><a href="#16-最接近的三数之和" class="headerlink" title="16. 最接近的三数之和"></a>16. 最接近的三数之和</h2><p>给定一个包括 n 个整数的数组 nums 和 一个目标值 target。找出 nums 中的三个整数，使得它们的和与 target 最接近。返回这三个数的和。假定每组输入只存在唯一答案。</p>
-<p>例如，给定数组 nums = [-1，2，1，-4], 和 target = 1.</p>
-<p>与 target 最接近的三个数的和为 2. (-1 + 2 + 1 = 2).</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int threeSumClosest(int[] nums, int target) &#123;</span><br><span class="line">        int left=0; int right=nums.length-1;</span><br><span class="line">        Arrays.sort(nums);</span><br><span class="line">        int ans=nums[0]+nums[1]+nums[2];</span><br><span class="line">        for(int i=0;i&lt;nums.length;i++)&#123;</span><br><span class="line">           left=i+1; right=nums.length-1;</span><br><span class="line">           while(left&lt;right)&#123;</span><br><span class="line">               int t=nums[i]+nums[left]+nums[right];</span><br><span class="line">               if(Math.abs(t-target)&lt;Math.abs(ans-target))</span><br><span class="line">                 ans=t;</span><br><span class="line">               if(t&gt;target)</span><br><span class="line">                  right--;</span><br><span class="line">               else if(t&lt;target)</span><br><span class="line">                  left++;</span><br><span class="line">               else</span><br><span class="line">                 return ans;</span><br><span class="line">           &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>三指针分别为最左元素，左右元素(right)和第二左元素(left)<br>首先进行数组排序，时间复杂度 O(nlogn)O(nlogn)O(nlogn)<br>在数组 nums 中，进行遍历，每遍历一个值利用其下标i，形成一个固定值 nums[i]<br>再使用前指针指向 start = i + 1 处，后指针指向 end = nums.length - 1 处，也就是结尾处<br>根据 sum = nums[i] + nums[start] + nums[end] 的结果，判断 sum 与目标 target 的距离，如果更近则更新结果 ans<br>同时判断 sum 与 target 的大小关系，因为数组有序，如果 sum &gt; target 则 end–，如果 sum &lt; target 则 start++，如果 sum == target 则说明距离为 0 直接返回结果<br>整个遍历过程，固定值为 n 次，双指针为 n 次，时间复杂度为 O(n2)O(n^2)O(n2)<br>总时间复杂度：O(nlogn)+O(n2)=O(n2)O(nlogn) + O(n^2) = O(n^2)O(nlogn)+O(n2)=O(n2)</p>
-<h2 id="202-快乐数"><a href="#202-快乐数" class="headerlink" title="202. 快乐数"></a>202. 快乐数</h2><p>编写一个算法来判断一个数是不是“快乐数”。</p>
-<p>一个“快乐数”定义为：对于一个正整数，每一次将该数替换为它每个位置上的数字的平方和，然后重复这个过程直到这个数变为 1，也可能是无限循环但始终变不到 1。如果可以变为 1，那么这个数就是快乐数。</p>
-<p>示例: </p>
-<p>输入: 19<br>输出: true<br>解释:<br>12 + 92 = 82<br>82 + 22 = 68<br>62 + 82 = 100<br>12 + 02 + 02 = 1</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int summ(int n)&#123;</span><br><span class="line">        int sum=0;</span><br><span class="line">        while(n!=0)&#123;//判断各位数和</span><br><span class="line">            int bit=n%10;</span><br><span class="line">            sum+=bit*bit;</span><br><span class="line">            n/=10;</span><br><span class="line">        &#125; </span><br><span class="line">        return sum;</span><br><span class="line">    &#125;</span><br><span class="line">    public boolean isHappy(int n) &#123;</span><br><span class="line">        int fast=n;//快指针</span><br><span class="line">        int slow=n;//慢指针</span><br><span class="line">        fast=summ(fast);</span><br><span class="line">        while(fast!=slow)&#123;</span><br><span class="line">           slow=summ(slow);</span><br><span class="line">           fast=summ(fast);</span><br><span class="line">           fast=summ(fast);</span><br><span class="line">        &#125;</span><br><span class="line">        if(slow==1) return true;</span><br><span class="line">        else return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>使用“快慢指针”思想找出循环：“快指针”每次走两步，“慢指针”每次走一步，当二者相等时，即为一个循环周期。此时，判断是不是因为1引起的循环，是的话就是快乐数，否则不是快乐数。<br>注意：此题不建议用集合记录每次的计算结果来判断是否进入循环，因为这个集合可能大到无法存储；另外，也不建议使用递归，同理，如果递归层次较深，会直接导致调用栈崩溃。不要因为这个题目给出的整数是int型而投机取巧。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/21/11 16 202双指针/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-35二分" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/20/35二分/">基础二分</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/20/35二分/" class="archive-article-date">
-  	<time datetime="2019-11-20T12:02:21.631Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。</p>
-<p>你可以假设数组中无重复元素。</p>
-<p>示例 1:</p>
-<p>输入: [1,3,5,6], 5<br>输出: 2</p>
-<p>示例 2:</p>
-<p>输入: [1,3,5,6], 2<br>输出: 1</p>
-<p>示例 3:</p>
-<p>输入: [1,3,5,6], 7<br>输出: 4</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int searchInsert(int[] nums, int target) &#123;</span><br><span class="line">        int len=nums.length;</span><br><span class="line">        if(target&gt;nums[len-1])</span><br><span class="line">         return len;</span><br><span class="line">        int mid,left=0,right=len-1;           </span><br><span class="line">        while(left&lt;=right)&#123;</span><br><span class="line">            mid=(left+right)/2;</span><br><span class="line">            if(nums[mid]==target)</span><br><span class="line">               return mid;</span><br><span class="line">            else if(nums[mid]&lt;target)</span><br><span class="line">                left=mid+1;</span><br><span class="line">            else</span><br><span class="line">                right=mid-1;</span><br><span class="line">        &#125;</span><br><span class="line">        return left;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/20/35二分/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-171进制转化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/18/171进制转化/">进制转化简化方法</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/18/171进制转化/" class="archive-article-date">
-  	<time datetime="2019-11-18T15:01:50.864Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>给定一个Excel表格中的列名称，返回其相应的列序号。</p>
-<p>例如，</p>
-<pre><code>A - 1
-B - 2
-C - 3
-...
-Z - 26
-AA - 27
-AB - 28 
-...</code></pre><p>示例 1</p>
-<p>输入 A<br>输出 1</p>
-<p>示例 2</p>
-<p>输入 AB<br>输出 28</p>
-<p>示例 3</p>
-<p>输入 ZY<br>输出 701</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int titleToNumber(String s) &#123;</span><br><span class="line">        int ans=0;</span><br><span class="line">        for(int i=0;is.length();i++)&#123;</span><br><span class="line">        int t=s.charAt(i)-&apos;A&apos;+1;</span><br><span class="line">        ans=ans26+t;参考十进制</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/18/171进制转化/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-64动态规划" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/17/64动态规划/">动态规划</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/17/64动态规划/" class="archive-article-date">
-  	<time datetime="2019-11-17T15:20:04.796Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>给定一个包含非负整数的 m x n 网格，请找出一条从左上角到右下角的路径，使得路径上的数字总和为最小。</p>
-<p>说明：每次只能向下或者向右移动一步。</p>
-<p>示例:</p>
-<p>输入:<br>[<br>  [1,3,1],<br>  [1,5,1],<br>  [4,2,1]<br>]<br>输出: 7<br>解释: 因为路径 1→3→1→1→1 的总和最小。<br>方法一</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int minPathSum(int[][] grid) &#123;</span><br><span class="line">        int n=grid.length;</span><br><span class="line">        int m=grid[0].length;</span><br><span class="line">        int dp[][]=new int[n][m];</span><br><span class="line">        for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">            for(int j=0;j&lt;m;j++)&#123;</span><br><span class="line">                if(i==0&amp;&amp;j==0) dp[0][0]=grid[0][0];//防止数组越界 i==-1||j==-1</span><br><span class="line">                else if(i==0) dp[i][j]=dp[i][j-1]+grid[i][j];</span><br><span class="line">                else if(j==0) dp[i][j]=dp[i-1][j]+grid[i][j];</span><br><span class="line">                else dp[i][j]=grid[i][j]+Math.min(dp[i-1][j],dp[i][j-1]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[n-1][m-1];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>方法二</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int minPathSum(int[][] grid) &#123;</span><br><span class="line">        int n=grid.length;</span><br><span class="line">        int m=grid[0].length;</span><br><span class="line">        for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">            for(int j=0;j&lt;m;j++)&#123;</span><br><span class="line">                if(i==0&amp;&amp;j==0)continue;//防止数组越界 i==-1||j==-1</span><br><span class="line">                else if(i==0) grid[i][j]=grid[i][j-1]+grid[i][j];</span><br><span class="line">                else if(j==0) grid[i][j]=grid[i-1][j]+grid[i][j];</span><br><span class="line">                else grid[i][j]=grid[i][j]+Math.min(grid[i-1][j],grid[i][j-1]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return grid[n-1][m-1];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">dp</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/17/64动态规划/">展开全文 >></a>
         </p>
       
 
@@ -743,11 +751,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">链表</a>
+                <a href="javascript:void(0)" class="js-tag color4">位运算</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">位运算</a>
+                <a href="javascript:void(0)" class="js-tag color3">链表</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -759,11 +767,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">回溯</a>
+                <a href="javascript:void(0)" class="js-tag color4">字符串</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">字符串</a>
+                <a href="javascript:void(0)" class="js-tag color3">回溯</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -771,11 +779,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CSS</a>
+                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
+                <a href="javascript:void(0)" class="js-tag color4">CSS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -795,15 +803,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Vue</a>
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -811,15 +815,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Vue</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">前端总共和</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -835,15 +843,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">排序</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">排序算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">排序</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -856,6 +864,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">浏览器</a>
               </li>
             
             <div class="clearfix"></div>

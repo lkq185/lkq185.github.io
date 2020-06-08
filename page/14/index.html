@@ -140,6 +140,392 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-常用单例模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/01/15/常用单例模式/">常用单例模式</a>
+    </h1>
+  
+
+        
+        <a href="/2020/01/15/常用单例模式/" class="archive-article-date">
+  	<time datetime="2020-01-15T07:16:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>单例模式</strong>：一个类只有一个实例(static并且构造器private)。提供一个访问该实例的全局访问点(public的get方法)。<br>如电脑里回收站只有一个，还比如只有一个配置器和Spring里的Bean。获取俩个对象是相同的。<br>优点：减少系统开销。<br>饿汉式：线程安全，效率高，不能延时加载。浪费空间。<br> <img src="https://img-blog.csdnimg.cn/20200310231249119.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>懒汉式：线程安全，效率不高，可以延时加载。解决浪费空间，但是效率低。<br><img src="https://img-blog.csdnimg.cn/20200310231302698.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>DCL懒汉式：可能出现问题，不建议使用。解决效率低。<br><img src="https://img-blog.csdnimg.cn/20200310231321898.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>静态内部类(饿汉式改进):线程安全，调用效率高，可以延时加载。但是被反射干扰。<br><img src="https://img-blog.csdnimg.cn/20200310231332101.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>枚举单例：线程安全，效率高，不能延时加载。不会被反射干扰。但是不能延时加载。<br> <img src="https://img-blog.csdnimg.cn/20200310231345861.png" alt="在这里插入图片描述"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/01/15/常用单例模式/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Redis的持久化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/01/12/Redis的持久化/">Redis持久化</a>
+    </h1>
+  
+
+        
+        <a href="/2020/01/12/Redis的持久化/" class="archive-article-date">
+  	<time datetime="2020-01-12T12:16:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Redis是内存型数据库，为了保证数据在断电后不会丢失，需要将内存中的数据持久化到硬盘上。<br><strong>RDB 持久化</strong><br>将某个时间点的所有数据都存放到硬盘上。可以将快照复制到其它服务器从而创建具有相同数据的服务器副本。如果系统发生故障，将会丢失最后一次创建快照之后的数据。如果数据量很大，保存快照的时间会很长。<br><strong>AOF 持久化</strong><br>将写命令添加到 AOF 文件（Append Only File）的末尾。使用 AOF 持久化需要设置同步选项，从而确保写命令什么时候会同步到磁盘文件上。这是因为对文件进行写入并不会马上将内容同步到磁盘上，而是先存储到缓冲区，然后由操作系统决定什么时候同步到磁盘。<br>随着服务器写请求的增多，AOF 文件会越来越大。Redis 提供了一种将 AOF 重写的特性，能够去除 AOF 文件中的冗余写命令。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/01/12/Redis的持久化/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Redis基础与常用数据结构" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/01/11/Redis基础与常用数据结构/">Redis基础和常用数据结构</a>
+    </h1>
+  
+
+        
+        <a href="/2020/01/11/Redis基础与常用数据结构/" class="archive-article-date">
+  	<time datetime="2020-01-11T12:10:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h2><p>Redis 是速度非常快的非关系型（<strong>NoSQL</strong>）内存键值数据库，可以存储键和五种不同类型的值之间的映射。<br><code>键的类型只能为字符串，</code>值支持五种数据类型：字符串、列表、集合、散列表、有序集合。</p>
+<h2 id="二、使用命令"><a href="#二、使用命令" class="headerlink" title="二、使用命令"></a>二、使用命令</h2><p><code>redis-cli</code> 启动redis（默认端口 6379）<br><strong>String</strong><br><code>set key value</code> 设置key和value<br><code>get key</code>           得到key<br><code>del key</code>    删除key</p>
+<p><strong>List</strong><br><code>rpush list-key value</code> 设置list的value<br><code>lrange list-key 0 -1</code> 输出List所有元素</p>
+<h2 id="三、数据类型"><a href="#三、数据类型" class="headerlink" title="三、数据类型"></a>三、数据类型</h2><p>key为String类型<br>value为String set zset Hash List</p>
+<h2 id="四、应用"><a href="#四、应用" class="headerlink" title="四、应用"></a>四、应用</h2><p>计数器：内存数据库读写性能高，很适合用做频繁读写的计数量(用String)、<br>缓存：将热点数据存到内存中，并设置最大使用量和淘汰策略。<br>查找表：利用了Redis快速查找的特性。如存储DNS。<br>消息队列：可以List双向链表类型。<br>会话缓存：存储多台应用服务器的会话信息。<br>分布式锁：可以用Redis自带的SETNX实现分布式锁。<br>交集并集实现共同好友：利用Set(不重复值集合)<br>有序性操作实现排行榜:利用Zset(排序的set)</p>
+<h2 id="五、与-Memchached-的比较。"><a href="#五、与-Memchached-的比较。" class="headerlink" title="五、与 Memchached 的比较。"></a>五、与 Memchached 的比较。</h2><p><img src="https://img-blog.csdnimg.cn/20200310214039815.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="六、优点"><a href="#六、优点" class="headerlink" title="六、优点"></a>六、优点</h2><p>1.Redis是<strong>单线程</strong>的，并且线程安全。<br>2.<strong>内存</strong>数据库，速度快，也支持数据的持久化，可以将内存中的数据保存在磁盘中，重启的时候可以再次加载进行使用。<br>3.Redis支持<strong>事务</strong><br>4.Redis的所有操作都是<strong>原子性</strong>的</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/01/11/Redis基础与常用数据结构/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-LRU" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/01/07/LRU/">LRU算法</a>
+    </h1>
+  
+
+        
+        <a href="/2020/01/07/LRU/" class="archive-article-date">
+  	<time datetime="2020-01-07T07:16:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">package Node;</span><br><span class="line"></span><br><span class="line">class DoubleList &#123;  </span><br><span class="line">    private Node head, tail; // 头尾虚节点</span><br><span class="line">    private int size; // 链表元素数</span><br><span class="line"></span><br><span class="line">    public DoubleList() &#123;</span><br><span class="line">        head = new Node(0, 0);</span><br><span class="line">        tail = new Node(0, 0);</span><br><span class="line">        head.next = tail;</span><br><span class="line">        tail.prev = head;</span><br><span class="line">        size = 0;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 在链表头部添加节点 x</span><br><span class="line">    public void addFirst(Node x) &#123;</span><br><span class="line">        x.next = head.next;</span><br><span class="line">        x.prev = head;</span><br><span class="line">        head.next.prev = x;</span><br><span class="line">        head.next = x;</span><br><span class="line">        size++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 删除链表中的 x 节点（x 一定存在）</span><br><span class="line">    public void remove(Node x) &#123;</span><br><span class="line">        x.prev.next = x.next;</span><br><span class="line">        x.next.prev = x.prev;</span><br><span class="line">        size--;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 删除链表中最后一个节点，并返回该节点</span><br><span class="line">    public Node removeLast() &#123;</span><br><span class="line">        if (tail.prev == head)</span><br><span class="line">            return null;</span><br><span class="line">        Node last = tail.prev;</span><br><span class="line">        remove(last);</span><br><span class="line">        return last;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 返回链表长度</span><br><span class="line">    public int size() &#123; return size; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">package Node;</span><br><span class="line">import java.util.*;</span><br><span class="line">class LRUCache &#123;</span><br><span class="line">    // key -&gt; Node(key, val)</span><br><span class="line">    private HashMap&lt;Integer, Node&gt; map;</span><br><span class="line">    // Node(k1, v1) &lt;-&gt; Node(k2, v2)...</span><br><span class="line">    private DoubleList cache;</span><br><span class="line">    // 最大容量</span><br><span class="line">    private int cap;</span><br><span class="line">    </span><br><span class="line">    public LRUCache(int capacity) &#123;</span><br><span class="line">        this.cap = capacity;</span><br><span class="line">        map = new HashMap&lt;&gt;();</span><br><span class="line">        cache = new DoubleList();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public int get(int key) &#123;</span><br><span class="line">        if (!map.containsKey(key))</span><br><span class="line">            return -1;</span><br><span class="line">        int val = map.get(key).val;</span><br><span class="line">        // 利用 put 方法把该数据提前</span><br><span class="line">        put(key, val);</span><br><span class="line">        return val;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public void put(int key, int val) &#123;</span><br><span class="line">        // 先把新节点 x 做出来</span><br><span class="line">        Node x = new Node(key, val);</span><br><span class="line">        </span><br><span class="line">        if (map.containsKey(key)==true) &#123;</span><br><span class="line">            // 删除旧的节点，新的插到头部</span><br><span class="line">            cache.remove(map.get(key));</span><br><span class="line">            cache.addFirst(x);</span><br><span class="line">            // 更新 map 中对应的数据</span><br><span class="line">            map.put(key, x);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            if (cap == cache.size()) &#123;</span><br><span class="line">                // 删除链表最后一个数据</span><br><span class="line">                Node last = cache.removeLast();</span><br><span class="line">                map.remove(last.key);</span><br><span class="line">            &#125;</span><br><span class="line">            // 直接添加到头部</span><br><span class="line">            cache.addFirst(x);</span><br><span class="line">            map.put(key, x);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">package Node;</span><br><span class="line">class Node &#123;</span><br><span class="line">    public int key, val;</span><br><span class="line">    public Node next, prev;</span><br><span class="line">    public Node(int k, int v) &#123;</span><br><span class="line">        this.key = k;</span><br><span class="line">        this.val = v;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">链表</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/01/07/LRU/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-树的子结构" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/01/06/树的子结构/">树的子结构</a>
+    </h1>
+  
+
+        
+        <a href="/2020/01/06/树的子结构/" class="archive-article-date">
+  	<time datetime="2020-01-06T14:27:53.109Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="https://img-blog.csdnimg.cn/20200106222628376.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">//再写一个方法来遍历大树，找到一个和小树根节点值相等的节点，</span><br><span class="line">以该节点和小树根节点的值为参数调用上面的方法即可</span><br><span class="line">public boolean HasSubtree(TreeNode root1, TreeNode root2) &#123;</span><br><span class="line">    if (root1 == null || root2 == null)</span><br><span class="line">        return false;</span><br><span class="line">    return isSubtreeWithRoot(root1, root2) || HasSubtree(root1.left, root2) || HasSubtree(root1.right, root2);</span><br><span class="line">&#125;</span><br><span class="line">//先写一个方法，传入两棵根节点值相同的树，判断tree1是否和tree2结构一样</span><br><span class="line">private boolean isSubtreeWithRoot(TreeNode root1, TreeNode root2) &#123;</span><br><span class="line">    if (root2 == null)</span><br><span class="line">        return true;</span><br><span class="line">    if (root1 == null)</span><br><span class="line">        return false;</span><br><span class="line">    if (root1.val != root2.val)</span><br><span class="line">        return false;</span><br><span class="line">    return isSubtreeWithRoot(root1.left, root2.left) &amp;&amp; isSubtreeWithRoot(root1.right, root2.right);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">树</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/01/06/树的子结构/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-剑指17 n位数全排列" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -176,398 +562,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/01/05/剑指17 n位数全排列/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-计算机网络学习笔记(协议二)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/14/计算机网络学习笔记(协议二)/">协议与设备(2)</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/14/计算机网络学习笔记(协议二)/" class="archive-article-date">
-  	<time datetime="2019-12-14T07:16:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>ARP是地址解析协议，简单语言解释一下工作原理</strong><br>1：首先，每个主机都会在自己的ARP缓冲区中建立一个ARP列表，以表示IP地址和MAC地址之间的对应关系。<br>2：当源主机要发送数据时，首先检查ARP列表中是否有对应IP地址的目的主机的MAC地址，如果有，则直接发送数据，如果没有，就向本网段的所有主机发送ARP数据包，该数据包包括的内容有：源主机 IP地址，源主机MAC地址，目的主机的IP 地址。<br>3：当本网络的所有主机收到该ARP数据包时，首先检查数据包中的IP地址是否是自己的IP地址，如果不是，则忽略该数据包，如果是，则首先从数据包中取出源主机的IP和MAC地址写入到ARP列表中，如果已经存在，则覆盖，然后将自己的MAC地址写入ARP响应包中，告诉源主机自己是它想要找的MAC地址。<br>4：源主机收到ARP响应包后。将目的主机的IP和MAC地址写入ARP列表，并利用此信息发送数据。如果源主机一直没有收到ARP响应数据包，表示ARP查询失败。<br>广播发送ARP请求，单播发送ARP响应。</p>
-<p><strong>各种协议的介绍</strong><br>答:ICMP协议： 因特网控制报文协议。它是TCP/IP协议族的一个子协议，用于在IP主机、路由器之间传递控制消息。<br>TFTP协议： 是TCP/IP协议族中的一个用来在客户机与服务器之间进行简单文件传输的协议，提供不复杂、开销不大的文件传输服务。<br>HTTP协议： 超文本传输协议，是一个属于应用层的面向对象的协议，由于其简捷、快速的方式，适用于分布式超媒体信息系统。<br>NAT协议：网络地址转换属接入广域网(WAN)技术，是一种将私有（保留）地址转化为合法IP地址的转换技术，<br>DHCP协议：动态主机配置协议，是一种让系统得以连接到网络上，并获取所需要的配置参数手段，使用UDP协议工作。具体用途：给内部网络或网络服务供应商自动分配IP地址，给用户或者内部网络管理员作为对所有计算机作中央管理的手段。</p>
-<p><strong>描述RARP协议</strong><br>RARP是逆地址解析协议，作用是完成硬件地址到IP地址的映射，主要用于无盘工作站，因为给无盘工作站配置的IP地址不能保存。<br>工作流程：在网络中配置一台RARP服务器，里面保存着IP地址和MAC地址的映射关系，当无盘工作站启动后，就封装一个RARP数据包，里面有其MAC地址，然后广播到网络上去，当服务器收到请求包后，就查找对应的MAC地址的IP地址装入响应报文中发回给请求者。因为需要广播请求报文，因此RARP只能用于具有广播能力的网络。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">网络</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/14/计算机网络学习笔记(协议二)/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-计算机网络学习笔记(协议)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/13/计算机网络学习笔记(协议)/">协议与设备</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/13/计算机网络学习笔记(协议)/" class="archive-article-date">
-  	<time datetime="2019-12-13T07:16:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>OSI，TCP/IP，五层协议的体系结构，以及各层协议</strong><br><strong>OSI分层 （7层）</strong>：物理层、数据链路层、网络层、传输层、会话层、表示层、应用层。<br><strong>TCP/IP分层（4层）</strong>：网络接口层、 网际层、运输层、 应用层。<br><strong>五层协议 （5层）</strong>：物理层、数据链路层、网络层、运输层、 应用层。</p>
-<p><strong>五层协议</strong><br>应用层；为特定应用程序提供传输服务(如HTTP，DNS)。单位为报文<br>传输层：为进程提供数据传输服务，单位为用户数据报(UDP)、报文段(TCP)。<br>网络层:为主机提供传输服务。把传输层用户数据报封装成组。<br>数据链路层：为同一链路的主机提供数据传输服务。把网络层传下来的组装成帧。<br>物理层：主要考虑怎么在传输媒介上传输比特流，让数据链路层感觉不到通信手段差异<br><strong>OSI</strong><br>表示层：数据压缩和加密。使主机不用关心数据的内部格式<br>会话层：建立和管理会话<br><strong>TCP/IP四层协议</strong><br>应用层<br>运输层<br>网际层<br>网络接口层</p>
-<p><strong>每一层的协议和设备如下：</strong><br>物理层：比特 集线器<br>数据链路：VLAN、MAC （网桥，交换机）帧。<br>网络层：IP、ICMP、ARP、RARP（路由器）<br>传输层：TCP、UDP<br>会话层：NFS、SQL<br>表示层：ASII<br>应用层：FTP、DNS、SMTP、HTTP、WWW</p>
-<p><strong>设备</strong><br>集线器：硬件设备，用来连接网络终端(作用于比特)<br>交换机：识别mac地址信息，根据mac地址进行转发，并记录这些地址与对应的端口<br>路由器：存储转发<br>网关：实现网络互连</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">网络</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/13/计算机网络学习笔记(协议)/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-非递归后序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/13/非递归后序/">非递归后序遍历</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/13/非递归后序/" class="archive-article-date">
-  	<time datetime="2019-12-13T07:16:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>非递归后序<br>思路;<br>先遍历左面。<br>然后拿出栈首<br>右子树不为空就输出<br>为空就跳到右子树</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public List&lt;Integer&gt; postorderTraversal(TreeNode root) &#123;</span><br><span class="line">    List&lt;Integer&gt; list = new ArrayList&lt;&gt;();</span><br><span class="line">    Stack&lt;TreeNode&gt; stack = new Stack&lt;&gt;();</span><br><span class="line">    TreeNode last=root;</span><br><span class="line">    while (root!= null || !stack.isEmpty()) &#123;</span><br><span class="line">        while (root!= null) &#123;</span><br><span class="line">            stack.push(root);</span><br><span class="line">            root= root.left;</span><br><span class="line">        &#125;</span><br><span class="line">        root= stack.peek();</span><br><span class="line">        // 如果某个节点没有右节点，就表示是最终叶子节点，需要输出它</span><br><span class="line">        // 需要输出的还有中间节点，中间的特点就是他的右孩子被输出后，他自己应该立刻输出</span><br><span class="line">        if (root.right == null||last==root.right) &#123;</span><br><span class="line">            list.add(root.val);</span><br><span class="line">            stack.pop();</span><br><span class="line">            last=root;</span><br><span class="line">            root=null;//将当前节点弹出</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            root= root.right;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return list;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">树</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/13/非递归后序/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-215利用最小堆" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/11/215利用最小堆/">最小堆应用</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/11/215利用最小堆/" class="archive-article-date">
-  	<time datetime="2019-12-11T06:35:27.317Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="—利用最小堆"><a href="#—利用最小堆" class="headerlink" title="—利用最小堆"></a>—利用最小堆</h2><p>在未排序的数组中找到第 k 个最大的元素。请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。</p>
-<p>示例 1:</p>
-<p>输入: [3,2,1,5,6,4] 和 k = 2<br>输出: 5</p>
-<p>示例 2:</p>
-<p>输入: [3,2,3,1,2,4,5,5,6] 和 k = 4<br>输出: 4</p>
-<p>说明:</p>
-<p>你可以假设 k 总是有效的，且 1 ≤ k ≤ 数组的长度。<br>思路:利用升序最小队列,当大于k时，删除最小的元素。<br>最后队列首为第k小元素。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int findKthLargest(int[] nums, int k) &#123;</span><br><span class="line">          //利用最小堆，创建K+1的size,遍历数组元素进行添加，并poll出一个。</span><br><span class="line">          //最后遍历结束剩下的第K个中，第一个就是最大的。</span><br><span class="line">          PriorityQueue&lt;Integer&gt; largeK = new PriorityQueue&lt;Integer&gt;(k + 1);</span><br><span class="line">                for(int el : nums) &#123;</span><br><span class="line">                    largeK.add(el);</span><br><span class="line">                    if (largeK.size() &gt; k) &#123;</span><br><span class="line">                        largeK.poll();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                return largeK.poll(); </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">堆</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/11/215利用最小堆/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-随机化快排找第k大的值215" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/11/随机化快排找第k大的值215/">随机化快排第k大的值</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/11/随机化快排找第k大的值215/" class="archive-article-date">
-  	<time datetime="2019-12-11T06:23:23.595Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在未排序的数组中找到第 k 个最大的元素。请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。</p>
-<p>示例 1:</p>
-<p>输入: [3,2,1,5,6,4] 和 k = 2<br>输出: 5</p>
-<p>示例 2:</p>
-<p>输入: [3,2,3,1,2,4,5,5,6] 和 k = 4<br>输出: 4<br><img src="https://img-blog.csdnimg.cn/20191211142249227.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>说明:</strong></p>
-<p>你可以假设 k 总是有效的，且 1 ≤ k ≤ 数组的长度。<br>3 2 1 5 6 4<br>随机3为前驱 3和最右交换<br>4 2 1 5 6 【3】 index=left<br>找比p=3小的数,与index交换,index加1<br>2 4 1 5 6 【3】<br>2 1 4 5 6 【3】<br>最后index和right交换<br>2 1 【3】5 6 4<br>k=4,所以只有在3的右面找第k大元素</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    int nums[];</span><br><span class="line">    public void swap(int a,int b)&#123;</span><br><span class="line">        int t=nums[b];</span><br><span class="line">        nums[b]=nums[a];</span><br><span class="line">        nums[a]=t;</span><br><span class="line">    &#125;</span><br><span class="line">    public int per(int left,int right,int p)&#123;</span><br><span class="line">        swap(p,right);//前驱和最右交换</span><br><span class="line">        int index=left;</span><br><span class="line">        for(int i=left;i&lt;right;i++)&#123;</span><br><span class="line">            if(nums[i]&lt;nums[right])&#123;</span><br><span class="line">                swap(i,index);</span><br><span class="line">                index++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        swap(index,right);</span><br><span class="line">        return index;</span><br><span class="line">    &#125;</span><br><span class="line">    public int sort(int left,int right,int k)&#123;</span><br><span class="line">        if(left-right==0) return nums[left];</span><br><span class="line">         Random random= new Random();</span><br><span class="line">        int p= left + random.nextInt(right - left);</span><br><span class="line">        p=per(left,right,p);</span><br><span class="line">        if(p==k)&#123;</span><br><span class="line">            return nums[p];</span><br><span class="line">        &#125;</span><br><span class="line">        else if(p&lt;k)&#123;</span><br><span class="line">           return sort(p+1,right,k);</span><br><span class="line">        &#125;</span><br><span class="line">        else&#123;</span><br><span class="line">          return sort(left,p-1,k);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public int findKthLargest(int[] nums, int k) &#123;</span><br><span class="line">        int n=nums.length;</span><br><span class="line">        this.nums=nums;</span><br><span class="line">        return sort(0,n-1,n-k);//找第k大</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">排序算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/11/随机化快排找第k大的值215/">展开全文 >></a>
         </p>
       
 
@@ -698,11 +692,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">链表</a>
+                <a href="javascript:void(0)" class="js-tag color4">位运算</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">位运算</a>
+                <a href="javascript:void(0)" class="js-tag color3">链表</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -714,11 +708,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">回溯</a>
+                <a href="javascript:void(0)" class="js-tag color4">字符串</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">字符串</a>
+                <a href="javascript:void(0)" class="js-tag color3">回溯</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -726,11 +720,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CSS</a>
+                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
+                <a href="javascript:void(0)" class="js-tag color4">CSS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -750,15 +744,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Vue</a>
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -766,15 +756,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Vue</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">前端总共和</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -790,15 +784,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">排序</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">排序算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">排序</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -811,6 +805,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">浏览器</a>
               </li>
             
             <div class="clearfix"></div>
