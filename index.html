@@ -657,98 +657,6 @@
 
 
   
-    <article id="post-浏览器与进程和线程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="浏览器是多线程的（多进程）"><a href="#浏览器是多线程的（多进程）" class="headerlink" title="浏览器是多线程的（多进程）"></a>浏览器是多线程的（多进程）</h2><ul>
-<li>每创建了一个Tab页。就相当于一个独立的浏览器进程。(浏览器的优化，一些进程被合并了）</li>
-<li>浏览器能运行：是因为系统给它的进程分配了资源（cpu和内存）<blockquote>
-<p>浏览器有哪些进程</p>
-</blockquote>
-</li>
-<li>浏览器主控进程（负责协调）</li>
-<li>第三方插件进程（使用插件时使用）</li>
-<li>GPU进程浏览器(3D绘制)</li>
-<li>渲染进程（负责协调、脚本执行、事件处理）<blockquote>
-<p>为什么不是进程?</p>
-</blockquote>
-</li>
-<li>一个崩溃影响整个进程。</li>
-</ul>
-<blockquote>
-<p>4.最主要的是渲染进程：它是多线程的。</p>
-</blockquote>
-<ol>
-<li><p>GUI渲染线程：负责渲染解析html树，css树，构建dom树和渲染树。布局绘制。他与js线程是互斥的，js执行时，gui会被挂起，gui会等待js引擎为空时立即执行。</p>
-</li>
-<li><p>JS引擎线程：负责处理js脚本。Js执行时间过长，会导致页面渲染不连贯。一个tab页无论如何只有一个js线程在执行js程序。</p>
-</li>
-<li><p>事件触发线程：归属于浏览器，而不是js引擎。用来控制循环（理解为浏览器忙不过来）。当JS引擎执行代码块如setTimeout（异步任务）时。线程会把事件添加到队列末尾，等待js引擎处理。</p>
-</li>
-<li><p>定时触发线程：计时器不是由js引擎计数的，添加到事件队列中，通过线程计时，当计时完毕后，添加到事件队列中。等待js引擎空闲时处理。</p>
-</li>
-<li><p>异步http请求。Xmlhttprequset连接后，会通过先开一个线程请求，检测到状态变更时，将回调放入事件队列里。由js引擎处理。</p>
-<blockquote>
-<p>浏览器进程和浏览器内核的通信过程。</p>
-</blockquote>
-<ol>
-<li>首先<code>浏览器进程</code>获取用户请求，首先需要获取页面内容(比如通过网络下载资源)。随后将该任务通过接口传给<code>渲染进程</code>，然后开始渲染。</li>
-<li><code>渲染进程</code>接的接口收到信息。交给<code>渲染线程</code>，然后开始渲染。</li>
-<li><code>渲染线程</code>开始渲染页面，这其间可能借助<code>浏览器进程</code>获取资源，GPU来帮助渲染。最后<code>渲染进程</code>把结果传给<code>浏览器进程</code>。</li>
-<li><code>浏览器进程</code>收到结果并将结果绘制出来。</li>
-</ol>
-</li>
-</ol>
-<blockquote>
-<p>为什么互斥js引擎和gui渲染线程？</p>
-</blockquote>
-<ul>
-<li>防止元素数据前后不一样。</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/06/03/浏览器与进程和线程/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-浏览器缓存" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1038,6 +946,125 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/05/27/主页内容/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-axios回顾和总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/27/axios回顾和总结/">axios复习和总结</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/27/axios回顾和总结/" class="archive-article-date">
+  	<time datetime="2020-05-27T08:41:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>axios 是什么</p>
+</blockquote>
+<ul>
+<li><p>Axios 是一个基于 promise 的 HTTP 库，可以用在浏览器和 node.js 中。前端最流行的 ajax 请求库，</p>
+</li>
+<li><p>基于 promise 的异步 ajax 请求库，支持promise所有的API</p>
+</li>
+<li><p>浏览器端/node 端都可以使用，浏览器中创建XMLHttpRequests</p>
+</li>
+<li><p>支持请求／响应拦截器</p>
+</li>
+<li><p>支持请求取消</p>
+</li>
+<li><p>可以转换请求数据和响应数据，并对响应回来的内容自动转换成 JSON类型的数据</p>
+</li>
+<li><p>批量发送多个请求</p>
+</li>
+<li><p>安全性更高，客户端支持防御 XSRF，就是让你的每个请求都带一个从cookie中拿到的key, 根据浏览器同源策略，假冒的网站是拿不到你cookie中得key的，这样，后台就可以轻松辨别出这个请求是否是用户在假冒网站上的误导输入，从而采取正确的策略。</p>
+</li>
+</ul>
+<blockquote>
+<p>axios为什么既能在浏览器环境运行又能在服务器(node)环境运行？</p>
+</blockquote>
+<ol>
+<li>axios在浏览器端使用XMLHttpRequest对象发送ajax请求</li>
+<li>在node环境使用http对象发送ajax请求。</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> defaults.adapter = getDefaultAdapter();</span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">getDefaultAdapter</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">   	<span class="keyword">var</span> adapter;</span><br><span class="line">       <span class="keyword">if</span> (<span class="keyword">typeof</span> XMLHttpRequest !== <span class="string">'undefined'</span>) &#123;</span><br><span class="line">       	<span class="comment">// 浏览器环境</span></span><br><span class="line">           adapter = <span class="built_in">require</span>(<span class="string">'./adapter/xhr'</span>);</span><br><span class="line">       &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> process !== <span class="string">'undefined'</span>) &#123;</span><br><span class="line">       	<span class="comment">// node环境</span></span><br><span class="line">           adapter = <span class="built_in">require</span>(<span class="string">'./adapter/http'</span>);</span><br><span class="line">       &#125;</span><br><span class="line">      <span class="keyword">return</span> adapter;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>上面几行代码，可以看出：XMLHttpRequest 是一个 API，它为客户端提供了在客户端和服务器之间传输数据的功能；process 对象是一个 global （全局变量），提供有关信息，控制当前 Node.js 进程。原来作者是通过判断XMLHttpRequest和process这两个全局变量来判断程序的运行环境的，从而在不同的环境提供不同的http请求模块，实现客户端和服务端程序的兼容。</li>
+</ul>
+<ul>
+<li><p>ajax的缺点、axios相比原生ajax的优点</p>
+<ul>
+<li>本身是针对MVC的编程,不符合现在前端MVVM的浪潮</li>
+<li>基于原生的XHR开发，XHR本身的架构不清晰。</li>
+<li>JQuery整个项目太大，单纯使用ajax却要引入整个JQuery非常的不合理（采取个性化打包的方案又不能享受CDN服务）<ul>
+<li>不符合关注分离（Separation of Concerns）的原则</li>
+<li>配置和调用方式非常混乱，而且基于事件的异步模型不友好。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Vue</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/27/axios回顾和总结/">展开全文 >></a>
         </p>
       
 

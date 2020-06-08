@@ -140,90 +140,6 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-背景图片和五彩导航栏" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/02/背景图片和五彩导航栏/">背景图片和五彩导航栏</a>
-    </h1>
-  
-
-        
-        <a href="/2020/05/02/背景图片和五彩导航栏/" class="archive-article-date">
-  	<time datetime="2020-05-02T05:39:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>背景图片url适合logo<br><strong>方位</strong>：left top center  right bottom 前后顺序无影响<br> <strong>background-repeat: no-repeat</strong>:背景图片是否平铺<br> <strong>background-position</strong>： 20px,40px;一定先x后<strong>background-attachment</strong>：默认scroll(随着页面滚动)，设为固定fixed。<br> 可复合一行使用顺序为：</p>
-<blockquote>
-<p> background tansparent url(img.jpg) reapt fixed top</p>
-</blockquote>
-<p><strong>背景颜色透明：</strong> background: rgba(0,0,0,0.5)也可以写.5,省去0。<br><strong>IE9以上可以使用</strong><br>三个0表示黑色，第四个表示黑色纯度，百分之50是纯黑色。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">  div &#123;</span><br><span class="line">           width: <span class="number">1000</span>px;</span><br><span class="line">           height:<span class="number">1000</span>px;</span><br><span class="line">           background-color: orange;</span><br><span class="line">           background-image: url(imge/大头娃娃<span class="number">1.</span>gif);</span><br><span class="line">           background-repeat: no-repeat;</span><br><span class="line">           background-position: center top;</span><br><span class="line">           background-position： <span class="number">20</span>px,<span class="number">40</span>px;</span><br><span class="line">           background-attachment：fixed;</span><br><span class="line">           background: rgba(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0.5</span>)</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/style&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>鼠标点击后更换为摸头效果</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">    &lt;meta name=<span class="string">"viewport"</span> content=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">    &lt;style&gt;</span></span><br><span class="line"><span class="regexp">        .nav a &#123;</span></span><br><span class="line"><span class="regexp">            /</span>* 转化为行内块 *<span class="regexp">/</span></span><br><span class="line"><span class="regexp">          display: inline-block;</span></span><br><span class="line"><span class="regexp">          width: 300px;</span></span><br><span class="line"><span class="regexp">          height: 300px;</span></span><br><span class="line"><span class="regexp">          background-color: pink;</span></span><br><span class="line"><span class="regexp">          text-align: center;</span></span><br><span class="line"><span class="regexp">          /</span>* 垂直居中 height=line-height *<span class="regexp">/</span></span><br><span class="line"><span class="regexp">          line-height: 300px;</span></span><br><span class="line"><span class="regexp">          color: black;</span></span><br><span class="line"><span class="regexp">          font-size: 50px;</span></span><br><span class="line"><span class="regexp">          /</span>* 下划线无*<span class="regexp">/</span></span><br><span class="line"><span class="regexp">          text-emphasis: none;</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">        .nav .bg1 &#123;</span></span><br><span class="line"><span class="regexp">            background: url(imge/</span>大头娃娃<span class="number">1.</span>gif) no-repeat   ;</span><br><span class="line">        &#125;</span><br><span class="line">        .nav .bg2 &#123;</span><br><span class="line">            background: url(imge/大头娃娃<span class="number">1.</span>gif) no-repeat   ;</span><br><span class="line">        &#125;</span><br><span class="line">        .nav .bg3 &#123;</span><br><span class="line">            background: url(imge/大头娃娃<span class="number">1.</span>gif) no-repeat   ;</span><br><span class="line">        &#125;</span><br><span class="line">        .nav .bg4 &#123;</span><br><span class="line">            background: url(imge/大头娃娃<span class="number">1.</span>gif) no-repeat   ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">/* 鼠标碰后变了 */</span></span><br><span class="line">        .nav .bg2:hover &#123;</span><br><span class="line">            background: url(imge/<span class="number">2.</span>gif) no-repeat ;</span><br><span class="line">        &#125;</span><br><span class="line">        .nav .bg3:hover &#123;</span><br><span class="line">            background: url(imge/<span class="number">2.</span>gif) no-repeat ;</span><br><span class="line">        &#125;</span><br><span class="line">        .nav .bg4:hover &#123;</span><br><span class="line">            background: url(imge/<span class="number">2.</span>gif) no-repeat ;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;<span class="regexp">/style&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"nav"</span>&gt;</span><br><span class="line">        &lt;a href=<span class="string">"#"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"bg1"</span>&gt;五彩导航&lt;<span class="regexp">/a&gt;</span></span><br><span class="line"><span class="regexp">        &lt;a href="#" class="bg2"&gt;五彩导航&lt;/</span>a&gt;</span><br><span class="line">        &lt;a href=<span class="string">"#"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"bg3"</span>&gt;五彩导航&lt;<span class="regexp">/a&gt;</span></span><br><span class="line"><span class="regexp">        &lt;a href="#" class="bg4"&gt;五彩导航&lt;/</span>a&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>body&gt;</span><br><span class="line">&lt;<span class="regexp">/html&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://img-blog.csdnimg.cn/20200502131718564.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CSS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/02/背景图片和五彩导航栏/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-CSS元素显示模式和盒子样式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -603,6 +519,88 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/04/29/Java常见集合类—HashMap/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-秒杀如何解决超卖？" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/01/秒杀如何解决超卖？/">如何解决超卖</a>
+    </h1>
+  
+
+        
+        <a href="/2020/03/01/秒杀如何解决超卖？/" class="archive-article-date">
+  	<time datetime="2020-03-01T07:16:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="如何解决高并发秒杀的超卖问题"><a href="#如何解决高并发秒杀的超卖问题" class="headerlink" title="如何解决高并发秒杀的超卖问题"></a>如何解决高并发秒杀的超卖问题</h2><p>由秒杀引发的一个问题:<br>    <strong>秒杀最大的一个问题就是解决超卖的问题。其中一种解决超卖如下方式：</strong></p>
+<h2 id="一：排他锁"><a href="#一：排他锁" class="headerlink" title="一：排他锁"></a>一：排他锁</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">update goods</span><br><span class="line">set num = num - 1 </span><br><span class="line">WHERE id = 1001 and num &gt; 0</span><br></pre></td></tr></table></figure>
+
+<p>我们假设现在商品只剩下一件了，此时数据库中 num = 1；但有100个线程同时读取到了这个 num = 1，所以100个线程都开始减库存了。<br> 但你会最终会发觉，其实只有一个线程减库存成功，其他99个线程全部失败。<br> 这就是MySQL中的排他锁起了作用。<br> 排他锁又称为写锁，简称X锁。<br>顾名思义，排他锁就是不能与其他所并存，如一个事务获取了一个数据行的排他锁，其他事务就不能再获取该行的其他锁，包括共享锁和排他锁，但是获取排他锁的事务是可以对数据就行读取和修改。<br>就是类似于我在执行update操作的时候，这一行是一个事务(默认加了排他锁)。这一行不能被任何其他线程修改和读写</p>
+<h2 id="二：乐观锁"><a href="#二：乐观锁" class="headerlink" title="二：乐观锁"></a>二：乐观锁</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1 </span><br><span class="line">select version from goods WHERE id= 1001</span><br><span class="line">2  </span><br><span class="line">update goods set num = num - 1, </span><br><span class="line">version = version + 1 </span><br><span class="line">WHERE id= 1001 AND num &gt; 0</span><br><span class="line">AND version =@version(上面查到的version);</span><br></pre></td></tr></table></figure>
+
+<p> 这种方式采用了版本号的方式，其实也就是CAS的原理。<br> 假设此时version = 100，num = 1;<br>100个线程进入到了这里，同时他们select出来版本号都是version = 100。<br>然后直接update的时候，只有其中一个先update了，同时更新了版本号。<br>那么其他99个在更新的时候，会发觉version并不等于上次select的version，就说明version被其他线程修改过了。那么我就放弃这次update </p>
+<h2 id="三：Redis预减库存"><a href="#三：Redis预减库存" class="headerlink" title="三：Redis预减库存"></a>三：Redis预减库存</h2><p> 利用redis的单线程预减库存。比如商品有100件。那么我在redis存储一个k,v。例如 &lt;gs1001, 100&gt;<br> 每一个用户线程进来，key值就减1，等减到0的时候，全部拒绝剩下的请求。<br> 那么也就是只有100个线程会进入到后续操作。所以一定不会出现超卖的现象</p>
+<h2 id="四：悲观锁"><a href="#四：悲观锁" class="headerlink" title="四：悲观锁"></a>四：悲观锁</h2><p>其他可以加悲观锁：在select语句末尾添加了for update<br>效率很低不用这种方式。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">秒杀项目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/03/01/秒杀如何解决超卖？/">展开全文 >></a>
         </p>
       
 

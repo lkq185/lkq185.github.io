@@ -140,92 +140,6 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-718最长公共子串" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/22/718最长公共子串/">最长公共子串(连续的)</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/22/718最长公共子串/" class="archive-article-date">
-  	<time datetime="2019-11-22T02:57:59.987Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>给两个整数数组 A 和 B ，返回两个数组中公共的、长度最长的子数组的长度。(必须是连续的，不连续的叫子序列)</p>
-<p>示例 1:</p>
-<p>输入:<br>A: [1,2,3,2,1]<br>B: [3,2,1,4,7]<br>输出: 3<br>解释:<br>长度最长的公共子数组是 [3, 2, 1]。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int findLength(int[] A, int[] B) &#123;</span><br><span class="line">        int n=A.length;</span><br><span class="line">        int m=B.length;</span><br><span class="line">        int dp[][]=new int[n+1][m+1];</span><br><span class="line">        int ans=0;</span><br><span class="line">        for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">            for(int j=0;j&lt;m;j++)&#123;</span><br><span class="line">                if(A[i]==B[j])</span><br><span class="line">                  dp[i+1][j+1]=dp[i][j]+1;</span><br><span class="line">                else</span><br><span class="line">                  dp[i+1][j+1]=0;</span><br><span class="line">                  ans=Math.max(dp[i+1][j+1],ans);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>算法思路：</p>
-<p>1、把两个字符串分别以行和列组成一个二维矩阵。</p>
-<p>2、比较二维矩阵中每个点对应行列字符中否相等，相等的话值设置为1，否则设置为0。</p>
-<p>3、通过查找出值为1的最长对角线就能找到最长公共子串。</p>
-<p>针对于上面的两个字符串我们可以得到的二维矩阵如下：<br><img src="https://img-blog.csdnimg.cn/20191122105704977.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p>从上图可以看到，str1和str2共有5个公共子串，但最长的公共子串长度为5。</p>
-<p>为了进一步优化算法的效率，我们可以再计算某个二维矩阵的值的时候顺便计算出来当前最长的公共子串的长度，即某个二维矩阵元素的值由record[i][j]=1演变为record[i][j]=1 +record[i-1][j-1]，这样就避免了后续查找对角线长度的操作了。修改后的二维矩阵如下：</p>
-<p><img src="https://img-blog.csdnimg.cn/20191122105647269.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">dp</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/22/718最长公共子串/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-11 16 202双指针" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -591,6 +505,85 @@ AB - 28
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/11/17/77回溯/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-20栈的应用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/14/20栈的应用/">栈的应用</a>
+    </h1>
+  
+
+        
+        <a href="/2019/11/14/20栈的应用/" class="archive-article-date">
+  	<time datetime="2019-11-14T14:41:34.094Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>给定一个只包括 ‘(‘，’)’，’{‘，’}’，’[‘，’]’ 的字符串，判断字符串是否有效。</p>
+<p>有效字符串需满足：</p>
+<pre><code>左括号必须用相同类型的右括号闭合。
+左括号必须以正确的顺序闭合。</code></pre><p>注意空字符串可被认为是有效字符串。</p>
+<p>示例 1:</p>
+<p>输入: “()”<br>输出: true</p>
+<p>示例 2:</p>
+<p>输入: “()[]{}”<br>输出: true</p>
+<p>示例 3:</p>
+<p>输入: “(]”<br>输出: false</p>
+<p>示例 4:</p>
+<p>输入: “([)]”<br>输出: false</p>
+<p>示例 5:</p>
+<p>输入: “{[]}”<br>输出: true</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public boolean isValid(String s) &#123;</span><br><span class="line">        if(s.length()&lt;1)</span><br><span class="line">        return true;</span><br><span class="line">        if(s.charAt(0)==&apos;]&apos;||s.charAt(0)==&apos;)&apos;||s.charAt(0)==&apos;&#125;&apos;) //</span><br><span class="line">          return false;</span><br><span class="line">        Stack&lt;Character&gt;q=new Stack&lt;&gt;();</span><br><span class="line">        Map&lt;Character,Character&gt; map=new HashMap&lt;&gt;();</span><br><span class="line">        map.put(&apos;(&apos;,&apos;)&apos;);</span><br><span class="line">        map.put(&apos;&#123;&apos;,&apos;&#125;&apos;);</span><br><span class="line">        map.put(&apos;[&apos;,&apos;]&apos;);</span><br><span class="line">        int len=s.length();</span><br><span class="line">        int k=1;</span><br><span class="line">        for(int i=0;i&lt;len;i++)&#123;//要从0开始，否则可能出现map的空指针</span><br><span class="line">            char c=s.charAt(i);</span><br><span class="line">            if(c==&apos;(&apos;||c==&apos;&#123;&apos;||c==&apos;[&apos;)&#123;//防止map空指针</span><br><span class="line">                q.push(c);</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line">            if(!q.empty()&amp;&amp;map.get(q.peek())==s.charAt(i))&#123;//map.get get方法   //栈不能为空          </span><br><span class="line">              q.pop();   </span><br><span class="line">              continue;</span><br><span class="line">              &#125;</span><br><span class="line">              return false;//不是左符号还未匹配</span><br><span class="line">            &#125;</span><br><span class="line">             if(q.empty())</span><br><span class="line">             return true;</span><br><span class="line">             else</span><br><span class="line">              return false;</span><br><span class="line">              //栈里不能有] &#125; ) 否则map空指针异常</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>栈初始化:Stack<character>q=new Stack&lt;&gt;();<br>栈头(等于top）q.peek<br>栈空q.empty()<br>弹栈q.pop()</character></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/14/20栈的应用/">展开全文 >></a>
         </p>
       
 
