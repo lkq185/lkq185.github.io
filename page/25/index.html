@@ -140,6 +140,297 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-如何写博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/30/如何写博客/">文章部署方法</a>
+    </h1>
+  
+
+        
+        <a href="/2019/10/30/如何写博客/" class="archive-article-date">
+  	<time datetime="2019-10-30T02:28:52.107Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <center>如何发布文章到自己搭建的hexo博客上</center>
+
+<p><strong>1.csdn导入</strong><br>2.选择Git Bash Here，输入 hexo g (完整命令为hexo generate)，<br>3 然后 输入 hexo s(完整命令为hexo server)，用于启动服务器<br>4.主要用来本地预览；完成后 打开浏览器输入 localhost:4000，会发现多了你刚写的那篇博客<br>5 最后输入hexo d(hexo deploy)，用于将本地文件发布到github等git仓库上；</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/10/30/如何写博客/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Dijkstra" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/22/Dijkstra/">Dijkstra</a>
+    </h1>
+  
+
+        
+        <a href="/2019/09/22/Dijkstra/" class="archive-article-date">
+  	<time datetime="2019-09-22T07:16:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="https://img-blog.csdnimg.cn/20200318190729337.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">       </p>
+<p><img src="https://img-blog.csdnimg.cn/20200318192224667.png" alt="在这里插入图片描述"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">#define INF 0x3f3f3f3;</span><br><span class="line">int map[110][110],dis[110],visited[110];</span><br><span class="line">int n;</span><br><span class="line">void Dijkstra()</span><br><span class="line">&#123;</span><br><span class="line">    int i,p,j,min;</span><br><span class="line">    for (i=1;i&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        dis[i]=map[1][i];</span><br><span class="line">        visited[i]=0;</span><br><span class="line">    &#125;</span><br><span class="line">    visited[1]=1;</span><br><span class="line">    for (i=1;i&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        min=INF;</span><br><span class="line">        for (j=1;j&lt;=n;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            if(!visited[j] &amp;&amp; dis[j]&lt;min)</span><br><span class="line">            &#123;</span><br><span class="line">                p=j;</span><br><span class="line">                min=dis[j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        visited[p]=1;</span><br><span class="line">        for (j=1;j&lt;=n;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            if(!visited[j] &amp;&amp; dis[p]+map[p][j]&lt;dis[j])</span><br><span class="line">            &#123;</span><br><span class="line">                    dis[j]=dis[p]+map[p][j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int m,i,j,a,b,t;</span><br><span class="line">    while(scanf(&quot;%d%d&quot;,&amp;n,&amp;m)!=EOF,n+m)</span><br><span class="line">    &#123;</span><br><span class="line">        for (i=1;i&lt;=n;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            for (j=1;j&lt;=n;j++)</span><br><span class="line">            &#123;</span><br><span class="line">                map[i][j]=INF;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        for(i=1;i&lt;=m;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            scanf(&quot;%d%d%d&quot;,&amp;a,&amp;b,&amp;t);</span><br><span class="line">            map[a][b]=t;</span><br><span class="line">        &#125;</span><br><span class="line">        Dijkstra();</span><br><span class="line">        for(int i=1;i&lt;=n;i++)&#123;</span><br><span class="line">        cout&lt;&lt;&quot;1到&quot;&lt;&lt;i&lt;&lt;&quot;最远距离&quot;;</span><br><span class="line">        printf(&quot;%d\n&quot;,dis[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20200318192548463.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>6 8<br>2 3 5<br>1 3 10<br>1 6 100<br>1 5 30<br>3 4 50<br>4 6 10<br>5 4 20<br>5 6 60<br>1到1最远距离66319347<br>1到2最远距离66319347<br>1到3最远距离10<br>1到4最远距离50<br>1到5最远距离30<br>1到6最远距离60</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">图</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/09/22/Dijkstra/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-第一篇博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/18/第一篇博客/">第一篇博客</a>
+    </h1>
+  
+
+        
+        <a href="/2019/09/18/第一篇博客/" class="archive-article-date">
+  	<time datetime="2019-09-18T07:16:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <center>第一篇博客</center>
+ 在用hexo搭建博客一个月后第一次用markdown写博客，希望以后每天分享自己学到的知识，加油，为梦想奋斗。
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/09/18/第一篇博客/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-我的小可爱朱媛媛" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/17/我的小可爱朱媛媛/">我的小可爱朱媛媛</a>
+    </h1>
+  
+
+        
+        <a href="/2019/09/17/我的小可爱朱媛媛/" class="archive-article-date">
+  	<time datetime="2019-09-17T14:23:38.187Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/09/17/我的小可爱朱媛媛/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     

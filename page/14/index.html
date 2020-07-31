@@ -140,6 +140,298 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-软链接和硬链接" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/06/软链接和硬链接/">软链接和硬链接</a>
+    </h1>
+  
+
+        
+        <a href="/2020/02/06/软链接和硬链接/" class="archive-article-date">
+  	<time datetime="2020-02-06T07:16:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="硬链接和软链接"><a href="#硬链接和软链接" class="headerlink" title="硬链接和软链接"></a>硬链接和软链接</h2><p>   链接就是l开头的(ll查看)   。对应windows快捷方式<br>   软链接：类似快捷方式，快捷方式方式，源文件就就不能用了<br>   硬链接：源文件或者快捷方式其中一个没了，原文件或者快捷方式可以通过快捷方式访问。<br>   touch创建一个文件。<br>   硬链接  在这里插入图片描述</p>
+<p>   软链接  (   f3是f1的快捷方式)<br>   <img src="https://img-blog.csdnimg.cn/20200325154447396.png" alt="在这里插入图片描述"><br> 蓝色的使软链接<br><img src="https://img-blog.csdnimg.cn/2020032515443137.png" alt="在这里插入图片描述"><br> 删除代表快捷方式失效了（红色）<br> <img src="https://img-blog.csdnimg.cn/2020032515441499.png" alt="在这里插入图片描述"><br>echo可以往文件输入字符串</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/02/06/软链接和硬链接/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Linux基础操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/05/Linux基础操作/">Linux基本操作</a>
+    </h1>
+  
+
+        
+        <a href="/2020/02/05/Linux基础操作/" class="archive-article-date">
+  	<time datetime="2020-02-05T07:16:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1.<strong>守护进程</strong><br>相当于windows的应用程序。<br>2.</p>
+<h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><p>pwd:跳到当前目录<br><img src="https://img-blog.csdnimg.cn/20200325154708454.png" alt="在这里插入图片描述"><br>mkdir -p text2/test3/test4 创建多级目录<br>在test2先创建test3，test下创建test4<br>rmdir删除目录<br>rmdir -p删除多级目录<br>按tab 自动补全<br>cp 把install.sh文件复制到lkq<br> <img src="https://img-blog.csdnimg.cn/2020032515471761.png" alt="在这里插入图片描述"><br>rm删除目录<br>-r删除子目录所有<br>-I 询问是否删除<br>-f 强制删除<br>mv(就是剪切) mv 当前文件 移动到另一个文件<br>-f 强制复制<br>ls -ll<br> <img src="https://img-blog.csdnimg.cn/2020032515465410.png" alt="在这里插入图片描述"><br>后9位<br> <img src="https://img-blog.csdnimg.cn/20200325154645614.png" alt="在这里插入图片描述"><br>首字母表示<br>•    当为[ d ]则是目录<br>•    当为[ - ]则是文件；<br>•    若是[ l ]则表示为链接文档 ( link file )；(快捷方式)<br>•    若是[ b ]则表示为装置文件里面的可供储存的接口设备 ( 可随机存取装置 )；<br>•    若是[ c ]则表示为装置文件里面的串行端口设备，例如键盘、鼠标 ( 一次性读取装置 )。<br>俩个root<br>    属主 :root创建的<br>属组 :只有root能操作</p>
+<h2 id="赋值操作权限"><a href="#赋值操作权限" class="headerlink" title="赋值操作权限"></a>赋值操作权限</h2><p>chmod 777 赋值于操作可读可写可执行<br><img src="https://img-blog.csdnimg.cn/20200325154630266.png" alt="在这里插入图片描述"><br>r:4     w:2         x:1<br>rw- 6<br>r-x 5<br>— 0 不可读不可写不可执行<br> 给lkq最高权限。<br>读取文件<br>     cat 正着读<br>     tac 倒着读<br>     nl自动加行号<br>     more 一页一页看 退出永q<br>     tail查看尾巴几行 tail -20 lkq<br>     head头几行</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/02/05/Linux基础操作/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-安装vm12为啥弹出此安装程序不支持降级？该怎么处理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/01/21/安装vm12为啥弹出此安装程序不支持降级？该怎么处理/">如何处理VM12弹出此安装程序不支持降级</a>
+    </h1>
+  
+
+        
+        <a href="/2020/01/21/安装vm12为啥弹出此安装程序不支持降级？该怎么处理/" class="archive-article-date">
+  	<time datetime="2020-01-21T12:38:16.085Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1从网上下载专门针对Wmare的清理工具，如图，在百度中搜索“Windows Installer Clean UP 简体中文版”来下载。<br>2.解压并安装该程序，然后就可以在“开始”-&gt;“所有程序”列表中找到“Windows Installer Clean UP”程序。<br>3.运行该程序，在打开的程序主界面中，选中与“Wmare相关”的部分，如图所示的选择，然后点击“Remove”按钮。<br>4.在弹出的窗口中点击“确定”按钮以授权进行删除操作。<br>5.接下来就可以再次运行“Wmare”虚拟机安装程序了，而且发现安装程序正常运行。（本人亲测，希望对你有所帮助）</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/01/21/安装vm12为啥弹出此安装程序不支持降级？该怎么处理/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-equals和==的区别" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/01/17/equals和==的区别/">equals和==的区别与关系</a>
+    </h1>
+  
+
+        
+        <a href="/2020/01/17/equals和==的区别/" class="archive-article-date">
+  	<time datetime="2020-01-17T07:16:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="区别："><a href="#区别：" class="headerlink" title="区别："></a>区别：</h2><p>==：可以比较值，引用类型比较地址。<br><strong>equals</strong>：继承自Object。比较引用对象，不能比较基本类型。重写的话可以比较引用对象。<br>如：String类重写equala()方法，使其比较的是字符的内容，而不再是内存地址。</p>
+<h2 id="equals-与hashCode-方法："><a href="#equals-与hashCode-方法：" class="headerlink" title="equals()与hashCode()方法："></a>equals()与hashCode()方法：</h2><p>不同对象的hashacode基本是不相同的，不过也有很小概率相同。这是需要用equals了<br>equals不相同，hashcode一定不相同<br>hashcode相同，equals不一定相同(因为不同对象hashcode可能相同)</p>
+<h2 id="为什么重写一个对象的equals方法，就必须重写他的hashCode方法"><a href="#为什么重写一个对象的equals方法，就必须重写他的hashCode方法" class="headerlink" title="为什么重写一个对象的equals方法，就必须重写他的hashCode方法"></a>为什么重写一个对象的equals方法，就必须重写他的hashCode方法</h2><p>Student s1=new Student(“小明”,18);</p>
+<p>Student s2=new Student(“小明”,18);</p>
+<p>如果s1.equals(s2)==true<br>由于默认的hashcode方法是根据对象的内存地址经哈希算法得来的，显然此时s1!=s2,故两者的hashcode不一定相等。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Java基础</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/01/17/equals和==的区别/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-什么是Java虚拟机？为什么Java被称作是“平台无关的编程语言" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -264,315 +556,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/01/15/常用单例模式/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Redis的持久化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/01/12/Redis的持久化/">Redis持久化</a>
-    </h1>
-  
-
-        
-        <a href="/2020/01/12/Redis的持久化/" class="archive-article-date">
-  	<time datetime="2020-01-12T12:16:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Redis是内存型数据库，为了保证数据在断电后不会丢失，需要将内存中的数据持久化到硬盘上。<br><strong>RDB 持久化</strong><br>将某个时间点的所有数据都存放到硬盘上。可以将快照复制到其它服务器从而创建具有相同数据的服务器副本。如果系统发生故障，将会丢失最后一次创建快照之后的数据。如果数据量很大，保存快照的时间会很长。<br><strong>AOF 持久化</strong><br>将写命令添加到 AOF 文件（Append Only File）的末尾。使用 AOF 持久化需要设置同步选项，从而确保写命令什么时候会同步到磁盘文件上。这是因为对文件进行写入并不会马上将内容同步到磁盘上，而是先存储到缓冲区，然后由操作系统决定什么时候同步到磁盘。<br>随着服务器写请求的增多，AOF 文件会越来越大。Redis 提供了一种将 AOF 重写的特性，能够去除 AOF 文件中的冗余写命令。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/01/12/Redis的持久化/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Redis基础与常用数据结构" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/01/11/Redis基础与常用数据结构/">Redis基础和常用数据结构</a>
-    </h1>
-  
-
-        
-        <a href="/2020/01/11/Redis基础与常用数据结构/" class="archive-article-date">
-  	<time datetime="2020-01-11T12:10:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h2><p>Redis 是速度非常快的非关系型（<strong>NoSQL</strong>）内存键值数据库，可以存储键和五种不同类型的值之间的映射。<br><code>键的类型只能为字符串，</code>值支持五种数据类型：字符串、列表、集合、散列表、有序集合。</p>
-<h2 id="二、使用命令"><a href="#二、使用命令" class="headerlink" title="二、使用命令"></a>二、使用命令</h2><p><code>redis-cli</code> 启动redis（默认端口 6379）<br><strong>String</strong><br><code>set key value</code> 设置key和value<br><code>get key</code>           得到key<br><code>del key</code>    删除key</p>
-<p><strong>List</strong><br><code>rpush list-key value</code> 设置list的value<br><code>lrange list-key 0 -1</code> 输出List所有元素</p>
-<h2 id="三、数据类型"><a href="#三、数据类型" class="headerlink" title="三、数据类型"></a>三、数据类型</h2><p>key为String类型<br>value为String set zset Hash List</p>
-<h2 id="四、应用"><a href="#四、应用" class="headerlink" title="四、应用"></a>四、应用</h2><p>计数器：内存数据库读写性能高，很适合用做频繁读写的计数量(用String)、<br>缓存：将热点数据存到内存中，并设置最大使用量和淘汰策略。<br>查找表：利用了Redis快速查找的特性。如存储DNS。<br>消息队列：可以List双向链表类型。<br>会话缓存：存储多台应用服务器的会话信息。<br>分布式锁：可以用Redis自带的SETNX实现分布式锁。<br>交集并集实现共同好友：利用Set(不重复值集合)<br>有序性操作实现排行榜:利用Zset(排序的set)</p>
-<h2 id="五、与-Memchached-的比较。"><a href="#五、与-Memchached-的比较。" class="headerlink" title="五、与 Memchached 的比较。"></a>五、与 Memchached 的比较。</h2><p><img src="https://img-blog.csdnimg.cn/20200310214039815.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="六、优点"><a href="#六、优点" class="headerlink" title="六、优点"></a>六、优点</h2><p>1.Redis是<strong>单线程</strong>的，并且线程安全。<br>2.<strong>内存</strong>数据库，速度快，也支持数据的持久化，可以将内存中的数据保存在磁盘中，重启的时候可以再次加载进行使用。<br>3.Redis支持<strong>事务</strong><br>4.Redis的所有操作都是<strong>原子性</strong>的</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/01/11/Redis基础与常用数据结构/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-LRU" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/01/07/LRU/">LRU算法</a>
-    </h1>
-  
-
-        
-        <a href="/2020/01/07/LRU/" class="archive-article-date">
-  	<time datetime="2020-01-07T07:16:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">package Node;</span><br><span class="line"></span><br><span class="line">class DoubleList &#123;  </span><br><span class="line">    private Node head, tail; // 头尾虚节点</span><br><span class="line">    private int size; // 链表元素数</span><br><span class="line"></span><br><span class="line">    public DoubleList() &#123;</span><br><span class="line">        head = new Node(0, 0);</span><br><span class="line">        tail = new Node(0, 0);</span><br><span class="line">        head.next = tail;</span><br><span class="line">        tail.prev = head;</span><br><span class="line">        size = 0;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 在链表头部添加节点 x</span><br><span class="line">    public void addFirst(Node x) &#123;</span><br><span class="line">        x.next = head.next;</span><br><span class="line">        x.prev = head;</span><br><span class="line">        head.next.prev = x;</span><br><span class="line">        head.next = x;</span><br><span class="line">        size++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 删除链表中的 x 节点（x 一定存在）</span><br><span class="line">    public void remove(Node x) &#123;</span><br><span class="line">        x.prev.next = x.next;</span><br><span class="line">        x.next.prev = x.prev;</span><br><span class="line">        size--;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 删除链表中最后一个节点，并返回该节点</span><br><span class="line">    public Node removeLast() &#123;</span><br><span class="line">        if (tail.prev == head)</span><br><span class="line">            return null;</span><br><span class="line">        Node last = tail.prev;</span><br><span class="line">        remove(last);</span><br><span class="line">        return last;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 返回链表长度</span><br><span class="line">    public int size() &#123; return size; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">package Node;</span><br><span class="line">import java.util.*;</span><br><span class="line">class LRUCache &#123;</span><br><span class="line">    // key -&gt; Node(key, val)</span><br><span class="line">    private HashMap&lt;Integer, Node&gt; map;</span><br><span class="line">    // Node(k1, v1) &lt;-&gt; Node(k2, v2)...</span><br><span class="line">    private DoubleList cache;</span><br><span class="line">    // 最大容量</span><br><span class="line">    private int cap;</span><br><span class="line">    </span><br><span class="line">    public LRUCache(int capacity) &#123;</span><br><span class="line">        this.cap = capacity;</span><br><span class="line">        map = new HashMap&lt;&gt;();</span><br><span class="line">        cache = new DoubleList();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public int get(int key) &#123;</span><br><span class="line">        if (!map.containsKey(key))</span><br><span class="line">            return -1;</span><br><span class="line">        int val = map.get(key).val;</span><br><span class="line">        // 利用 put 方法把该数据提前</span><br><span class="line">        put(key, val);</span><br><span class="line">        return val;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public void put(int key, int val) &#123;</span><br><span class="line">        // 先把新节点 x 做出来</span><br><span class="line">        Node x = new Node(key, val);</span><br><span class="line">        </span><br><span class="line">        if (map.containsKey(key)==true) &#123;</span><br><span class="line">            // 删除旧的节点，新的插到头部</span><br><span class="line">            cache.remove(map.get(key));</span><br><span class="line">            cache.addFirst(x);</span><br><span class="line">            // 更新 map 中对应的数据</span><br><span class="line">            map.put(key, x);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            if (cap == cache.size()) &#123;</span><br><span class="line">                // 删除链表最后一个数据</span><br><span class="line">                Node last = cache.removeLast();</span><br><span class="line">                map.remove(last.key);</span><br><span class="line">            &#125;</span><br><span class="line">            // 直接添加到头部</span><br><span class="line">            cache.addFirst(x);</span><br><span class="line">            map.put(key, x);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">package Node;</span><br><span class="line">class Node &#123;</span><br><span class="line">    public int key, val;</span><br><span class="line">    public Node next, prev;</span><br><span class="line">    public Node(int k, int v) &#123;</span><br><span class="line">        this.key = k;</span><br><span class="line">        this.val = v;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">链表</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/01/07/LRU/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-树的子结构" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/01/06/树的子结构/">树的子结构</a>
-    </h1>
-  
-
-        
-        <a href="/2020/01/06/树的子结构/" class="archive-article-date">
-  	<time datetime="2020-01-06T14:27:53.109Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="https://img-blog.csdnimg.cn/20200106222628376.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">//再写一个方法来遍历大树，找到一个和小树根节点值相等的节点，</span><br><span class="line">以该节点和小树根节点的值为参数调用上面的方法即可</span><br><span class="line">public boolean HasSubtree(TreeNode root1, TreeNode root2) &#123;</span><br><span class="line">    if (root1 == null || root2 == null)</span><br><span class="line">        return false;</span><br><span class="line">    return isSubtreeWithRoot(root1, root2) || HasSubtree(root1.left, root2) || HasSubtree(root1.right, root2);</span><br><span class="line">&#125;</span><br><span class="line">//先写一个方法，传入两棵根节点值相同的树，判断tree1是否和tree2结构一样</span><br><span class="line">private boolean isSubtreeWithRoot(TreeNode root1, TreeNode root2) &#123;</span><br><span class="line">    if (root2 == null)</span><br><span class="line">        return true;</span><br><span class="line">    if (root1 == null)</span><br><span class="line">        return false;</span><br><span class="line">    if (root1.val != root2.val)</span><br><span class="line">        return false;</span><br><span class="line">    return isSubtreeWithRoot(root1.left, root2.left) &amp;&amp; isSubtreeWithRoot(root1.right, root2.right);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">树</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/01/06/树的子结构/">展开全文 >></a>
         </p>
       
 

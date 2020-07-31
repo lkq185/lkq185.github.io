@@ -140,6 +140,325 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-19删除倒数第n个结点" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/04/19删除倒数第n个结点/">链表操作2</a>
+    </h1>
+  
+
+        
+        <a href="/2019/12/04/19删除倒数第n个结点/" class="archive-article-date">
+  	<time datetime="2019-12-04T14:57:56.305Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>给定一个链表，删除链表的倒数第 n 个节点，并且返回链表的头结点。</p>
+<p>示例：</p>
+<p>给定一个链表: 1-&gt;2-&gt;3-&gt;4-&gt;5, 和 n = 2.</p>
+<p>当删除了倒数第二个节点后，链表变为 1-&gt;2-&gt;3-&gt;5.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public ListNode removeNthFromEnd(ListNode head, int n) &#123;</span><br><span class="line">        if(head==null) return null;</span><br><span class="line">        ListNode ans=new ListNode(0);//</span><br><span class="line">        ans.next=head;</span><br><span class="line">        ListNode t=head;</span><br><span class="line">        int count=0;</span><br><span class="line">        while(t!=null)&#123;</span><br><span class="line">            t=t.next;</span><br><span class="line">            count++;</span><br><span class="line">        &#125;</span><br><span class="line">        t=ans;</span><br><span class="line">        for(int i=0;i&lt;count-n;i++)&#123;</span><br><span class="line">            t=t.next;</span><br><span class="line">        &#125;</span><br><span class="line">        t.next=t.next.next;</span><br><span class="line">        return ans.next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">链表</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/04/19删除倒数第n个结点/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-40回溯加剪枝算法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/04/40回溯加剪枝算法/">剪枝加回溯</a>
+    </h1>
+  
+
+        
+        <a href="/2019/12/04/40回溯加剪枝算法/" class="archive-article-date">
+  	<time datetime="2019-12-04T14:54:46.598Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="剪枝加回溯"><a href="#剪枝加回溯" class="headerlink" title="剪枝加回溯"></a>剪枝加回溯</h2><p>给定一个数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。</p>
+<p>candidates 中的每个数字在每个组合中只能使用一次。</p>
+<p>说明：</p>
+<pre><code>所有数字（包括目标数）都是正整数。
+解集不能包含重复的组合。 </code></pre><p>示例 1:</p>
+<p>输入: candidates = [10,1,2,7,6,1,5], target = 8,<br>所求解集为:<br>[<br>  [1, 7],<br>  [1, 2, 5],<br>  [2, 6],<br>  [1, 1, 6]<br>]</p>
+<p>示例 2:</p>
+<p>输入: candidates = [2,5,2,1,2], target = 5,<br>所求解集为:<br>[<br>  [1,2,2],<br>  [5]<br>]</p>
+<p>剪枝前</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    int target;</span><br><span class="line">    LinkedList&lt;List&lt;Integer&gt;&gt; res=new LinkedList&lt;&gt;();</span><br><span class="line">    public void help(int sum,int first,LinkedList&lt;Integer&gt; cur,int candidates[])&#123;</span><br><span class="line">        if(sum&gt;=target)&#123;</span><br><span class="line">        if(sum==target&amp;&amp;res.contains(cur)==false)</span><br><span class="line">            res.add(new LinkedList&lt;Integer&gt;(cur));</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i=first;i&lt;candidates.length;i++)&#123;</span><br><span class="line">            sum+=candidates[i];</span><br><span class="line">            cur.add(candidates[i]);</span><br><span class="line">            help(sum,i+1,cur,candidates);</span><br><span class="line">            sum-=candidates[i];</span><br><span class="line">            cur.removeLast();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public List&lt;List&lt;Integer&gt;&gt; combinationSum2(int[] candidates, int target) &#123;</span><br><span class="line">        this.target=target;</span><br><span class="line">        Arrays.sort(candidates);</span><br><span class="line">        LinkedList&lt;Integer&gt; cur=new LinkedList&lt;&gt;();</span><br><span class="line">        help(0,0,cur,candidates);</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>剪枝后</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    int target;</span><br><span class="line">    LinkedList&lt;List&lt;Integer&gt;&gt; res=new LinkedList&lt;&gt;();</span><br><span class="line">    public void help(int sum,int first,LinkedList&lt;Integer&gt; cur,int candidates[])&#123;</span><br><span class="line">        if(sum&gt;=target)&#123;//排序好的如大于,直接剪枝</span><br><span class="line">        if(sum==target&amp;&amp;res.contains(cur)==false)</span><br><span class="line">            res.add(new LinkedList&lt;Integer&gt;(cur));</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i=first;i&lt;candidates.length;i++)&#123;</span><br><span class="line">            if(candidates[i]&gt;target)</span><br><span class="line">               break;</span><br><span class="line">            sum+=candidates[i];</span><br><span class="line">            if(sum&gt;target) break;//剪枝</span><br><span class="line">            cur.add(candidates[i]);</span><br><span class="line">            help(sum,i+1,cur,candidates);</span><br><span class="line">            sum-=candidates[i];</span><br><span class="line">            cur.removeLast();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public List&lt;List&lt;Integer&gt;&gt; combinationSum2(int[] candidates, int target) &#123;</span><br><span class="line">        this.target=target;</span><br><span class="line">        Arrays.sort(candidates);</span><br><span class="line">        LinkedList&lt;Integer&gt; cur=new LinkedList&lt;&gt;();</span><br><span class="line">        help(0,0,cur,candidates);</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">回溯</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/04/40回溯加剪枝算法/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-226反转二叉树" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/03/226反转二叉树/">反转二叉树(镜像)</a>
+    </h1>
+  
+
+        
+        <a href="/2019/12/03/226反转二叉树/" class="archive-article-date">
+  	<time datetime="2019-12-03T07:56:05.257Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>示例：</p>
+<p>输入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">     4</span><br><span class="line">   /   \</span><br><span class="line">  2     7</span><br><span class="line"> / \   / \</span><br><span class="line">1   3 6   9</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">     4</span><br><span class="line">   /   \</span><br><span class="line">  7     2</span><br><span class="line"> / \   / \</span><br><span class="line">9   6 3   1</span><br></pre></td></tr></table></figure>
+
+<h2 id="迭代"><a href="#迭代" class="headerlink" title="迭代"></a>迭代</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition for a binary tree node.</span><br><span class="line"> * public class TreeNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     TreeNode left;</span><br><span class="line"> *     TreeNode right;</span><br><span class="line"> *     TreeNode(int x) &#123; val = x; &#125;</span><br><span class="line"> * &#125;</span><br><span class="line"> */</span><br><span class="line">class Solution &#123;</span><br><span class="line">    public TreeNode invertTree(TreeNode root) &#123;</span><br><span class="line">        if(root==null) return null;</span><br><span class="line">        Stack&lt;TreeNode&gt; stack=new Stack&lt;&gt;();</span><br><span class="line">        stack.add(root);</span><br><span class="line">        while(!stack.isEmpty())&#123;</span><br><span class="line">            TreeNode t=stack.pop();</span><br><span class="line">            TreeNode temp=t.right;</span><br><span class="line">            t.right=t.left;</span><br><span class="line">            t.left=temp;</span><br><span class="line">            if(t.left!=null) stack.add(t.left);</span><br><span class="line">            if(t.right!=null) stack.add(t.right);</span><br><span class="line">        &#125;</span><br><span class="line">        return root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public TreeNode invertTree(TreeNode root) &#123;</span><br><span class="line">        help(root);</span><br><span class="line">        return root;</span><br><span class="line">    &#125;</span><br><span class="line">    public void help(TreeNode root)&#123;</span><br><span class="line">        if(root==null) return;</span><br><span class="line">        TreeNode t=root.left;</span><br><span class="line">        root.left=root.right;</span><br><span class="line">        root.right=t;</span><br><span class="line">        help(root.left);</span><br><span class="line">        help(root.right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/03/226反转二叉树/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-83链表元素删除" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/02/83链表元素删除/">链表操作1</a>
+    </h1>
+  
+
+        
+        <a href="/2019/12/02/83链表元素删除/" class="archive-article-date">
+  	<time datetime="2019-12-02T15:21:11.863Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><p>给定一个链表，两两交换其中相邻的节点，并返回交换后的链表。</p>
+<p>你不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。</p>
+<p> 示例:</p>
+<p>给定 1-&gt;2-&gt;3-&gt;4, 你应该返回 2-&gt;1-&gt;4-&gt;3.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition for singly-linked list.</span><br><span class="line"> * public class ListNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     ListNode next;</span><br><span class="line"> *     ListNode(int x) &#123; val = x; &#125;</span><br><span class="line"> * &#125;</span><br><span class="line"> */</span><br><span class="line">class Solution &#123;</span><br><span class="line">    public ListNode swapPairs(ListNode head) &#123;</span><br><span class="line">        ListNode cur=new ListNode(0);</span><br><span class="line">        cur.next=head;</span><br><span class="line">        ListNode ans=cur;</span><br><span class="line">        while(ans.next!=null&amp;&amp;ans.next.next!=null)&#123;</span><br><span class="line">             ListNode start=ans.next;</span><br><span class="line">             ListNode end=ans.next.next;</span><br><span class="line">             ans.next=end;</span><br><span class="line">             start.next=end.next;</span><br><span class="line">             end.next=start;</span><br><span class="line">             ans=start;             </span><br><span class="line">        &#125;</span><br><span class="line">        return cur.next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20191202231834588.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">链表</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/02/83链表元素删除/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-2. 两数相加" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -255,366 +574,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/12/01/5最长回文子串/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-链表删除21 237 876" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/30/链表删除21 237 876/">链表简单操作</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/30/链表删除21 237 876/" class="archive-article-date">
-  	<time datetime="2019-11-30T14:45:40.853Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>##链表操作<br><strong>删除</strong></p>
-<p>给定一个带有头结点 head 的非空单链表，返回链表的中间结点。</p>
-<p>如果有两个中间结点，则返回第二个中间结点。</p>
-<p>示例 1：</p>
-<p>输入：[1,2,3,4,5]<br>输出：此列表中的结点 3 (序列化形式：[3,4,5])<br>返回的结点值为 3 。 (测评系统对该结点序列化表述是 [3,4,5])。<br>注意，我们返回了一个 ListNode 类型的对象 ans，这样：<br>ans.val = 3, ans.next.val = 4, ans.next.next.val = 5, 以及 ans.next.next.next = NULL.</p>
-<p>示例 2：</p>
-<p>输入：[1,2,3,4,5,6]<br>输出：此列表中的结点 4 (序列化形式：[4,5,6])<br>由于该列表有两个中间结点，值分别为 3 和 4，我们返回第二个结点。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public ListNode middleNode(ListNode head) &#123;</span><br><span class="line">        int ans=0;</span><br><span class="line">        ListNode pre=head;</span><br><span class="line">        while(pre!=null)&#123;</span><br><span class="line">            pre=pre.next;</span><br><span class="line">            ans++;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i=0;i&lt;ans/2;i++)&#123;</span><br><span class="line">           head=head.next;</span><br><span class="line">        &#125;</span><br><span class="line">        return head;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="合成操作"><a href="#合成操作" class="headerlink" title="合成操作"></a>合成操作</h2><p>将两个有序链表合并为一个新的有序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。 </p>
-<p>示例：</p>
-<p>输入：1-&gt;2-&gt;4, 1-&gt;3-&gt;4<br>输出：1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition for singly-linked list.</span><br><span class="line"> * public class ListNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     ListNode next;</span><br><span class="line"> *     ListNode(int x) &#123; val = x; &#125;</span><br><span class="line"> * &#125;</span><br><span class="line"> */</span><br><span class="line">class Solution &#123;</span><br><span class="line">    public ListNode mergeTwoLists(ListNode l1, ListNode l2) &#123;</span><br><span class="line">        if(l1==null)</span><br><span class="line">          return l2;</span><br><span class="line">        else if(l2==null)</span><br><span class="line">         return l1;</span><br><span class="line">        else if(l1.val&gt;l2.val)&#123;</span><br><span class="line">            l2.next=mergeTwoLists(l1,l2.next);//l2指向merge函数返回值,即俩个元素链接的头指针</span><br><span class="line">            return l2;</span><br><span class="line">        &#125;</span><br><span class="line">        else&#123;</span><br><span class="line">            l1.next=mergeTwoLists(l1.next,l2);</span><br><span class="line">            return l1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>删除2</strong></p>
-<p>请编写一个函数，使其可以删除某个链表中给定的（非末尾）节点，你将只被给定要求被删除的节点。</p>
-<p>现有一个链表 – head = [4,5,1,9]，它可以表示为:</p>
-<p>示例 1:</p>
-<p>输入: head = [4,5,1,9], node = 5<br>输出: [4,1,9]<br>解释: 给定你链表中值为 5 的第二个节点，那么在调用了你的函数之后，该链表应变为 4 -&gt; 1 -&gt; 9.<br><img src="https://img-blog.csdnimg.cn/20191130223950506.png" alt="在这里插入图片描述"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public void deleteNode(ListNode node) &#123;</span><br><span class="line">       node.val=node.next.val;</span><br><span class="line">       node.next=node.next.next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>删除5<br>先把1的值赋给5<br>然后用原先的5，现在的1指向9</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">链表</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/30/链表删除21 237 876/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-反转链表" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/27/反转链表/">反转链表</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/27/反转链表/" class="archive-article-date">
-  	<time datetime="2019-11-27T14:51:36.038Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="反转一个单链表"><a href="#反转一个单链表" class="headerlink" title="反转一个单链表"></a>反转一个单链表</h2><p>示例:</p>
-<p>输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL<br>输出: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL</p>
-<p>进阶:<br>你可以迭代或递归地反转链表。你能否用两种方法解决这道题？</p>
-<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/reverse-linked-list" target="_blank" rel="noopener">https://leetcode-cn.com/problems/reverse-linked-list</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public ListNode reverseList(ListNode head) &#123;</span><br><span class="line">        ListNode cur=head;//当前节点</span><br><span class="line">        ListNode pre=null;</span><br><span class="line">        ListNode t=null;</span><br><span class="line">        while(cur!=null)&#123;</span><br><span class="line">            //记录当前节点的下一个节点</span><br><span class="line">            t=cur.next;</span><br><span class="line">            //当前节点指向前一个结点</span><br><span class="line">            cur.next=pre;//注意当前节点是cur.next</span><br><span class="line">            //移动</span><br><span class="line">            pre=cur;//前一个结点指向当前结点</span><br><span class="line">            cur=t;</span><br><span class="line">        &#125;</span><br><span class="line">        return pre;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">链表</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/27/反转链表/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-72最小变化次数 动态规划" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/26/72最小变化次数 动态规划/">最小单词变化次数</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/26/72最小变化次数 动态规划/" class="archive-article-date">
-  	<time datetime="2019-11-26T02:31:07.848Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="最小单词变化次数"><a href="#最小单词变化次数" class="headerlink" title="最小单词变化次数"></a>最小单词变化次数</h2><p>给定两个单词 word1 和 word2，计算出将 word1 转换成 word2 所使用的最少操作数 。</p>
-<p>你可以对一个单词进行如下三种操作：</p>
-<pre><code>插入一个字符
-删除一个字符
-替换一个字符</code></pre><p>示例 1:</p>
-<p>输入: word1 = “horse”, word2 = “ros”<br>输出: 3<br>解释:<br>horse -&gt; rorse (将 ‘h’ 替换为 ‘r’)<br>rorse -&gt; rose (删除 ‘r’)<br>rose -&gt; ros (删除 ‘e’)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int minDistance(String word1, String word2) &#123;</span><br><span class="line">        int n=word1.length();</span><br><span class="line">        int m=word2.length();</span><br><span class="line">        int dp[][]=new int[n+1][m+1];</span><br><span class="line">        for(int i=0;i&lt;=m;i++) dp[0][i]=i;</span><br><span class="line">        for(int i=0;i&lt;=n;i++) dp[i][0]=i;</span><br><span class="line">        for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">            for(int j=0;j&lt;m;j++)&#123;</span><br><span class="line">                if(word1.charAt(i)==word2.charAt(j))</span><br><span class="line">                   dp[i+1][j+1]=dp[i][j];</span><br><span class="line">                else</span><br><span class="line">                   dp[i+1][j+1]=Math.min(Math.min(dp[i][j],dp[i+1][j]),dp[i][j+1])+1;//dp[i][j]代表替换操作,dp[i+1][j]代表删除操作，dp[i][j+1]代表增加操作</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[n][m];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>当 word1[i] == word2[j]，dp[i][j] = dp[i-1][j-1]；<br>相当于最后一位是一样的，这一位就不用操作，只看前面的就行</p>
-<p>当 word1[i] != word2[j]，dp[i][j] = min(dp[i-1][j-1], dp[i-1][j], dp[i][j-1]) + 1</p>
-<p>最后一位不一样，3种方法：<br>1.dp[i-1][j-1] 表示替换操作，只需要直接替换最后一位就行，这时就是前i-1 j-1的+1<br>2.dp[i-1][j]删除操作， hors horse 前4个 前5个 ，只要删一个就行<br>3.dp[i][j-1] 表示插入操作，horse hors，插入一个s<br>返回dp[-1][-1]</p>
-<p><img src="https://img-blog.csdnimg.cn/2019112610293031.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="image.png"></p>
-<p>红色字代表word1[i] == word2[j]，dp[i][j] = dp[i-1][j-1]，和左上那个格一样</p>
-<p>用黄色格子举例，对应的操作为’ho’ -&gt; ‘r’</p>
-<p>首先判断word1[i] != word2[j]，因为r!=o，所以dp[i][j] = min(dp[i-1][j-1], dp[i-1][j], dp[i][j-1]) + 1，找黄色格子上方，左方，左上最小的那个值+1就得到。可以看到，上方和左上+1都满足条件，对应的操作为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.换掉h，删掉o，2，从上方格子来，dp[i-1][j]+1，删除操作</span><br><span class="line">2.删掉h，换掉o，2，从左上的格子来，dp[i-1][j-1]+1替换操作</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">dp</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/26/72最小变化次数 动态规划/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-144 589 590二叉树和n叉树前序遍历" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/25/144 589 590二叉树和n叉树前序遍历/">递归与迭代</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/25/144 589 590二叉树和n叉树前序遍历/" class="archive-article-date">
-  	<time datetime="2019-11-25T14:06:00.297Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="144-二叉树的前序遍历"><a href="#144-二叉树的前序遍历" class="headerlink" title="144. 二叉树的前序遍历"></a>144. 二叉树的前序遍历</h2><p>给定一个二叉树，返回它的 前序 遍历。</p>
-<p> 示例:</p>
-<p>输入: [1,null,2,3]  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line"> \</span><br><span class="line">  2</span><br><span class="line"> /</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
-
-<p>输出: [1,2,3]</p>
-<p><strong>迭代</strong>(先右后左）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition for a binary tree node.</span><br><span class="line"> * public class TreeNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     TreeNode left;</span><br><span class="line"> *     TreeNode right;</span><br><span class="line"> *     TreeNode(int x) &#123; val = x; &#125;</span><br><span class="line"> * &#125;</span><br><span class="line"> */</span><br><span class="line">class Solution &#123;</span><br><span class="line">    public List&lt;Integer&gt; preorderTraversal(TreeNode root) &#123;</span><br><span class="line">        List&lt;Integer&gt; res=new LinkedList&lt;&gt;();</span><br><span class="line">        if(root==null) return res;</span><br><span class="line">        Stack&lt;TreeNode&gt; q=new Stack&lt;&gt;();</span><br><span class="line">        q.add(root);</span><br><span class="line">        while(!q.isEmpty())&#123;//因为是栈，先右后左</span><br><span class="line">            TreeNode t=q.peek();</span><br><span class="line">            q.pop();</span><br><span class="line">            res.add(t.val);</span><br><span class="line">            if(t.right!=null)</span><br><span class="line">            q.add(t.right);</span><br><span class="line">            if(t.left!=null)</span><br><span class="line">            q.add(t.left);</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>递归</strong>（先左后右）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    List&lt;Integer&gt; res=new ArrayList&lt;&gt;();</span><br><span class="line">    public void help(TreeNode root)&#123;</span><br><span class="line">        if(root==null) return;</span><br><span class="line">        res.add(root.val);</span><br><span class="line">        help(root.left);</span><br><span class="line">        help(root.right);</span><br><span class="line">    &#125;</span><br><span class="line">    public List&lt;Integer&gt; preorderTraversal(TreeNode root) &#123;</span><br><span class="line">        help(root);</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="589-N叉树的前序遍历"><a href="#589-N叉树的前序遍历" class="headerlink" title="589. N叉树的前序遍历"></a>589. N叉树的前序遍历</h2><p>给定一个 N 叉树，返回其节点值的前序遍历。</p>
-<p>例如，给定一个 3叉树 :<img src="https://img-blog.csdnimg.cn/20191125213950431.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p>返回其前序遍历: [1,3,5,6,2,4]。</p>
-<h2 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">// Definition for a Node.</span><br><span class="line">class Node &#123;</span><br><span class="line">    public int val;</span><br><span class="line">    public List&lt;Node&gt; children;</span><br><span class="line"></span><br><span class="line">    public Node() &#123;&#125;</span><br><span class="line"></span><br><span class="line">    public Node(int _val) &#123;</span><br><span class="line">        val = _val;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Node(int _val, List&lt;Node&gt; _children) &#123;</span><br><span class="line">        val = _val;</span><br><span class="line">        children = _children;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">*/</span><br><span class="line">class Solution &#123;</span><br><span class="line">    List&lt;Integer&gt; res=new ArrayList&lt;&gt;();</span><br><span class="line">    public List&lt;Integer&gt; preorder(Node root) &#123;</span><br><span class="line">        if(root==null) return res;</span><br><span class="line">        res.add(root.val);</span><br><span class="line">        for(int i=0;i&lt;root.children.size();i++)</span><br><span class="line">        preorder(root.children.get(i));</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>迭代</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public List&lt;Integer&gt; preorder(Node root) &#123;</span><br><span class="line">        List&lt;Integer&gt; res=new LinkedList&lt;&gt;();</span><br><span class="line">        if(root==null) return res;</span><br><span class="line">        Stack&lt;Node&gt; q=new Stack&lt;&gt;();</span><br><span class="line">        q.add(root);</span><br><span class="line">        while(!q.isEmpty())&#123;//因为是栈，先右后左</span><br><span class="line">            Node t=q.peek();</span><br><span class="line">            q.pop();</span><br><span class="line">            res.add(t.val);</span><br><span class="line">            for(int i=t.children.size()-1;i&gt;=0;i--)&#123;</span><br><span class="line">            q.add(t.children.get(i));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="590-N叉树的后序遍历"><a href="#590-N叉树的后序遍历" class="headerlink" title="590. N叉树的后序遍历"></a>590. N叉树的后序遍历</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    List&lt;Integer&gt; res=new ArrayList&lt;&gt;();</span><br><span class="line">    public void help(Node root)&#123;</span><br><span class="line">        if(root==null) return ;</span><br><span class="line">        for(int i=0;i&lt;root.children.size();i++)&#123;</span><br><span class="line">        postorder(root.children.get(i));</span><br><span class="line">        &#125;</span><br><span class="line">        res.add(root.val);</span><br><span class="line">    &#125;</span><br><span class="line">    public List&lt;Integer&gt; postorder(Node root) &#123;</span><br><span class="line">        help(root);</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>二叉树的后序遍历 是左右加值那么n叉树自然是遍历之后加值</strong></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">树</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/25/144 589 590二叉树和n叉树前序遍历/">展开全文 >></a>
         </p>
       
 

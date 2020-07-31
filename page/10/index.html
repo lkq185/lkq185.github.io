@@ -140,6 +140,580 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-品优购项目二" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/07/品优购项目二/">品优购电商项目学习一(头部界面)</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/07/品优购项目二/" class="archive-article-date">
+  	<time datetime="2020-05-07T11:31:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="nav范围"><a href="#nav范围" class="headerlink" title="nav范围"></a>nav范围</h2><p><img src="https://img-blog.csdnimg.cn/20200506224552523.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="nav布局"><a href="#nav布局" class="headerlink" title="nav布局"></a>nav布局</h2><ol>
+<li>一个大盒子里俩个小盒子</li>
+<li>左边盒子里装俩个盒子dt和dd俩个盒子。上面是dt,下面是dd。然后dt和父亲一边大就把dd挤下来了。</li>
+</ol>
+<p><img src="https://img-blog.csdnimg.cn/20200506225855672.png" alt="在这里插入图片描述"></p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"dropdown fl"</span> &gt;</span><br><span class="line">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"dt"</span>&gt;全部商品分类&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    &lt;div class="dd"&gt;哒哒哒&lt;/</span>div&gt;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/css====================</span></span><br><span class="line"><span class="regexp">    width: 100%;</span></span><br><span class="line"><span class="regexp">    height: 100%;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>div里放12个<code>li</code> 。每个<code>li</code>后面放<code>i</code> 存<code>&gt;</code></li>
+<li>鼠标变白只变<code>li</code>，不变<code>&gt;</code><br><img src="https://img-blog.csdnimg.cn/20200506232541670.png" alt="在这里插入图片描述"></li>
+</ol>
+<ol start="5">
+<li>加一个内边距，防止浮动元素<code>&gt;</code>靠最右面。</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">padding：<span class="number">0</span> <span class="number">10</span>px</span><br></pre></td></tr></table></figure>
+
+<p>6.<code>div</code>的<code>ul</code>的8个<code>li</code>。大小给<code>a</code>。用padding撑开<br><img src="https://img-blog.csdnimg.cn/20200506234004761.png" alt="在这里插入图片描述"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.navitems li a&#123;</span><br><span class="line">    display: block;</span><br><span class="line">    height:<span class="number">45</span>px;</span><br><span class="line">    line-height: <span class="number">45</span>px;</span><br><span class="line">    padding: <span class="number">0</span> <span class="number">25</span>px;</span><br><span class="line">    font-size: <span class="number">16</span>px;</span><br><span class="line">    color:#333;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="底部footer"><a href="#底部footer" class="headerlink" title="底部footer"></a>底部footer</h2><ol>
+<li>底部footer制作，因为底部和头部是共享的。都用common.css.</li>
+<li>利用精灵图存放图片。一个<code>li</code>里放一个<code>i</code>和一个<code>div</code>。然后根据精灵图方位求图片。精灵图：就是把图片存放在一起，然后移动距离。浮动的盒子可以直接给大小，所以<code>i</code>不需要转换为块元素。</li>
+<li>列表用dl里放<code>dt</code>（标题）和<code>dd</code>（列表）<br><img src="https://img-blog.csdnimg.cn/20200507131553940.png" alt="在这里插入图片描述"></li>
+<li>底部栏。<code>div</code>里放俩个小<code>p</code>。</li>
+</ol>
+<h2 id="主体设计"><a href="#主体设计" class="headerlink" title="主体设计"></a>主体设计</h2><ol>
+<li>一个大div里面放左右俩个小div</li>
+</ol>
+<p><img src="https://img-blog.csdnimg.cn/20200507141719229.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<pre><code>2. 焦点图。垂直居中，先走高度一半。然后往回走height一半。一堆小li来回切换，所以是链接。</code></pre><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">ul&gt;li&gt;a&gt;img</span><br><span class="line"><span class="comment">//==============</span></span><br><span class="line">            &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"focus fl"</span>&gt;</span><br><span class="line">                &lt;a href=<span class="string">"#"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"arrow-l"</span>&gt; <span class="xml"><span class="tag">&lt; &lt;/<span class="attr">a</span>&gt;</span></span></span><br><span class="line">                &lt;a href=<span class="string">"#"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"arrow-r"</span>&gt; &gt; <span class="xml"><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span></span><br><span class="line">                &lt;ul&gt;</span><br><span class="line">                    &lt;li&gt;<span class="xml"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">""</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"upload/banner1.jpg"</span> <span class="attr">class</span>=<span class="string">"main-img"</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">                &lt;<span class="regexp">/ul&gt;</span></span><br><span class="line"><span class="regexp">            &lt;/</span>div&gt;</span><br><span class="line"><span class="comment">//================================</span></span><br><span class="line">.arrow-l&#123;</span><br><span class="line">    position: absolute;</span><br><span class="line">    top:<span class="number">50</span>%;</span><br><span class="line">    margin-top: <span class="number">-20</span>px;</span><br><span class="line">    width: <span class="number">24</span>px;</span><br><span class="line">    height: <span class="number">40</span>px;</span><br><span class="line">    background-color: pink;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>小圆圈<code>ol&lt;li*4</code></li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">.circle li &#123;</span><br><span class="line">.circle li &#123;</span><br><span class="line">    float: left;</span><br><span class="line">    width: <span class="number">8</span>px;</span><br><span class="line">    height: <span class="number">8</span>px;</span><br><span class="line">    margin: <span class="number">0</span> <span class="number">3</span>px;</span><br><span class="line">    border: 1px solid #fff;</span><br><span class="line">    border-radius: <span class="number">50</span>%;</span><br><span class="line">    <span class="comment">/* 鼠标经过小手 */</span></span><br><span class="line">    cursor: pointer;</span><br><span class="line">    <span class="comment">/* background-color: #fff; */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p><strong>newsflash</strong>。一个大<code>div</code>放三个小<code>div</code><br>品优购快报：上下俩个<code>div</code>。下面<code>div&gt;li*5</code><br>中间：<code>ul&gt;li*12</code><br><img src="https://img-blog.csdnimg.cn/20200507145026342.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+</li>
+<li><p>一行装不下4个<code>li</code>怎么办。保证<code>li</code>父亲<code>ul</code>能装4个<code>li</code>。保证比250px大。为了防止<code>ul</code>比父盒子大，露出一部分，会隐藏溢出。<code>.lifeservice</code>加<code>overflow-hidden</code>。但是最后一个盒子就小了一点，不会影响大局。<br><img src="https://img-blog.csdnimg.cn/20200507155344755.png" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20200507151705336.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+</li>
+<li><p>每一个块（<code>li</code>）里面装一个<code>a</code>转化为block并和父亲一样宽。a里面放<code>i</code>和<code>p</code>。</p>
+</li>
+<li><p>解决块级元素外边距合并，加<code>overlow：hidden</code></p>
+</li>
+<li><p>注意使用精灵图的时候，<code>css</code>中<code>.service-ico</code>必须放在<code>.service-ico-huafei</code>前面，否则会发生层叠。前面的失效。</p>
+<h2 id="推荐模块"><a href="#推荐模块" class="headerlink" title="推荐模块"></a>推荐模块</h2><p><img src="https://img-blog.csdnimg.cn/20200507155544141.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+</li>
+<li><p>一个大<code>div</code>里面俩个小<code>div</code>，左面<code>div</code>放<code>h3</code>和<code>img</code></p>
+</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">前端综合</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/07/品优购项目二/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-品优购电商项目学习一(头部界面)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/06/品优购电商项目学习一(头部界面)/">品优购电商项目学习一(头部界面)</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/06/品优购电商项目学习一(头部界面)/" class="archive-article-date">
+  	<time datetime="2020-05-06T14:49:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="设计目标"><a href="#设计目标" class="headerlink" title="设计目标"></a>设计目标</h2><ul>
+<li>保证浏览器IE7以上，火狐，360，chrome等。</li>
+<li>熟悉CSS+DIV布局，页面的搭建工作</li>
+<li>了解电商网站的布局模式</li>
+<li>为后期品优购移动端做铺垫</li>
+</ul>
+<h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2><ul>
+<li>开发工具sublime、photoshop、主流浏览器</li>
+<li>技术栈：HTML结构+CSS技术  布局</li>
+</ul>
+<h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><ul>
+<li>能会引入ico图标</li>
+<li>可简单看懂优化三大标签</li>
+<li>能使用字体图标</li>
+<li>能说出css熟悉书写顺序</li>
+</ul>
+<h2 id="代码规范"><a href="#代码规范" class="headerlink" title="代码规范"></a>代码规范</h2><p>  <strong>HTML规范：</strong></p>
+<ul>
+<li>DOCTYPE声明。<!DOCTYPE html></li>
+<li>HTML5规范</li>
+<li>UTF-8并且中文zh-CN</li>
+<li>属性用双引号</li>
+<li>大于号和小于号用&amp;gt</li>
+<li>代码缩进四个空格</li>
+<li>段落元素内部只嵌套内联元素</li>
+<li>用JPEG格式，小于200kb</li>
+<li>不使用ID选择器。</li>
+</ul>
+<p> <strong>CSS规范：</strong></p>
+<ul>
+<li>顺序为布局定位属性、自身属性、文本属性、其他属性。</li>
+<li>命名规范：项目名字pinyougou，脚本img，脚本js，样式文件夹css。</li>
+<li>类名：必须以字母开头且小写。如.nav_top。不用广告词作为类名，不用敏感词。</li>
+</ul>
+<h2 id="前期准备工作"><a href="#前期准备工作" class="headerlink" title="前期准备工作"></a>前期准备工作</h2><p>实现结构和样式相分离的模式<br>把公共的放入同一个文件夹</p>
+<h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2><p>品优购-综合购物网站-正品低价、品质保障、轻松购物</p>
+<h2 id="网站说明"><a href="#网站说明" class="headerlink" title="网站说明"></a>网站说明</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta name=<span class="string">"description"</span> content=<span class="string">"专业的综合网上购物商城,销售家电、数码通讯、电脑、家居百货"</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20200506190213552.png" alt="在这里插入图片描述"></p>
+<h2 id="字体图标"><a href="#字体图标" class="headerlink" title="字体图标"></a>字体图标</h2><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p><img src="https://img-blog.csdnimg.cn/20200506185914970.png" alt="在这里插入图片描述"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel=<span class="string">"shortcut icon"</span> href=<span class="string">"pin.ico"</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>关键词</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta name=<span class="string">"keywords"</span> content=<span class="string">"家用电器,电脑办公,手机,图书,团购,金融,我的购物车"</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="logo优化"><a href="#logo优化" class="headerlink" title="logo优化"></a>logo优化</h2><ul>
+<li><strong>logo优化</strong>：点击logo回到第一个界面（index.html)。</li>
+<li>放一个h1里面的a和父亲一样大，并且<strong>转化为块元素</strong>。因为a没有大小。</li>
+<li>在h1写一个文字。目的：<strong>搜索引擎认为这个很重要</strong>。但是不现实出来。</li>
+<li>文字偏离盒子，然后溢出隐藏。这样就看不见了。<code>text-indent: -999px。overflow: hidden</code>。</li>
+<li>京东隐藏h1做法：<code>font-size</code>=0</li>
+<li>鼠标点击后显示名字：<code>d</code></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">        &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"logo"</span>&gt;</span><br><span class="line">             &lt;h1&gt;</span><br><span class="line">                 &lt;a href=<span class="string">"index.html"</span> title=<span class="string">"品优购"</span>&gt;品优购&lt;<span class="regexp">/a&gt;</span></span><br><span class="line"><span class="regexp">             &lt;/</span>h1&gt;</span><br><span class="line">        &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    /</span><span class="regexp">/====================</span></span><br><span class="line"><span class="regexp">    /</span>* a需要大小，和父亲一样大 *<span class="regexp">/</span></span><br><span class="line"><span class="regexp">    overflow: hidden;</span></span><br><span class="line"><span class="regexp">    display: block;</span></span><br><span class="line"><span class="regexp">    width: 175px;</span></span><br><span class="line"><span class="regexp">    height: 56px;</span></span><br><span class="line"><span class="regexp">    background: url(../img</span><span class="regexp">/logo.png) no-repeat;</span></span><br><span class="line"><span class="regexp">    text-indent: -999px;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="购物车"><a href="#购物车" class="headerlink" title="购物车"></a>购物车</h2><p><img src="https://img-blog.csdnimg.cn/20200506224102402.png" alt="在这里插入图片描述"></p>
+<ul>
+<li>div里面一个div存购物车</li>
+<li>输入文字</li>
+<li>一个 i 输入8，改变line-height让8上去，否则文字大小和盒子一样大。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">.count&#123;</span><br><span class="line">    position: absolute;</span><br><span class="line">    top: <span class="number">0</span>;</span><br><span class="line">    left: <span class="number">100</span>px;</span><br><span class="line">    <span class="comment">/* 应该是左侧对齐，才能往右走 */</span></span><br><span class="line">    background-color: #e60012;</span><br><span class="line">    height:<span class="number">14</span>px;</span><br><span class="line">    padding: <span class="number">0</span> <span class="number">3</span>px;</span><br><span class="line">    <span class="comment">/* 让8上去，否则行高默认父亲行高34px*/</span></span><br><span class="line">    line-height: <span class="number">14</span>px;</span><br><span class="line">    color: #fff;</span><br><span class="line">    border-radius: <span class="number">7</span>px <span class="number">7</span>px <span class="number">7</span>px <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">前端综合</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/06/品优购电商项目学习一(头部界面)/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-正则表达式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/06/正则表达式/">JavaScript中正则表达式和应用</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/06/正则表达式/" class="archive-article-date">
+  	<time datetime="2020-05-06T08:21:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h2><blockquote>
+<p>什么是正则表达式</p>
+</blockquote>
+<p><strong>正则表达式</strong>用于匹配字符串中字符组合的模式。在JavaScript中，正则表达式也是<strong>对象</strong>。</p>
+<blockquote>
+<p>正则表达式作用</p>
+</blockquote>
+<ol>
+<li>表单验证：匹配我们想要的字符串和文本</li>
+<li>过滤敏感词并且替换。</li>
+<li>输入关键词，根据关键词提取相关的内容显示。</li>
+</ol>
+<blockquote>
+<p>正则表达式特点</p>
+</blockquote>
+<p>优点</p>
+<ol>
+<li>灵活，逻辑性，功能性强。</li>
+<li>可以迅速并且简单得到字符串控制</li>
+</ol>
+<p>缺点：</p>
+<ol>
+<li>有点复杂。可以直接复制，但是要修改。</li>
+</ol>
+<blockquote>
+<p>创建正则表达式</p>
+</blockquote>
+<ol>
+<li>调用RegExp对象的构造函数创建</li>
+<li>利用字面量创建</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.调用RegExp对象的构造函数创建</span></span><br><span class="line"><span class="keyword">var</span> str1=<span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="regexp">/123/</span>);</span><br><span class="line"><span class="built_in">console</span>.log(reg);</span><br><span class="line"><span class="comment">//2.利用字面量创建</span></span><br><span class="line"><span class="keyword">var</span> str2=<span class="regexp">/123/</span>;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>测试正则表达式</p>
+</blockquote>
+<ul>
+<li>检测字符串是否符合正则表达式用test()。返回true或者false。其参数是测试字符串。</li>
+<li>只要含有字符串123，就是true，如1123，111233。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">regexObj.text(str)</span><br><span class="line">        <span class="keyword">var</span> str2=<span class="regexp">/123/</span>;</span><br><span class="line">        <span class="built_in">console</span>.log(str2.test(<span class="number">123</span>));</span><br></pre></td></tr></table></figure>
+
+
+
+<ol>
+<li>regexObj是正则表达式</li>
+<li>str是我们要检测的文本</li>
+<li>检测str文本是否符合正则表达式规范</li>
+</ol>
+<blockquote>
+<p>正则表达式组成</p>
+</blockquote>
+<p>组成：正则表达式可以由简单的字符构成，如/abc/，也可以是简单特殊的字符组合。比如/ab*c/。其中特殊字符也被称为元字符，在正则表达式具有特殊意义的专用符号，如^、$、+</p>
+<h2 id="边界符-和"><a href="#边界符-和" class="headerlink" title="边界符^和$"></a>边界符^和$</h2><blockquote>
+<p><strong>/^abc/</strong></p>
+</blockquote>
+<p>必须以abc开头才为false</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> &lt;script&gt;</span><br><span class="line">    <span class="keyword">var</span> str=<span class="regexp">/^abc/</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(str.test(<span class="string">'abc'</span>));<span class="comment">//true</span></span><br><span class="line">    <span class="built_in">console</span>.log(str.test(<span class="string">'abcd'</span>));<span class="comment">//true</span></span><br><span class="line">    <span class="built_in">console</span>.log(str.test(<span class="string">'aabcd'</span>));<span class="comment">//false</span></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>/^abc$/</strong></p>
+</blockquote>
+<p>必须以abc开头，abc<strong>结尾</strong>。则这个字符串必须为abc。</p>
+<blockquote>
+<p>/[abc]/</p>
+</blockquote>
+<p>只要包含abc中的一个字符就返true。</p>
+<blockquote>
+<p>   /^ [abc] $ /</p>
+</blockquote>
+<p>表示只有输入a或者输入b或者输入c才返回true。<br>输入aa返回true。</p>
+<blockquote>
+<pre><code>/ ^ [a-z] $ /</code></pre></blockquote>
+<p>输入26个小写字母任意一个都返回true<br>输入a、z返回true</p>
+<blockquote>
+<pre><code>/ ^ [a-zA-Z] $ /</code></pre></blockquote>
+<p>输入任意1个大写或者小写字母都返回true。</p>
+<blockquote>
+<p>   / ^ [a-zA-Z0-9_-] $ /</p>
+</blockquote>
+<p>输入小写字符，大写字母，0-9，-，_。都返回true。<br>多选一，长度为1才可以。</p>
+<blockquote>
+<pre><code>/ ^ [^a-zA-Z0-9_-] $ /</code></pre></blockquote>
+<p>中括里面，表示取反。表示这些符号都不能包含。输入这些都返回false。</p>
+<blockquote>
+<pre><code>/^[a-zA-Z0-9_-]{6,16}$/;</code></pre></blockquote>
+<p>表示可以输入字符数组下划线。且长度在6和16之间。<br>注意：{6,16}之间不能有空格</p>
+<p>总结：</p>
+<ul>
+<li>中括号外^表示边界符，中括号内表示取反。</li>
+<li>[ ]表示多选一。</li>
+</ul>
+<h2 id="量词符"><a href="#量词符" class="headerlink" title="量词符"></a>量词符</h2><ul>
+<li><code>/^a*$/</code>   表示任意次a都可以，包括0次</li>
+<li><code>/^a+$/</code>  表示任意次a都可以，不包括0次</li>
+<li><code>/^a?$/</code>  表示只有出现<strong>0次</strong>或者<strong>1次</strong>a返回true</li>
+<li><code>/^a{3}$/</code>  表示只有<strong>恰好出现3次a</strong>返回true</li>
+<li><code>/^a{3,}$/</code>  表示出现<strong>大于等于</strong>3次a出现true</li>
+<li><code>/^a{3,14}$/</code> 表示在3和14之间个a返回true</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"> &lt;script&gt;</span><br><span class="line">    <span class="keyword">var</span> str=<span class="regexp">/^a*$/</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(str.test(<span class="string">''</span>));<span class="comment">//true</span></span><br><span class="line">    <span class="built_in">console</span>.log(str.test(<span class="string">'a'</span>));<span class="comment">//true</span></span><br><span class="line">    <span class="built_in">console</span>.log(str.test(<span class="string">'aaa'</span>));<span class="comment">//true</span></span><br><span class="line">    <span class="keyword">var</span> str=<span class="regexp">/^a+$/</span></span><br><span class="line">    <span class="built_in">console</span>.log(str.test(<span class="string">''</span>));<span class="comment">//false</span></span><br><span class="line">    <span class="built_in">console</span>.log(str.test(<span class="string">'a'</span>));<span class="comment">//true</span></span><br><span class="line">    <span class="built_in">console</span>.log(str.test(<span class="string">'aaa'</span>));<span class="comment">//true</span></span><br><span class="line">    <span class="keyword">var</span> str=<span class="regexp">/^a?$/</span></span><br><span class="line">    <span class="built_in">console</span>.log(str.test(<span class="string">''</span>));<span class="comment">//true</span></span><br><span class="line">    <span class="built_in">console</span>.log(str.test(<span class="string">'a'</span>));<span class="comment">//true</span></span><br><span class="line">    <span class="built_in">console</span>.log(str.test(<span class="string">'aaa'</span>));<span class="comment">//false</span></span><br><span class="line">    <span class="keyword">var</span> str=<span class="regexp">/^a&#123;3&#125;$/</span></span><br><span class="line">    <span class="built_in">console</span>.log(str.test(<span class="string">''</span>));<span class="comment">//false</span></span><br><span class="line">    <span class="built_in">console</span>.log(str.test(<span class="string">'a'</span>));<span class="comment">//false</span></span><br><span class="line">    <span class="built_in">console</span>.log(str.test(<span class="string">'aaa'</span>));<span class="comment">//true</span></span><br><span class="line">    <span class="keyword">var</span> str=<span class="regexp">/^a&#123;3,&#125;$/</span></span><br><span class="line">    <span class="built_in">console</span>.log(str.test(<span class="string">''</span>));<span class="comment">//false</span></span><br><span class="line">    <span class="built_in">console</span>.log(str.test(<span class="string">'aaaa'</span>));<span class="comment">//true</span></span><br><span class="line">    <span class="built_in">console</span>.log(str.test(<span class="string">'aaa'</span>));<span class="comment">//true</span></span><br><span class="line">    <span class="keyword">var</span> str=<span class="regexp">/^a&#123;3,14&#125;$/</span></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="案列"><a href="#案列" class="headerlink" title="案列"></a>案列</h2><blockquote>
+<p>表单验证。当输入数字字母下划线并且长度在6和16之间时，输出正确的并变为绿色。</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20200506145448599.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">    &lt;meta name=<span class="string">"viewport"</span> content=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">    &lt;style&gt;</span></span><br><span class="line"><span class="regexp">      span&#123;</span></span><br><span class="line"><span class="regexp">        color:#aaa;</span></span><br><span class="line"><span class="regexp">        font-size: 14px;</span></span><br><span class="line"><span class="regexp">      &#125;</span></span><br><span class="line"><span class="regexp">      .right &#123;</span></span><br><span class="line"><span class="regexp">        color: green;</span></span><br><span class="line"><span class="regexp">      &#125;</span></span><br><span class="line"><span class="regexp">      .wrong&#123;</span></span><br><span class="line"><span class="regexp">        color: red;</span></span><br><span class="line"><span class="regexp">      &#125;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>style&gt;</span><br><span class="line">&lt;<span class="regexp">/head&gt;</span></span><br><span class="line"><span class="regexp">&lt;body&gt;</span></span><br><span class="line"><span class="regexp">    &lt;input type="text" class="uname"&gt; &lt;span&gt;请输入用户名&lt;/</span>span&gt;</span><br><span class="line">      &lt;script&gt;</span><br><span class="line">          <span class="keyword">var</span> str= <span class="regexp">/^[a-zA-Z0-9_-]&#123;6,16&#125;$/</span>;</span><br><span class="line">          <span class="keyword">var</span> uname=<span class="built_in">document</span>.querySelector(<span class="string">'.uname'</span>);</span><br><span class="line">          <span class="keyword">var</span> span=<span class="built_in">document</span>.querySelector(<span class="string">'span'</span>);</span><br><span class="line">          <span class="comment">//失去焦点</span></span><br><span class="line">          uname.onblur=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(str.test(<span class="keyword">this</span>.value))&#123;</span><br><span class="line">              <span class="built_in">console</span>.log(<span class="string">'正确的'</span>);</span><br><span class="line">              span.className=<span class="string">'right'</span>;</span><br><span class="line">              span.innerHTML=<span class="string">'用户名格式正确'</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">              <span class="built_in">console</span>.log(<span class="string">'错误的'</span>);</span><br><span class="line">              span.className=<span class="string">'wrong'</span>;</span><br><span class="line">              span.innerHTML=<span class="string">'用户名格式正确'</span>;</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">      &lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>body&gt;</span><br><span class="line">&lt;<span class="regexp">/html&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="括号总结"><a href="#括号总结" class="headerlink" title="括号总结"></a>括号总结</h2><p>在线测试网站：c.runoob.com</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="comment">//a||b||c</span></span><br><span class="line">  <span class="keyword">var</span> str=<span class="regexp">/^[abc]$/</span>;</span><br><span class="line">  <span class="comment">//只让c重复三次 abccc</span></span><br><span class="line">  <span class="keyword">var</span> str=<span class="regexp">/^abc&#123;3&#125;$/</span>;</span><br><span class="line">  <span class="comment">//让abc重复三次 abcabcabc</span></span><br><span class="line">  <span class="keyword">var</span> str=<span class="regexp">/^(abc)&#123;3&#125;$/</span></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="预定义类"><a href="#预定义类" class="headerlink" title="预定义类"></a>预定义类</h2><p><code>\d</code>：只要是数字就可以。<br><code>^\d$</code>:只能一位数字。<br><code>\D</code>：匹配非数字，位数不限。<br><code>\w</code>：匹配任意字母、数字、下划线。<br><code>\W</code>：除了字母数字下划线。<br><code>\s</code>：匹配空格<br><code>\S</code>：匹配非空格<br>都是[ ]，只有一个。</p>
+<blockquote>
+<p>验证号码 010-12345678或者0530-12345678</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/^\d&#123;<span class="number">3</span>&#125;$-\d&#123;<span class="number">8</span>&#125;|\d&#123;<span class="number">4</span>&#125;-\d&#123;<span class="number">7</span>&#125;$/;</span><br><span class="line"><span class="comment">//==============================</span></span><br><span class="line">/^\d&#123;<span class="number">3</span>,<span class="number">4</span>&#125;$-\d&#123;<span class="number">7</span>,<span class="number">8</span>&#125;$/;</span><br></pre></td></tr></table></figure>
+
+<h2 id="正则表达式替换"><a href="#正则表达式替换" class="headerlink" title="正则表达式替换"></a>正则表达式替换</h2><blockquote>
+<p>把red替换为baby<br>只替换第一个符合条件的。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="comment">//1.替换replace</span></span><br><span class="line">  <span class="keyword">var</span> str=<span class="string">'andy和red'</span></span><br><span class="line">  <span class="keyword">var</span> newstr=str.replace(<span class="string">'andy'</span>,<span class="string">'baby'</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(newstr)</span><br><span class="line">  <span class="comment">//2.用正则表达式</span></span><br><span class="line">  <span class="keyword">var</span> newstr=str.replace(<span class="regexp">/andy/</span>,<span class="string">'baby'</span>);</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>/表达式/[switch]</p>
+</blockquote>
+<p>switch(也称为修饰符）按照什么模式匹配</p>
+<ul>
+<li>g：全局匹配</li>
+<li>i：忽略大小写</li>
+<li>gi：忽略大小写并且全局匹配</li>
+</ul>
+<h2 id="案列-1"><a href="#案列-1" class="headerlink" title="案列"></a>案列</h2><blockquote>
+<p>把哈哈和hh替换成**</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/2020050616205537.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">      &lt;textarea name=<span class="string">""</span> id=<span class="string">"message"</span> cols=<span class="string">"30"</span> rows=<span class="string">"10"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span><span class="xml"><span class="tag">&lt;<span class="name">button</span>&gt;</span>提交<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line">      &lt;div&gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">      &lt;script&gt;</span><br><span class="line">         <span class="keyword">var</span> text=<span class="built_in">document</span>.querySelector(<span class="string">'textarea'</span>);</span><br><span class="line">         <span class="keyword">var</span> btn=<span class="built_in">document</span>.querySelector(<span class="string">'button'</span>);</span><br><span class="line">         <span class="keyword">var</span> div=<span class="built_in">document</span>.querySelector(<span class="string">'div'</span>);</span><br><span class="line">         btn.onclick=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            div.innerHTML=text.value.replace(<span class="regexp">/哈哈|hh/g</span>,<span class="string">'**'</span>);</span><br><span class="line">         &#125;</span><br><span class="line">      &lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>body&gt;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/06/正则表达式/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-深拷贝和浅拷贝" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/06/深拷贝和浅拷贝/">深拷贝和浅拷贝</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/06/深拷贝和浅拷贝/" class="archive-article-date">
+  	<time datetime="2020-05-05T17:08:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="深拷贝和浅拷贝"><a href="#深拷贝和浅拷贝" class="headerlink" title="深拷贝和浅拷贝"></a>深拷贝和浅拷贝</h2><ul>
+<li>浅拷贝只是拷贝一层，更深层次对象级别的只拷贝引用。</li>
+<li>深拷贝拷贝多层，每一级数据都会拷贝。</li>
+</ul>
+<h2 id="浅拷贝："><a href="#浅拷贝：" class="headerlink" title="浅拷贝："></a>浅拷贝：</h2><p><img src="https://img-blog.csdnimg.cn/20200506004625787.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p>造成的问题</p>
+</blockquote>
+<ul>
+<li>把深层次的地址拷贝给了赋值对象。赋值对象更改深层次属性时，原对象也会发生改变。</li>
+<li>原理：俩个对象指向同一块区域，共享属性</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">var</span> obj=&#123;</span><br><span class="line">        id:<span class="number">1</span>,</span><br><span class="line">        name:<span class="string">'andy'</span>,</span><br><span class="line">        msg:&#123;</span><br><span class="line">            age:<span class="number">18</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">var</span> o=&#123;&#125;;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> k <span class="keyword">in</span> obj)&#123;</span><br><span class="line">        <span class="comment">//k是属性名 obj[k]属性值</span></span><br><span class="line">        o[k]=obj[k];</span><br><span class="line">    &#125;</span><br><span class="line">    o.msg.age=<span class="number">20</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(o.msg.age);<span class="comment">//20</span></span><br><span class="line">    <span class="built_in">console</span>.log(obj.msg.age);<span class="comment">//20</span></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>浅拷贝方式。把obj浅拷贝给o</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.assign(o,obj);</span><br></pre></td></tr></table></figure>
+
+<h2 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h2><p><img src="https://img-blog.csdnimg.cn/20200506004611319.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<ul>
+<li>把深层次的地址拷贝给了赋值对象。赋值对象更改深层次属性时，原对象不会发生改变。</li>
+<li>原理：赋值对象开辟了一个新的空间，指向了新的空间。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">     &lt;script&gt;</span><br><span class="line">         <span class="keyword">var</span> obj=&#123;</span><br><span class="line">             id:<span class="number">1</span>,</span><br><span class="line">             name:<span class="string">'andy'</span>,</span><br><span class="line">             msg:&#123;</span><br><span class="line">                 age:<span class="number">18</span></span><br><span class="line">             &#125;,</span><br><span class="line">             color:[<span class="string">'pink'</span>,<span class="string">'red'</span>]</span><br><span class="line">         &#125;;</span><br><span class="line">         <span class="keyword">var</span> o=&#123;&#125;;</span><br><span class="line">         <span class="function"><span class="keyword">function</span> <span class="title">deepCopy</span>(<span class="params">newobj,oldobj</span>)</span>&#123;</span><br><span class="line">             <span class="keyword">for</span>(<span class="keyword">var</span> k <span class="keyword">in</span> oldobj)&#123;</span><br><span class="line">                <span class="comment">//判断属性属于简单还是复杂数据类型</span></span><br><span class="line">               <span class="comment">//1.获取属性值 oldobj[k]</span></span><br><span class="line">               <span class="keyword">var</span> item=oldobj[k];</span><br><span class="line">               <span class="comment">//2.判断这个值是不是数组</span></span><br><span class="line">               <span class="keyword">if</span>(item <span class="keyword">instanceof</span> <span class="built_in">Array</span>)&#123;</span><br><span class="line">                 newobj[k]=[];</span><br><span class="line">                 <span class="comment">//等于o.color=[]，下一层;</span></span><br><span class="line">                 deepCopy(newobj[k],item);</span><br><span class="line">               &#125;<span class="keyword">else</span> <span class="keyword">if</span>(item <span class="keyword">instanceof</span> <span class="built_in">Object</span>)&#123;</span><br><span class="line">                  <span class="comment">//3.判断是否为对象</span></span><br><span class="line">                  newobj[k]=&#123;&#125;;</span><br><span class="line">                  deepCopy(newobj[k],item);</span><br><span class="line">               &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                 <span class="comment">//4.判断是否为简单数据类型</span></span><br><span class="line">                 <span class="comment">//进行赋值</span></span><br><span class="line">                 newobj[k]=item;</span><br><span class="line">               &#125;           </span><br><span class="line">             &#125;</span><br><span class="line">         &#125;</span><br><span class="line">         deepCopy(o,obj);</span><br><span class="line">         <span class="built_in">console</span>.log(o);</span><br><span class="line">  &lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>进行赋值 newobj[k]=item;</p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/06/深拷贝和浅拷贝/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-高阶函数和闭包" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -360,523 +934,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/05/05/递归/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-严格模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/05/严格模式/">严格模式</a>
-    </h1>
-  
-
-        
-        <a href="/2020/05/05/严格模式/" class="archive-article-date">
-  	<time datetime="2020-05-05T10:27:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="严格模式"><a href="#严格模式" class="headerlink" title="严格模式"></a>严格模式</h2><ul>
-<li>JavaScript除了提供正常模式外，还提供了严格模式。ES5的严格模式是采用具有限制性JavaScript变体的一种方式，即在严格的条件下运行JS代码。</li>
-<li>严格模式在IE10以上版本浏览器才被支持，旧版本会被忽略。</li>
-</ul>
-<blockquote>
-<ul>
-<li>严格模式的更改如下</li>
-</ul>
-</blockquote>
-<ol>
-<li>消除一些不合法，不符合逻辑支出，减少怪异行为。比如变量不声明就可以赋值。</li>
-<li>消除代码运行的一些不安全之处，保证代码安全。</li>
-<li>提高编译器效率，增加运行速度。</li>
-<li>禁用了ECMAScript的未来版本中可能定义的一些语法错误，为未来新版本JavaScript做好铺垫。比如一些保留字如：class ，enum ，export ，extends ，import ，super不能做变量名</li>
-</ol>
-<h2 id="开启严格模式"><a href="#开启严格模式" class="headerlink" title="开启严格模式"></a>开启严格模式</h2><blockquote>
-<p>为脚本开启严格模式</p>
-</blockquote>
-<p>IE10以前版本会略过这句话</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="meta">    'use strict'</span>;</span><br><span class="line">    <span class="comment">//下面js代码按照严格模式执行代码</span></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">====================</span></span><br><span class="line"><span class="regexp">&lt;script&gt;</span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/为了脚本开启一个独立空间</span></span><br><span class="line"><span class="regexp">(function()&#123;'use strict'&#125;)();</span></span><br><span class="line"><span class="regexp">&lt;/</span>script&gt;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>为某个函数开启严格模式</p>
-</blockquote>
-<p>函数内部添加’use strict’</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"><span class="meta">    'use strict'</span>;</span><br><span class="line">    <span class="comment">//只在函数里面执行严格模式</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fun</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="严格模式的变化"><a href="#严格模式的变化" class="headerlink" title="严格模式的变化"></a>严格模式的变化</h2><ol>
-<li>变量变化，必须要声明</li>
-<li>不能随意删除已经声明好的变量</li>
-<li>全局定义域this指向不是window而是define</li>
-<li>构造函数不加new,this会报错。</li>
-<li>定时器指向的还是window,无变化</li>
-<li>事件和对象还是指向调用者</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="meta">    'use strict'</span>;</span><br><span class="line">    <span class="comment">//1.不声明会报错</span></span><br><span class="line">    num=<span class="number">10</span>;</span><br><span class="line">    <span class="comment">//2.不能随意删除已经声明好的变量</span></span><br><span class="line">    <span class="keyword">var</span> num=<span class="number">10</span>;</span><br><span class="line">    <span class="keyword">delete</span> num;</span><br><span class="line">    <span class="comment">//3.全局定义域this指向不是window而是define</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//4.构造函数不加new,this会报错。</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">Star</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.sex=<span class="string">'男'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    Star();</span><br><span class="line">    <span class="comment">//5.定时器指向的还是window,无变化</span></span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="built_in">console</span>.log(<span class="keyword">this</span>);&#125;,<span class="number">2000</span>);</span><br><span class="line">    <span class="comment">//6.事件和对象还是指向调用者</span></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="函数变化"><a href="#函数变化" class="headerlink" title="函数变化"></a>函数变化</h2><ol>
-<li>不能有重名的参数</li>
-<li>函数必须声明在顶层。不允许在非函数代码块内声明函数</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="meta">    'use strict'</span>;</span><br><span class="line">    <span class="comment">//1.不能有重名的参数</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">a,a</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>(a+a);</span><br><span class="line">        <span class="comment">//输出4</span></span><br><span class="line">        <span class="comment">//因为a=1会覆盖为a=2</span></span><br><span class="line">    &#125;</span><br><span class="line">    f(<span class="number">1</span>,<span class="number">2</span>);</span><br><span class="line">    <span class="comment">//2.函数必须声明在顶层。不允许在非函数代码块内声明函数。</span></span><br><span class="line">    <span class="keyword">if</span>()&#123;</span><br><span class="line">       <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>()&#123;</span><br><span class="line">        <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">    &#125;        </span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/05/严格模式/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-JavaScript函数调用和不同函数（apply，bind，call）的this指向问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/05/JavaScript函数调用和不同函数（apply，bind，call）的this指向问题/">JavaScript函数调用和不同函数（apply，bind，call）的this指向问题</a>
-    </h1>
-  
-
-        
-        <a href="/2020/05/05/JavaScript函数调用和不同函数（apply，bind，call）的this指向问题/" class="archive-article-date">
-  	<time datetime="2020-05-05T08:56:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="函数定义方式"><a href="#函数定义方式" class="headerlink" title="函数定义方式"></a>函数定义方式</h2><ol>
-<li>所有函数都Function的实例对象。</li>
-<li>函数也属于对象</li>
-<li>指向：表示这个函数是谁的属性。调用函数得人是谁。函数指向window就是，window调用这个函数。</li>
-</ol>
-<blockquote>
-<p>三种方式</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="comment">//1.自定义函数</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>)</span>&#123;&#125;;</span><br><span class="line">    <span class="comment">//2.函数表达式（匿名函数）</span></span><br><span class="line">    <span class="keyword">var</span> fun=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</span><br><span class="line">    <span class="comment">//3.利用new Function('参数1','参数2',函数体)；</span></span><br><span class="line">    <span class="comment">//执行效率低</span></span><br><span class="line">    <span class="keyword">var</span> f=<span class="keyword">new</span> <span class="built_in">Function</span>(<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'console.log(a+b)'</span>);</span><br><span class="line">    f(<span class="number">1</span>,<span class="number">2</span>);</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://img-blog.csdnimg.cn/20200505132852818.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="函数的调用"><a href="#函数的调用" class="headerlink" title="函数的调用"></a>函数的调用</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="comment">//1.普通函数</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'人生巅峰'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    fn.call(); fn();</span><br><span class="line">    <span class="comment">//2.对象的方法</span></span><br><span class="line">    <span class="keyword">var</span> o&#123;</span><br><span class="line">        say:<span class="function"><span class="keyword">function</span>(<span class="params"></span>);</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'人生巅峰'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    o.say();</span><br><span class="line">    <span class="comment">//3.构造函数</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">Star</span>(<span class="params"></span>)</span>&#123;&#125;;</span><br><span class="line">    <span class="keyword">new</span> Star();</span><br><span class="line">    <span class="comment">//4.绑定事件函数</span></span><br><span class="line">    btn.onclick=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</span><br><span class="line">    <span class="comment">//5.定时器函数</span></span><br><span class="line">    setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;,<span class="number">1000</span>);<span class="comment">//定时器一秒钟调用一次。</span></span><br><span class="line">    <span class="comment">//6.立即执行函数</span></span><br><span class="line">    (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'人生巅峰'</span>);</span><br><span class="line">    &#125;)();</span><br><span class="line">    <span class="comment">//立即执行,自动调用。</span></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="不同函数的this指向问题"><a href="#不同函数的this指向问题" class="headerlink" title="不同函数的this指向问题"></a>不同函数的this指向问题</h2><ul>
-<li>指向：表示这个函数是谁的属性。调用函数得人是谁。</li>
-<li>如window调用this，那么就是this指向window。</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="comment">//1.普通函数this指向window</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'人生巅峰'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">window</span>.fn();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//2.对象的方法this指向o</span></span><br><span class="line">    <span class="keyword">var</span> o&#123;</span><br><span class="line">        say:<span class="function"><span class="keyword">function</span>(<span class="params"></span>);</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'人生巅峰'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    o.say();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//3.构造函数this指向ldh这个实例对象</span></span><br><span class="line">    <span class="comment">//原型对象里的this指向的也是ldh对象实例</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">Star</span>(<span class="params"></span>)</span>&#123;&#125;;</span><br><span class="line">    <span class="keyword">new</span> Star();</span><br><span class="line">    Star.prototype.sing()&#123;&#125;</span><br><span class="line">    <span class="keyword">var</span> ldh=<span class="keyword">new</span> Star();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//4.绑定事件函数。this指向函数调用者,也就是btn</span></span><br><span class="line">    btn.onclick=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//5.定时器函数。this指向window。</span></span><br><span class="line">    <span class="comment">//函数调用者是window</span></span><br><span class="line">    setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;,<span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//6.立即执行函数</span></span><br><span class="line">    <span class="comment">//指向的是window</span></span><br><span class="line">    (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'人生巅峰'</span>);</span><br><span class="line">    &#125;)();</span><br><span class="line">    <span class="comment">//立即执行,自动调用。</span></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="可以改变函数内部this指向不同对象"><a href="#可以改变函数内部this指向不同对象" class="headerlink" title="可以改变函数内部this指向不同对象"></a>可以改变函数内部this指向不同对象</h2><blockquote>
-<p>call()</p>
-</blockquote>
-<ul>
-<li>call是一个可以调用函数 第二个可以改变函数内this指向</li>
-<li>call主要作用可以实现继承</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="comment">//1.call()</span></span><br><span class="line">    <span class="keyword">var</span> o=&#123;</span><br><span class="line">        name:<span class="string">'andy'</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">    &#125;;       </span><br><span class="line">    <span class="comment">//由window改成0</span></span><br><span class="line">    f.call(o);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//2.实现继承</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">father</span>(<span class="params">name,age</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name=name;</span><br><span class="line">        <span class="keyword">this</span>.age=age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">son</span>(<span class="params">name,age</span>)</span>&#123;</span><br><span class="line">        <span class="comment">//改变指向</span></span><br><span class="line">        <span class="comment">//调用父类构造方法，传递儿子的值。</span></span><br><span class="line">        father.call(<span class="keyword">this</span>,name,age);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> son=<span class="keyword">new</span> son(<span class="string">'lll'</span>,<span class="number">19</span>);</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="apply"><a href="#apply" class="headerlink" title="apply"></a>apply</h2><blockquote>
-<p>apply(）方法调用一个函数。简单理解为调用函数方式，但是他可以改变this指向。</p>
-</blockquote>
-<p>fun.apply(thisArg，[argsArray])</p>
-<ul>
-<li><strong>thisArg</strong>：在fun函数运行时指定this的值。</li>
-<li><strong>argsArray</strong>：传递的值，必须包含在<strong>数组里面</strong></li>
-<li>返回值就是函数的返回值，因为它就是调用函数</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="comment">//2.apply()</span></span><br><span class="line">    <span class="keyword">var</span> o=&#123;</span><br><span class="line">        name:<span class="string">'andy'</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">        <span class="comment">//打印的不是数组形式，是字符串形式。</span></span><br><span class="line">        <span class="built_in">console</span>.log(arr);</span><br><span class="line">    &#125;;  </span><br><span class="line">    <span class="comment">//1.调用函数,改变函数内部this指向     </span></span><br><span class="line">    <span class="comment">//2.必须是数组形式</span></span><br><span class="line">    <span class="comment">//3.apply主要作用 用apply借助于数学内置对象最大值。</span></span><br><span class="line">    <span class="comment">//Math.max();</span></span><br><span class="line">    <span class="keyword">var</span> arr=[<span class="number">1</span>,<span class="number">66</span>,<span class="number">3</span>,<span class="number">99</span>,<span class="number">4</span>];</span><br><span class="line">    <span class="keyword">var</span> max=<span class="built_in">Math</span>.max.apply(<span class="literal">null</span>,arr);</span><br><span class="line">    <span class="comment">//尽量不用null。理解为自己调用自己</span></span><br><span class="line">    <span class="keyword">var</span> max=<span class="built_in">Math</span>.max.apply(<span class="built_in">Math</span>,arr);</span><br><span class="line">    f.apply(o,[<span class="string">'pink'</span>]);</span><br><span class="line">&lt;<span class="regexp">/script&gt;`在这里插入代码片`</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="bind"><a href="#bind" class="headerlink" title="bind"></a>bind</h2><p>类似于绑定到某一新函数身上，不会调用原函数。</p>
-<blockquote>
-<p>bind()方法不会调用函数，但是能改变函数内部this指向。<br>fun.bind(this.Arg，arg1，arg2，…)</p>
-</blockquote>
-<ul>
-<li>thisArg：在函数运行时指定的this值。</li>
-<li>arg1，arg2：传递的其他参数</li>
-<li>返回由指定的this值和初始化参数改造的原函数的拷贝</li>
-</ul>
-<blockquote>
-<p>我们有一个按钮，当我们点击之后，就禁用这个按钮，3秒钟之后开启这个按钮。</p>
-</blockquote>
-<ol>
-<li>时间函数指向的btn按钮。定时器函数this指向的是window</li>
-<li>bind里this指向btn这个对象，因为在function括号外面</li>
-<li>定时器不需要立刻执行，但又需要this指向btn</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;button&gt;点击&lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">    &lt;script&gt;</span></span><br><span class="line"><span class="regexp">        /</span><span class="regexp">/3.bind()</span></span><br><span class="line"><span class="regexp">        var o=&#123;</span></span><br><span class="line"><span class="regexp">            name:'andy'</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">        function f(a,b)&#123;</span></span><br><span class="line"><span class="regexp">            console.log(this);</span></span><br><span class="line"><span class="regexp">            console.log(a+b);</span></span><br><span class="line"><span class="regexp">        &#125;;  </span></span><br><span class="line"><span class="regexp">        /</span><span class="regexp">/只是绑定，并不执行</span></span><br><span class="line"><span class="regexp">        var f2=f.bind(o,1,2);</span></span><br><span class="line"><span class="regexp">        f2();</span></span><br><span class="line"><span class="regexp">        /</span><span class="regexp">/1.不会调用原来函数 可以改变原来函数内部this指向</span></span><br><span class="line"><span class="regexp">        /</span><span class="regexp">/2.返回的是原函数改变this之后的新函数</span></span><br><span class="line"><span class="regexp">        /</span><span class="regexp">/3.我们有一个按钮，当我们点击之后，就禁用这个按钮，3秒钟之后开启这个按钮。</span></span><br><span class="line"><span class="regexp">        var btn=document.querySelector('button');</span></span><br><span class="line"><span class="regexp">        btn.onclick=function()&#123;</span></span><br><span class="line"><span class="regexp">            this.disabled=true;/</span><span class="regexp">/时间函数指向的btn按钮</span></span><br><span class="line"><span class="regexp">            var that=this;</span></span><br><span class="line"><span class="regexp">            setTimeout(function()&#123;</span></span><br><span class="line"><span class="regexp">                that.disabled=false;/</span><span class="regexp">/定时器函数this指向的是window</span></span><br><span class="line"><span class="regexp">            &#125;,3000)</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp"> /</span><span class="regexp">/====================================================================</span></span><br><span class="line"><span class="regexp">            var btn=document.querySelector('button');</span></span><br><span class="line"><span class="regexp">            btn.onclick=function()&#123;</span></span><br><span class="line"><span class="regexp">            this.disabled=true;/</span><span class="regexp">/时间函数指向的btn按钮</span></span><br><span class="line"><span class="regexp">            setTimeout(function()&#123;</span></span><br><span class="line"><span class="regexp">                this.disabled=false;/</span><span class="regexp">/定时器函数this指向的是window</span></span><br><span class="line"><span class="regexp">            &#125;.bind(this),3000)</span></span><br><span class="line"><span class="regexp">        &#125;/</span><span class="regexp">/bind里this指向btn这个对象，因为在function括号外面</span></span><br><span class="line"><span class="regexp">        /</span><span class="regexp">/定时器不需要立刻执行，但又需要this指向btn</span></span><br><span class="line"><span class="regexp">    &lt;/</span>script&gt;</span><br><span class="line">&lt;<span class="regexp">/body&gt;</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>适用于：有的函数不需要立刻调用，但是又想改变内部的this指向。</p>
-</blockquote>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><strong>相同点：</strong></p>
-<ol>
-<li>都可以改变函数内部this指向</li>
-</ol>
-<p><strong>不同点：</strong></p>
-<ol>
-<li>call和apply都会调用函数，并且改变内部this指向</li>
-<li>call和apply传递的函数不一样，call传递参数arg1，arg2形式。apply必须数组形式[arg]</li>
-<li>bind不会立刻调用函数，可以改变函数内部this指向</li>
-</ol>
-<p><strong>主要应用场景：</strong></p>
-<ol>
-<li>call经常做继承</li>
-<li>apply经常跟数组有关系，比如借助数组求最大值最小值</li>
-<li>bind不调用函数，但是想改变this指向，比如定时器this指向。</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/05/JavaScript函数调用和不同函数（apply，bind，call）的this指向问题/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-css定位" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/04/css定位/">CSS中定位</a>
-    </h1>
-  
-
-        
-        <a href="/2020/05/04/css定位/" class="archive-article-date">
-  	<time datetime="2020-05-04T14:37:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>为什么用定位？</p>
-</blockquote>
-<p>定位可以让盒子自由在某个盒子内移动位置或者固定在屏幕中某个位置，并且可以压住其他盒子。</p>
-<blockquote>
-<p>定位组成<br>定位模式+边偏移<br>定位模式指定一个元素在文档中定位方式，边偏移决定了该元素最终位置。</p>
-</blockquote>
-<p>1.定位模式：<br>决定定位方式，通过css的position来设置。<br>2.边偏移<br>移动到最终位置 4种属性</p>
-<blockquote>
-<p>边偏移4种方法</p>
-</blockquote>
-<h2 id="1-static-默认方式"><a href="#1-static-默认方式" class="headerlink" title="1.static(默认方式)"></a>1.static(默认方式)</h2><p>1.标准流，没有边偏移。一般不使用</p>
-<h2 id="2-relative-相对定位"><a href="#2-relative-相对定位" class="headerlink" title="2.relative(相对定位)"></a>2.relative(相对定位)</h2><p>1.相当于原来位置定位。<br>2.不同于float，原位置仍然保留。<br>用来限制绝对定位。</p>
-<h2 id="3-absolute-绝对定位"><a href="#3-absolute-绝对定位" class="headerlink" title="3.absolute(绝对定位)"></a>3.absolute(绝对定位)</h2><p>1.移动元素时，是相对于祖先元素来说的（拼爹型）。<br>2.没有祖先元素，以浏览器为父亲。<br>3.父亲没有定位时，子元素还是以浏览器为准。<br>4.如果父亲有定位，以最近一级带有定位父亲为基准。(爷爷有，父亲没有，以爷爷为准)<br>5.绝对定位位置不保存位置。(脱标)</p>
-<h2 id="子绝父相"><a href="#子绝父相" class="headerlink" title="子绝父相"></a>子绝父相</h2><blockquote>
-<p>子级用绝对定位的话，父亲用相对定位</p>
-</blockquote>
-<p>因为父级定位要占有位置，所以用相对定位（ralative）<br>子盒子不占有位置，则是绝对定位（absolute）</p>
-<h2 id="固定定位"><a href="#固定定位" class="headerlink" title="固定定位"></a>固定定位</h2><p>1.固定定位是固定于浏览器可视区的位置<br>2.以浏览器可视窗口为参照点移动元素，跟父亲没有任何关系。<br>3.不占有原先位置。</p>
-<blockquote>
-<p>如何固定在最右侧</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">position：fixed;</span><br><span class="line">&lt;!-<span class="number">-1.</span>走浏览器一半 --&gt;</span><br><span class="line">left:<span class="number">50</span>%;</span><br><span class="line">&lt;!-<span class="number">-2.</span>利用margin走版心一半,背景盒子<span class="number">800</span>px--&gt;</span><br><span class="line">margin-left:<span class="number">400</span>px;</span><br></pre></td></tr></table></figure>
-
-<h2 id="粘性定位"><a href="#粘性定位" class="headerlink" title="粘性定位"></a>粘性定位</h2><p>可视窗口为参考并且有大小占有原位置。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><img src="https://img-blog.csdnimg.cn/20200504205848766.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="定位的叠放次序"><a href="#定位的叠放次序" class="headerlink" title="定位的叠放次序"></a>定位的叠放次序</h2><p>1.n个绝对定位，后来的在最上面，覆盖了前面的。<br>2.设置z-index：n。数值越大，越靠上。</p>
-<h2 id="定位的扩展"><a href="#定位的扩展" class="headerlink" title="定位的扩展"></a>定位的扩展</h2><blockquote>
-<p>绝地定位盒子不能margin：auto水平居中</p>
-</blockquote>
-<p>解决方法：<br>水平居中</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.left走父盒子百分之50</span></span><br><span class="line">position：absolute；</span><br><span class="line">left:<span class="number">50</span>%</span><br><span class="line"><span class="comment">//2.左走这个盒子宽度一半</span></span><br><span class="line">margin-left:<span class="number">-100</span>px;</span><br></pre></td></tr></table></figure>
-
-<p>垂直居中</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">position：absolute;</span><br><span class="line"><span class="comment">//1.left走父盒子高度百分之50</span></span><br><span class="line">top:<span class="number">50</span>%</span><br><span class="line"><span class="comment">//2.左走这个盒子高度一半</span></span><br><span class="line">margin-top:<span class="number">-100</span>px;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>定位的特殊性</p>
-</blockquote>
-<p>绝对定位和固定定位也和浮动类似。<br>1.行内元素添加绝对或者固定定位，<strong>也可以直接设置宽度和高度。</strong><br>2.块级元素，不加高度和宽度，默认大小为<strong>内容的大小</strong>。<br>3.脱标的不会触发外边距合并。</p>
-<blockquote>
-<p>绝对定位会压住完全定位</p>
-</blockquote>
-<p>1.浮动的元素不会压住下面标准流的文字，<strong>绝对定位或者固定定位</strong>会压住下面的<strong>标准流</strong>所有内容。</p>
-<blockquote>
-<p>原因</p>
-</blockquote>
-<p>因为浮动目的：让文字围绕图片<br>定位目的：让图片在最上面。</p>
-<h2 id="淘宝焦点图模仿"><a href="#淘宝焦点图模仿" class="headerlink" title="淘宝焦点图模仿"></a>淘宝焦点图模仿</h2><p><img src="https://img-blog.csdnimg.cn/20200504220029817.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p><img src="https://img-blog.csdnimg.cn/20200504220030511.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">    &lt;meta name=<span class="string">"viewport"</span> content=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span><br><span class="line">    &lt;title&gt;淘宝焦点图&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">    &lt;style&gt;</span></span><br><span class="line"><span class="regexp">        *&#123;</span></span><br><span class="line"><span class="regexp">            margin: 0;</span></span><br><span class="line"><span class="regexp">            padding: 0;</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">        li &#123;</span></span><br><span class="line"><span class="regexp">            /</span>* 清除无序列表圆点 *<span class="regexp">/</span></span><br><span class="line"><span class="regexp">            list-style: none;</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">        .tb-promo &#123;</span></span><br><span class="line"><span class="regexp">            position: relative;</span></span><br><span class="line"><span class="regexp">            width: 520px;</span></span><br><span class="line"><span class="regexp">            height: 280px;</span></span><br><span class="line"><span class="regexp">            background-color: pink;</span></span><br><span class="line"><span class="regexp">            margin: 100px auto;</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">        /</span>* 保证盒子和照片一样大 *<span class="regexp">/</span></span><br><span class="line"><span class="regexp">        .tb-promo img &#123;</span></span><br><span class="line"><span class="regexp">            width: 520px;</span></span><br><span class="line"><span class="regexp">            height: 280px;</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">        /</span>* 并集选择器，选择公共部分 *<span class="regexp">/</span></span><br><span class="line"><span class="regexp">        .next,</span></span><br><span class="line"><span class="regexp">        .prev&#123;</span></span><br><span class="line"><span class="regexp">            position: absolute;</span></span><br><span class="line"><span class="regexp">            top: 50%;</span></span><br><span class="line"><span class="regexp">            margin-top: -15px;</span></span><br><span class="line"><span class="regexp">            /</span>* 绝对定位不用加宽度和高度 *<span class="regexp">/</span></span><br><span class="line"><span class="regexp">            /</span>* 子绝对父相对 *<span class="regexp">/</span></span><br><span class="line"><span class="regexp">            width: 20px;</span></span><br><span class="line"><span class="regexp">            height: 30px;</span></span><br><span class="line"><span class="regexp">            text-align: center;</span></span><br><span class="line"><span class="regexp">            /</span>* 垂直居中 *<span class="regexp">/</span></span><br><span class="line"><span class="regexp">            line-height: 30px;</span></span><br><span class="line"><span class="regexp">            background: rgba(0,0,0,.3);</span></span><br><span class="line"><span class="regexp">            color:#fff;</span></span><br><span class="line"><span class="regexp">            text-decoration: none;  </span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">        .prev&#123;</span></span><br><span class="line"><span class="regexp">            left:0;</span></span><br><span class="line"><span class="regexp">            border-top-right-radius: 15px;</span></span><br><span class="line"><span class="regexp">            border-bottom-right-radius: 15px;          </span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">        .next&#123;</span></span><br><span class="line"><span class="regexp">            /</span>* 如果既有left，又有right，先执行left *<span class="regexp">/</span></span><br><span class="line"><span class="regexp">            /</span>* 既有top，又有botom，执行top *<span class="regexp">/</span></span><br><span class="line"><span class="regexp">            right: 0;</span></span><br><span class="line"><span class="regexp">            border-top-left-radius: 15px;</span></span><br><span class="line"><span class="regexp">            border-bottom-left-radius: 15px;          </span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">        .promo-nav &#123;</span></span><br><span class="line"><span class="regexp">            position: absolute;</span></span><br><span class="line"><span class="regexp">            bottom: 10px;</span></span><br><span class="line"><span class="regexp">            /</span>* <span class="number">1.</span>先走<span class="number">50</span>% *<span class="regexp">/</span></span><br><span class="line"><span class="regexp">            left: 50%;</span></span><br><span class="line"><span class="regexp">            width: 70px;</span></span><br><span class="line"><span class="regexp">            height: 13px;</span></span><br><span class="line"><span class="regexp">            /</span>* <span class="number">2.</span>走一半 *<span class="regexp">/</span></span><br><span class="line"><span class="regexp">            margin-left: -35px;</span></span><br><span class="line"><span class="regexp">            background:rgba(255,255,255,.3);</span></span><br><span class="line"><span class="regexp">            border-radius: 7px;</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">        .promo-nav li &#123;</span></span><br><span class="line"><span class="regexp">            float: left;</span></span><br><span class="line"><span class="regexp">            width: 8px;</span></span><br><span class="line"><span class="regexp">            height: 8px;</span></span><br><span class="line"><span class="regexp">            background-color: white;</span></span><br><span class="line"><span class="regexp">            border-radius: 50%;</span></span><br><span class="line"><span class="regexp">            /</span>* 上下左右都是<span class="number">3</span>像素 *<span class="regexp">/</span></span><br><span class="line"><span class="regexp">            margin: 3px;</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">        .promo-nav .ed&#123;</span></span><br><span class="line"><span class="regexp">            background-color: orange;</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>style&gt;</span><br><span class="line">&lt;<span class="regexp">/head&gt;</span></span><br><span class="line"><span class="regexp">&lt;body&gt;</span></span><br><span class="line"><span class="regexp">    &lt;div class="tb-promo"&gt;</span></span><br><span class="line"><span class="regexp">        &lt;img src="imge/</span><span class="number">5.</span>png<span class="string">" alt="</span><span class="string">"&gt;</span></span><br><span class="line"><span class="string">        &lt;!-- 左箭头 &amp;lt小于--&gt;</span></span><br><span class="line">        &lt;a href="#" class="prev"&gt;&amp;lt;&lt;/a&gt;</span><br><span class="line">        &lt;a href=<span class="string">"#"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"next"</span>&gt;&amp;gt;<span class="xml"><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span></span><br><span class="line">        &lt;ul <span class="class"><span class="keyword">class</span></span>=<span class="string">"promo-nav"</span>&gt;</span><br><span class="line">            &lt;li <span class="class"><span class="keyword">class</span></span>=<span class="string">"ed"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">            &lt;li&gt;<span class="xml"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">            &lt;li&gt;<span class="xml"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">            &lt;li&gt;<span class="xml"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">            &lt;li&gt;<span class="xml"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">        &lt;<span class="regexp">/ul&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>div&gt;</span><br><span class="line">&lt;<span class="regexp">/body&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>html&gt;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>布局总结</p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20200504220302230.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="元素的显示与隐藏"><a href="#元素的显示与隐藏" class="headerlink" title="元素的显示与隐藏"></a>元素的显示与隐藏</h2><blockquote>
-<p>本质：让一个元素显示或者隐藏</p>
-</blockquote>
-<h2 id="1-display"><a href="#1-display" class="headerlink" title="1.display"></a>1.display</h2><p>让一个元素如何显示</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//隐藏对象</span></span><br><span class="line">display:none;</span><br><span class="line"><span class="comment">//除了表示转化为块级元素，还有显示的意思</span></span><br><span class="line">display:block;</span><br></pre></td></tr></table></figure>
-
-<p>  display:none 把元素隐藏，且不占有原来位置了。<br>  visibility:hidden 和display：block不一样，继续占有原位置。</p>
-<h2 id="2-visibility"><a href="#2-visibility" class="headerlink" title="2.visibility"></a>2.visibility</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//显示对象</span></span><br><span class="line">visibility:visible;</span><br><span class="line"><span class="comment">//隐藏对象</span></span><br><span class="line">visibility:hidden;</span><br></pre></td></tr></table></figure>
-
-<p>  visibility:hidden 和display：block不一样，继续占有原位置。<br>  display:none 把元素隐藏，且不占有原来位置了。</p>
-<h2 id="3-overflow"><a href="#3-overflow" class="headerlink" title="3.overflow"></a>3.overflow</h2><p>只让溢出的内容显示或者隐藏</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//溢出的可见</span></span><br><span class="line">overflow:visiable;</span><br><span class="line"><span class="comment">//溢出的隐藏</span></span><br><span class="line">overflow:hidden;</span><br><span class="line"><span class="comment">//溢出部分显示滚动弄条，不溢出也显示滚动条</span></span><br><span class="line">overflow:scroll;</span><br><span class="line"><span class="comment">//需要的时候添加滚动条，不超出不加滚动条。</span></span><br><span class="line">overflow:auto;</span><br></pre></td></tr></table></figure>
-
-<p>   overflow:scroll;溢出部分显示滚动弄条，不溢出也显示滚动条<br>  overflow:auto 需要的时候添加滚动条，不超出不加滚动条。</p>
-<blockquote>
-<p>隐藏注意</p>
-</blockquote>
-<p>有定位的盒子，不能添加overflow:hidden;如下图hot。<br><img src="https://img-blog.csdnimg.cn/2020050422170615.png" alt="在这里插入图片描述"></p>
-<blockquote>
-<p>总结</p>
-</blockquote>
-<p>1.display显示隐藏元素，但不保留位置。<br>2.visibility显示隐藏元素，但是保留原来位置。<br>3.overlow溢出显示隐藏，但是只对溢出部分处理。</p>
-<h2 id="土豆定位"><a href="#土豆定位" class="headerlink" title="土豆定位"></a>土豆定位</h2><p>1.建一个大盒子<br>2.里面放一张图片<br>3.做一个黑色半透明盒子不占压住底下大盒子，为了不占位置用绝对定位，并且子绝对父相对。<br> 4.隐藏遮罩层且不保留位置，用display<br> 5.当我们鼠标经过的时候，就让盒子里面的遮罩层显示出来。<br> <img src="https://img-blog.csdnimg.cn/20200504223622398.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p><img src="https://img-blog.csdnimg.cn/20200504223637257.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">    &lt;meta name=<span class="string">"viewport"</span> content=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">    &lt;style&gt;</span></span><br><span class="line"><span class="regexp">        .tudou&#123;</span></span><br><span class="line"><span class="regexp">            /</span>* 子绝对父相 *<span class="regexp">/</span></span><br><span class="line"><span class="regexp">            position: relative;</span></span><br><span class="line"><span class="regexp">            width: 444px;</span></span><br><span class="line"><span class="regexp">            height: 320px;</span></span><br><span class="line"><span class="regexp">            background-color: pink;</span></span><br><span class="line"><span class="regexp">            margin: 30px auto;</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">        .tudou img &#123;</span></span><br><span class="line"><span class="regexp">            width: 100%;</span></span><br><span class="line"><span class="regexp">            height: 100%;</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">        .mask&#123;</span></span><br><span class="line"><span class="regexp">            /</span>* 隐藏遮罩层 *<span class="regexp">/</span></span><br><span class="line"><span class="regexp">            display: none;</span></span><br><span class="line"><span class="regexp">            position: absolute;</span></span><br><span class="line"><span class="regexp">            top: 0;</span></span><br><span class="line"><span class="regexp">            left: 0;</span></span><br><span class="line"><span class="regexp">            width: 100%;</span></span><br><span class="line"><span class="regexp">            height: 100%;</span></span><br><span class="line"><span class="regexp">            background: rgba(0, 0, 0,.4) url(imge/</span><span class="number">7.</span>png) no-repeat center;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">/* 当我们鼠标经过的时候，就让盒子里面的遮罩层显示*/</span></span><br><span class="line">        .tudou:hover .mask&#123;</span><br><span class="line">             display: block;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;<span class="regexp">/style&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">'tudou'</span>&gt;</span><br><span class="line">        &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"mask"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">        &lt;img src=<span class="string">"imge/6.png"</span> alt=<span class="string">""</span>&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>body&gt;</span><br><span class="line">&lt;<span class="regexp">/html&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CSS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/04/css定位/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-ES5中新增方法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/04/ES5中新增方法/">ES5中新增方法</a>
-    </h1>
-  
-
-        
-        <a href="/2020/05/04/ES5中新增方法/" class="archive-article-date">
-  	<time datetime="2020-05-04T09:24:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="forEach"><a href="#forEach" class="headerlink" title="forEach"></a>forEach</h2><p><img src="https://img-blog.csdnimg.cn/20200504165010851.png" alt="在这里插入图片描述"></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">        <span class="comment">//forEach遍历</span></span><br><span class="line">        <span class="keyword">var</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line">        arr.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">value,index,array</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'每个数组元素'</span>+value);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'每个数组元素索引号'</span>+index);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'数组本身'</span>+array);</span><br><span class="line">        &#125;)</span><br><span class="line">    &lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="filter"><a href="#filter" class="headerlink" title="filter()"></a>filter()</h2><p>筛选数组<br><img src="https://img-blog.csdnimg.cn/20200504165343209.png" alt="在这里插入图片描述"></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">        <span class="comment">//forEach遍历</span></span><br><span class="line">        <span class="keyword">var</span> arr=[<span class="number">44</span>,<span class="number">22</span>,<span class="number">33</span>];</span><br><span class="line">        <span class="keyword">var</span> newArr=arr.filter(<span class="function"><span class="keyword">function</span>(<span class="params">value,index</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> value&gt;=<span class="number">27</span>;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="built_in">console</span>.log(newArr);</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="some"><a href="#some" class="headerlink" title="some"></a>some</h2><p>查看是否有满足的元素，返回true或者false<br><img src="https://img-blog.csdnimg.cn/20200504165735788.png" alt="在这里插入图片描述"></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="comment">//forEach遍历</span></span><br><span class="line">    <span class="keyword">var</span> arr=[<span class="number">44</span>,<span class="number">22</span>,<span class="number">33</span>];</span><br><span class="line">    <span class="keyword">var</span> flag1=arr.some(<span class="function"><span class="keyword">function</span>(<span class="params">value</span>)</span>&#123;</span><br><span class="line">       <span class="keyword">return</span> value&gt;=<span class="number">29</span>;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">var</span> flag2=arr.some(<span class="function"><span class="keyword">function</span>(<span class="params">value</span>)</span>&#123;</span><br><span class="line">       <span class="keyword">return</span> value&gt;=<span class="number">55</span>;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="built_in">console</span>.log(flag1);</span><br><span class="line">    <span class="built_in">console</span>.log(flag2);</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>如果找到第一个合适的，就不再继续查找了。</p>
-<h2 id="trim"><a href="#trim" class="headerlink" title="trim"></a>trim</h2><p>清除左边和右边的空格。返回一个新的字符串，不修改原字符串。<br>但是不去除中间的空格。<br><img src="https://img-blog.csdnimg.cn/20200504170241515.png" alt="在这里插入图片描述"></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">var</span> str=<span class="string">'  tom  '</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(str);</span><br><span class="line">    <span class="keyword">var</span> str1=str.trim(str);</span><br><span class="line">    <span class="built_in">console</span>.log(str1);</span><br><span class="line">    <span class="keyword">var</span> str=<span class="string">' t om '</span>;</span><br><span class="line">    <span class="keyword">var</span> str2=str.trim(str);</span><br><span class="line">    <span class="built_in">console</span>.log(str2);</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>解决的问题</p>
-</blockquote>
-<p>用户输入几个空格（实际为null），但是可以提交请求的bug。<br>防止额外空格影响字符串长度数据。如输入空格tom长度为4，实际我们需要长度为3的字符串。</p>
-<h2 id="Object-keys-obj"><a href="#Object-keys-obj" class="headerlink" title="Object.keys(obj)"></a>Object.keys(obj)</h2><p>效果类似for in<br>返回一个数组<br><img src="https://img-blog.csdnimg.cn/20200504171118852.png" alt="在这里插入图片描述"></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">var</span> obj=&#123;</span><br><span class="line">    id: <span class="number">1</span>,</span><br><span class="line">    pname: <span class="string">'小米'</span>,</span><br><span class="line">    price: <span class="number">1000</span>,</span><br><span class="line">    num:<span class="number">2000</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> arr=<span class="built_in">Object</span>.keys(obj);</span><br><span class="line">arr.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">value</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(value);</span><br><span class="line">&#125;)</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Object-defineProperties-obj-prop-descriptor"><a href="#Object-defineProperties-obj-prop-descriptor" class="headerlink" title="Object.defineProperties(obj,prop,descriptor)"></a>Object.defineProperties(obj,prop,descriptor)</h2><p>添加修改属性方式<img src="https://img-blog.csdnimg.cn/20200504172342410.png" alt="在这里插入图片描述"></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">var</span> obj=&#123;</span><br><span class="line">    id: <span class="number">1</span>,</span><br><span class="line">    pname: <span class="string">'小米'</span>,</span><br><span class="line">    price: <span class="number">1000</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(obj,<span class="string">'pname'</span>,&#123;<span class="attr">value</span>:<span class="string">'华为'</span>&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(obj.pname);</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CSS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/04/ES5中新增方法/">展开全文 >></a>
         </p>
       
 
