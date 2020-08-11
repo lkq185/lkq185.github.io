@@ -140,6 +140,205 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-实习总结——项目学习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>项目流程<br><img src="https://img-blog.csdnimg.cn/20200731233924447.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+</ul>
+<h3 id="入口文件"><a href="#入口文件" class="headerlink" title="入口文件"></a>入口文件</h3><p><img src="https://img-blog.csdnimg.cn/20200731232832155.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<ol>
+<li>vue</li>
+</ol>
+<ul>
+<li>from ‘vue’等于。安装处理了vue单文件组件的加载器，想要让vue单文件组件能够使用，我们必须要安装vue<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">"../node_modules/vue/dist/vue.js"</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ol start="2">
+<li>router</li>
+</ol>
+<ul>
+<li>采用路由去中心化。把路由分配到模块中，再用require汇总。目的是更好的维护路由文件。</li>
+<li>路由是history模式</li>
+<li>分为全局(登陆、注册)、带tab模块的页面、其他路由会自动重定向<ol start="3">
+<li>router.validate(验证)</li>
+</ol>
+</li>
+<li>判断是否有权限、或者tab是否超出最大数量限制</li>
+</ul>
+<ol start="4">
+<li>Store</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">- vuex管理全局状态</span><br><span class="line">- 每个组件使用这些属性，进行操作，一起改变</span><br><span class="line">- 类似于全局变量。 </span><br><span class="line">- 优点：提高开发效率、高效实现组件间数据共享、vuex数据是响应式的、</span><br><span class="line">- State：保存组件间共享的数据，只能通过mutation变更</span><br><span class="line">- Mutation：用于修改变更state中的数据，不能用于异步操作，必须是同步 </span><br><span class="line">- Action：用于异步获取数据</span><br><span class="line">- Getter：从store从获取数据、类似于计算数据、监控修饰变量的变化，不会修改变量。</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>Component</li>
+</ol>
+<ul>
+<li>组件的install和常用组件直接挂载在原型对象上</li>
+<li>install流程</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span>组件注册会寻找插件上的install方法，并且执行。如果插件没有install方法的话，就会报错，无法使用use注册组件。</span><br><span class="line"><span class="number">2.</span> mixin侵入式的给每个Vue组件的beforeCreate与destroyed生命周期对组件指定路由组件进行了创建与摧毁。</span><br><span class="line"><span class="number">3.</span>全局挂载$router和$route</span><br><span class="line"><span class="number">4.</span>注册router-link和router-view两个组件。</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>Rsentry<ul>
+<li>监听线上环境的错误次数和时间</li>
+</ul>
+</li>
+<li>Plugins<ul>
+<li>封装了操作storage的方法</li>
+<li>用的少，直接调用window.sessionstorage.getItem和setItem也可以使用</li>
+</ul>
+<ol start="9">
+<li>Directives：</li>
+</ol>
+</li>
+</ol>
+<ul>
+<li><p>封装了一个正则表达式判断输入是否符合条件</p>
+<ol start="10">
+<li><p>Css</p>
+<ul>
+<li>用float，父亲不给高度并且加上overflow：hidden触发BFC<h3 id="项目技术"><a href="#项目技术" class="headerlink" title="项目技术"></a>项目技术</h3><blockquote>
+<p>Vue</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>路由：占位符、单页面、</p>
+</li>
+</ol>
+<ul>
+<li>单页面：只有一张web页面。单页面仅通过路由实现局部资源的跳转。公共资源仅加载一次，适用于PC端官网、购物网站</li>
+<li>优点：</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span>数据传递容易。</span><br><span class="line"><span class="number">2.</span>维护容易(数据更改不用都改)。</span><br><span class="line"><span class="number">3.</span>代码复用。</span><br><span class="line"><span class="number">4.</span>页面切换快。</span><br><span class="line"><span class="number">5.</span>对服务端压力小。</span><br><span class="line"><span class="number">6.</span>前后端分明，前端负责交互，后端负责处理数据。</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>seo原理就是一个服务器向另一个服务器获取内容。<ul>
+<li>因为搜索引擎的SEO是从页面获取内容，而搜索引擎不会等页面数据获取数据完毕才爬取。所以抓不到异步获取数据的内容，只能获取页面中模板。</li>
+<li>服务端优化SSR或者预渲染：将标签渲染成html片段过程在服务端执行</li>
+<li>优点：</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- 更好的SEO：SSR直接从服务器返回已经渲染好的页面。</span><br><span class="line">- 更快的到达时间(首屏加载更快)：SPA会等到所有Vue编译后的js文件都下载完毕后，才开始页面渲染，文件下载需要一定的时间。SSR直接渲染好页面直接返回，无需等js下载完毕。</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>缺点：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- 开发限制：只支持created和beforecreated俩个钩子函数。需要处在node.js server条件下运行。</span><br><span class="line">- 服务器负载更大。</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>History：</li>
+</ol>
+<ul>
+<li>原理：利用了HTML5新增的pushstate(压栈)和replacestate(替换栈中元素)方法，应用于浏览器的历史修改栈，但不会触发popstate。</li>
+<li>变了URL，后端存在对应的URL与之对应。</li>
+<li>我们可以使用 popstate 事件来监听 url 的变化，从而对页面进行跳转（渲染）。</li>
+<li>浏览器的前进与后退会触发popstate事件。</li>
+<li>刷新时，会向后端请求资源。后端如果缺少对路由的处理会出现404错误。</li>
+<li>总结：不怕前进后退、怕F5刷新。</li>
+</ul>
+<ol start="4">
+<li>mixins：</li>
+</ol>
+<ul>
+<li>Mixins包含组件可复用的功能、混入的对象的方法将成为组件自己的方法</li>
+<li>方法和参数再各组件中不共享</li>
+<li>同名函数执行，重写后的方法也会执行。 </li>
+<li>与vuex区别：mixins相互独立的，vuex会一起改变。例如- Java里子类的父类方法的重写。Vuex类似于全局变量。</li>
+</ul>
+<ol start="5">
+<li>v-for为什么要加key</li>
+</ol>
+<ul>
+<li>因为vue采用就地复用的策略、列表数据修改时，如果没有key复用之前的元素。如果存在key，通过key修改这项。</li>
+<li>不建议用index：因为在数组中间插入元素时，会重新计算位置，导致渲染多次。（因为用index渲染时是无法识别俩个不一样的DOM元素）</li>
+<li>不建议用随机数(因为俩个一样的DOM可能被识别成不同的)</li>
+<li>用id做为key。因为diff算法时，可以更高效的插入元素。（直接找到插入的位置，进行插入）</li>
+</ul>
+<ol start="6">
+<li>Axios<ul>
+<li>定义：它是一个基于promise的HTTP库，既可以在浏览器中执行，也可以在node.js中执行。<br>特点或者优点：</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>支持所有promise的api</li>
+<li>支持请求和响应拦截器。</li>
+<li>安全性高，客户端支持防御CSRF(伪造用户身份)，就是让每个请求都携带一个从cookie中拿到的key，根据浏览器同源政策，假冒的网站是拿不到你cookie中的key。<br>为什么既能在浏览器中发送、又能在node服务器发送。</li>
+<li>内部用XMLHttpRequest和process俩个全局变量来匹配不同的环境并进行不同的操作。<br>源码中有一个</li>
+<li>在浏览器中使用XMLHttpRequest对象发送ajax请求。<ul>
+<li>应用：baseurl、请求拦截器、响应拦截器</li>
+</ul>
+</li>
+<li>注意：请求拦截器和响应拦截器。注意就是像onload组件单独封装ajax，需要单独为请求头赋值信息。</li>
+</ul>
+<ol start="7">
+<li>跨域：因为浏览器跨域限制<ul>
+<li>本地使用代理，代理会替自己向服务器请求。</li>
+<li>CORS：前端什么都不做，就是正常发送请求，如果需要携带cookie，前后端都要设置。</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>简单请求：符合下列条件之一</li>
+<li>前端什么都不用做，就是正常发请求，如果需要带cookie，前后端都要设置。</li>
+<li>ORIGIN:from的网站。<ul>
+<li>请求方法为Head、get、post之一</li>
+<li>HTTP头不超过：accept、accept-language、content-langage、content-type只限于application/x-www-form-urlencoded、multipart/form-data、text/plain。</li>
+<li>方法：在HTTP请求头信息添加origin字段(表示来自哪个协议+域名+端口)。 </li>
+</ul>
+</li>
+<li>优点:支持任何请求。</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/07/31/实习总结——项目学习/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Vue和前端工程化、webpack的基本使用（模块化、脚手架使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -927,298 +1126,6 @@
 
 
   
-    <article id="post-CORS和JSONP" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/07/CORS和JSONP/">CORS和JSONP</a>
-    </h1>
-  
-
-        
-        <a href="/2020/06/07/CORS和JSONP/" class="archive-article-date">
-  	<time datetime="2020-06-07T08:41:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="JSONP和CORS"><a href="#JSONP和CORS" class="headerlink" title="JSONP和CORS"></a>JSONP和CORS</h2><blockquote>
-<p>跨域的基本概念</p>
-</blockquote>
-<ul>
-<li>浏览器为了一定的安全因素，增加了同源策略。有违同源策略的操作都是被禁止的，这个时候就会发生我们所说的跨域。</li>
-<li>但其实浏览器加载的资源很多都是跨域的，只是有些资源的加载浏览器是允许的。</li>
-<li>图片（img）、CSS、Script等资源是不受同源策略限制的。</li>
-<li>我们所说的跨域主要说的是ajax请求无法完成。<blockquote>
-<p>跨域解决方案</p>
-</blockquote>
-</li>
-</ul>
-<h4 id="JSONP"><a href="#JSONP" class="headerlink" title="JSONP"></a>JSONP</h4><ul>
-<li>JSONP的优点就是因为他够老，能兼容各种浏览器，无兼容问题。</li>
-<li>他发送的不是ajax请求，而是利用了script标签加载机制。</li>
-<li>JSONP缺点：只支持get，而且存在安全问题。</li>
-<li>技术发展至今，jsonp这种前后端耦合的方式肯定要被代替。</li>
-</ul>
-<h4 id="CORS跨域解决方案"><a href="#CORS跨域解决方案" class="headerlink" title="CORS跨域解决方案"></a>CORS跨域解决方案</h4><ul>
-<li>CORS从具体的代码实现上来说比较方便，前端几乎不需要写任何代码就可以支持。主要是靠服务端进行配置。</li>
-<li>CORS需要浏览器和服务器同时支持。目前所有浏览器都支持该功能，IE浏览器不能低于IE10。</li>
-<li>整个CORS通信过程，都是浏览器自动完成，不需要用户参与。对于开发者来说，CORS通信与同源的AJAX通信没有差别，代码完全一样。</li>
-<li>浏览器一旦发现AJAX请求跨源，就会自动添加一些附加的头信息，有时还会多出一次附加的请求，但用户不会有感觉。</li>
-<li>因此，实现CORS通信的关键是服务器。只要服务器实现了CORS接口，就可以跨源通信。</li>
-</ul>
-<blockquote>
-<p>CORS的两种请求</p>
-</blockquote>
-<ul>
-<li>浏览器将CORS请求分成两类：简单请求（simple request）和非简单请求（预检请求）（not-so-simple request）。</li>
-</ul>
-<p>只要同时满足以下两大条件，就属于简单请求。</p>
-<ol>
-<li>请求方法是以下三种方法之一：</li>
-</ol>
-<ul>
-<li>HEAD</li>
-<li>GET</li>
-<li>POST</li>
-</ul>
-<ol start="2">
-<li>HTTP请求头信息不超出以下几种字段：</li>
-</ol>
-<ul>
-<li><p>Accept</p>
-</li>
-<li><p>Accept-Language</p>
-</li>
-<li><p>Content-Language</p>
-</li>
-<li><p>Last-Event-ID</p>
-</li>
-<li><p>Content-Type：只限于三个值application/x-www-form-urlencoded、multipart/form-data、text/plain</p>
-</li>
-<li><p>凡是不同时满足上面两个条件，就属于非简单请求。</p>
-</li>
-<li><p>浏览器对这两种请求的处理，是不一样的。</p>
-<h5 id="1-CORS的简单请求"><a href="#1-CORS的简单请求" class="headerlink" title="1.CORS的简单请求"></a>1.CORS的简单请求</h5></li>
-<li><p>对于简单请求，浏览器直接发出CORS请求。具体来说，就是在头信息之中，增加一个Origin字段。</p>
-</li>
-<li><p>下面是一个例子，浏览器发现这次跨源AJAX请求是简单请求，就自动在头信息之中，添加一个Origin字段。</p>
-</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">GET /cors HTTP/<span class="number">1.1</span> </span><br><span class="line">Origin: http:<span class="comment">//m.xin.com</span></span><br><span class="line">Host: api.alice.com</span><br><span class="line">Accept-Language: en-US</span><br><span class="line">Connection: keep-alive</span><br><span class="line">User-Agent: Mozilla/<span class="number">5.0</span>...</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>上面的头信息中，Origin字段用来说明，本次请求来自哪个源（协议 + 域名 + 端口）。服务器根据这个值，决定是否同意这次请求。</p>
-</li>
-<li><p>如果Origin指定的源，不在许可范围内，服务器会返回一个正常的HTTP回应。浏览器发现，这个回应的头信息<code>没有包含Access-Control-Allow-Origin</code>字段（详见下文），就知道出错了，从而抛出一个错误，被XMLHttpRequest的onerror回调函数捕获。</p>
-</li>
-<li><p>注意，这种错误无法通过状态码识别，因为HTTP回应的状态码有可能是200。</p>
-</li>
-<li><p>如果Origin指定的域名在许可范围内，服务器返回的响应，会多出几个头信息字段。</p>
-</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Origin: http:<span class="comment">//api.bob.com</span></span><br><span class="line">Access-Control-Allow-Credentials: <span class="literal">true</span></span><br><span class="line">Access-Control-Expose-Headers: FooBar</span><br><span class="line">Content-Type: text/html; charset=utf<span class="number">-8</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>上面的头信息之中，有三个与CORS请求相关的字段，都以Access-Control-开头。</li>
-</ul>
-<ol>
-<li>Access-Control-Allow-Origin</li>
-</ol>
-<ul>
-<li>该字段是必须的。它的值要么是请求时Origin字段的值，要么是一个*，表示接受任意域名的请求。</li>
-</ul>
-<ol start="2">
-<li>Access-Control-Allow-Credentials</li>
-</ol>
-<ul>
-<li>该字段可选。它的值是一个布尔值，表示是否允许发送Cookie。默认情况下，Cookie不包括在CORS请求之中。设为true，即表示服务器明确许可，Cookie可以包含在请求中，一起发给服务器。这个值也只能设为true，如果服务器不要浏览器发送Cookie，删除该字段即可。</li>
-</ul>
-<ol start="3">
-<li>Access-Control-Expose-Headers</li>
-</ol>
-<ul>
-<li><p>该字段可选。CORS请求时，XMLHttpRequest对象的getResponseHeader()方法只能拿到6个基本字段：Cache-Control、Content-Language、Content-Type、Expires、Last-Modified、Pragma。如果想拿到其他字段，就必须在Access-Control-Expose-Headers里面指定。上面的例子指定，getResponseHeader(‘FooBar’)可以返回FooBar字段的值。</p>
-<blockquote>
-<p>withCredentials 属性</p>
-</blockquote>
-</li>
-<li><p>上面说到，<code>CORS请求默认不发送Cookie和HTTP认证信息</code>。如果要把Cookie发到服务器，一方面要服务器同意，客户端：Access-Control-Allow-Credentials = true。</p>
-</li>
-<li><p>Access-Control-Allow-Credentials: true</p>
-</li>
-<li><p>另一方面，<code>开发者必须在AJAX请求中打开withCredentials属性</code>。</p>
-</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xhr.withCredentials = <span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>否则，即使服务器同意发送Cookie，浏览器也不会发送。或者，服务器要求设置Cookie，浏览器也不会处理。</p>
-</li>
-<li><p>但是，如果省略<code>withCredentials</code>设置，有的浏览器还是会一起发送Cookie。这时，可以显式关闭withCredentials。</p>
-</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xhr.withCredentials = <span class="literal">false</span>;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>需要注意的是，如果要发送Cookie，Access-Control-Allow-Origin就不能设为星号，必须指定明确的、与请求网页一致的域名。同时，Cookie依然遵循同源政策，只有用服务器域名设置的Cookie才会上传，其他域名的Cookie并不会上传，且（跨源）原网页代码中的document.cookie也无法读取服务器域名下的Cookie。</li>
-</ul>
-<h4 id="2-CORS非简单请求-预检请求"><a href="#2-CORS非简单请求-预检请求" class="headerlink" title="2.CORS非简单请求-预检请求"></a>2.CORS非简单请求-预检请求</h4><ul>
-<li><p>非简单请求是那种对服务器有特殊要求的请求，比如请求方法是PUT或DELETE，或者<code>Content-Type</code>字段的类型是<code>application/json。</code></p>
-</li>
-<li><p>非简单请求的CORS请求，会在正式通信之前，<code>增加一次HTTP查询请求</code>，称为<code>&quot;预检&quot;请求</code>（preflight）。</p>
-</li>
-<li><p>浏览器先询问服务器，当前网页所在的域名是否在服务器的许可名单之中，以及可以使用哪些HTTP动词和头信息字段。只有得到肯定答复，浏览器才会发出正式的XMLHttpRequest请求，否则就报错。</p>
-</li>
-<li><p>代码</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var url = 'http://api.uxin.com/user';</span><br><span class="line">var xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xhr.open('PUT', url, true);</span><br><span class="line">xhr.setRequestHeader('X-Custom-Header', 'value');</span><br><span class="line">xhr.send();</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>上面代码中，HTTP请求的方法是PUT，并且发送一个自定义头信息X-Custom-Header。</p>
-</li>
-<li><p>浏览器发现，这是一个非简单请求，就自动发出一个<code>&quot;预检&quot;请求</code>，要求服务器确认可以这样请求。下面是这个”预检”请求的HTTP头信息。</p>
-</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">OPTIONS /cors HTTP/<span class="number">1.1</span></span><br><span class="line">Origin: http:<span class="comment">//m.a.com</span></span><br><span class="line">Access-Control-Request-Method: PUT</span><br><span class="line">Access-Control-Request-Headers: X-Custom-Header</span><br><span class="line">Host: api.alice.com</span><br><span class="line">Accept-Language: en-US</span><br><span class="line">Connection: keep-alive</span><br><span class="line">User-Agent: Mozilla/<span class="number">5.0</span>...</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>“预检”请求用的请求方法是<code>OPTIONS</code>，表示这个请求是用来询问的。头信息里面，关键字段是<code>Origin</code>，表示请求来自哪个源。</p>
-</li>
-<li><p>除了Origin字段，”预检”请求的头信息包括两个特殊字段。</p>
-</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Request-Method</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>该字段是必须的，用来列出浏览器的CORS请求会用到哪些HTTP方法，上例是PUT。</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Request-Headers</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>该字段是一个逗号分隔的字符串，指定浏览器CORS请求会额外发送的头信息字段，上例是X-Custom-Header。</li>
-</ul>
-<h4 id="CORS预检请求的响应"><a href="#CORS预检请求的响应" class="headerlink" title="CORS预检请求的响应"></a>CORS预检请求的响应</h4><ul>
-<li>服务器收到”预检”请求以后，检查了Origin、Access-Control-Request-Method和Access-Control-Request-Headers字段以后，确认允许跨源请求，就可以做出回应。</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">HTTP/<span class="number">1.1</span> <span class="number">200</span> OK</span><br><span class="line">Date: Mon, <span class="number">01</span> Dec <span class="number">2008</span> <span class="number">01</span>:<span class="number">15</span>:<span class="number">39</span> GMT</span><br><span class="line">Server: Apache/<span class="number">2.0</span><span class="number">.61</span> (Unix)</span><br><span class="line">Access-Control-Allow-Origin: http:<span class="comment">//m.a.com</span></span><br><span class="line">Access-Control-Allow-Methods: GET, POST, PUT</span><br><span class="line">Access-Control-Allow-Headers: X-Custom-Header</span><br><span class="line">Content-Type: text/html; charset=utf<span class="number">-8</span></span><br><span class="line">Content-Encoding: gzip</span><br><span class="line">Content-Length: <span class="number">0</span></span><br><span class="line">Keep-Alive: timeout=<span class="number">2</span>, max=<span class="number">100</span></span><br><span class="line">Connection: Keep-Alive</span><br><span class="line">Content-Type: text/plain</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>上面的HTTP回应中，关键的是Access-Control-Allow-Origin字段，表示<a href="http://m.a.com可以请求数据。该字段也可以设为星号，表示同意任意跨源请求。" target="_blank" rel="noopener">http://m.a.com可以请求数据。该字段也可以设为星号，表示同意任意跨源请求。</a></li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Origin: *</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>如果浏览器否定了”预检”请求，会返回一个正常的HTTP回应，但是没有任何CORS相关的头信息字段。这时浏览器就会认定，服务器不同意预检请求，因此触发一个错误，被XMLHttpRequest对象的onerror回调函数捕获。控制台会打印出如下的报错信息。</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">XMLHttpRequest cannot load http:<span class="comment">//m.a.com.</span></span><br><span class="line">Origin http:<span class="comment">//m.a.com is not allowed by Access-Control-Allow-Origin.</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>服务器回应的其他CORS相关字段如下。</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Methods: GET, POST, PUT</span><br><span class="line">Access-Control-Allow-Headers: X-Custom-Header</span><br><span class="line">Access-Control-Allow-Credentials: <span class="literal">true</span></span><br><span class="line">Access-Control-Max-Age: <span class="number">1728000</span></span><br></pre></td></tr></table></figure>
-
-<ol>
-<li>Access-Control-Allow-Methods</li>
-</ol>
-<ul>
-<li>该字段必需，它的值是逗号分隔的一个字符串，表明服务器支持的所有跨域请求的方法。注意，返回的是所有支持的方法，而不单是浏览器请求的那个方法。这是为了避免多次”预检”请求。</li>
-</ul>
-<ol start="2">
-<li>Access-Control-Allow-Headers</li>
-</ol>
-<ul>
-<li>如果浏览器请求包括Access-Control-Request-Headers字段，则Access-Control-Allow-Headers字段是必需的。它也是一个逗号分隔的字符串，表明服务器支持的所有头信息字段，不限于浏览器在”预检”中请求的字段。</li>
-</ul>
-<ol start="3">
-<li>Access-Control-Allow-Credentials</li>
-</ol>
-<ul>
-<li>该字段与简单请求时的含义相同。</li>
-</ul>
-<ol start="4">
-<li>Access-Control-Max-Age</li>
-</ol>
-<ul>
-<li>该字段可选，用来指定本次预检请求的有效期，单位为秒。上面结果中，有效期是20天（1728000秒），即允许缓存该条回应1728000秒（即20天），在此期间，不用发出另一条预检请求。</li>
-<li>CORS浏览器的正常请求和回应</li>
-</ul>
-<p>一旦服务器通过了”预检”请求，以后每次浏览器正常的CORS请求，就都跟简单请求一样，会有一个Origin头信息字段。服务器的回应，也都会有一个Access-Control-Allow-Origin头信息字段。</p>
-<ul>
-<li>下面是”预检”请求之后，浏览器的正常CORS请求。</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">PUT /cors HTTP/<span class="number">1.1</span></span><br><span class="line">Origin: http:<span class="comment">//m.a.com</span></span><br><span class="line">Host: api.alice.com</span><br><span class="line">X-Custom-Header: value</span><br><span class="line">Accept-Language: en-US</span><br><span class="line">Connection: keep-alive</span><br><span class="line">User-Agent: Mozilla/<span class="number">5.0</span>..</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>上面头信息的Origin字段是浏览器自动添加的。</p>
-</li>
-<li><p>下面是服务器正常的回应。</p>
-</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Origin: http:<span class="comment">//m.a.com</span></span><br><span class="line">Content-Type: text/html; charset=utf<span class="number">-8</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>上面头信息中，Access-Control-Allow-Origin字段是每次回应都必定包含的。</p>
-</li>
-<li><p>我们要知道CORS是http协议的一部分，由浏览器和服务器来完成。所以对于前端来说还是比较简单的。我们要做的是理解这个协议和实现机制，在遇到类似问题的时候可以快速的定位。</p>
-</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">浏览器</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/06/07/CORS和JSONP/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1356,6 +1263,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">浏览器</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">图</a>
               </li>
              
@@ -1368,7 +1279,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1376,7 +1287,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
+                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1392,15 +1303,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
+                <a href="javascript:void(0)" class="js-tag color5">flex</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1408,15 +1315,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">排序</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color3">排序</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1433,14 +1348,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">网络</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">浏览器</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">flex</a>
               </li>
             
             <div class="clearfix"></div>

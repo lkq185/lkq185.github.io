@@ -140,6 +140,82 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-计算机网络学习笔记(协议二)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/14/计算机网络学习笔记(协议二)/">协议与设备(2)</a>
+    </h1>
+  
+
+        
+        <a href="/2019/12/14/计算机网络学习笔记(协议二)/" class="archive-article-date">
+  	<time datetime="2019-12-14T07:16:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>ARP是地址解析协议，简单语言解释一下工作原理</strong><br>1：首先，每个主机都会在自己的ARP缓冲区中建立一个ARP列表，以表示IP地址和MAC地址之间的对应关系。<br>2：当源主机要发送数据时，首先检查ARP列表中是否有对应IP地址的目的主机的MAC地址，如果有，则直接发送数据，如果没有，就向本网段的所有主机发送ARP数据包，该数据包包括的内容有：源主机 IP地址，源主机MAC地址，目的主机的IP 地址。<br>3：当本网络的所有主机收到该ARP数据包时，首先检查数据包中的IP地址是否是自己的IP地址，如果不是，则忽略该数据包，如果是，则首先从数据包中取出源主机的IP和MAC地址写入到ARP列表中，如果已经存在，则覆盖，然后将自己的MAC地址写入ARP响应包中，告诉源主机自己是它想要找的MAC地址。<br>4：源主机收到ARP响应包后。将目的主机的IP和MAC地址写入ARP列表，并利用此信息发送数据。如果源主机一直没有收到ARP响应数据包，表示ARP查询失败。<br>广播发送ARP请求，单播发送ARP响应。</p>
+<p><strong>各种协议的介绍</strong><br>答:ICMP协议： 因特网控制报文协议。它是TCP/IP协议族的一个子协议，用于在IP主机、路由器之间传递控制消息。<br>TFTP协议： 是TCP/IP协议族中的一个用来在客户机与服务器之间进行简单文件传输的协议，提供不复杂、开销不大的文件传输服务。<br>HTTP协议： 超文本传输协议，是一个属于应用层的面向对象的协议，由于其简捷、快速的方式，适用于分布式超媒体信息系统。<br>NAT协议：网络地址转换属接入广域网(WAN)技术，是一种将私有（保留）地址转化为合法IP地址的转换技术，<br>DHCP协议：动态主机配置协议，是一种让系统得以连接到网络上，并获取所需要的配置参数手段，使用UDP协议工作。具体用途：给内部网络或网络服务供应商自动分配IP地址，给用户或者内部网络管理员作为对所有计算机作中央管理的手段。</p>
+<p><strong>描述RARP协议</strong><br>RARP是逆地址解析协议，作用是完成硬件地址到IP地址的映射，主要用于无盘工作站，因为给无盘工作站配置的IP地址不能保存。<br>工作流程：在网络中配置一台RARP服务器，里面保存着IP地址和MAC地址的映射关系，当无盘工作站启动后，就封装一个RARP数据包，里面有其MAC地址，然后广播到网络上去，当服务器收到请求包后，就查找对应的MAC地址的IP地址装入响应报文中发回给请求者。因为需要广播请求报文，因此RARP只能用于具有广播能力的网络。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">网络</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/14/计算机网络学习笔记(协议二)/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-计算机网络学习笔记(协议)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -527,90 +603,6 @@
 
 
   
-    <article id="post-148排序链表" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/11/148排序链表/">排序链表</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/11/148排序链表/" class="archive-article-date">
-  	<time datetime="2019-12-11T03:35:11.834Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在 O(n log n) 时间复杂度和常数级空间复杂度下，对链表进行排序。</p>
-<p>示例 1:</p>
-<p>输入: 4-&gt;2-&gt;1-&gt;3<br>输出: 1-&gt;2-&gt;3-&gt;4</p>
-<p>示例 2:</p>
-<p>输入: -1-&gt;5-&gt;3-&gt;4-&gt;0<br>输出: -1-&gt;0-&gt;3-&gt;4-&gt;5<br><strong>首先归并排序</strong></p>
-<p><img src="https://img-blog.csdnimg.cn/20191211111702962.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">public static void mergeSort(int[] arr) &#123;</span><br><span class="line">    sort(arr, 0, arr.length - 1);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static void sort(int[] arr, int L, int R) &#123;</span><br><span class="line">    if(L == R) &#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    int mid = L + ((R - L) &gt;&gt; 1);</span><br><span class="line">    sort(arr, L, mid);</span><br><span class="line">    sort(arr, mid + 1, R);</span><br><span class="line">    merge(arr, L, mid, R);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static void merge(int[] arr, int L, int mid, int R) &#123;</span><br><span class="line">    int[] temp = new int[R - L + 1];</span><br><span class="line">    int i = 0;</span><br><span class="line">    int p1 = L;</span><br><span class="line">    int p2 = mid + 1;</span><br><span class="line">    // 比较左右两部分的元素，哪个小，把那个元素填入temp中</span><br><span class="line">    while(p1 &lt;= mid &amp;&amp; p2 &lt;= R) &#123;</span><br><span class="line">        temp[i++] = arr[p1] &lt; arr[p2] ? arr[p1++] : arr[p2++];</span><br><span class="line">    &#125;</span><br><span class="line">    // 上面的循环退出后，把剩余的元素依次填入到temp中</span><br><span class="line">    // 以下两个while只有一个会执行</span><br><span class="line">    while(p1 &lt;= mid) &#123;</span><br><span class="line">        temp[i++] = arr[p1++];</span><br><span class="line">    &#125;</span><br><span class="line">    while(p2 &lt;= R) &#123;</span><br><span class="line">        temp[i++] = arr[p2++];</span><br><span class="line">    &#125;</span><br><span class="line">    // 把最终的排序的结果复制给原数组</span><br><span class="line">    for(i = 0; i &lt; temp.length; i++) &#123;</span><br><span class="line">        arr[L + i] = temp[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>那么链表排序呢<br>把每个链表分成一部分，之后连接在一起。<br>注意：要保证存在前驱结点</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public ListNode merry(ListNode left,ListNode right)&#123;</span><br><span class="line">        ListNode pre=new ListNode(0);</span><br><span class="line">        ListNode cur=pre;//pre遍历中所以cur指代pre</span><br><span class="line">        while(left!=null&amp;&amp;right!=null)&#123;</span><br><span class="line">            if(left.val&gt;right.val)&#123;</span><br><span class="line">            pre.next=right;</span><br><span class="line">            right=right.next;</span><br><span class="line">            &#125;</span><br><span class="line">            else&#123;</span><br><span class="line">              pre.next=left;</span><br><span class="line">              left=left.next;</span><br><span class="line">            &#125;</span><br><span class="line">            pre=pre.next;</span><br><span class="line">        &#125;</span><br><span class="line">        if(left==null)  pre.next=right;//把剩余链表整个加入到pre中</span><br><span class="line">        else  pre.next=left;</span><br><span class="line">        return cur.next;</span><br><span class="line">    &#125;</span><br><span class="line">    public ListNode sortList(ListNode head) &#123;</span><br><span class="line">        if(head==null||head.next==null) return head;</span><br><span class="line">        ListNode slow=head;</span><br><span class="line">        ListNode fast=head.next;//头结点后一个结点开始</span><br><span class="line">        while(fast!=null&amp;&amp;fast.next!=null)&#123;</span><br><span class="line">             slow=slow.next;</span><br><span class="line">             fast=fast.next.next;</span><br><span class="line">        &#125;</span><br><span class="line">        ListNode right=slow.next;</span><br><span class="line">        slow.next=null;</span><br><span class="line">        return merry(sortList(head),sortList(right));  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">链表</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/11/148排序链表/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/15/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/page/17/">17</a><a class="page-number" href="/page/18/">18</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><a class="extend next" rel="next" href="/page/17/">Next &raquo;</a>
@@ -748,6 +740,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">浏览器</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">图</a>
               </li>
              
@@ -760,7 +756,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -768,7 +764,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
+                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -784,15 +780,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
+                <a href="javascript:void(0)" class="js-tag color5">flex</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -800,15 +792,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">排序</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color3">排序</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -825,14 +825,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">网络</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">浏览器</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">flex</a>
               </li>
             
             <div class="clearfix"></div>

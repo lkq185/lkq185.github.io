@@ -140,6 +140,255 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-项目优化和发布" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/25/项目优化和发布/">项目优化和发布</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/25/项目优化和发布/" class="archive-article-date">
+  	<time datetime="2020-05-25T14:56:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="项目优化"><a href="#项目优化" class="headerlink" title="项目优化"></a>项目优化</h2><blockquote>
+<p>实现步骤：</p>
+</blockquote>
+<ul>
+<li>生成打包报告，根据报告优化项目</li>
+<li>第三方库启用CDN（通过externals加载外部CDN）</li>
+<li>通过CDN加载Element-UI，在<code>main-prod.js</code>中注释掉按需加载，同时在<code>index.html</code>头部通过CDN加载element.ui的js和css样式</li>
+<li>首页内容定制：不同环境下产生不同内容。通过插件进行定制</li>
+<li>路由懒加载：打包时，JS包非常大，我们把不同路由对应的组件分割成不同代码块，然后当路由被访问到的时候才加载对应组件，这样就更高效了。</li>
+<li>路由懒加载步骤：<ol>
+<li>安装<code>@babel/plugin-syntax-dynamic-import</code>包</li>
+<li>在babel.config.js配置文件中声明该插件</li>
+<li>将所有路由由<code>import...from...</code>改为按需加载的形式。<code>./Bar.vue</code>是路由组件存放路径，<code>/* webpackChunName:&quot;group-foo&quot;</code>分组，相同分组会被打包到同一个文件。</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Foo = <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="comment">/* webpackChunName:"group-foo" */</span><span class="string">'./Bar.vue'</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="根据报错修改代码"><a href="#根据报错修改代码" class="headerlink" title="根据报错修改代码"></a>根据报错修改代码</h2><p>根据ESLint的警告提示更改对应的代码<br>在.prettierrc文件中更改设置”printWidth”:200,  将每行代码的文字数量更改为200</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;semi&quot;:false,</span><br><span class="line">    &quot;singleQuote&quot;:true,</span><br><span class="line">    &quot;printWidth&quot;:200</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="执行build"><a href="#执行build" class="headerlink" title="执行build"></a>执行build</h2><ul>
+<li>安装一个插件（babel-plugin-transform-remove-console）在项目build阶段移除所有的console信息</li>
+<li>打开项目控制台，点击依赖-&gt;开发依赖，输入babel-plugin-transform-remove-console，安装</li>
+<li>打开babel.config.js，编辑代码如下：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//项目发布阶段需要用到的babel插件</span></span><br><span class="line"><span class="keyword">const</span> productPlugins = []</span><br><span class="line"></span><br><span class="line"><span class="comment">//判断是开发还是发布阶段</span></span><br><span class="line"><span class="keyword">if</span>(process.env.NODE_ENV === <span class="string">'production'</span>)&#123;</span><br><span class="line">  <span class="comment">//发布阶段</span></span><br><span class="line">  productPlugins.push(<span class="string">"transform-remove-console"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="string">"presets"</span>: [</span><br><span class="line">    <span class="string">"@vue/app"</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"plugins"</span>: [</span><br><span class="line">    [</span><br><span class="line">      <span class="string">"component"</span>,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">"libraryName"</span>: <span class="string">"element-ui"</span>,</span><br><span class="line">        <span class="string">"styleLibraryName"</span>: <span class="string">"theme-chalk"</span></span><br><span class="line">      &#125;</span><br><span class="line">    ],</span><br><span class="line">    ...productPlugins</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="优化1-生成打包报告"><a href="#优化1-生成打包报告" class="headerlink" title="优化1. 生成打包报告"></a>优化1. 生成打包报告</h2><ol>
+<li>命令行形式生成打包报告<code>vue-cli-service build --report</code></li>
+<li>可视化ui：在vue控制台生成打包报告：点击<code>“任务”=&gt;“build”=&gt;“运行”</code><br>运行完毕之后点击右侧<code>“分析”</code>，<code>“控制台”</code>面板查看报告</li>
+</ol>
+<ul>
+<li>分析能看哪些文件体积大。</li>
+<li>控制台可以看哪个文件占的面积大（第三方依赖向）</li>
+<li>控台台可以看项目打开时间的占比</li>
+</ul>
+<blockquote>
+<p>修改webpack的默认配置</p>
+</blockquote>
+<ul>
+<li>默认情况下，vue-cli 3.0生成的项目，隐藏了webpack配置项，如果我们需要配置webpack</li>
+</ul>
+<ol>
+<li>需要通过vue.config.js来配置。</li>
+<li>在项目根目录中创建vue.config.js文件，</li>
+</ol>
+<blockquote>
+<p>为开发模式和发布模式指定不同的打包入口，共用一个入口文件（main.js）。为了将项目开发与发布分离，我们有俩种模式，指定各自的打包入口</p>
+</blockquote>
+<ol>
+<li>开发入口，main-dev</li>
+<li>发布模式，main-prod</li>
+</ol>
+<blockquote>
+<p>通过chainWebpack修改</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    chainWebpack:<span class="function"><span class="params">config</span>=&gt;</span>&#123;</span><br><span class="line">        <span class="comment">//发布模式 = production</span></span><br><span class="line">        config.when(process.env.NODE_ENV === <span class="string">'production'</span>,config=&gt;&#123;</span><br><span class="line">            <span class="comment">//entry找到默认的打包入口，调用clear则是删除默认的打包入口</span></span><br><span class="line">            <span class="comment">//add添加新的打包入口</span></span><br><span class="line">            config.entry(<span class="string">'app'</span>).clear().add(<span class="string">'./src/main-prod.js'</span>)</span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="comment">//开发模式 = development</span></span><br><span class="line">        config.when(process.env.NODE_ENV === <span class="string">'development'</span>,config=&gt;&#123;</span><br><span class="line">            config.entry(<span class="string">'app'</span>).clear().add(<span class="string">'./src/main-dev.js'</span>)</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>补充： </p>
+<ul>
+<li>chainWebpack可以通过链式编程的形式，修改webpack配置</li>
+<li>configureWebpack可以通过操作对象的形式，修改webpack配置</li>
+</ul>
+<h2 id="2-加载外部CDN"><a href="#2-加载外部CDN" class="headerlink" title="2. 加载外部CDN"></a>2. 加载外部CDN</h2><ul>
+<li>默认情况下，import导入第三方依赖包（如element-ui和echarts），都会被打包到同一个文件中，导致该js文件过大。</li>
+<li>那么我们可以通过webpack的externals节点，来配置加载外部的CDN资源。凡是声明在externals中第三方依赖包，都不会被打包。</li>
+<li>原理：webpack检查程序员有没有在externals有没有声明一些第三方依赖包，有的话不会把这些包打包在一起，而是直接去window全局对象身上找现成的对象来使用。</li>
+<li>第一个key表示有没有导入这个包，如果有则第二个value表示全局这个对象</li>
+</ul>
+<blockquote>
+<p>第一步</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    chainWebpack:<span class="function"><span class="params">config</span>=&gt;</span>&#123;</span><br><span class="line">        <span class="comment">//发布模式</span></span><br><span class="line">        config.when(process.env.NODE_ENV === <span class="string">'production'</span>,config=&gt;&#123;</span><br><span class="line">            <span class="comment">//entry找到默认的打包入口，调用clear则是删除默认的打包入口</span></span><br><span class="line">            <span class="comment">//add添加新的打包入口</span></span><br><span class="line">            config.entry(<span class="string">'app'</span>).clear().add(<span class="string">'./src/main-prod.js'</span>)</span><br><span class="line"></span><br><span class="line">            <span class="comment">//使用externals设置排除项</span></span><br><span class="line">            config.set(<span class="string">'externals'</span>,&#123;</span><br><span class="line">                vue:<span class="string">'Vue'</span>,</span><br><span class="line">                <span class="string">'vue-router'</span>:<span class="string">'VueRouter'</span>,</span><br><span class="line">                axios:<span class="string">'axios'</span>,</span><br><span class="line">                lodash:<span class="string">'_'</span>,</span><br><span class="line">                echarts:<span class="string">'echarts'</span>,</span><br><span class="line">                nprogress:<span class="string">'NProgress'</span>,</span><br><span class="line">                <span class="string">'vue-quill-editor'</span>:<span class="string">'VueQuillEditor'</span></span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="comment">//开发模式</span></span><br><span class="line">        config.when(process.env.NODE_ENV === <span class="string">'development'</span>,config=&gt;&#123;</span><br><span class="line">            config.entry(<span class="string">'app'</span>).clear().add(<span class="string">'./src/main-dev.js'</span>)</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>设置好排除之后，为了使我们可以使用vue，axios等内容，我们需要加载外部CDN的形式解决引入依赖项。</li>
+<li>打开开发入口文件main-prod.js,删除掉默认的样式表。<blockquote>
+<p>第二步</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"><span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">'./App.vue'</span></span><br><span class="line"><span class="keyword">import</span> router <span class="keyword">from</span> <span class="string">'./router'</span></span><br><span class="line"><span class="comment">// import './plugins/element.js'</span></span><br><span class="line"><span class="comment">//导入字体图标</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">'./assets/fonts/iconfont.css'</span></span><br><span class="line"><span class="comment">//导入全局样式</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">'./assets/css/global.css'</span></span><br><span class="line"><span class="comment">//导入第三方组件vue-table-with-tree-grid</span></span><br><span class="line"><span class="keyword">import</span> TreeTable <span class="keyword">from</span> <span class="string">'vue-table-with-tree-grid'</span></span><br><span class="line"><span class="comment">//导入进度条插件</span></span><br><span class="line"><span class="keyword">import</span> NProgress <span class="keyword">from</span> <span class="string">'nprogress'</span></span><br><span class="line"><span class="comment">//导入进度条样式</span></span><br><span class="line"><span class="comment">// import 'nprogress/nprogress.css'</span></span><br><span class="line"><span class="comment">// //导入axios</span></span><br><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">'axios'</span></span><br><span class="line"><span class="comment">// //导入vue-quill-editor（富文本编辑器）</span></span><br><span class="line"><span class="keyword">import</span> VueQuillEditor <span class="keyword">from</span> <span class="string">'vue-quill-editor'</span></span><br><span class="line"><span class="comment">// //导入vue-quill-editor的样式</span></span><br><span class="line"><span class="comment">// import 'quill/dist/quill.core.css'</span></span><br><span class="line"><span class="comment">// import 'quill/dist/quill.snow.css'</span></span><br><span class="line"><span class="comment">// import 'quill/dist/quill.bubble.css'</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<blockquote>
+<p>第三步</p>
+<ul>
+<li>然后打开public/index.html添加外部cdn引入代码，这样全局就多了这些对象（构造函数）。</li>
+</ul>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">    &lt;meta http-equiv=<span class="string">"X-UA-Compatible"</span> content=<span class="string">"IE=edge"</span>&gt;</span><br><span class="line">    &lt;meta name=<span class="string">"viewport"</span> content=<span class="string">"width=device-width,initial-scale=1.0"</span>&gt;</span><br><span class="line">    &lt;link rel=<span class="string">"icon"</span> href=<span class="string">"&lt;%= BASE_URL %&gt;favicon.ico"</span>&gt;</span><br><span class="line">    &lt;title&gt;电商后台管理系统&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">    &lt;!-- nprogress 的样式表文件 --&gt;</span></span><br><span class="line"><span class="regexp">    &lt;link rel="stylesheet" href="https:/</span><span class="regexp">/cdn.staticfile.org/</span>nprogress/<span class="number">0.2</span><span class="number">.0</span>/nprogress.min.css<span class="string">" /&gt;</span></span><br><span class="line"><span class="string">    &lt;!-- 富文本编辑器 的样式表文件 --&gt;</span></span><br><span class="line"><span class="string">    &lt;link rel="</span>stylesheet<span class="string">" href="</span>https:<span class="comment">//cdn.staticfile.org/quill/1.3.4/quill.core.min.css" /&gt;</span></span><br><span class="line">    &lt;link rel=<span class="string">"stylesheet"</span> href=<span class="string">"https://cdn.staticfile.org/quill/1.3.4/quill.snow.min.css"</span> /&gt;</span><br><span class="line">    &lt;link rel=<span class="string">"stylesheet"</span> href=<span class="string">"https://cdn.staticfile.org/quill/1.3.4/quill.bubble.min.css"</span> /&gt;</span><br><span class="line">    &lt;!-- element-ui 的样式表文件 --&gt;</span><br><span class="line">    &lt;link rel=<span class="string">"stylesheet"</span> href=<span class="string">"https://cdn.staticfile.org/element-ui/2.8.2/theme-chalk/index.css"</span> /&gt;</span><br><span class="line"></span><br><span class="line">    &lt;script src=<span class="string">"https://cdn.staticfile.org/vue/2.5.22/vue.min.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">    &lt;script src=<span class="string">"https://cdn.staticfile.org/vue-router/3.0.1/vue-router.min.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">    &lt;script src=<span class="string">"https://cdn.staticfile.org/axios/0.18.0/axios.min.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">    &lt;script src=<span class="string">"https://cdn.staticfile.org/lodash.js/4.17.11/lodash.min.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">    &lt;script src=<span class="string">"https://cdn.staticfile.org/echarts/4.1.0/echarts.min.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">    &lt;script src=<span class="string">"https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">    &lt;!-- 富文本编辑器的 js 文件 --&gt;</span><br><span class="line">    &lt;script src=<span class="string">"https://cdn.staticfile.org/quill/1.3.4/quill.min.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">    &lt;script src=<span class="string">"https://cdn.jsdelivr.net/npm/vue-quill-editor@3.0.4/dist/vue-quill-editor.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line">    &lt;!-- element-ui 的 js 文件 --&gt;</span><br><span class="line">    &lt;script src=<span class="string">"https://cdn.staticfile.org/element-ui/2.8.2/index.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>优化elementUI</p>
+<ol>
+<li>main-prod.js中，注释掉element-ui按需加载的代码</li>
+</ol>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">、<span class="comment">//import './plugins/element.js'</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>在index.html的头部区域中，通过CDN加载element-ui的js和css样式。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel=<span class="string">"stylesheet"</span> href=<span class="string">"https://cdn.staticfile.org/element-ui/2.8.2/theme-chalk/index.css"</span> /&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="2-定制首页内容"><a href="#2-定制首页内容" class="headerlink" title="2.定制首页内容"></a>2.定制首页内容</h2><ul>
+<li>开发环境的首页和发布环境的首页展示内容的形式有所不同</li>
+<li>如开发环境中使用的是import加载第三方包，而发布环境则是使用CDN，那么首页也需根据环境不同来进行不同的实现,我们可以通过插件的方式来定制首页内容，打开vue.config.js，编写代码如下：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    chainWebpack:<span class="function"><span class="params">config</span>=&gt;</span>&#123;</span><br><span class="line">        config.when(process.env.NODE_ENV === <span class="string">'production'</span>,config=&gt;&#123;</span><br><span class="line">            ......</span><br><span class="line">            </span><br><span class="line">            <span class="comment">//使用插件</span></span><br><span class="line">            config.plugin(<span class="string">'html'</span>).tap(<span class="function"><span class="params">args</span>=&gt;</span>&#123;</span><br><span class="line">                <span class="comment">//添加参数isProd</span></span><br><span class="line">                args[<span class="number">0</span>].isProd = <span class="literal">true</span></span><br><span class="line">                <span class="keyword">return</span> args</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;)</span><br><span class="line"></span><br><span class="line">        config.when(process.env.NODE_ENV === <span class="string">'development'</span>,config=&gt;&#123;</span><br><span class="line">            config.entry(<span class="string">'app'</span>).clear().add(<span class="string">'./src/main-dev.js'</span>)</span><br><span class="line"></span><br><span class="line">            <span class="comment">//使用插件</span></span><br><span class="line">            config.plugin(<span class="string">'html'</span>).tap(<span class="function"><span class="params">args</span>=&gt;</span>&#123;</span><br><span class="line">                <span class="comment">//添加参数isProd</span></span><br><span class="line">                args[<span class="number">0</span>].isProd = <span class="literal">false</span></span><br><span class="line">                <span class="keyword">return</span> args</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>然后在public/index.html中使用插件判断是否为发布环境并定制首页内容</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">    &lt;meta http-equiv=<span class="string">"X-UA-Compatible"</span> content=<span class="string">"IE=edge"</span>&gt;</span><br><span class="line">    &lt;meta name=<span class="string">"viewport"</span> content=<span class="string">"width=device-width,initial-scale=1.0"</span>&gt;</span><br><span class="line">    &lt;link rel=<span class="string">"icon"</span> href=<span class="string">"&lt;%= BASE_URL %&gt;favicon.ico"</span>&gt;</span><br><span class="line">    &lt;title&gt;<span class="xml"><span class="tag">&lt;<span class="name">%=</span> <span class="attr">htmlWebpackPlugin.options.isProd</span> ? '' <span class="attr">:</span> '<span class="attr">dev</span> <span class="attr">-</span> ' %&gt;</span>电商后台管理系统<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line">    &lt;% <span class="keyword">if</span>(htmlWebpackPlugin.options.isProd)&#123; %&gt;</span><br><span class="line">    &lt;!-- nprogress 的样式表文件 --&gt;</span><br><span class="line">    &lt;link rel=<span class="string">"stylesheet"</span> href=<span class="string">"https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css"</span> /&gt;</span><br><span class="line">    ........</span><br><span class="line">    &lt;!-- element-ui 的 js 文件 --&gt;</span><br><span class="line">    &lt;script src=<span class="string">"https://cdn.staticfile.org/element-ui/2.8.2/index.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">    &lt;% &#125; %&gt;</span><br><span class="line">  &lt;<span class="regexp">/head&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-路由懒加载（143到96）"><a href="#3-路由懒加载（143到96）" class="headerlink" title="3. 路由懒加载（143到96）"></a>3. 路由懒加载（143到96）</h2><ul>
+<li>当打包构建时，JS文件非常大，影响页面加载。如果我们能把不同的路由对应的组件分割成不同的代码块，然后当路由被访问的时候才加载对应组件，这样就更高效了。</li>
+<li>当路由被访问时才加载对应的路由文件，就是路由懒加载。</li>
+</ul>
+<blockquote>
+<p>路由懒加载实现步骤：</p>
+</blockquote>
+<ol>
+<li>安装 @babel/plugin-syntax-dynamic-import包</li>
+</ol>
+<ul>
+<li>打开vue控制台，点击依赖-&gt;安装依赖-&gt;开发依赖-&gt;搜索@babel/plugin-syntax-dynamic-import<br>点击安装。</li>
+</ul>
+<ol start="2">
+<li>在babel.config.js中开发模式声明该插件，打开babel.config.js</li>
+<li>将路由改为按需加载</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//项目发布阶段需要用到的babel插件</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line"></span><br><span class="line">    ...productPlugins,</span><br><span class="line">    <span class="comment">//配置路由懒加载插件</span></span><br><span class="line">    <span class="string">"@babel/plugin-syntax-dynamic-import"</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>将路由更改为按需加载的形式，打开router.js，更改引入组件代码如下：</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// import Order from './components/order/Order.vue'</span></span><br><span class="line"><span class="keyword">const</span> Report = <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="comment">/* webpackChunkName:"report" */</span> <span class="string">'./components/report/Report.vue'</span>)</span><br><span class="line"><span class="comment">// import Report from './components/report/Report.vue'</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="项目上线"><a href="#项目上线" class="headerlink" title="项目上线"></a>项目上线</h2><blockquote>
+<p>通过node创建服务器</p>
+</blockquote>
+<ol>
+<li>在vue_shop同级创建一个文件夹<code>vue_shop_server</code>存放node服务器</li>
+<li>使用终端打开<code>vue_shop_server</code>文件夹，输入命令 <code>npm init -y</code></li>
+<li>初始化包之后，输入命令 <code>npm i express -S</code></li>
+<li>打开vue_shop目录，复制dist文件夹，粘贴到<code>vue_shop_server</code>中</li>
+<li>在<code>vue_shop_server</code>文件夹中创建app.js文件,编写代码如下：</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>)</span><br><span class="line"><span class="comment">//创建web服务器</span></span><br><span class="line"><span class="keyword">const</span> app = express()</span><br><span class="line"><span class="comment">//托管静态资源</span></span><br><span class="line">app.use(express.static(<span class="string">'./dist'</span>))</span><br><span class="line"><span class="comment">//启动web服务器</span></span><br><span class="line">app.listen(<span class="number">8998</span>,()=&gt;&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"server running at http://127.0.0.1:8998"</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>然后再次在终端中输入  node app.js</li>
+</ol>
+<h2 id="开启gzip压缩"><a href="#开启gzip压缩" class="headerlink" title="开启gzip压缩"></a>开启gzip压缩</h2><ul>
+<li>打开vue_shop_server文件夹的终端，输入命令：<code>npm i compression -D</code></li>
+<li>打开app.js,编写代码：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>)</span><br><span class="line"><span class="comment">//导入包</span></span><br><span class="line"><span class="keyword">const</span> compression = <span class="built_in">require</span>(<span class="string">'compression'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = express()</span><br><span class="line"><span class="comment">//启用中间件</span></span><br><span class="line">app.use(compression())</span><br><span class="line">app.use(express.static(<span class="string">'./dist'</span>))</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">8998</span>,()=&gt;&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"server running at http://127.0.0.1:8998"</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置https服务"><a href="#配置https服务" class="headerlink" title="配置https服务"></a>配置https服务</h2><p>配置https服务一般是后台进行处理，前端开发人员了解即可。<br>首先，需要申请SSL证书，进入<a href="https://freessl.cn官网" target="_blank" rel="noopener">https://freessl.cn官网</a><br>在后台导入证书，打开今天资料/素材，复制素材中的两个文件到vue_shop_server中<br>打开app.js文件，编写代码导入证书，并开启https服务</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>)</span><br><span class="line"><span class="keyword">const</span> compression = <span class="built_in">require</span>(<span class="string">'compression'</span>)</span><br><span class="line"><span class="keyword">const</span> https = <span class="built_in">require</span>(<span class="string">'https'</span>)</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = express()</span><br><span class="line"><span class="comment">//创建配置对象设置公钥和私钥</span></span><br><span class="line"><span class="keyword">const</span> options = &#123;</span><br><span class="line">    cert:fs.readFileSync(<span class="string">'./full_chain.pem'</span>),</span><br><span class="line">    key:fs.readFileSync(<span class="string">'./private.key'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">app.use(compression())</span><br><span class="line">app.use(express.static(<span class="string">'./dist'</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">// app.listen(8998,()=&gt;&#123;</span></span><br><span class="line"><span class="comment">//     console.log("server running at http://127.0.0.1:8998")</span></span><br><span class="line"><span class="comment">// &#125;)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//启动https服务</span></span><br><span class="line">https.createServer(options,app).listen(<span class="number">443</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>注意：因为我们使用的证书有问题，所以无法正常使用https服务</li>
+</ul>
+<h2 id="使用pm2管理应用"><a href="#使用pm2管理应用" class="headerlink" title="使用pm2管理应用"></a>使用pm2管理应用</h2><ul>
+<li>关闭终端窗口还可以运行项目</li>
+<li>打开vue_shop_server文件夹的终端，输入命令：<code>npm i pm2 -g</code></li>
+<li>使用pm2启动项目，在终端中输入命令：<code>pm2 start app.js --name</code> 自定义名称</li>
+<li>查看项目列表命令：<code>pm2 ls</code></li>
+<li>重启项目：<code>pm2 restart</code> 自定义名称</li>
+<li>停止项目：<code>pm2 stop</code> 自定义名称</li>
+<li>删除项目：<code>pm2 delete</code> 自定义名称</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">前端综合</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/25/项目优化和发布/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-登录功能" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1045,144 +1294,6 @@
 
 
   
-    <article id="post-类和对象" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/23/类和对象/">类和对象</a>
-    </h1>
-  
-
-        
-        <a href="/2020/05/23/类和对象/" class="archive-article-date">
-  	<time datetime="2020-05-23T13:35:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>创建对象</p>
-</blockquote>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//以下代码是对对象的复习</span></span><br><span class="line"><span class="comment">//字面量创建对象</span></span><br><span class="line"><span class="keyword">var</span> ldh = &#123;</span><br><span class="line">    name: <span class="string">'刘德华'</span>,</span><br><span class="line">    age: <span class="number">18</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(ldh);</span><br><span class="line"></span><br><span class="line"><span class="comment">//构造函数创建对象</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">Star</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">this</span>.age = age;</span><br><span class="line"> &#125;</span><br><span class="line"><span class="keyword">var</span> ldh = <span class="keyword">new</span> Star(<span class="string">'刘德华'</span>, <span class="number">18</span>)<span class="comment">//实例化对象</span></span><br><span class="line"><span class="built_in">console</span>.log(ldh);</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>创建类</p>
-</blockquote>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//步骤1 使用class关键字</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">name</span> </span>&#123;</span><br><span class="line">  <span class="comment">// class body</span></span><br><span class="line">&#125;     </span><br><span class="line"><span class="comment">//步骤2使用定义的类创建实例  注意new关键字</span></span><br><span class="line"><span class="keyword">var</span> xx = <span class="keyword">new</span> name();</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>类的constructor</p>
-</blockquote>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 创建类 class  创建一个 明星类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Star</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 类的共有属性放到 constructor 里面</span></span><br><span class="line">  <span class="keyword">constructor</span>(name, age) &#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name;</span><br><span class="line">  <span class="keyword">this</span>.age = age;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">  <span class="comment">// 2. 利用类创建对象 new</span></span><br><span class="line">  <span class="keyword">var</span> ldh = <span class="keyword">new</span> Star(<span class="string">'刘德华'</span>, <span class="number">18</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(ldh);</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>类创建添加属性和方法</p>
-</blockquote>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">// 1. 创建类 class  创建一个类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Star</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 类的共有属性放到 constructor 里面 constructor是 构造器或者构造函数</span></span><br><span class="line">    <span class="keyword">constructor</span>(uname, age) &#123;</span><br><span class="line">      <span class="keyword">this</span>.uname = uname;</span><br><span class="line">      <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;<span class="comment">//-------------------------------------------&gt;注意,方法与方法之间不需要添加逗号</span></span><br><span class="line">    sing(song) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>.uname + <span class="string">'唱'</span> + song);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 2. 利用类创建对象 new</span></span><br><span class="line"><span class="keyword">var</span> ldh = <span class="keyword">new</span> Star(<span class="string">'刘德华'</span>, <span class="number">18</span>);</span><br><span class="line"><span class="built_in">console</span>.log(ldh); <span class="comment">// Star &#123;uname: "刘德华", age: 18&#125;</span></span><br><span class="line">ldh.sing(<span class="string">'冰雨'</span>); <span class="comment">// 刘德华唱冰雨</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>注意哟:</strong></p>
-<ol>
-<li>通过class 关键字创建类, 类名我们还是习惯性定义首字母大写</li>
-<li>类里面有个constructor 函数,可以接受传递过来的参数,同时返回实例对象</li>
-<li>constructor 函数 只要 new 生成实例时,就会自动调用这个函数, 如果我们不写这个函数,类也会自动生成这个函数</li>
-<li>多个函数方法之间不需要添加逗号分隔</li>
-<li>生成实例 new 不能省略</li>
-<li>语法规范, 创建类 类名后面不要加小括号,生成实例 类名后面加小括号, 构造函数不需要加function</li>
-</ol>
-<h2 id="类的继承"><a href="#类的继承" class="headerlink" title="类的继承"></a>类的继承</h2><ol>
-<li>语法</li>
-</ol>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 父类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Father</span></span>&#123;   </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="comment">// 子类继承父类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span>  <span class="title">Son</span>  <span class="keyword">extends</span> <span class="title">Father</span> </span>&#123;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>示例</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Father</span> </span>&#123;</span><br><span class="line">      <span class="keyword">constructor</span>(surname) &#123;</span><br><span class="line">        <span class="keyword">this</span>.surname= surname;</span><br><span class="line">      &#125;</span><br><span class="line">      say() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'你的姓是'</span> + <span class="keyword">this</span>.surname);</span><br><span class="line">       &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Son</span> <span class="keyword">extends</span> <span class="title">Father</span></span>&#123;  <span class="comment">// 这样子类就继承了父类的属性和方法</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> damao= <span class="keyword">new</span> Son(<span class="string">'刘'</span>);</span><br><span class="line">damao.say();      <span class="comment">//结果为 你的姓是刘</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>子类使用super关键字访问父类的方法</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//定义了父类</span></span><br><span class="line"> <span class="class"><span class="keyword">class</span> <span class="title">Father</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(x, y) &#123;</span><br><span class="line">    <span class="keyword">this</span>.x = x;</span><br><span class="line">    <span class="keyword">this</span>.y = y;</span><br><span class="line">    &#125;</span><br><span class="line">    sum() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.x + <span class="keyword">this</span>.y);</span><br><span class="line"> 	&#125;</span><br><span class="line">  &#125;</span><br><span class="line"> <span class="comment">//子元素继承父类</span></span><br><span class="line">     <span class="class"><span class="keyword">class</span> <span class="title">Son</span> <span class="keyword">extends</span> <span class="title">Father</span> </span>&#123;</span><br><span class="line">    		 <span class="keyword">constructor</span>(x, y) &#123;</span><br><span class="line">     		<span class="keyword">super</span>(x, y); <span class="comment">//使用super调用了父类中的构造函数</span></span><br><span class="line">     	&#125;</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">var</span> son = <span class="keyword">new</span> Son(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">     son.sum(); <span class="comment">//结果为3</span></span><br></pre></td></tr></table></figure>
-
-<p>  <strong>注意:</strong> </p>
-<ol>
-<li><p>继承中,如果实例化子类输出一个方法,先看子类有没有这个方法,如果有就先执行子类的</p>
-</li>
-<li><p>继承中,如果子类里面没有,就去查找父类有没有这个方法,如果有,就执行父类的这个方法(就近原则)</p>
-</li>
-<li><p>如果子类想要继承父类的方法,同时在自己内部扩展自己的方法,利用super 调用父类的构造函数,super 必须在子类this之前调用</p>
-</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 父类有加法方法</span></span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">Father</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(x, y) &#123;</span><br><span class="line">    <span class="keyword">this</span>.x = x;</span><br><span class="line">    <span class="keyword">this</span>.y = y;</span><br><span class="line">    &#125;</span><br><span class="line">    sum() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.x + <span class="keyword">this</span>.y);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 子类继承父类加法方法 同时 扩展减法方法</span></span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">Son</span> <span class="keyword">extends</span> <span class="title">Father</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(x, y) &#123;</span><br><span class="line">    <span class="comment">// 利用super 调用父类的构造函数 super 必须在子类this之前调用,放到this之后会报错</span></span><br><span class="line">    <span class="keyword">super</span>(x, y);</span><br><span class="line">    <span class="keyword">this</span>.x = x;</span><br><span class="line">    <span class="keyword">this</span>.y = y;</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line">   subtract() &#123;</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="keyword">this</span>.x - <span class="keyword">this</span>.y);</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">var</span> son = <span class="keyword">new</span> Son(<span class="number">5</span>, <span class="number">3</span>);</span><br><span class="line"> son.subtract(); <span class="comment">//2</span></span><br><span class="line"> son.sum();<span class="comment">//8</span></span><br></pre></td></tr></table></figure>
-
-<ol start="4">
-<li><p>时刻注意this的指向问题,类里面的共有的属性和方法一定要加this使用.</p>
-<ol>
-<li>constructor中的this指向的是new出来的实例对象 </li>
-<li>自定义的方法,一般也指向的new出来的实例对象</li>
-<li>绑定事件之后this指向的就是触发事件的事件源</li>
-</ol>
-</li>
-</ol>
-<p>  ​</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/23/类和对象/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
@@ -1320,6 +1431,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">浏览器</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">图</a>
               </li>
              
@@ -1332,7 +1447,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1340,7 +1455,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
+                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1356,15 +1471,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
+                <a href="javascript:void(0)" class="js-tag color5">flex</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1372,15 +1483,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">排序</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color3">排序</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1397,14 +1516,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">网络</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">浏览器</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">flex</a>
               </li>
             
             <div class="clearfix"></div>

@@ -140,6 +140,144 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-类和对象" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/23/类和对象/">类和对象</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/23/类和对象/" class="archive-article-date">
+  	<time datetime="2020-05-23T13:35:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>创建对象</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//以下代码是对对象的复习</span></span><br><span class="line"><span class="comment">//字面量创建对象</span></span><br><span class="line"><span class="keyword">var</span> ldh = &#123;</span><br><span class="line">    name: <span class="string">'刘德华'</span>,</span><br><span class="line">    age: <span class="number">18</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(ldh);</span><br><span class="line"></span><br><span class="line"><span class="comment">//构造函数创建对象</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">Star</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">this</span>.age = age;</span><br><span class="line"> &#125;</span><br><span class="line"><span class="keyword">var</span> ldh = <span class="keyword">new</span> Star(<span class="string">'刘德华'</span>, <span class="number">18</span>)<span class="comment">//实例化对象</span></span><br><span class="line"><span class="built_in">console</span>.log(ldh);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>创建类</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//步骤1 使用class关键字</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">name</span> </span>&#123;</span><br><span class="line">  <span class="comment">// class body</span></span><br><span class="line">&#125;     </span><br><span class="line"><span class="comment">//步骤2使用定义的类创建实例  注意new关键字</span></span><br><span class="line"><span class="keyword">var</span> xx = <span class="keyword">new</span> name();</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>类的constructor</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 创建类 class  创建一个 明星类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Star</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 类的共有属性放到 constructor 里面</span></span><br><span class="line">  <span class="keyword">constructor</span>(name, age) &#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name;</span><br><span class="line">  <span class="keyword">this</span>.age = age;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">  <span class="comment">// 2. 利用类创建对象 new</span></span><br><span class="line">  <span class="keyword">var</span> ldh = <span class="keyword">new</span> Star(<span class="string">'刘德华'</span>, <span class="number">18</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(ldh);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>类创建添加属性和方法</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">// 1. 创建类 class  创建一个类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Star</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 类的共有属性放到 constructor 里面 constructor是 构造器或者构造函数</span></span><br><span class="line">    <span class="keyword">constructor</span>(uname, age) &#123;</span><br><span class="line">      <span class="keyword">this</span>.uname = uname;</span><br><span class="line">      <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;<span class="comment">//-------------------------------------------&gt;注意,方法与方法之间不需要添加逗号</span></span><br><span class="line">    sing(song) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>.uname + <span class="string">'唱'</span> + song);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 2. 利用类创建对象 new</span></span><br><span class="line"><span class="keyword">var</span> ldh = <span class="keyword">new</span> Star(<span class="string">'刘德华'</span>, <span class="number">18</span>);</span><br><span class="line"><span class="built_in">console</span>.log(ldh); <span class="comment">// Star &#123;uname: "刘德华", age: 18&#125;</span></span><br><span class="line">ldh.sing(<span class="string">'冰雨'</span>); <span class="comment">// 刘德华唱冰雨</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>注意哟:</strong></p>
+<ol>
+<li>通过class 关键字创建类, 类名我们还是习惯性定义首字母大写</li>
+<li>类里面有个constructor 函数,可以接受传递过来的参数,同时返回实例对象</li>
+<li>constructor 函数 只要 new 生成实例时,就会自动调用这个函数, 如果我们不写这个函数,类也会自动生成这个函数</li>
+<li>多个函数方法之间不需要添加逗号分隔</li>
+<li>生成实例 new 不能省略</li>
+<li>语法规范, 创建类 类名后面不要加小括号,生成实例 类名后面加小括号, 构造函数不需要加function</li>
+</ol>
+<h2 id="类的继承"><a href="#类的继承" class="headerlink" title="类的继承"></a>类的继承</h2><ol>
+<li>语法</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 父类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Father</span></span>&#123;   </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="comment">// 子类继承父类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span>  <span class="title">Son</span>  <span class="keyword">extends</span> <span class="title">Father</span> </span>&#123;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>示例</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Father</span> </span>&#123;</span><br><span class="line">      <span class="keyword">constructor</span>(surname) &#123;</span><br><span class="line">        <span class="keyword">this</span>.surname= surname;</span><br><span class="line">      &#125;</span><br><span class="line">      say() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'你的姓是'</span> + <span class="keyword">this</span>.surname);</span><br><span class="line">       &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Son</span> <span class="keyword">extends</span> <span class="title">Father</span></span>&#123;  <span class="comment">// 这样子类就继承了父类的属性和方法</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> damao= <span class="keyword">new</span> Son(<span class="string">'刘'</span>);</span><br><span class="line">damao.say();      <span class="comment">//结果为 你的姓是刘</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>子类使用super关键字访问父类的方法</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//定义了父类</span></span><br><span class="line"> <span class="class"><span class="keyword">class</span> <span class="title">Father</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(x, y) &#123;</span><br><span class="line">    <span class="keyword">this</span>.x = x;</span><br><span class="line">    <span class="keyword">this</span>.y = y;</span><br><span class="line">    &#125;</span><br><span class="line">    sum() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.x + <span class="keyword">this</span>.y);</span><br><span class="line"> 	&#125;</span><br><span class="line">  &#125;</span><br><span class="line"> <span class="comment">//子元素继承父类</span></span><br><span class="line">     <span class="class"><span class="keyword">class</span> <span class="title">Son</span> <span class="keyword">extends</span> <span class="title">Father</span> </span>&#123;</span><br><span class="line">    		 <span class="keyword">constructor</span>(x, y) &#123;</span><br><span class="line">     		<span class="keyword">super</span>(x, y); <span class="comment">//使用super调用了父类中的构造函数</span></span><br><span class="line">     	&#125;</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">var</span> son = <span class="keyword">new</span> Son(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">     son.sum(); <span class="comment">//结果为3</span></span><br></pre></td></tr></table></figure>
+
+<p>  <strong>注意:</strong> </p>
+<ol>
+<li><p>继承中,如果实例化子类输出一个方法,先看子类有没有这个方法,如果有就先执行子类的</p>
+</li>
+<li><p>继承中,如果子类里面没有,就去查找父类有没有这个方法,如果有,就执行父类的这个方法(就近原则)</p>
+</li>
+<li><p>如果子类想要继承父类的方法,同时在自己内部扩展自己的方法,利用super 调用父类的构造函数,super 必须在子类this之前调用</p>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 父类有加法方法</span></span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">Father</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(x, y) &#123;</span><br><span class="line">    <span class="keyword">this</span>.x = x;</span><br><span class="line">    <span class="keyword">this</span>.y = y;</span><br><span class="line">    &#125;</span><br><span class="line">    sum() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.x + <span class="keyword">this</span>.y);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 子类继承父类加法方法 同时 扩展减法方法</span></span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">Son</span> <span class="keyword">extends</span> <span class="title">Father</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(x, y) &#123;</span><br><span class="line">    <span class="comment">// 利用super 调用父类的构造函数 super 必须在子类this之前调用,放到this之后会报错</span></span><br><span class="line">    <span class="keyword">super</span>(x, y);</span><br><span class="line">    <span class="keyword">this</span>.x = x;</span><br><span class="line">    <span class="keyword">this</span>.y = y;</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line">   subtract() &#123;</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="keyword">this</span>.x - <span class="keyword">this</span>.y);</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">var</span> son = <span class="keyword">new</span> Son(<span class="number">5</span>, <span class="number">3</span>);</span><br><span class="line"> son.subtract(); <span class="comment">//2</span></span><br><span class="line"> son.sum();<span class="comment">//8</span></span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li><p>时刻注意this的指向问题,类里面的共有的属性和方法一定要加this使用.</p>
+<ol>
+<li>constructor中的this指向的是new出来的实例对象 </li>
+<li>自定义的方法,一般也指向的new出来的实例对象</li>
+<li>绑定事件之后this指向的就是触发事件的事件源</li>
+</ol>
+</li>
+</ol>
+<p>  ​</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/23/类和对象/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-ES6模块化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1133,155 +1271,6 @@
 
 
   
-    <article id="post-使用vue脚手架和element-ui使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/21/使用vue脚手架和element-ui使用/">Vue脚手架和element ui使用</a>
-    </h1>
-  
-
-        
-        <a href="/2020/05/21/使用vue脚手架和element-ui使用/" class="archive-article-date">
-  	<time datetime="2020-05-21T13:56:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Vue脚手架"><a href="#Vue脚手架" class="headerlink" title="Vue脚手架"></a>Vue脚手架</h2><blockquote>
-<p>Vue脚手架可以快速生成Vue项目基础的架构。</p>
-</blockquote>
-<ol>
-<li>安装3.x版本的Vue脚手架： <code>npm install -g @vue/cli</code></li>
-</ol>
-<blockquote>
-<p> 基于3.x版本的脚手架创建Vue项目：</p>
-</blockquote>
-<ol>
-<li>使用命令创建Vue项目：<code>vue create my-project</code></li>
-</ol>
-<ul>
-<li>选择Manually select features(选择特性以创建项目)<ul>
-<li>勾选特性可以用空格进行勾选。</li>
-<li>是否选用历史模式的路由：n</li>
-<li>ESLint选择：ESLint + Standard config</li>
-<li>何时进行ESLint语法校验：Lint on save</li>
-<li>babel，postcss等配置文件如何放置：In dedicated config files(单独使用文件进行配置)</li>
-<li>是否保存为模板：n</li>
-<li>使用哪个工具安装包：npm</li>
-</ul>
-<ol start="2">
-<li>基于ui界面创建Vue项目<br> 命令：vue ui<br> 在自动打开的创建项目网页中配置项目信息。</li>
-<li>基于2.x的旧模板，创建Vue项目<br> npm install -g @vue/cli-init<br> vue init webpack my-project</li>
-</ol>
-</li>
-</ul>
-<blockquote>
-<p>分析Vue脚手架生成的项目结构</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">node_modules:依赖包目录</span><br><span class="line">public：静态资源目录</span><br><span class="line">src：源码目录</span><br><span class="line">src/assets:资源目录</span><br><span class="line">src/components：组件目录</span><br><span class="line">src/views:视图组件目录</span><br><span class="line">src/App.vue:根组件</span><br><span class="line">src/main.js:入口js</span><br><span class="line">src/router.js:路由js</span><br><span class="line">babel.config.js:babel配置文件</span><br><span class="line">.eslintrc.js:</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>new一个Vue的实例对象</li>
-<li>把router挂载上去</li>
-<li>通过render函数把根组件渲染到首页上去</li>
-<li>通过$mount方法把Vue实例挂载到app所在区域<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  router,</span><br><span class="line">  render:<span class="function"><span class="params">h</span>=&gt;</span>h(App)</span><br><span class="line">&#125;).$mount(<span class="string">"#app"</span>)</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="Vue脚手架的自定义配置"><a href="#Vue脚手架的自定义配置" class="headerlink" title="Vue脚手架的自定义配置"></a>Vue脚手架的自定义配置</h2><ul>
-<li>不推荐在<code>package.json</code>里配置</li>
-<li>通过单独的文件中配置文件进行配置，创建<code>vue.config.js</code>文件<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">A.通过 package.json 进行配置 [不推荐使用],打包成功时，自动打开浏览器</span><br><span class="line">    <span class="string">"vue"</span>:&#123;</span><br><span class="line">        <span class="string">"devServer"</span>:&#123;</span><br><span class="line">            <span class="string">"port"</span>:<span class="string">"9990"</span>,</span><br><span class="line">            <span class="string">"open"</span>:<span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">B.通过单独的配置文件进行配置，创建vue.config.js</span><br><span class="line">    <span class="built_in">module</span>.exports = &#123;</span><br><span class="line">        devServer:&#123;</span><br><span class="line">            port:<span class="number">8888</span>,</span><br><span class="line">            open:<span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="Element-UI的基本使用"><a href="#Element-UI的基本使用" class="headerlink" title="Element-UI的基本使用"></a>Element-UI的基本使用</h2><ul>
-<li>Element-UI:一套基于2.0的桌面端组件库</li>
-<li>官网地址：<a href="http://element-cn.eleme.io/#/zh-CN" target="_blank" rel="noopener">http://element-cn.eleme.io/#/zh-CN</a></li>
-</ul>
-<blockquote>
-<p> 导入使用：</p>
-</blockquote>
-<ol>
-<li><p>安装：npm install element-ui -S</p>
-</li>
-<li><p><code>main.js</code>导入组件库：<code>import ElementUI from &quot;element-ui&quot;;</code></p>
-</li>
-<li><p><code>main.js</code>中导入样式<code>import &quot;element-ui/lib/theme-chalk/index.css&quot;</code></p>
-<ol start="4">
-<li><code>main.js</code>中使用Vue.use(ElementUI)</li>
-</ol>
-</li>
-<li><p>在App.vue中复制html代码。</p>
-</li>
-</ol>
-<blockquote>
-<p>可视版安装</p>
-</blockquote>
-<ol>
-<li>添加插件：搜索<code>vue-cli-plugin-element</code></li>
-<li>import on demand 按需导入</li>
-<li>zh-CN</li>
-<li>element.js注册了button，这样每个都能使用button按钮了</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Vue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/21/使用vue脚手架和element-ui使用/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
@@ -1419,6 +1408,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">浏览器</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">图</a>
               </li>
              
@@ -1431,7 +1424,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1439,7 +1432,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
+                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1455,15 +1448,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
+                <a href="javascript:void(0)" class="js-tag color5">flex</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1471,15 +1460,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">排序</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color3">排序</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1496,14 +1493,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">网络</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">浏览器</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">flex</a>
               </li>
             
             <div class="clearfix"></div>

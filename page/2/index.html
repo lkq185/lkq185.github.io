@@ -140,6 +140,298 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-CORS和JSONP" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/06/07/CORS和JSONP/">CORS和JSONP</a>
+    </h1>
+  
+
+        
+        <a href="/2020/06/07/CORS和JSONP/" class="archive-article-date">
+  	<time datetime="2020-06-07T08:41:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="JSONP和CORS"><a href="#JSONP和CORS" class="headerlink" title="JSONP和CORS"></a>JSONP和CORS</h2><blockquote>
+<p>跨域的基本概念</p>
+</blockquote>
+<ul>
+<li>浏览器为了一定的安全因素，增加了同源策略。有违同源策略的操作都是被禁止的，这个时候就会发生我们所说的跨域。</li>
+<li>但其实浏览器加载的资源很多都是跨域的，只是有些资源的加载浏览器是允许的。</li>
+<li>图片（img）、CSS、Script等资源是不受同源策略限制的。</li>
+<li>我们所说的跨域主要说的是ajax请求无法完成。<blockquote>
+<p>跨域解决方案</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="JSONP"><a href="#JSONP" class="headerlink" title="JSONP"></a>JSONP</h4><ul>
+<li>JSONP的优点就是因为他够老，能兼容各种浏览器，无兼容问题。</li>
+<li>他发送的不是ajax请求，而是利用了script标签加载机制。</li>
+<li>JSONP缺点：只支持get，而且存在安全问题。</li>
+<li>技术发展至今，jsonp这种前后端耦合的方式肯定要被代替。</li>
+</ul>
+<h4 id="CORS跨域解决方案"><a href="#CORS跨域解决方案" class="headerlink" title="CORS跨域解决方案"></a>CORS跨域解决方案</h4><ul>
+<li>CORS从具体的代码实现上来说比较方便，前端几乎不需要写任何代码就可以支持。主要是靠服务端进行配置。</li>
+<li>CORS需要浏览器和服务器同时支持。目前所有浏览器都支持该功能，IE浏览器不能低于IE10。</li>
+<li>整个CORS通信过程，都是浏览器自动完成，不需要用户参与。对于开发者来说，CORS通信与同源的AJAX通信没有差别，代码完全一样。</li>
+<li>浏览器一旦发现AJAX请求跨源，就会自动添加一些附加的头信息，有时还会多出一次附加的请求，但用户不会有感觉。</li>
+<li>因此，实现CORS通信的关键是服务器。只要服务器实现了CORS接口，就可以跨源通信。</li>
+</ul>
+<blockquote>
+<p>CORS的两种请求</p>
+</blockquote>
+<ul>
+<li>浏览器将CORS请求分成两类：简单请求（simple request）和非简单请求（预检请求）（not-so-simple request）。</li>
+</ul>
+<p>只要同时满足以下两大条件，就属于简单请求。</p>
+<ol>
+<li>请求方法是以下三种方法之一：</li>
+</ol>
+<ul>
+<li>HEAD</li>
+<li>GET</li>
+<li>POST</li>
+</ul>
+<ol start="2">
+<li>HTTP请求头信息不超出以下几种字段：</li>
+</ol>
+<ul>
+<li><p>Accept</p>
+</li>
+<li><p>Accept-Language</p>
+</li>
+<li><p>Content-Language</p>
+</li>
+<li><p>Last-Event-ID</p>
+</li>
+<li><p>Content-Type：只限于三个值application/x-www-form-urlencoded、multipart/form-data、text/plain</p>
+</li>
+<li><p>凡是不同时满足上面两个条件，就属于非简单请求。</p>
+</li>
+<li><p>浏览器对这两种请求的处理，是不一样的。</p>
+<h5 id="1-CORS的简单请求"><a href="#1-CORS的简单请求" class="headerlink" title="1.CORS的简单请求"></a>1.CORS的简单请求</h5></li>
+<li><p>对于简单请求，浏览器直接发出CORS请求。具体来说，就是在头信息之中，增加一个Origin字段。</p>
+</li>
+<li><p>下面是一个例子，浏览器发现这次跨源AJAX请求是简单请求，就自动在头信息之中，添加一个Origin字段。</p>
+</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">GET /cors HTTP/<span class="number">1.1</span> </span><br><span class="line">Origin: http:<span class="comment">//m.xin.com</span></span><br><span class="line">Host: api.alice.com</span><br><span class="line">Accept-Language: en-US</span><br><span class="line">Connection: keep-alive</span><br><span class="line">User-Agent: Mozilla/<span class="number">5.0</span>...</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>上面的头信息中，Origin字段用来说明，本次请求来自哪个源（协议 + 域名 + 端口）。服务器根据这个值，决定是否同意这次请求。</p>
+</li>
+<li><p>如果Origin指定的源，不在许可范围内，服务器会返回一个正常的HTTP回应。浏览器发现，这个回应的头信息<code>没有包含Access-Control-Allow-Origin</code>字段（详见下文），就知道出错了，从而抛出一个错误，被XMLHttpRequest的onerror回调函数捕获。</p>
+</li>
+<li><p>注意，这种错误无法通过状态码识别，因为HTTP回应的状态码有可能是200。</p>
+</li>
+<li><p>如果Origin指定的域名在许可范围内，服务器返回的响应，会多出几个头信息字段。</p>
+</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Origin: http:<span class="comment">//api.bob.com</span></span><br><span class="line">Access-Control-Allow-Credentials: <span class="literal">true</span></span><br><span class="line">Access-Control-Expose-Headers: FooBar</span><br><span class="line">Content-Type: text/html; charset=utf<span class="number">-8</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>上面的头信息之中，有三个与CORS请求相关的字段，都以Access-Control-开头。</li>
+</ul>
+<ol>
+<li>Access-Control-Allow-Origin</li>
+</ol>
+<ul>
+<li>该字段是必须的。它的值要么是请求时Origin字段的值，要么是一个*，表示接受任意域名的请求。</li>
+</ul>
+<ol start="2">
+<li>Access-Control-Allow-Credentials</li>
+</ol>
+<ul>
+<li>该字段可选。它的值是一个布尔值，表示是否允许发送Cookie。默认情况下，Cookie不包括在CORS请求之中。设为true，即表示服务器明确许可，Cookie可以包含在请求中，一起发给服务器。这个值也只能设为true，如果服务器不要浏览器发送Cookie，删除该字段即可。</li>
+</ul>
+<ol start="3">
+<li>Access-Control-Expose-Headers</li>
+</ol>
+<ul>
+<li><p>该字段可选。CORS请求时，XMLHttpRequest对象的getResponseHeader()方法只能拿到6个基本字段：Cache-Control、Content-Language、Content-Type、Expires、Last-Modified、Pragma。如果想拿到其他字段，就必须在Access-Control-Expose-Headers里面指定。上面的例子指定，getResponseHeader(‘FooBar’)可以返回FooBar字段的值。</p>
+<blockquote>
+<p>withCredentials 属性</p>
+</blockquote>
+</li>
+<li><p>上面说到，<code>CORS请求默认不发送Cookie和HTTP认证信息</code>。如果要把Cookie发到服务器，一方面要服务器同意，客户端：Access-Control-Allow-Credentials = true。</p>
+</li>
+<li><p>Access-Control-Allow-Credentials: true</p>
+</li>
+<li><p>另一方面，<code>开发者必须在AJAX请求中打开withCredentials属性</code>。</p>
+</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xhr.withCredentials = <span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>否则，即使服务器同意发送Cookie，浏览器也不会发送。或者，服务器要求设置Cookie，浏览器也不会处理。</p>
+</li>
+<li><p>但是，如果省略<code>withCredentials</code>设置，有的浏览器还是会一起发送Cookie。这时，可以显式关闭withCredentials。</p>
+</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xhr.withCredentials = <span class="literal">false</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>需要注意的是，如果要发送Cookie，Access-Control-Allow-Origin就不能设为星号，必须指定明确的、与请求网页一致的域名。同时，Cookie依然遵循同源政策，只有用服务器域名设置的Cookie才会上传，其他域名的Cookie并不会上传，且（跨源）原网页代码中的document.cookie也无法读取服务器域名下的Cookie。</li>
+</ul>
+<h4 id="2-CORS非简单请求-预检请求"><a href="#2-CORS非简单请求-预检请求" class="headerlink" title="2.CORS非简单请求-预检请求"></a>2.CORS非简单请求-预检请求</h4><ul>
+<li><p>非简单请求是那种对服务器有特殊要求的请求，比如请求方法是PUT或DELETE，或者<code>Content-Type</code>字段的类型是<code>application/json。</code></p>
+</li>
+<li><p>非简单请求的CORS请求，会在正式通信之前，<code>增加一次HTTP查询请求</code>，称为<code>&quot;预检&quot;请求</code>（preflight）。</p>
+</li>
+<li><p>浏览器先询问服务器，当前网页所在的域名是否在服务器的许可名单之中，以及可以使用哪些HTTP动词和头信息字段。只有得到肯定答复，浏览器才会发出正式的XMLHttpRequest请求，否则就报错。</p>
+</li>
+<li><p>代码</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var url = 'http://api.uxin.com/user';</span><br><span class="line">var xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xhr.open('PUT', url, true);</span><br><span class="line">xhr.setRequestHeader('X-Custom-Header', 'value');</span><br><span class="line">xhr.send();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>上面代码中，HTTP请求的方法是PUT，并且发送一个自定义头信息X-Custom-Header。</p>
+</li>
+<li><p>浏览器发现，这是一个非简单请求，就自动发出一个<code>&quot;预检&quot;请求</code>，要求服务器确认可以这样请求。下面是这个”预检”请求的HTTP头信息。</p>
+</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">OPTIONS /cors HTTP/<span class="number">1.1</span></span><br><span class="line">Origin: http:<span class="comment">//m.a.com</span></span><br><span class="line">Access-Control-Request-Method: PUT</span><br><span class="line">Access-Control-Request-Headers: X-Custom-Header</span><br><span class="line">Host: api.alice.com</span><br><span class="line">Accept-Language: en-US</span><br><span class="line">Connection: keep-alive</span><br><span class="line">User-Agent: Mozilla/<span class="number">5.0</span>...</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>“预检”请求用的请求方法是<code>OPTIONS</code>，表示这个请求是用来询问的。头信息里面，关键字段是<code>Origin</code>，表示请求来自哪个源。</p>
+</li>
+<li><p>除了Origin字段，”预检”请求的头信息包括两个特殊字段。</p>
+</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Request-Method</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>该字段是必须的，用来列出浏览器的CORS请求会用到哪些HTTP方法，上例是PUT。</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Request-Headers</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>该字段是一个逗号分隔的字符串，指定浏览器CORS请求会额外发送的头信息字段，上例是X-Custom-Header。</li>
+</ul>
+<h4 id="CORS预检请求的响应"><a href="#CORS预检请求的响应" class="headerlink" title="CORS预检请求的响应"></a>CORS预检请求的响应</h4><ul>
+<li>服务器收到”预检”请求以后，检查了Origin、Access-Control-Request-Method和Access-Control-Request-Headers字段以后，确认允许跨源请求，就可以做出回应。</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">HTTP/<span class="number">1.1</span> <span class="number">200</span> OK</span><br><span class="line">Date: Mon, <span class="number">01</span> Dec <span class="number">2008</span> <span class="number">01</span>:<span class="number">15</span>:<span class="number">39</span> GMT</span><br><span class="line">Server: Apache/<span class="number">2.0</span><span class="number">.61</span> (Unix)</span><br><span class="line">Access-Control-Allow-Origin: http:<span class="comment">//m.a.com</span></span><br><span class="line">Access-Control-Allow-Methods: GET, POST, PUT</span><br><span class="line">Access-Control-Allow-Headers: X-Custom-Header</span><br><span class="line">Content-Type: text/html; charset=utf<span class="number">-8</span></span><br><span class="line">Content-Encoding: gzip</span><br><span class="line">Content-Length: <span class="number">0</span></span><br><span class="line">Keep-Alive: timeout=<span class="number">2</span>, max=<span class="number">100</span></span><br><span class="line">Connection: Keep-Alive</span><br><span class="line">Content-Type: text/plain</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>上面的HTTP回应中，关键的是Access-Control-Allow-Origin字段，表示<a href="http://m.a.com可以请求数据。该字段也可以设为星号，表示同意任意跨源请求。" target="_blank" rel="noopener">http://m.a.com可以请求数据。该字段也可以设为星号，表示同意任意跨源请求。</a></li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Origin: *</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果浏览器否定了”预检”请求，会返回一个正常的HTTP回应，但是没有任何CORS相关的头信息字段。这时浏览器就会认定，服务器不同意预检请求，因此触发一个错误，被XMLHttpRequest对象的onerror回调函数捕获。控制台会打印出如下的报错信息。</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">XMLHttpRequest cannot load http:<span class="comment">//m.a.com.</span></span><br><span class="line">Origin http:<span class="comment">//m.a.com is not allowed by Access-Control-Allow-Origin.</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>服务器回应的其他CORS相关字段如下。</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Methods: GET, POST, PUT</span><br><span class="line">Access-Control-Allow-Headers: X-Custom-Header</span><br><span class="line">Access-Control-Allow-Credentials: <span class="literal">true</span></span><br><span class="line">Access-Control-Max-Age: <span class="number">1728000</span></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>Access-Control-Allow-Methods</li>
+</ol>
+<ul>
+<li>该字段必需，它的值是逗号分隔的一个字符串，表明服务器支持的所有跨域请求的方法。注意，返回的是所有支持的方法，而不单是浏览器请求的那个方法。这是为了避免多次”预检”请求。</li>
+</ul>
+<ol start="2">
+<li>Access-Control-Allow-Headers</li>
+</ol>
+<ul>
+<li>如果浏览器请求包括Access-Control-Request-Headers字段，则Access-Control-Allow-Headers字段是必需的。它也是一个逗号分隔的字符串，表明服务器支持的所有头信息字段，不限于浏览器在”预检”中请求的字段。</li>
+</ul>
+<ol start="3">
+<li>Access-Control-Allow-Credentials</li>
+</ol>
+<ul>
+<li>该字段与简单请求时的含义相同。</li>
+</ul>
+<ol start="4">
+<li>Access-Control-Max-Age</li>
+</ol>
+<ul>
+<li>该字段可选，用来指定本次预检请求的有效期，单位为秒。上面结果中，有效期是20天（1728000秒），即允许缓存该条回应1728000秒（即20天），在此期间，不用发出另一条预检请求。</li>
+<li>CORS浏览器的正常请求和回应</li>
+</ul>
+<p>一旦服务器通过了”预检”请求，以后每次浏览器正常的CORS请求，就都跟简单请求一样，会有一个Origin头信息字段。服务器的回应，也都会有一个Access-Control-Allow-Origin头信息字段。</p>
+<ul>
+<li>下面是”预检”请求之后，浏览器的正常CORS请求。</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">PUT /cors HTTP/<span class="number">1.1</span></span><br><span class="line">Origin: http:<span class="comment">//m.a.com</span></span><br><span class="line">Host: api.alice.com</span><br><span class="line">X-Custom-Header: value</span><br><span class="line">Accept-Language: en-US</span><br><span class="line">Connection: keep-alive</span><br><span class="line">User-Agent: Mozilla/<span class="number">5.0</span>..</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>上面头信息的Origin字段是浏览器自动添加的。</p>
+</li>
+<li><p>下面是服务器正常的回应。</p>
+</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Origin: http:<span class="comment">//m.a.com</span></span><br><span class="line">Content-Type: text/html; charset=utf<span class="number">-8</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>上面头信息中，Access-Control-Allow-Origin字段是每次回应都必定包含的。</p>
+</li>
+<li><p>我们要知道CORS是http协议的一部分，由浏览器和服务器来完成。所以对于前端来说还是比较简单的。我们要做的是理解这个协议和实现机制，在遇到类似问题的时候可以快速的定位。</p>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">浏览器</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/06/07/CORS和JSONP/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-http和websocket" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -854,255 +1146,6 @@
 
 
   
-    <article id="post-项目优化和发布" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/25/项目优化和发布/">项目优化和发布</a>
-    </h1>
-  
-
-        
-        <a href="/2020/05/25/项目优化和发布/" class="archive-article-date">
-  	<time datetime="2020-05-25T14:56:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="项目优化"><a href="#项目优化" class="headerlink" title="项目优化"></a>项目优化</h2><blockquote>
-<p>实现步骤：</p>
-</blockquote>
-<ul>
-<li>生成打包报告，根据报告优化项目</li>
-<li>第三方库启用CDN（通过externals加载外部CDN）</li>
-<li>通过CDN加载Element-UI，在<code>main-prod.js</code>中注释掉按需加载，同时在<code>index.html</code>头部通过CDN加载element.ui的js和css样式</li>
-<li>首页内容定制：不同环境下产生不同内容。通过插件进行定制</li>
-<li>路由懒加载：打包时，JS包非常大，我们把不同路由对应的组件分割成不同代码块，然后当路由被访问到的时候才加载对应组件，这样就更高效了。</li>
-<li>路由懒加载步骤：<ol>
-<li>安装<code>@babel/plugin-syntax-dynamic-import</code>包</li>
-<li>在babel.config.js配置文件中声明该插件</li>
-<li>将所有路由由<code>import...from...</code>改为按需加载的形式。<code>./Bar.vue</code>是路由组件存放路径，<code>/* webpackChunName:&quot;group-foo&quot;</code>分组，相同分组会被打包到同一个文件。</li>
-</ol>
-</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Foo = <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="comment">/* webpackChunName:"group-foo" */</span><span class="string">'./Bar.vue'</span>)</span><br></pre></td></tr></table></figure>
-
-<h2 id="根据报错修改代码"><a href="#根据报错修改代码" class="headerlink" title="根据报错修改代码"></a>根据报错修改代码</h2><p>根据ESLint的警告提示更改对应的代码<br>在.prettierrc文件中更改设置”printWidth”:200,  将每行代码的文字数量更改为200</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;semi&quot;:false,</span><br><span class="line">    &quot;singleQuote&quot;:true,</span><br><span class="line">    &quot;printWidth&quot;:200</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="执行build"><a href="#执行build" class="headerlink" title="执行build"></a>执行build</h2><ul>
-<li>安装一个插件（babel-plugin-transform-remove-console）在项目build阶段移除所有的console信息</li>
-<li>打开项目控制台，点击依赖-&gt;开发依赖，输入babel-plugin-transform-remove-console，安装</li>
-<li>打开babel.config.js，编辑代码如下：</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//项目发布阶段需要用到的babel插件</span></span><br><span class="line"><span class="keyword">const</span> productPlugins = []</span><br><span class="line"></span><br><span class="line"><span class="comment">//判断是开发还是发布阶段</span></span><br><span class="line"><span class="keyword">if</span>(process.env.NODE_ENV === <span class="string">'production'</span>)&#123;</span><br><span class="line">  <span class="comment">//发布阶段</span></span><br><span class="line">  productPlugins.push(<span class="string">"transform-remove-console"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="string">"presets"</span>: [</span><br><span class="line">    <span class="string">"@vue/app"</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"plugins"</span>: [</span><br><span class="line">    [</span><br><span class="line">      <span class="string">"component"</span>,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">"libraryName"</span>: <span class="string">"element-ui"</span>,</span><br><span class="line">        <span class="string">"styleLibraryName"</span>: <span class="string">"theme-chalk"</span></span><br><span class="line">      &#125;</span><br><span class="line">    ],</span><br><span class="line">    ...productPlugins</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="优化1-生成打包报告"><a href="#优化1-生成打包报告" class="headerlink" title="优化1. 生成打包报告"></a>优化1. 生成打包报告</h2><ol>
-<li>命令行形式生成打包报告<code>vue-cli-service build --report</code></li>
-<li>可视化ui：在vue控制台生成打包报告：点击<code>“任务”=&gt;“build”=&gt;“运行”</code><br>运行完毕之后点击右侧<code>“分析”</code>，<code>“控制台”</code>面板查看报告</li>
-</ol>
-<ul>
-<li>分析能看哪些文件体积大。</li>
-<li>控制台可以看哪个文件占的面积大（第三方依赖向）</li>
-<li>控台台可以看项目打开时间的占比</li>
-</ul>
-<blockquote>
-<p>修改webpack的默认配置</p>
-</blockquote>
-<ul>
-<li>默认情况下，vue-cli 3.0生成的项目，隐藏了webpack配置项，如果我们需要配置webpack</li>
-</ul>
-<ol>
-<li>需要通过vue.config.js来配置。</li>
-<li>在项目根目录中创建vue.config.js文件，</li>
-</ol>
-<blockquote>
-<p>为开发模式和发布模式指定不同的打包入口，共用一个入口文件（main.js）。为了将项目开发与发布分离，我们有俩种模式，指定各自的打包入口</p>
-</blockquote>
-<ol>
-<li>开发入口，main-dev</li>
-<li>发布模式，main-prod</li>
-</ol>
-<blockquote>
-<p>通过chainWebpack修改</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    chainWebpack:<span class="function"><span class="params">config</span>=&gt;</span>&#123;</span><br><span class="line">        <span class="comment">//发布模式 = production</span></span><br><span class="line">        config.when(process.env.NODE_ENV === <span class="string">'production'</span>,config=&gt;&#123;</span><br><span class="line">            <span class="comment">//entry找到默认的打包入口，调用clear则是删除默认的打包入口</span></span><br><span class="line">            <span class="comment">//add添加新的打包入口</span></span><br><span class="line">            config.entry(<span class="string">'app'</span>).clear().add(<span class="string">'./src/main-prod.js'</span>)</span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="comment">//开发模式 = development</span></span><br><span class="line">        config.when(process.env.NODE_ENV === <span class="string">'development'</span>,config=&gt;&#123;</span><br><span class="line">            config.entry(<span class="string">'app'</span>).clear().add(<span class="string">'./src/main-dev.js'</span>)</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>补充： </p>
-<ul>
-<li>chainWebpack可以通过链式编程的形式，修改webpack配置</li>
-<li>configureWebpack可以通过操作对象的形式，修改webpack配置</li>
-</ul>
-<h2 id="2-加载外部CDN"><a href="#2-加载外部CDN" class="headerlink" title="2. 加载外部CDN"></a>2. 加载外部CDN</h2><ul>
-<li>默认情况下，import导入第三方依赖包（如element-ui和echarts），都会被打包到同一个文件中，导致该js文件过大。</li>
-<li>那么我们可以通过webpack的externals节点，来配置加载外部的CDN资源。凡是声明在externals中第三方依赖包，都不会被打包。</li>
-<li>原理：webpack检查程序员有没有在externals有没有声明一些第三方依赖包，有的话不会把这些包打包在一起，而是直接去window全局对象身上找现成的对象来使用。</li>
-<li>第一个key表示有没有导入这个包，如果有则第二个value表示全局这个对象</li>
-</ul>
-<blockquote>
-<p>第一步</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    chainWebpack:<span class="function"><span class="params">config</span>=&gt;</span>&#123;</span><br><span class="line">        <span class="comment">//发布模式</span></span><br><span class="line">        config.when(process.env.NODE_ENV === <span class="string">'production'</span>,config=&gt;&#123;</span><br><span class="line">            <span class="comment">//entry找到默认的打包入口，调用clear则是删除默认的打包入口</span></span><br><span class="line">            <span class="comment">//add添加新的打包入口</span></span><br><span class="line">            config.entry(<span class="string">'app'</span>).clear().add(<span class="string">'./src/main-prod.js'</span>)</span><br><span class="line"></span><br><span class="line">            <span class="comment">//使用externals设置排除项</span></span><br><span class="line">            config.set(<span class="string">'externals'</span>,&#123;</span><br><span class="line">                vue:<span class="string">'Vue'</span>,</span><br><span class="line">                <span class="string">'vue-router'</span>:<span class="string">'VueRouter'</span>,</span><br><span class="line">                axios:<span class="string">'axios'</span>,</span><br><span class="line">                lodash:<span class="string">'_'</span>,</span><br><span class="line">                echarts:<span class="string">'echarts'</span>,</span><br><span class="line">                nprogress:<span class="string">'NProgress'</span>,</span><br><span class="line">                <span class="string">'vue-quill-editor'</span>:<span class="string">'VueQuillEditor'</span></span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="comment">//开发模式</span></span><br><span class="line">        config.when(process.env.NODE_ENV === <span class="string">'development'</span>,config=&gt;&#123;</span><br><span class="line">            config.entry(<span class="string">'app'</span>).clear().add(<span class="string">'./src/main-dev.js'</span>)</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>设置好排除之后，为了使我们可以使用vue，axios等内容，我们需要加载外部CDN的形式解决引入依赖项。</li>
-<li>打开开发入口文件main-prod.js,删除掉默认的样式表。<blockquote>
-<p>第二步</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"><span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">'./App.vue'</span></span><br><span class="line"><span class="keyword">import</span> router <span class="keyword">from</span> <span class="string">'./router'</span></span><br><span class="line"><span class="comment">// import './plugins/element.js'</span></span><br><span class="line"><span class="comment">//导入字体图标</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">'./assets/fonts/iconfont.css'</span></span><br><span class="line"><span class="comment">//导入全局样式</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">'./assets/css/global.css'</span></span><br><span class="line"><span class="comment">//导入第三方组件vue-table-with-tree-grid</span></span><br><span class="line"><span class="keyword">import</span> TreeTable <span class="keyword">from</span> <span class="string">'vue-table-with-tree-grid'</span></span><br><span class="line"><span class="comment">//导入进度条插件</span></span><br><span class="line"><span class="keyword">import</span> NProgress <span class="keyword">from</span> <span class="string">'nprogress'</span></span><br><span class="line"><span class="comment">//导入进度条样式</span></span><br><span class="line"><span class="comment">// import 'nprogress/nprogress.css'</span></span><br><span class="line"><span class="comment">// //导入axios</span></span><br><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">'axios'</span></span><br><span class="line"><span class="comment">// //导入vue-quill-editor（富文本编辑器）</span></span><br><span class="line"><span class="keyword">import</span> VueQuillEditor <span class="keyword">from</span> <span class="string">'vue-quill-editor'</span></span><br><span class="line"><span class="comment">// //导入vue-quill-editor的样式</span></span><br><span class="line"><span class="comment">// import 'quill/dist/quill.core.css'</span></span><br><span class="line"><span class="comment">// import 'quill/dist/quill.snow.css'</span></span><br><span class="line"><span class="comment">// import 'quill/dist/quill.bubble.css'</span></span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<blockquote>
-<p>第三步</p>
-<ul>
-<li>然后打开public/index.html添加外部cdn引入代码，这样全局就多了这些对象（构造函数）。</li>
-</ul>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">    &lt;meta http-equiv=<span class="string">"X-UA-Compatible"</span> content=<span class="string">"IE=edge"</span>&gt;</span><br><span class="line">    &lt;meta name=<span class="string">"viewport"</span> content=<span class="string">"width=device-width,initial-scale=1.0"</span>&gt;</span><br><span class="line">    &lt;link rel=<span class="string">"icon"</span> href=<span class="string">"&lt;%= BASE_URL %&gt;favicon.ico"</span>&gt;</span><br><span class="line">    &lt;title&gt;电商后台管理系统&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">    &lt;!-- nprogress 的样式表文件 --&gt;</span></span><br><span class="line"><span class="regexp">    &lt;link rel="stylesheet" href="https:/</span><span class="regexp">/cdn.staticfile.org/</span>nprogress/<span class="number">0.2</span><span class="number">.0</span>/nprogress.min.css<span class="string">" /&gt;</span></span><br><span class="line"><span class="string">    &lt;!-- 富文本编辑器 的样式表文件 --&gt;</span></span><br><span class="line"><span class="string">    &lt;link rel="</span>stylesheet<span class="string">" href="</span>https:<span class="comment">//cdn.staticfile.org/quill/1.3.4/quill.core.min.css" /&gt;</span></span><br><span class="line">    &lt;link rel=<span class="string">"stylesheet"</span> href=<span class="string">"https://cdn.staticfile.org/quill/1.3.4/quill.snow.min.css"</span> /&gt;</span><br><span class="line">    &lt;link rel=<span class="string">"stylesheet"</span> href=<span class="string">"https://cdn.staticfile.org/quill/1.3.4/quill.bubble.min.css"</span> /&gt;</span><br><span class="line">    &lt;!-- element-ui 的样式表文件 --&gt;</span><br><span class="line">    &lt;link rel=<span class="string">"stylesheet"</span> href=<span class="string">"https://cdn.staticfile.org/element-ui/2.8.2/theme-chalk/index.css"</span> /&gt;</span><br><span class="line"></span><br><span class="line">    &lt;script src=<span class="string">"https://cdn.staticfile.org/vue/2.5.22/vue.min.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">    &lt;script src=<span class="string">"https://cdn.staticfile.org/vue-router/3.0.1/vue-router.min.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">    &lt;script src=<span class="string">"https://cdn.staticfile.org/axios/0.18.0/axios.min.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">    &lt;script src=<span class="string">"https://cdn.staticfile.org/lodash.js/4.17.11/lodash.min.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">    &lt;script src=<span class="string">"https://cdn.staticfile.org/echarts/4.1.0/echarts.min.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">    &lt;script src=<span class="string">"https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">    &lt;!-- 富文本编辑器的 js 文件 --&gt;</span><br><span class="line">    &lt;script src=<span class="string">"https://cdn.staticfile.org/quill/1.3.4/quill.min.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">    &lt;script src=<span class="string">"https://cdn.jsdelivr.net/npm/vue-quill-editor@3.0.4/dist/vue-quill-editor.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line">    &lt;!-- element-ui 的 js 文件 --&gt;</span><br><span class="line">    &lt;script src=<span class="string">"https://cdn.staticfile.org/element-ui/2.8.2/index.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>优化elementUI</p>
-<ol>
-<li>main-prod.js中，注释掉element-ui按需加载的代码</li>
-</ol>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">、<span class="comment">//import './plugins/element.js'</span></span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>在index.html的头部区域中，通过CDN加载element-ui的js和css样式。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel=<span class="string">"stylesheet"</span> href=<span class="string">"https://cdn.staticfile.org/element-ui/2.8.2/theme-chalk/index.css"</span> /&gt;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<h2 id="2-定制首页内容"><a href="#2-定制首页内容" class="headerlink" title="2.定制首页内容"></a>2.定制首页内容</h2><ul>
-<li>开发环境的首页和发布环境的首页展示内容的形式有所不同</li>
-<li>如开发环境中使用的是import加载第三方包，而发布环境则是使用CDN，那么首页也需根据环境不同来进行不同的实现,我们可以通过插件的方式来定制首页内容，打开vue.config.js，编写代码如下：</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    chainWebpack:<span class="function"><span class="params">config</span>=&gt;</span>&#123;</span><br><span class="line">        config.when(process.env.NODE_ENV === <span class="string">'production'</span>,config=&gt;&#123;</span><br><span class="line">            ......</span><br><span class="line">            </span><br><span class="line">            <span class="comment">//使用插件</span></span><br><span class="line">            config.plugin(<span class="string">'html'</span>).tap(<span class="function"><span class="params">args</span>=&gt;</span>&#123;</span><br><span class="line">                <span class="comment">//添加参数isProd</span></span><br><span class="line">                args[<span class="number">0</span>].isProd = <span class="literal">true</span></span><br><span class="line">                <span class="keyword">return</span> args</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;)</span><br><span class="line"></span><br><span class="line">        config.when(process.env.NODE_ENV === <span class="string">'development'</span>,config=&gt;&#123;</span><br><span class="line">            config.entry(<span class="string">'app'</span>).clear().add(<span class="string">'./src/main-dev.js'</span>)</span><br><span class="line"></span><br><span class="line">            <span class="comment">//使用插件</span></span><br><span class="line">            config.plugin(<span class="string">'html'</span>).tap(<span class="function"><span class="params">args</span>=&gt;</span>&#123;</span><br><span class="line">                <span class="comment">//添加参数isProd</span></span><br><span class="line">                args[<span class="number">0</span>].isProd = <span class="literal">false</span></span><br><span class="line">                <span class="keyword">return</span> args</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>然后在public/index.html中使用插件判断是否为发布环境并定制首页内容</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">    &lt;meta http-equiv=<span class="string">"X-UA-Compatible"</span> content=<span class="string">"IE=edge"</span>&gt;</span><br><span class="line">    &lt;meta name=<span class="string">"viewport"</span> content=<span class="string">"width=device-width,initial-scale=1.0"</span>&gt;</span><br><span class="line">    &lt;link rel=<span class="string">"icon"</span> href=<span class="string">"&lt;%= BASE_URL %&gt;favicon.ico"</span>&gt;</span><br><span class="line">    &lt;title&gt;<span class="xml"><span class="tag">&lt;<span class="name">%=</span> <span class="attr">htmlWebpackPlugin.options.isProd</span> ? '' <span class="attr">:</span> '<span class="attr">dev</span> <span class="attr">-</span> ' %&gt;</span>电商后台管理系统<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line">    &lt;% <span class="keyword">if</span>(htmlWebpackPlugin.options.isProd)&#123; %&gt;</span><br><span class="line">    &lt;!-- nprogress 的样式表文件 --&gt;</span><br><span class="line">    &lt;link rel=<span class="string">"stylesheet"</span> href=<span class="string">"https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css"</span> /&gt;</span><br><span class="line">    ........</span><br><span class="line">    &lt;!-- element-ui 的 js 文件 --&gt;</span><br><span class="line">    &lt;script src=<span class="string">"https://cdn.staticfile.org/element-ui/2.8.2/index.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">    &lt;% &#125; %&gt;</span><br><span class="line">  &lt;<span class="regexp">/head&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="3-路由懒加载（143到96）"><a href="#3-路由懒加载（143到96）" class="headerlink" title="3. 路由懒加载（143到96）"></a>3. 路由懒加载（143到96）</h2><ul>
-<li>当打包构建时，JS文件非常大，影响页面加载。如果我们能把不同的路由对应的组件分割成不同的代码块，然后当路由被访问的时候才加载对应组件，这样就更高效了。</li>
-<li>当路由被访问时才加载对应的路由文件，就是路由懒加载。</li>
-</ul>
-<blockquote>
-<p>路由懒加载实现步骤：</p>
-</blockquote>
-<ol>
-<li>安装 @babel/plugin-syntax-dynamic-import包</li>
-</ol>
-<ul>
-<li>打开vue控制台，点击依赖-&gt;安装依赖-&gt;开发依赖-&gt;搜索@babel/plugin-syntax-dynamic-import<br>点击安装。</li>
-</ul>
-<ol start="2">
-<li>在babel.config.js中开发模式声明该插件，打开babel.config.js</li>
-<li>将路由改为按需加载</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//项目发布阶段需要用到的babel插件</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line"></span><br><span class="line">    ...productPlugins,</span><br><span class="line">    <span class="comment">//配置路由懒加载插件</span></span><br><span class="line">    <span class="string">"@babel/plugin-syntax-dynamic-import"</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li>将路由更改为按需加载的形式，打开router.js，更改引入组件代码如下：</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// import Order from './components/order/Order.vue'</span></span><br><span class="line"><span class="keyword">const</span> Report = <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="comment">/* webpackChunkName:"report" */</span> <span class="string">'./components/report/Report.vue'</span>)</span><br><span class="line"><span class="comment">// import Report from './components/report/Report.vue'</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="项目上线"><a href="#项目上线" class="headerlink" title="项目上线"></a>项目上线</h2><blockquote>
-<p>通过node创建服务器</p>
-</blockquote>
-<ol>
-<li>在vue_shop同级创建一个文件夹<code>vue_shop_server</code>存放node服务器</li>
-<li>使用终端打开<code>vue_shop_server</code>文件夹，输入命令 <code>npm init -y</code></li>
-<li>初始化包之后，输入命令 <code>npm i express -S</code></li>
-<li>打开vue_shop目录，复制dist文件夹，粘贴到<code>vue_shop_server</code>中</li>
-<li>在<code>vue_shop_server</code>文件夹中创建app.js文件,编写代码如下：</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>)</span><br><span class="line"><span class="comment">//创建web服务器</span></span><br><span class="line"><span class="keyword">const</span> app = express()</span><br><span class="line"><span class="comment">//托管静态资源</span></span><br><span class="line">app.use(express.static(<span class="string">'./dist'</span>))</span><br><span class="line"><span class="comment">//启动web服务器</span></span><br><span class="line">app.listen(<span class="number">8998</span>,()=&gt;&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"server running at http://127.0.0.1:8998"</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<ol start="6">
-<li>然后再次在终端中输入  node app.js</li>
-</ol>
-<h2 id="开启gzip压缩"><a href="#开启gzip压缩" class="headerlink" title="开启gzip压缩"></a>开启gzip压缩</h2><ul>
-<li>打开vue_shop_server文件夹的终端，输入命令：<code>npm i compression -D</code></li>
-<li>打开app.js,编写代码：</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>)</span><br><span class="line"><span class="comment">//导入包</span></span><br><span class="line"><span class="keyword">const</span> compression = <span class="built_in">require</span>(<span class="string">'compression'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = express()</span><br><span class="line"><span class="comment">//启用中间件</span></span><br><span class="line">app.use(compression())</span><br><span class="line">app.use(express.static(<span class="string">'./dist'</span>))</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">8998</span>,()=&gt;&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"server running at http://127.0.0.1:8998"</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h2 id="配置https服务"><a href="#配置https服务" class="headerlink" title="配置https服务"></a>配置https服务</h2><p>配置https服务一般是后台进行处理，前端开发人员了解即可。<br>首先，需要申请SSL证书，进入<a href="https://freessl.cn官网" target="_blank" rel="noopener">https://freessl.cn官网</a><br>在后台导入证书，打开今天资料/素材，复制素材中的两个文件到vue_shop_server中<br>打开app.js文件，编写代码导入证书，并开启https服务</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>)</span><br><span class="line"><span class="keyword">const</span> compression = <span class="built_in">require</span>(<span class="string">'compression'</span>)</span><br><span class="line"><span class="keyword">const</span> https = <span class="built_in">require</span>(<span class="string">'https'</span>)</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = express()</span><br><span class="line"><span class="comment">//创建配置对象设置公钥和私钥</span></span><br><span class="line"><span class="keyword">const</span> options = &#123;</span><br><span class="line">    cert:fs.readFileSync(<span class="string">'./full_chain.pem'</span>),</span><br><span class="line">    key:fs.readFileSync(<span class="string">'./private.key'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">app.use(compression())</span><br><span class="line">app.use(express.static(<span class="string">'./dist'</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">// app.listen(8998,()=&gt;&#123;</span></span><br><span class="line"><span class="comment">//     console.log("server running at http://127.0.0.1:8998")</span></span><br><span class="line"><span class="comment">// &#125;)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//启动https服务</span></span><br><span class="line">https.createServer(options,app).listen(<span class="number">443</span>)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>注意：因为我们使用的证书有问题，所以无法正常使用https服务</li>
-</ul>
-<h2 id="使用pm2管理应用"><a href="#使用pm2管理应用" class="headerlink" title="使用pm2管理应用"></a>使用pm2管理应用</h2><ul>
-<li>关闭终端窗口还可以运行项目</li>
-<li>打开vue_shop_server文件夹的终端，输入命令：<code>npm i pm2 -g</code></li>
-<li>使用pm2启动项目，在终端中输入命令：<code>pm2 start app.js --name</code> 自定义名称</li>
-<li>查看项目列表命令：<code>pm2 ls</code></li>
-<li>重启项目：<code>pm2 restart</code> 自定义名称</li>
-<li>停止项目：<code>pm2 stop</code> 自定义名称</li>
-<li>删除项目：<code>pm2 delete</code> 自定义名称</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">前端综合</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/25/项目优化和发布/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -1240,6 +1283,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">浏览器</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">图</a>
               </li>
              
@@ -1252,7 +1299,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1260,7 +1307,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
+                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1276,15 +1323,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
+                <a href="javascript:void(0)" class="js-tag color5">flex</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1292,15 +1335,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">排序</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color3">排序</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1317,14 +1368,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">网络</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">浏览器</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">flex</a>
               </li>
             
             <div class="clearfix"></div>
