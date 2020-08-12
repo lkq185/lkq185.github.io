@@ -140,6 +140,107 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-JavaScript继承和call()" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/04/JavaScript继承和call()/">JavaScript继承和call()</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/04/JavaScript继承和call()/" class="archive-article-date">
+  	<time datetime="2020-05-04T08:42:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><blockquote>
+<p>ES6之前没有extends继承。我们可以用<strong>构造函数加原型对象</strong>模拟实现继承，称为<strong>组合继承</strong></p>
+</blockquote>
+<h2 id="call"><a href="#call" class="headerlink" title="call()"></a>call()</h2><p>fun.call(thisarg,arg1,arg2,…)<br>thisArg:当前调用this的指向对象<br><strong>功能：</strong><br>1.调用函数<br>2.改变函数指向</p>
+<blockquote>
+<p>输出andy</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">x，y</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'hhh'</span>);</span><br><span class="line">        <span class="comment">//正常指向window</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">        <span class="built_in">console</span>.log(x+y);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> o=&#123;</span><br><span class="line">      name=<span class="string">'andy'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//1.调用函数</span></span><br><span class="line">    fn.call();</span><br><span class="line">    <span class="comment">//2.改变函数指向</span></span><br><span class="line">    <span class="comment">//第一个o不会当做参数传输。</span></span><br><span class="line">    fn.call(o,<span class="number">1</span>,<span class="number">2</span>);    </span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="子构造函数用父构造函数"><a href="#子构造函数用父构造函数" class="headerlink" title="子构造函数用父构造函数"></a>子构造函数用父构造函数</h2><p><strong>父亲this指向子类this</strong>或理解为<strong>call()传进this，把父类构造函数拿过来。</strong><br><strong>指回：从左向右看，约等于链表。</strong><br>1.指向子构造函数实例<br>2.先用call调用方法，然后把子this传进来<br>3.改为指向子类实例</p>
+<blockquote>
+<p>输出子类构造函数</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="comment">//父构造函数</span></span><br><span class="line">     <span class="function"><span class="keyword">function</span> <span class="title">father</span>(<span class="params">name,age</span>)</span>&#123;</span><br><span class="line">         <span class="comment">//指向父构造函数实例</span></span><br><span class="line">         <span class="keyword">this</span>.name=name;</span><br><span class="line">         <span class="keyword">this</span>.age=age;</span><br><span class="line">     &#125;    </span><br><span class="line">     <span class="function"><span class="keyword">function</span> <span class="title">son</span>(<span class="params">name,age</span>)</span>&#123;</span><br><span class="line">         <span class="comment">//指向子构造函数实例</span></span><br><span class="line">         <span class="comment">//先用call调用方法，然后把子this传进来</span></span><br><span class="line">         <span class="comment">//改为指向子类实例</span></span><br><span class="line">         father.call(<span class="keyword">this</span>,name,age);</span><br><span class="line">     &#125;    </span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="子类继承父类方法"><a href="#子类继承父类方法" class="headerlink" title="子类继承父类方法"></a>子类继承父类方法</h2><blockquote>
+<p>son.prototype=father.prototype;<br>会有问题吗。</p>
+</blockquote>
+<p>有问题：子类指向父类原型对象，<strong>父类地址给了孩子。</strong>这样父类有了子类的原型对象方法。子原型对象变化了，父类也会变化。约等于双方方法互通了。<br><strong>解决方法</strong><br><strong>new一个father的实例对象。</strong><br>父类实例通过_proto_指向father原型对象<br>这样son的_proto_拥有父类原型对象方法（本身指向son的构造函数的，被覆盖了）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> father.baba=<span class="keyword">new</span> father();</span><br><span class="line">son.prototype=baba.prototype;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>问题：这样做缺点？</p>
+</blockquote>
+<p>son的prototype的构造函数指向了父类，需要用constructor重新指回原来的构造函数。<br><strong>指向、指回：从左向右看，约等于链表。</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">son.prototype.constructor=son;</span><br></pre></td></tr></table></figure>
+
+<p><strong>总结：传递的是地址。</strong></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/04/JavaScript继承和call()/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-综合学习-模仿学习网站" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -641,113 +742,9 @@
 
 
   
-    <article id="post-CSS三大特性" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/02/CSS三大特性/">CSS三大特性</a>
-    </h1>
-  
-
-        
-        <a href="/2020/05/02/CSS三大特性/" class="archive-article-date">
-  	<time datetime="2020-05-02T05:56:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="层叠性："><a href="#层叠性：" class="headerlink" title="层叠性："></a>层叠性：</h2><p>最后为粉色：就近原则或者覆盖了红色。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">div &#123;</span><br><span class="line">    color: red;</span><br><span class="line">&#125;</span><br><span class="line">div &#123;</span><br><span class="line">    pink: pink;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="继承性"><a href="#继承性" class="headerlink" title="继承性"></a>继承性</h2><p>p继承div的属性<br>儿子继承父子继承的属性<br>可以把body选择为一个颜色。<br><strong>但也只是继承一部分特点：只有关于文字关系的可以继承。</strong></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">    div &#123;</span><br><span class="line">        color: pink;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;<span class="regexp">/style&gt;</span></span><br><span class="line"><span class="regexp">&lt;div&gt;</span></span><br><span class="line"><span class="regexp">    &lt;p&gt;2&lt;/</span>p&gt;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p><strong>行高的继承</strong></p>
-</blockquote>
-<p>让子元素font-size行高为1.5倍<br>如子类font-size ：12px 则子类为12乘1.5</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//父类</span></span><br><span class="line">font: <span class="number">12</span>px/<span class="number">1.5</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="优先性"><a href="#优先性" class="headerlink" title="优先性"></a>优先性</h2><blockquote>
-<p>div选择.d还是div</p>
-</blockquote>
-<p>答案：选择red色 因为类选择器大于元素选择器<br>id选择器永远大于类选择器<br>id（#开头）&gt;类&gt;元素选择器</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">    &lt;style&gt;</span><br><span class="line">        div &#123;</span><br><span class="line">            color: pink;</span><br><span class="line">        &#125;</span><br><span class="line">        .d &#123;</span><br><span class="line">           color: red;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;<span class="regexp">/style&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"d"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&lt;<span class="regexp">/body&gt;</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>红还是粉</p>
-</blockquote>
-<p>最后为红色<br>尽管id选择器大于元素选择器<br>首先p继承了父类div后权重降为0<br>所以元素选择大于id选择器，最后为red（类选择器）<br>注：看什么颜色看是不是直接被选择颜色，而不是继承来的颜色。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">    &lt;style&gt;</span><br><span class="line">        #father &#123;</span><br><span class="line">            color: pink;</span><br><span class="line">        &#125;</span><br><span class="line">        p &#123;</span><br><span class="line">           color: red;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;<span class="regexp">/style&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div id=<span class="string">"father"</span>&gt;</span><br><span class="line">        &lt;p&gt;hhh&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>div&gt;</span><br><span class="line">&lt;<span class="regexp">/body&gt;</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>超链接类选择器设置颜色为blue色所以当让boby变颜色时，a herf颜色不变，还是蓝色。<br> 因为a继承了boby权重为0，还是遵从自己的蓝颜色。</p>
-</blockquote>
-<p>复合选择器 权重相加让后比较<br>如俩个类选择器0，0，0，1相加变为0，0，0，2<br>但不会进位。<br>4组一个单位，不会进位。</p>
-<blockquote>
-<p><strong>:hover</strong>伪类选择器为10<br>div ul li= 0 0 0 3<br>.nav ul li=0 0 1 2<br>a:hover=0 0 1 1<br>.nav a=0 0 1 1</p>
-</blockquote>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CSS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/02/CSS三大特性/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/11/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><a class="extend next" rel="next" href="/page/13/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/11/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" href="/page/13/">Next &raquo;</a>
     </nav>
   
 
@@ -898,15 +895,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -930,11 +927,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTML</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color5">HTML</a>
               </li>
              
               <li class="article-tag-list-item">

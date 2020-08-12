@@ -140,6 +140,208 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-构造函数和原型" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/23/构造函数和原型/">构造函数和原型</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/23/构造函数和原型/" class="archive-article-date">
+  	<time datetime="2020-05-23T14:41:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>对象的三种创建方式</p>
+</blockquote>
+<ol>
+<li><p>字面量方式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>new关键字</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>构造函数方式(ES6之前大量生成对象)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name,age</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name;</span><br><span class="line">  <span class="keyword">this</span>.age = age;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> Person(<span class="string">'zs'</span>,<span class="number">12</span>);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="1-静态成员和实例成员"><a href="#1-静态成员和实例成员" class="headerlink" title="1. 静态成员和实例成员"></a>1. 静态成员和实例成员</h2><blockquote>
+<p>实例成员</p>
+</blockquote>
+<ul>
+<li>实例成员就是构造函数内部通过this添加的成员 如下列代码中uname age sing 就是实例成员</li>
+<li>实例成员只能通过实例化的对象来访问</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">Star</span>(<span class="params">uname, age</span>) </span>&#123;</span><br><span class="line">     <span class="keyword">this</span>.uname = uname;</span><br><span class="line">     <span class="keyword">this</span>.age = age;</span><br><span class="line">     <span class="keyword">this</span>.sing = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="built_in">console</span>.log(<span class="string">'我会唱歌'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> ldh = <span class="keyword">new</span> Star(<span class="string">'刘德华'</span>, <span class="number">18</span>);</span><br><span class="line"><span class="built_in">console</span>.log(ldh.uname);<span class="comment">//实例成员只能通过实例化的对象来访问</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>静态成员</p>
+</blockquote>
+<ul>
+<li>静态成员 在构造函数本身上添加的成员  如下列代码中 sex 就是静态成员,静态成员只能通过构造函数来访问</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">Star</span>(<span class="params">uname, age</span>) </span>&#123;</span><br><span class="line">     <span class="keyword">this</span>.uname = uname;</span><br><span class="line">     <span class="keyword">this</span>.age = age;</span><br><span class="line">     <span class="keyword">this</span>.sing = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="built_in">console</span>.log(<span class="string">'我会唱歌'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">Star.sex = <span class="string">'男'</span>;</span><br><span class="line"><span class="keyword">var</span> ldh = <span class="keyword">new</span> Star(<span class="string">'刘德华'</span>, <span class="number">18</span>);</span><br><span class="line"><span class="built_in">console</span>.log(Star.sex);<span class="comment">//静态成员只能通过构造函数来访问</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>构造函数的问题</p>
+</blockquote>
+<p>构造函数方法很好用，但是存在浪费内存的问题。</p>
+<h2 id="2-构造函数原型prototype"><a href="#2-构造函数原型prototype" class="headerlink" title="2.构造函数原型prototype"></a>2.构造函数原型prototype</h2><ul>
+<li>是什么？：对象，存储公共方法</li>
+<li>作用：共享方法</li>
+<li>JavaScript 规定，每一个构造函数都有一个prototype 属性，指向另一个对象。注意这个prototype就是一个对象，这个对象的所有属性和方法，都会被构造函数所拥有。</li>
+<li>我们可以把那些不变的方法，直接定义在 prototype 对象上，这样所有对象的实例就可以共享这些方法。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Star</span>(<span class="params">uname, age</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.uname = uname;</span><br><span class="line">    <span class="keyword">this</span>.age = age;</span><br><span class="line">&#125;</span><br><span class="line">Star.prototype.sing = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'我会唱歌'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> ldh = <span class="keyword">new</span> Star(<span class="string">'刘德华'</span>, <span class="number">18</span>);</span><br><span class="line"><span class="keyword">var</span> zxy = <span class="keyword">new</span> Star(<span class="string">'张学友'</span>, <span class="number">19</span>);</span><br><span class="line">ldh.sing();<span class="comment">//我会唱歌</span></span><br><span class="line">zxy.sing();<span class="comment">//我会唱歌</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-对象原型"><a href="#3-对象原型" class="headerlink" title="3. 对象原型"></a>3. 对象原型</h2><ul>
+<li>对象都会有一个属性 <strong>proto</strong> 指向构造函数的 prototype 原型对象</li>
+<li>实例对象的 <strong>proto</strong>和构造函数的 prototype 是等价的</li>
+<li>先找构造函数有没有方法，没有再去prototype找。</li>
+</ul>
+<h2 id="4-constructor构造函数"><a href="#4-constructor构造函数" class="headerlink" title="4.constructor构造函数"></a>4.constructor构造函数</h2><ul>
+<li>对象原型（ <strong>proto</strong>）和构造函数（prototype）原型对象里面都有一个属性 constructor 属性 ，constructor 我们称为构造函数，因为它指回构造函数本身。</li>
+<li>如果我们修改了原来的原型对象,给原型对象赋值的是一个对象（原对象star被覆盖）,则必须手动的利用constructor指回原来的构造函数如:</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">Star</span>(<span class="params">uname, age</span>) </span>&#123;</span><br><span class="line">     <span class="keyword">this</span>.uname = uname;</span><br><span class="line">     <span class="keyword">this</span>.age = age;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">// 很多情况下,我们需要手动的利用constructor 这个属性指回 原来的构造函数</span></span><br><span class="line"> Star.prototype = &#123;</span><br><span class="line"> <span class="comment">// 如果我们修改了原来的原型对象,给原型对象赋值的是一个对象,则必须手动的利用constructor指回原来的构造函数</span></span><br><span class="line">   <span class="keyword">constructor</span>: Star, // 手动设置指回原来的构造函数</span><br><span class="line">   sing: function() &#123;</span><br><span class="line">     <span class="built_in">console</span>.log(<span class="string">'我会唱歌'</span>);</span><br><span class="line">   &#125;,</span><br><span class="line">   movie: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="built_in">console</span>.log(<span class="string">'我会演电影'</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> zxy = <span class="keyword">new</span> Star(<span class="string">'张学友'</span>, <span class="number">19</span>);</span><br><span class="line"><span class="built_in">console</span>.log(zxy)</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-原型链和成员的查找机制"><a href="#5-原型链和成员的查找机制" class="headerlink" title="5.原型链和成员的查找机制"></a>5.原型链和成员的查找机制</h2><ul>
+<li>原型链：任何对象都有原型对象,也就是prototype属性,任何原型对象也是一个对象,该对象就有<strong>proto</strong>属性,这样一层一层往上找,就形成了一条链,我们称此为原型链;</li>
+<li>当访问一个对象的属性（包括方法）时，首先查找这个对象自身有没有该属性。</li>
+<li>如果没有就查找它的原型（也就是 <strong>proto</strong>指向的 prototype 原型对象）。</li>
+<li>如果还没有就查找原型对象的原型（Object的原型对象）。</li>
+<li>依此类推一直找到 Object 为止（null）。</li>
+<li><strong>proto</strong>对象原型的意义就在于为对象成员查找机制提供一个方向，或者说一条路线。</li>
+</ul>
+<h2 id="6-原型对象中this指向"><a href="#6-原型对象中this指向" class="headerlink" title="6.原型对象中this指向"></a>6.原型对象中this指向</h2><ul>
+<li>构造函数中的this和原型对象的this,都指向我们new出来的实例对象</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Star</span>(<span class="params">uname, age</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.uname = uname;</span><br><span class="line">    <span class="keyword">this</span>.age = age;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> that;</span><br><span class="line">Star.prototype.sing = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'我会唱歌'</span>);</span><br><span class="line">    that = <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> ldh = <span class="keyword">new</span> Star(<span class="string">'刘德华'</span>, <span class="number">18</span>);</span><br><span class="line"><span class="comment">// 1. 在构造函数中,里面this指向的是对象实例 ldh</span></span><br><span class="line"><span class="built_in">console</span>.log(that === ldh);<span class="comment">//true</span></span><br><span class="line"><span class="comment">// 2.原型对象函数里面的this 指向的是 实例对象 ldh</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="7-通过原型为数组扩展内置方法"><a href="#7-通过原型为数组扩展内置方法" class="headerlink" title="7.通过原型为数组扩展内置方法"></a>7.通过原型为数组扩展内置方法</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Array</span>.prototype.sum = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> sum = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.length; i++) &#123;</span><br><span class="line">  sum += <span class="keyword">this</span>[i];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> sum;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//此时数组对象中已经存在sum()方法了  可以始终 数组.sum()进行数据的求</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="8-继承——call"><a href="#8-继承——call" class="headerlink" title="8.继承——call()"></a>8.继承——call()</h2><ul>
+<li>call()可以调用函数</li>
+<li>call()可以修改this的指向,使用call()的时候 参数一是修改后的this指向,参数2,参数3..使用逗号隔开连接</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">x, y</span>) </span>&#123;</span><br><span class="line">     <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">     <span class="built_in">console</span>.log(x + y);</span><br><span class="line">&#125;</span><br><span class="line">  <span class="keyword">var</span> o = &#123;</span><br><span class="line">  	name: <span class="string">'andy'</span></span><br><span class="line">  &#125;;</span><br><span class="line">  fn.call(o, <span class="number">1</span>, <span class="number">2</span>);<span class="comment">//调用了函数此时的this指向了对象o,</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="9-子构造函数继承父构造函数中的属性"><a href="#9-子构造函数继承父构造函数中的属性" class="headerlink" title="9.子构造函数继承父构造函数中的属性"></a>9.子构造函数继承父构造函数中的属性</h2><ol>
+<li>先定义一个父构造函数</li>
+<li>再定义一个子构造函数</li>
+<li>子构造函数继承父构造函数的属性(使用call方法)</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">// 1. 父构造函数</span></span><br><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">Father</span>(<span class="params">uname, age</span>) </span>&#123;</span><br><span class="line">   <span class="comment">// this 指向父构造函数的对象实例</span></span><br><span class="line">   <span class="keyword">this</span>.uname = uname;</span><br><span class="line">   <span class="keyword">this</span>.age = age;</span><br><span class="line"> &#125;</span><br><span class="line">  <span class="comment">// 2 .子构造函数 </span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Son</span>(<span class="params">uname, age, score</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// this 指向子构造函数的对象实例</span></span><br><span class="line">  <span class="number">3.</span>使用call方式实现子继承父的属性</span><br><span class="line">  Father.call(<span class="keyword">this</span>, uname, age);</span><br><span class="line">  <span class="keyword">this</span>.score = score;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> son = <span class="keyword">new</span> Son(<span class="string">'刘德华'</span>, <span class="number">18</span>, <span class="number">100</span>);</span><br><span class="line"><span class="built_in">console</span>.log(son);</span><br></pre></td></tr></table></figure>
+
+<h2 id="10-借用原型对象继承方法"><a href="#10-借用原型对象继承方法" class="headerlink" title="10. 借用原型对象继承方法"></a>10. 借用原型对象继承方法</h2><ol>
+<li><p>先定义一个父构造函数</p>
+</li>
+<li><p>再定义一个子构造函数</p>
+</li>
+<li><p>子构造函数继承父构造函数的属性(使用call方法)</p>
+<blockquote>
+<p>方法</p>
+</blockquote>
+</li>
+<li><p>子类构造函数的原型对象指向父类实列对象。</p>
+</li>
+<li><p>因为父类实例对象指向父类的prototype，这样就形成子类prototype——&gt;父类实例——&gt;父类构造函数prototype。</p>
+</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 父构造函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Father</span>(<span class="params">uname, age</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// this 指向父构造函数的对象实例</span></span><br><span class="line">  <span class="keyword">this</span>.uname = uname;</span><br><span class="line">  <span class="keyword">this</span>.age = age;</span><br><span class="line">&#125;</span><br><span class="line">Father.prototype.money = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="number">100000</span>);</span><br><span class="line"> &#125;;</span><br><span class="line"> <span class="comment">// 2 .子构造函数 </span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">Son</span>(<span class="params">uname, age, score</span>) </span>&#123;</span><br><span class="line">      <span class="comment">// this 指向子构造函数的对象实例</span></span><br><span class="line">      Father.call(<span class="keyword">this</span>, uname, age);</span><br><span class="line">      <span class="keyword">this</span>.score = score;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="comment">// Son.prototype = Father.prototype;  这样直接赋值会有问题,如果修改了子原型对象,父原型对象也会跟着一起变化</span></span><br><span class="line">  Son.prototype = <span class="keyword">new</span> Father();</span><br><span class="line">  <span class="comment">// 如果利用对象的形式修改了原型对象,别忘了利用constructor 指回原来的构造函数</span></span><br><span class="line">  Son.prototype.constructor = Son;</span><br><span class="line">  <span class="comment">// 这个是子构造函数专门的方法</span></span><br><span class="line">  Son.prototype.exam = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'孩子要考试'</span>);</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">var</span> son = <span class="keyword">new</span> Son(<span class="string">'刘德华'</span>, <span class="number">18</span>, <span class="number">100</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(son);</span><br></pre></td></tr></table></figure>
+
+<h2 id="11-ES5新增方法"><a href="#11-ES5新增方法" class="headerlink" title="11.ES5新增方法"></a>11.ES5新增方法</h2><blockquote>
+<p>数组方法forEach遍历数组</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">arr.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">value, index, array</span>) </span>&#123;</span><br><span class="line">      <span class="comment">//参数一是:数组元素</span></span><br><span class="line">      <span class="comment">//参数二是:数组元素的索引</span></span><br><span class="line">      <span class="comment">//参数三是:当前的数组</span></span><br><span class="line">&#125;)</span><br><span class="line"> <span class="comment">//相当于数组遍历的 for循环 没有返回值</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>数组方法filter过滤数组</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">12</span>, <span class="number">66</span>, <span class="number">4</span>, <span class="number">88</span>, <span class="number">3</span>, <span class="number">7</span>];</span><br><span class="line"><span class="keyword">var</span> newArr = arr.filter(<span class="function"><span class="keyword">function</span>(<span class="params">value, index,array</span>) </span>&#123;</span><br><span class="line">	 <span class="comment">//参数一是:数组元素</span></span><br><span class="line">   <span class="comment">//参数二是:数组元素的索引</span></span><br><span class="line">   <span class="comment">//参数三是:当前的数组</span></span><br><span class="line">   <span class="keyword">return</span> value &gt;= <span class="number">20</span>;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(newArr);<span class="comment">//[66,88] //返回值是一个新数组</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>trim方法去除字符串两端的空格</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">'   hello   '</span></span><br><span class="line"><span class="built_in">console</span>.log(str.trim()）  <span class="comment">//hello 去除两端空格</span></span><br><span class="line"><span class="keyword">var</span> str1 = <span class="string">'   he l l o   '</span></span><br><span class="line"><span class="built_in">console</span>.log(str.trim()）  <span class="comment">//he l l o  去除两端空格</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>获取对象的属性名</p>
+</blockquote>
+<ul>
+<li>Object.keys(对象) 获取到当前对象中的属性名 ，返回值是一个数组</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">var</span> obj = &#123;</span><br><span class="line">     id: <span class="number">1</span>,</span><br><span class="line">     pname: <span class="string">'小米'</span>,</span><br><span class="line">     price: <span class="number">1999</span>,</span><br><span class="line">     num: <span class="number">2000</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> result = <span class="built_in">Object</span>.keys(obj)</span><br><span class="line"><span class="built_in">console</span>.log(result)<span class="comment">//[id，pname,price,num]</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>object.defineProperty</p>
+</blockquote>
+<p>Object.defineProperty设置或修改对象中的属性</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.defineProperty(对象，修改或新增的属性名，&#123;</span><br><span class="line">		value:修改或新增的属性的值,</span><br><span class="line">		writable:<span class="literal">true</span>/<span class="literal">false</span>,<span class="comment">//如果值为false 不允许修改这个属性值</span></span><br><span class="line">		enumerable: <span class="literal">false</span>,<span class="comment">//enumerable 如果值为false 则不允许遍历</span></span><br><span class="line">        configurable: <span class="literal">false</span>  <span class="comment">//configurable 如果为false 则不允许删除这个属性 属性是否可以被删除或是否可以再次修改特性</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/23/构造函数和原型/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-类和对象" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -985,295 +1187,9 @@
 
 
   
-    <article id="post-后台管理系统总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/21/后台管理系统总结/">后台管理系统总结</a>
-    </h1>
-  
-
-        
-        <a href="/2020/05/21/后台管理系统总结/" class="archive-article-date">
-  	<time datetime="2020-05-21T14:56:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="vue项目制作"><a href="#vue项目制作" class="headerlink" title="vue项目制作"></a>vue项目制作</h2><ol>
-<li><code>vue init webpack vcustomers</code> customers是文件名。</li>
-<li>到customers文件夹<code>cnpm install</code><h2 id="项目启动"><a href="#项目启动" class="headerlink" title="项目启动"></a>项目启动</h2></li>
-<li>定位到vue文件夹，首先vue开启8080端口，<code>npm run dev</code></li>
-<li>定位到JSONSEVER文件夹，开启json-server3000端口。<code>npm run json:server</code></li>
-</ol>
-<h2 id="Customers-vue"><a href="#Customers-vue" class="headerlink" title="Customers.vue"></a>Customers.vue</h2><ol>
-<li>从hello复制内容，更改div的class为<code>customer</code>和default的name为<code>customer</code></li>
-</ol>
-<blockquote>
-<p>设置路由过程</p>
-</blockquote>
-<ol>
-<li>控制台中<code>cnpm install vue-router --save</code>安装路由</li>
-<li><code>main.js</code>中引入路由<code>import VueRouter from &#39;vue-router&#39;</code></li>
-<li>中间件使用<code>Vue.use(VueRouter)</code>（配置一次即可，以后不用再配置了）</li>
-<li>设置路由，path时要跳转的页面，<code>component</code>是vue文件的名称，表示跳转到的vue文件。path路径下的页面就是<code>component.vue</code></li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">  mode:<span class="string">"history"</span>,</span><br><span class="line">  base:__dirname,</span><br><span class="line">  routes:[</span><br><span class="line">    &#123;<span class="attr">path</span>:<span class="string">"/"</span>,<span class="attr">component</span>:Customers&#125;,</span><br><span class="line">    &#123;<span class="attr">path</span>:<span class="string">"/about"</span>,<span class="attr">component</span>:About&#125;,</span><br><span class="line">    &#123;<span class="attr">path</span>:<span class="string">"/add"</span>,<span class="attr">component</span>:Add&#125;,</span><br><span class="line">    &#123;<span class="attr">path</span>:<span class="string">"/customer/:id"</span>,<span class="attr">component</span>:CustomerDetails&#125;,</span><br><span class="line">    &#123;<span class="attr">path</span>:<span class="string">"/edit/:id"</span>,<span class="attr">component</span>:Edit&#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<ol start="5">
-<li>引入组件Customers：<code>import Customers from &#39;./components/Customers&#39;</code></li>
-<li>装入路由：可以根据路由跳转到不同页面了</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  router,</span><br><span class="line">  template: <span class="string">`</span></span><br><span class="line"><span class="string">     &lt;div id="app"&gt;</span></span><br><span class="line"><span class="string">       &lt;router-link to="/"&gt;主页&lt;/router-link&gt;</span></span><br><span class="line"><span class="string">       &lt;router-link to="/about"&gt;关于我们&lt;/router-link&gt;</span></span><br><span class="line"><span class="string">       &lt;router-view&gt;&lt;/router-view&gt;</span></span><br><span class="line"><span class="string">     &lt;/div&gt;</span></span><br><span class="line"><span class="string">  `</span></span><br><span class="line">&#125;).$mount(<span class="string">"#app"</span>)</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>书写内容</p>
-<ol>
-<li><code>table</code>里添加内容<code>&lt;tr v-for=&quot;customer in customers&quot;&gt;</code></li>
-<li><code>data</code>里添加<code>customers</code>数组</li>
-<li>安装vue-resource：<code>cnpm vue-resource --save</code></li>
-<li><code>methods</code>里添加方法给<code>customers</code>数组赋值，then会接收数据，类似于Ajax</li>
-</ol>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fetchCustomers()&#123;</span><br><span class="line">    <span class="keyword">this</span>.$http.get(<span class="string">"http://localhost:3000/users"</span>)</span><br><span class="line">    .then(<span class="function"><span class="keyword">function</span>(<span class="params">response</span>)</span>&#123;</span><br><span class="line">        <span class="comment">// console.log(response);       </span></span><br><span class="line">        <span class="keyword">this</span>.customers = response.body;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-
-<ol start="5">
-<li><code>main.js</code>添加<code>import VueResource from &#39;vue-resource&#39;</code></li>
-<li><code>main.js</code>添加<code>Vue.use(VueResource)&#39;</code></li>
-<li>此时页面没有显示内容，借用生命周期created时，构建函数</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">created() &#123;</span><br><span class="line">    <span class="keyword">this</span>.fetchCustomers();</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-
-<ol start="8">
-<li>在上面td里赋值email、phone、name。</li>
-</ol>
-<h2 id="搭建bootStrap"><a href="#搭建bootStrap" class="headerlink" title="搭建bootStrap"></a>搭建bootStrap</h2><ol>
-<li>index.html引入cdn</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel=<span class="string">"stylesheet"</span> href=<span class="string">"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"</span>&gt;</span><br><span class="line">&lt;<span class="regexp">/head&gt;</span></span><br><span class="line"><span class="regexp">&lt;body&gt;</span></span><br><span class="line"><span class="regexp">  &lt;div id="app"&gt;&lt;/</span>div&gt;</span><br><span class="line">  &lt;!-- built files will be auto injected --&gt;</span><br><span class="line">  &lt;script src=<span class="string">"https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">  &lt;script src=<span class="string">"https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"</span> integrity=<span class="string">"sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"</span> crossorigin=<span class="string">"anonymous"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>中文网引入模板粘贴到main.js</li>
-</ol>
-<h2 id="About-vue"><a href="#About-vue" class="headerlink" title="About.vue"></a>About.vue</h2><ol>
-<li>从hello复制内容，更改div的class为<code>about</code>和default的name为<code>about</code></li>
-<li>此页面填写一些关于此管理系统的简介和内容</li>
-</ol>
-<h2 id="Add-vue"><a href="#Add-vue" class="headerlink" title="Add.vue"></a>Add.vue</h2><blockquote>
-<p>书写内容<br><img src="https://img-blog.csdnimg.cn/20200521180429796.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<ol>
-<li>设置一个form，绑定事件<code>&lt;form v-on:submit=&quot;addCustomer&quot;&gt;</code></li>
-<li>每一个都书写内容，v-model绑定数据。<code>&lt;input type=&quot;text&quot; class=&quot;form-control&quot; placeholder=&quot;name&quot; v-model=&quot;customer.name&quot;&gt;</code></li>
-<li><code>methods</code>里书写<code>addCustomer</code>方法，submit之后把信息拿到并post到本地JSONSERVER文件里。提交后跳到主页面，<code>this.$router.push({path:&quot;/&quot;,query:{alert:&quot;用户信息添加成功!&quot;}});</code> 。</li>
-</ol>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">methods: &#123;</span><br><span class="line">    <span class="comment">// 提交按钮的事件e</span></span><br><span class="line">    addCustomer(e)&#123;</span><br><span class="line">      <span class="comment">// 名字电话邮箱不能为空</span></span><br><span class="line">        <span class="keyword">if</span>(!<span class="keyword">this</span>.customer.name||!<span class="keyword">this</span>.customer.phone||!<span class="keyword">this</span>.customer.email)&#123;</span><br><span class="line">            <span class="keyword">this</span>.alert = <span class="string">"请添加对应的信息!"</span>;              </span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">let</span> newCustomer = &#123;</span><br><span class="line">                name: <span class="keyword">this</span>.customer.name,</span><br><span class="line">                phone: <span class="keyword">this</span>.customer.phone,</span><br><span class="line">                email: <span class="keyword">this</span>.customer.email,</span><br><span class="line">                education: <span class="keyword">this</span>.customer.education,</span><br><span class="line">                graduationschool: <span class="keyword">this</span>.customer.graduationschool,</span><br><span class="line">                profession: <span class="keyword">this</span>.customer.profession,</span><br><span class="line">                profile: <span class="keyword">this</span>.customer.profile</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 传到这个接口</span></span><br><span class="line">            <span class="keyword">this</span>.$http.post(<span class="string">"http://localhost:3000/users"</span>,newCustomer)</span><br><span class="line">            <span class="comment">// 传回来并且接收</span></span><br><span class="line">            .then(<span class="function"><span class="keyword">function</span>(<span class="params">response</span>)</span>&#123;</span><br><span class="line">                <span class="comment">// console.log(response);   </span></span><br><span class="line">                <span class="comment">// 跳转到主页面 </span></span><br><span class="line">                <span class="keyword">this</span>.$router.push(&#123;<span class="attr">path</span>:<span class="string">"/"</span>,<span class="attr">query</span>:&#123;<span class="attr">alert</span>:<span class="string">"用户信息添加成功!"</span>&#125;&#125;);           </span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 阻止默认事件</span></span><br><span class="line">        e.preventDefault();       </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<ol start="4">
-<li>当页面更新时(DOM元素更新时)添加方法，借用生命周期created函数。</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">updated() &#123;</span><br><span class="line">       <span class="keyword">this</span>.fetchCustomers();</span><br><span class="line">   &#125;,</span><br></pre></td></tr></table></figure>
-
-<h2 id="Alert-vue"><a href="#Alert-vue" class="headerlink" title="Alert.vue"></a>Alert.vue</h2><ol>
-<li>bootstrap引入组件，调用message</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"alert alert-warning alert-dismissible"</span> role=<span class="string">"alert"</span>&gt;</span><br><span class="line">    &lt;button type=<span class="string">"button"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"close"</span> data-dismiss=<span class="string">"alert"</span> aria-label=<span class="string">"Close"</span>&gt;<span class="xml"><span class="tag">&lt;<span class="name">span</span> <span class="attr">aria-hidden</span>=<span class="string">"true"</span>&gt;</span>&amp;times;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><span class="xml"><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line">    &#123;&#123;message&#125;&#125;</span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>绑定属性    <code>props:[&#39;message&#39;],</code>   父级 prop 的更新会向下流动到子组件中，但是反过来则不行。这样会防止从子组件意外改变父级组件的状态，从而导致你的应用的数据流向难以理解。<br>额外的，每次父级组件发生更新时，子组件中所有的 prop 都将会刷新为最新的值。这意味着你不应该在一个子组件内部改变 prop。</li>
-<li>在Customers.vue中引入组件<code>import Alert from &#39;./Alert&#39;</code></li>
-<li>在Customers.vue中使用组件   </li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">components:&#123;</span><br><span class="line">      Alert</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<ol start="5">
-<li>在Customers.vue的data中定义<code>alert:&quot;&quot;</code></li>
-<li>在Customers.vue中调用Alert <code>&lt;Alert v-if=&quot;alert&quot; v-bind:message=&quot;alert&quot;&gt;&lt;/Alert&gt;</code>。alert没有值就不弹出来了，v-bind绑定信息。</li>
-<li>Add.vue中<code>this.$router.push({path:&quot;/&quot;,query:{alert:&quot;用户信息添加成功!&quot;}});</code>  ，添加<code>query</code>（这是一个对象）信息。</li>
-<li>Customers.vue中借用生命周期函数created，如果<code>alert</code>不为空传递参数给第6步中的<code>v-bind:meesage</code>。</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">created() &#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span>.$route.query.alert)&#123;</span><br><span class="line">        <span class="keyword">this</span>.alert = <span class="keyword">this</span>.$route.query.alert;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>.fetchCustomers();</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-
-<h2 id="CustomerDetails-vue（页面详情）"><a href="#CustomerDetails-vue（页面详情）" class="headerlink" title="CustomerDetails.vue（页面详情）"></a>CustomerDetails.vue（页面详情）</h2><blockquote>
-<p>首先添加路由信息<br><img src="https://img-blog.csdnimg.cn/20200521185115340.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200521190410277.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<ol>
-<li>注意main.js中借用id形式<code>{path:&quot;/customer/:id&quot;,component:CustomerDetails},</code></li>
-<li>Customers.vue中添加路由信息</li>
-</ol>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;td&gt;<span class="xml"><span class="tag">&lt;<span class="name">router-link</span> <span class="attr">class</span>=<span class="string">"btn btn-default"</span> <span class="attr">v-bind:to</span>=<span class="string">"'/customer/'+customer.id"</span>&gt;</span>详情<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><span class="xml"><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li>CustomerDetails.vue的data中添加<code>customer:&quot;&quot;</code>，customer是对象。</li>
-<li>CustomerDetails.vue的methods中添加方法</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">fetchCustomers(id)&#123;</span><br><span class="line">    <span class="comment">// 拼接id</span></span><br><span class="line">    <span class="keyword">this</span>.$http.get(<span class="string">"http://localhost:3000/users/"</span>+id)</span><br><span class="line">    .then(<span class="function"><span class="keyword">function</span>(<span class="params">response</span>)</span>&#123;</span><br><span class="line">        <span class="comment">// console.log(response);       </span></span><br><span class="line">        <span class="keyword">this</span>.customer = response.body;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-
-<ol start="5">
-<li>借用生命周期函数created，定义函数调用时间</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 一进到组件里就有id</span></span><br><span class="line">created() &#123;</span><br><span class="line">    <span class="keyword">this</span>.fetchCustomers(<span class="keyword">this</span>.$route.params.id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>添加返回按钮<br><img src="https://img-blog.csdnimg.cn/20200521190928296.png" alt="在这里插入图片描述"></p>
-</blockquote>
-<ul>
-<li>router-link标签就是html里的a href</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;router-link to=<span class="string">"/"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"btn btn-default"</span>&gt;返回&lt;<span class="regexp">/router-link&gt;</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>删除按钮<br><img src="https://img-blog.csdnimg.cn/20200521191044383.png" alt="在这里插入图片描述"></p>
-</blockquote>
-<ol>
-<li>删除：绑定<code>deleteCustomer</code>方法</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;button <span class="class"><span class="keyword">class</span></span>=<span class="string">"btn btn-danger"</span> v-on:click=<span class="string">"deleteCustomer(customer.id)"</span>&gt;删除&lt;<span class="regexp">/button&gt;</span></span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>拿到id，利用delete删除本地数据。删除成功后返回到主页，添加query会返回弹出窗口。</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">deleteCustomer(id)&#123;</span><br><span class="line">    <span class="keyword">this</span>.$http.delete(<span class="string">"http://localhost:3000/users/"</span>+id)</span><br><span class="line">    .then(<span class="function"><span class="keyword">function</span>(<span class="params">response</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.$router.push(&#123;<span class="attr">path</span>:<span class="string">"/"</span>,<span class="attr">query</span>:&#123;<span class="attr">alert</span>:<span class="string">"用户删除成功"</span>&#125;&#125;);</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>编辑按钮<br><img src="https://img-blog.csdnimg.cn/20200521191044383.png" alt="在这里插入图片描述"></p>
-<ol start="3">
-<li>绑定编辑跳转页面，会把id传到Edit.vue的页面</li>
-</ol>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;router-link <span class="class"><span class="keyword">class</span></span>=<span class="string">"btn btn-primary"</span> v-bind:to=<span class="string">"'/edit/'+customer.id"</span>&gt;编辑&lt;<span class="regexp">/router-link&gt;</span></span><br></pre></td></tr></table></figure>
-
-<ol start="4">
-<li>新建Edit.vue，页面和编辑类似。最主要改变的是http的请求的方式改为put，并且拿到url中的id，拼接后按照id进行更新。</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 传到这个接口</span></span><br><span class="line">                <span class="keyword">this</span>.$http.put(<span class="string">"http://localhost:3000/users/"</span>+<span class="keyword">this</span>.$route.params.id,updateCustomer)</span><br></pre></td></tr></table></figure>
-
-<ol start="5">
-<li>main.js中配置路由。</li>
-<li>写一个方法，来到这个页面的时候，文本框中有当前的信息。</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">fetchCustomer(id)&#123;</span><br><span class="line">   <span class="keyword">this</span>.$http.get(<span class="string">"http://localhost:3000/users/"</span>+id)</span><br><span class="line">   .then(<span class="function"><span class="keyword">function</span>(<span class="params">response</span>)</span>&#123;</span><br><span class="line">       <span class="keyword">this</span>.customer = response.data;</span><br><span class="line">   &#125;)</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-
-<p>7.调用生命周期created，在页面构建完成时给上一步的方法传递id</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">created()&#123;</span><br><span class="line">    <span class="keyword">this</span>.fetchCustomer(<span class="keyword">this</span>.$route.params.id);</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>Add.vue中，当姓名或者电话或者id为空时，弹出下面，成功时回到主页并弹出成功。<br><img src="https://img-blog.csdnimg.cn/20200521193133613.png" alt="这里是引用"></p>
-<ol>
-<li>Add.vue中引入Alert组件并且在component中添加Alert</li>
-</ol>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Alert <span class="keyword">from</span> <span class="string">'./Alert'</span></span><br><span class="line">components:&#123;</span><br><span class="line">   Alert</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>定义一个alert=””，并在方法中设置当姓名或者电话或者id为空时，给alert赋值”请添加对应的信息!”</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">updateCustomer(e)&#123;</span><br><span class="line">  <span class="comment">// 名字电话邮箱不能为空</span></span><br><span class="line">    <span class="keyword">if</span>(!<span class="keyword">this</span>.customer.name||!<span class="keyword">this</span>.customer.phone||!<span class="keyword">this</span>.customer.email)&#123;</span><br><span class="line">        <span class="comment">// console.log("请添加对应的信息"); </span></span><br><span class="line">        <span class="keyword">this</span>.alert = <span class="string">"请添加对应的信息!"</span>;</span><br></pre></td></tr></table></figure>
-
-<ol start="4">
-<li>如果alert不为空，打印出alert</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Alert v-<span class="keyword">if</span>=<span class="string">"alert"</span> v-bind:message=<span class="string">"alert"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">Alert</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-
-<ol start="5">
-<li>对alert进行赋值</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.then(<span class="function"><span class="keyword">function</span>(<span class="params">response</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.customer = response.data;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>编辑页面，编辑成功后，当姓名或者电话或者id为空时，弹出下面</p>
-</blockquote>
-<ul>
-<li>和上面步骤一样</li>
-</ul>
-<h2 id="搜索框"><a href="#搜索框" class="headerlink" title="搜索框"></a>搜索框</h2><blockquote>
-<p><img src="https://img-blog.csdnimg.cn/2020052119470121.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="这里是引用"></p>
-<ol>
-<li>Customer.vue中添加搜索框，v-model上<code>filterInput</code></li>
-</ol>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=<span class="string">"text"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"form-control"</span> placeholder=<span class="string">"搜索"</span> v-model=<span class="string">"filterInput"</span>&gt;</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li><p>下面data中添加<code>filterInput</code>属性</p>
-</li>
-<li><p>表格添加方法，第一个形参曾经的数组，第二个是v-model的值</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;tr v-<span class="keyword">for</span>=<span class="string">"customer in filterBy(customers,filterInput)"</span>&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li></li>
-</ol>
-<ul>
-<li>methods实现方法，filter是ES6中方法，遍历整个数组和当前customer比较，和for-in里的customer的name相同的就返回。</li>
-<li>然后用ES6里的match方法，value是文本框输入的value，正常情况为null，如果输入的值能匹配到数组中的名字任意一个字就返回true并显示匹配上的名字。</li>
-<li>如果hzx，输入x可以匹配上，返回true，并且展示hzx的信息。</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">filterBy(customers,value)&#123;</span><br><span class="line">    <span class="comment">// ES6的方法,遍历整个数组和当前customer比较，和customer的name相同的就返回</span></span><br><span class="line">  <span class="keyword">return</span> customers.filter(<span class="function"><span class="keyword">function</span>(<span class="params">customer</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// 如果为null，遍历整个数组</span></span><br><span class="line">      <span class="keyword">return</span> customer.name.match(value);</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
-<li>component.vue表示当前页面，引入的vue和底下的template表示的在当前页面添加引入的vue。</li>
-<li>null不指向任何对象，相当于没有任何值；而“”代表一个长度为0的字符串，match要赋值为空字符串</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">前端综合</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/21/后台管理系统总结/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
     </nav>
   
 
@@ -1424,15 +1340,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1456,11 +1372,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTML</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color5">HTML</a>
               </li>
              
               <li class="article-tag-list-item">

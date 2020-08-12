@@ -140,6 +140,110 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-CSS三大特性" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/02/CSS三大特性/">CSS三大特性</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/02/CSS三大特性/" class="archive-article-date">
+  	<time datetime="2020-05-02T05:56:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="层叠性："><a href="#层叠性：" class="headerlink" title="层叠性："></a>层叠性：</h2><p>最后为粉色：就近原则或者覆盖了红色。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">div &#123;</span><br><span class="line">    color: red;</span><br><span class="line">&#125;</span><br><span class="line">div &#123;</span><br><span class="line">    pink: pink;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="继承性"><a href="#继承性" class="headerlink" title="继承性"></a>继承性</h2><p>p继承div的属性<br>儿子继承父子继承的属性<br>可以把body选择为一个颜色。<br><strong>但也只是继承一部分特点：只有关于文字关系的可以继承。</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">    div &#123;</span><br><span class="line">        color: pink;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;<span class="regexp">/style&gt;</span></span><br><span class="line"><span class="regexp">&lt;div&gt;</span></span><br><span class="line"><span class="regexp">    &lt;p&gt;2&lt;/</span>p&gt;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>行高的继承</strong></p>
+</blockquote>
+<p>让子元素font-size行高为1.5倍<br>如子类font-size ：12px 则子类为12乘1.5</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//父类</span></span><br><span class="line">font: <span class="number">12</span>px/<span class="number">1.5</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="优先性"><a href="#优先性" class="headerlink" title="优先性"></a>优先性</h2><blockquote>
+<p>div选择.d还是div</p>
+</blockquote>
+<p>答案：选择red色 因为类选择器大于元素选择器<br>id选择器永远大于类选择器<br>id（#开头）&gt;类&gt;元素选择器</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">    &lt;style&gt;</span><br><span class="line">        div &#123;</span><br><span class="line">            color: pink;</span><br><span class="line">        &#125;</span><br><span class="line">        .d &#123;</span><br><span class="line">           color: red;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;<span class="regexp">/style&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"d"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&lt;<span class="regexp">/body&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>红还是粉</p>
+</blockquote>
+<p>最后为红色<br>尽管id选择器大于元素选择器<br>首先p继承了父类div后权重降为0<br>所以元素选择大于id选择器，最后为red（类选择器）<br>注：看什么颜色看是不是直接被选择颜色，而不是继承来的颜色。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">    &lt;style&gt;</span><br><span class="line">        #father &#123;</span><br><span class="line">            color: pink;</span><br><span class="line">        &#125;</span><br><span class="line">        p &#123;</span><br><span class="line">           color: red;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;<span class="regexp">/style&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div id=<span class="string">"father"</span>&gt;</span><br><span class="line">        &lt;p&gt;hhh&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>div&gt;</span><br><span class="line">&lt;<span class="regexp">/body&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>超链接类选择器设置颜色为blue色所以当让boby变颜色时，a herf颜色不变，还是蓝色。<br> 因为a继承了boby权重为0，还是遵从自己的蓝颜色。</p>
+</blockquote>
+<p>复合选择器 权重相加让后比较<br>如俩个类选择器0，0，0，1相加变为0，0，0，2<br>但不会进位。<br>4组一个单位，不会进位。</p>
+<blockquote>
+<p><strong>:hover</strong>伪类选择器为10<br>div ul li= 0 0 0 3<br>.nav ul li=0 0 1 2<br>a:hover=0 0 1 1<br>.nav a=0 0 1 1</p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CSS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/02/CSS三大特性/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-背景图片和五彩导航栏" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -570,71 +674,9 @@
 
 
   
-    <article id="post-Java常见集合类—HashMap" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="首先HashMap结构"><a href="#首先HashMap结构" class="headerlink" title="首先HashMap结构"></a>首先HashMap结构</h2><p>底层是数组，当key相同时，是一个链表。<br>JDK8以后，当HashMap采用了拉链法。<br><strong>当数组长度大于64且链表大于8时，链表变为红黑树。</strong><br>因为红黑树查找更快为2的n次方。<br>HashMap长度为2的n次方。</p>
-<h2 id="1-Hashmap长度为啥是2的n次方？"><a href="#1-Hashmap长度为啥是2的n次方？" class="headerlink" title="1.Hashmap长度为啥是2的n次方？"></a>1.Hashmap长度为啥是2的n次方？</h2><p>因为会进行<code>(len-1)&amp;hashcode</code>(等价于取模操作)来确定位置。<br>&amp;运算比取模效率更高。<br>当len是2的n次方时，2的n次方减1最后一位是1(如16-1=15为1111)<br>可以让位置更分散，减少key的碰撞。<br>如果最后一位是0，很多位置取不到。</p>
-<h2 id="2-HashMap-put为null时怎么办？"><a href="#2-HashMap-put为null时怎么办？" class="headerlink" title="2.HashMap put为null时怎么办？"></a>2.HashMap put为null时怎么办？</h2><p>不为null时，定位index，如果key不存在，插在头部，如果key存在，替换新value。<br>在table[0]里找，如果有key=null的，就返回原null的value。并把原来value更新为新的value。<br>如果没有，<code>则插在表头。</code></p>
-<h2 id="3-为什么是0-75-就是到0-75长度就会扩容"><a href="#3-为什么是0-75-就是到0-75长度就会扩容" class="headerlink" title="3.为什么是0.75(就是到0.75长度就会扩容)"></a>3.为什么是0.75(就是到0.75长度就会扩容)</h2><p>平均了时间和空间效率。<br>如果是1。提高了空间效率。但是增加了查询时间成本。<br>如果是0.5。降低了时间效率。提高了空间效率。</p>
-<h2 id="4-怎么设置初始化大小。"><a href="#4-怎么设置初始化大小。" class="headerlink" title="4.怎么设置初始化大小。"></a>4.怎么设置初始化大小。</h2><p>首先扩容非常消耗性能。<br>如果new HashMap(1000) 则会自动设置为1024个<br>但是这样就会进行扩容了。<br>所以必须初始化为2048，保证0.75*2048&gt;1024。<br>即是2的倍数页防止了扩容。</p>
-<h2 id="5-扩容方法和为什么HashMap线程不安全？"><a href="#5-扩容方法和为什么HashMap线程不安全？" class="headerlink" title="5.扩容方法和为什么HashMap线程不安全？"></a>5.扩容方法和为什么HashMap线程不安全？</h2><p>JDK1.7<br>原扩容方式：把数组扩容俩倍。然后重新计算位置（计算index）后，把数组复制到扩容后的数组。<br>缺点：头插法，可能造成死锁（形成环形链表）。线程不安全。网络不安全。<br>JDK8的扩容方式。新的索引要么和原索引相等，要么高位加1。<br>尾插法<br>方法：与原来Hashcode进行&amp;（len-1）运算。<br>比如从1111扩容到11111<br>则 00001&amp;01111=1  00001&amp;11111=1<br>   10001&amp;01111=1  10001&amp;11111=17<br>   原hashcode高位为0索引不变<br>   原hashcode高位为1新索引高位加1</p>
-<p>JDK1.8中为了避免死锁头插改成尾插<br>JDK1.8当put操作时，可能造成数据覆盖。即俩个不同的key会覆盖，由于size++操作。<br>假设当前HashMap的zise大小为10，当线程A执行到第38行代码时，从主内存中获得size的值为10后准备进行+1操作，但是由于时间片耗尽只好让出CPU，线程B快乐的拿到CPU还是从主内存中拿到size的值10进行+1操作，完成了put操作并将size=11写回主内存，然后线程A再次拿到CPU并继续执行(此时size的值仍为10)，当执行完put操作后，还是将size=11写回内存，此时，线程A、B都执行了一次put操作，但是size的值只增加了1</p>
-<h2 id="6-HashMap在JDK8的新特征？"><a href="#6-HashMap在JDK8的新特征？" class="headerlink" title="6.HashMap在JDK8的新特征？"></a>6.HashMap在JDK8的新特征？</h2><p>当链表长度大于8时自动转化为红黑树（且数组必须大于64）<br>红黑树特征？<br>1.每个节点只能是红色或者黑色<br>2.根结点为黑色<br>3.红色结点的叶节点只能是黑色。<br>4.任意结点到其每个叶子结点，包含相同的黑色结点</p>
-<h2 id="7-为什么重写equals方法时，也要重写hashcode方法呢？"><a href="#7-为什么重写equals方法时，也要重写hashcode方法呢？" class="headerlink" title="7.为什么重写equals方法时，也要重写hashcode方法呢？"></a>7.为什么重写equals方法时，也要重写hashcode方法呢？</h2><p>对equals方法进行了重写，建议一定要对hashCode方法重写，以保证相同的对象返回相同的hash值，不同的对象返回不同的hash值。用来区分相同hash值的俩个元素（同一个链表的元素）。</p>
-<h2 id="8-put操作"><a href="#8-put操作" class="headerlink" title="8.put操作"></a>8.put操作</h2><p>确定下标，然后判断是否已经存在键值对。如果存在的话更新这个键值对的value值。</p>
-<h2 id="9-Hash方法为什么右移-16-位，为什么要使用-位异或"><a href="#9-Hash方法为什么右移-16-位，为什么要使用-位异或" class="headerlink" title="9.Hash方法为什么右移 16 位，为什么要使用 ^ 位异或"></a>9.Hash方法为什么右移 16 位，为什么要使用 ^ 位异或</h2><p><strong>首先hashcode算法</strong><br>之所以使用 31， 是因为他是一个奇素数。如果乘数是偶数，并且乘法溢出的话，信息就会丢失，因为与2相乘等价于移位运算（低位补0）。使用素数的好处并不很明显，但是习惯上使用素数来计算散列结果。 31 有个很好的性能，即用移位和减法来代替乘法，可以得到更好的性能： 31 * i == (i &lt;&lt; 5） - i， 现代的 VM 可以自动完成这种优化。这个公式可以很简单的推导出来。</p>
-<p>JDK8 hash（扰动函数）<br>防止index函数出现有规律的情况</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">   5static final int hash(Object key) &#123;</span><br><span class="line">    int h;</span><br><span class="line">    return (key == null) ? 0 : (h = key.hashCode()) ^ (h &gt;&gt;&gt; 16);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>右位移16位，正好是32bit的一半，自己的高半区和低半区做异或，就是为了混合原始哈希码的高16位和低16位，以此来加大低位的随机性。而且混合后的低位掺杂了高位的部分特征，这样高位的信息也被变相保留下来。</strong></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/04/29/Java常见集合类—HashMap/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/12/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><a class="extend next" rel="next" href="/page/14/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/12/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" href="/page/14/">Next &raquo;</a>
     </nav>
   
 
@@ -785,15 +827,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -817,11 +859,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTML</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color5">HTML</a>
               </li>
              
               <li class="article-tag-list-item">

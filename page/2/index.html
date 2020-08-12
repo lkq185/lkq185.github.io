@@ -709,6 +709,104 @@
 
 
   
+    <article id="post-flex弹性盒子flex-grow 和flex的区别" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/06/06/flex弹性盒子flex-grow 和flex的区别/">flex弹性盒子flex-grow 和flex的区别</a>
+    </h1>
+  
+
+        
+        <a href="/2020/06/06/flex弹性盒子flex-grow 和flex的区别/" class="archive-article-date">
+  	<time datetime="2020-06-06T08:22:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li><p>在flex弹性盒子体系中，flex-grow和flex都有对子元素进行放大的作用，但是这两个属性在放大时的计算方法不同。</p>
+</li>
+<li><p>这是一个宽700px的弹性盒子，其中红黄蓝每个子元素的宽度都为100px。我们分别使用flex-grow和flex对子元素进行放大。</p>
+</li>
+<li><p><img src="https://img-blog.csdnimg.cn/20200611135004664.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+</li>
+</ul>
+<h4 id="使用flex进行放大"><a href="#使用flex进行放大" class="headerlink" title="使用flex进行放大"></a>使用flex进行放大</h4><p><img src="https://img-blog.csdnimg.cn/20200611134946156.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p>使用flex</p>
+</blockquote>
+<ol>
+<li>计算剩余空间，剩余空间为弹性盒子剩余宽度与进行flex的子元素的宽度之和。<br>例中的剩余空间为<br>剩余宽度为400px ，进行flex的子元素宽度分别是100,100，所以剩余空间为600px。</li>
+<li>按照进行flex属性值，数字的比例进行分配空间。黄色和蓝色的比例为1:2。因此其宽度分别为200px,400px。</li>
+</ol>
+<h4 id="使用flex-grow进行放大"><a href="#使用flex-grow进行放大" class="headerlink" title="使用flex-grow进行放大"></a>使用flex-grow进行放大</h4><p><img src="https://img-blog.csdnimg.cn/20200611135041889.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p>使用flex-grow</p>
+</blockquote>
+<ol>
+<li>计算剩余空间，剩余空间为弹性盒子剩余宽度<br>例中的剩余空间为：剩余宽度为400px</li>
+<li>按照进行flex属性值，数字的比例进行分配空间。黄色和蓝色的比例为1:2。因此其宽度分别为133.34px ,266.66px。</li>
+<li>元素自身的宽度加上分配到的剩余空间就是放大后的宽度。因此其最终显示出来宽度分别为233.34px ,366.66px。</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">flex</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/06/06/flex弹性盒子flex-grow 和flex的区别/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-浏览器缓存" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1027,128 +1125,9 @@
 
 
   
-    <article id="post-axios回顾和总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/27/axios回顾和总结/">axios复习和总结</a>
-    </h1>
-  
-
-        
-        <a href="/2020/05/27/axios回顾和总结/" class="archive-article-date">
-  	<time datetime="2020-05-27T08:41:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>axios 是什么</p>
-</blockquote>
-<ul>
-<li><p>Axios 是一个基于 promise 的 HTTP 库，可以用在浏览器和 node.js 中。前端最流行的 ajax 请求库，</p>
-</li>
-<li><p>基于 promise 的异步 ajax 请求库，支持promise所有的API</p>
-</li>
-<li><p>浏览器端/node 端都可以使用，浏览器中创建XMLHttpRequests</p>
-</li>
-<li><p>支持请求／响应拦截器</p>
-</li>
-<li><p>支持请求取消</p>
-</li>
-<li><p>可以转换请求数据和响应数据，并对响应回来的内容自动转换成 JSON类型的数据</p>
-</li>
-<li><p>批量发送多个请求</p>
-</li>
-<li><p>安全性更高，客户端支持防御 XSRF，就是让你的每个请求都带一个从cookie中拿到的key, 根据浏览器同源策略，假冒的网站是拿不到你cookie中得key的，这样，后台就可以轻松辨别出这个请求是否是用户在假冒网站上的误导输入，从而采取正确的策略。</p>
-</li>
-</ul>
-<blockquote>
-<p>axios为什么既能在浏览器环境运行又能在服务器(node)环境运行？</p>
-</blockquote>
-<ol>
-<li>axios在浏览器端使用XMLHttpRequest对象发送ajax请求</li>
-<li>在node环境使用http对象发送ajax请求。</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> defaults.adapter = getDefaultAdapter();</span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">getDefaultAdapter</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">   	<span class="keyword">var</span> adapter;</span><br><span class="line">       <span class="keyword">if</span> (<span class="keyword">typeof</span> XMLHttpRequest !== <span class="string">'undefined'</span>) &#123;</span><br><span class="line">       	<span class="comment">// 浏览器环境</span></span><br><span class="line">           adapter = <span class="built_in">require</span>(<span class="string">'./adapter/xhr'</span>);</span><br><span class="line">       &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> process !== <span class="string">'undefined'</span>) &#123;</span><br><span class="line">       	<span class="comment">// node环境</span></span><br><span class="line">           adapter = <span class="built_in">require</span>(<span class="string">'./adapter/http'</span>);</span><br><span class="line">       &#125;</span><br><span class="line">      <span class="keyword">return</span> adapter;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>上面几行代码，可以看出：XMLHttpRequest 是一个 API，它为客户端提供了在客户端和服务器之间传输数据的功能；process 对象是一个 global （全局变量），提供有关信息，控制当前 Node.js 进程。原来作者是通过判断XMLHttpRequest和process这两个全局变量来判断程序的运行环境的，从而在不同的环境提供不同的http请求模块，实现客户端和服务端程序的兼容。</li>
-</ul>
-<ul>
-<li><p>ajax的缺点、axios相比原生ajax的优点</p>
-<ul>
-<li>本身是针对MVC的编程,不符合现在前端MVVM的浪潮</li>
-<li>基于原生的XHR开发，XHR本身的架构不清晰。</li>
-<li>JQuery整个项目太大，单纯使用ajax却要引入整个JQuery非常的不合理（采取个性化打包的方案又不能享受CDN服务）<ul>
-<li>不符合关注分离（Separation of Concerns）的原则</li>
-<li>配置和调用方式非常混乱，而且基于事件的异步模型不友好。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Vue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/27/axios回顾和总结/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
     </nav>
   
 
@@ -1299,15 +1278,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1331,11 +1310,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTML</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color5">HTML</a>
               </li>
              
               <li class="article-tag-list-item">

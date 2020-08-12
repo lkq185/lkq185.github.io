@@ -140,6 +140,153 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-1第一次力扣" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/12/1第一次力扣/">第一次力扣</a>
+    </h1>
+  
+
+        
+        <a href="/2019/11/12/1第一次力扣/" class="archive-article-date">
+  	<time datetime="2019-11-12T15:11:28.496Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。</p>
+<p>你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。</p>
+<p>示例:</p>
+<p>给定 nums = [2, 7, 11, 15], target = 9</p>
+<p>因为 nums[0] + nums[1] = 2 + 7 = 9<br>所以返回 [0, 1]</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int[] twoSum(int[] nums, int target) &#123;</span><br><span class="line">	        HashMap&lt;Integer,Integer&gt; map = new HashMap&lt;&gt;();</span><br><span class="line">	        int[] res = new int[2];</span><br><span class="line">	        for (int i = 0; i &lt; nums.length; i++) &#123;</span><br><span class="line">	            int dif = target - nums[i];</span><br><span class="line">	            if (map.get(dif) != null) &#123;</span><br><span class="line">	                res[0] = map.get(dif);</span><br><span class="line">	                res[1] = i;</span><br><span class="line">	                return res;</span><br><span class="line">	            &#125;</span><br><span class="line">	            map.put(nums[i],i);</span><br><span class="line">	        &#125;</span><br><span class="line">	        return res;</span><br><span class="line">	    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>力扣第一题，经典的运用HashMap<br>思路就是如果出现了这个值的 需要的值key存在(map.get(dif) != null)，即返回下标。<br>因为存在key=数组索引<br>              value=值<br>              所以想到用HashMap</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/12/1第一次力扣/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-归并排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/11/归并排序/">归并排序</a>
+    </h1>
+  
+
+        
+        <a href="/2019/11/11/归并排序/" class="archive-article-date">
+  	<time datetime="2019-11-11T06:16:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">public static void mergeSort(int[] arr) &#123;</span><br><span class="line">    sort(arr, 0, arr.length - 1);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static void sort(int[] arr, int L, int R) &#123;</span><br><span class="line">    if(L == R) &#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    int mid = L + ((R - L) &gt;&gt; 1);</span><br><span class="line">    sort(arr, L, mid);</span><br><span class="line">    sort(arr, mid + 1, R);</span><br><span class="line">    merge(arr, L, mid, R);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static void merge(int[] arr, int L, int mid, int R) &#123;</span><br><span class="line">    int[] temp = new int[R - L + 1];</span><br><span class="line">    int i = 0;</span><br><span class="line">    int p1 = L;</span><br><span class="line">    int p2 = mid + 1;</span><br><span class="line">    // 比较左右两部分的元素，哪个小，把那个元素填入temp中</span><br><span class="line">    while(p1 &lt;= mid &amp;&amp; p2 &lt;= R) &#123;</span><br><span class="line">        temp[i++] = arr[p1] &lt; arr[p2] ? arr[p1++] : arr[p2++];</span><br><span class="line">    &#125;</span><br><span class="line">    // 上面的循环退出后，把剩余的元素依次填入到temp中</span><br><span class="line">    // 以下两个while只有一个会执行</span><br><span class="line">    while(p1 &lt;= mid) &#123;</span><br><span class="line">        temp[i++] = arr[p1++];</span><br><span class="line">    &#125;</span><br><span class="line">    while(p2 &lt;= R) &#123;</span><br><span class="line">        temp[i++] = arr[p2++];</span><br><span class="line">    &#125;</span><br><span class="line">    // 把最终的排序的结果复制给原数组</span><br><span class="line">    for(i = 0; i &lt; temp.length; i++) &#123;</span><br><span class="line">        arr[L + i] = temp[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> <strong><strong>复杂度</strong></strong></p>
+<p>时间复杂度：O(nlogn)<br>空间复杂度：O(N)，归并排序需要一个与原数组相同长度的数组做辅助来排序<br>稳定性：归并排序是稳定的排序算法，temp[i++] = arr[p1] &lt;= arr[p2] ? arr[p1++] : arr[p2++];这行代码可以保证当左右两部分的值相等的时候，先复制左边的值，这样可以保证值相等的时候两个元素的相对位置不变。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">排序</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/11/归并排序/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-二叉树镜像，深度，按层次输出" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -452,172 +599,9 @@
 
 
   
-    <article id="post-Servle学习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/01/Servle学习/">Servlet学习</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/01/Servle学习/" class="archive-article-date">
-  	<time datetime="2019-11-01T15:13:37.521Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Servlet学习记录"><a href="#Servlet学习记录" class="headerlink" title="Servlet学习记录"></a>Servlet学习记录</h1><p>今天web课学习了Servlet课，对其有了新的学习与认识。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;web-app&gt;</span><br><span class="line"> </span><br><span class="line">    &lt;servlet&gt;</span><br><span class="line">        &lt;servlet-name&gt;HelloServlet&lt;/servlet-name&gt;</span><br><span class="line">        &lt;servlet-class&gt;HelloServlet&lt;/servlet-class&gt;</span><br><span class="line">    &lt;/servlet&gt;</span><br><span class="line"> </span><br><span class="line">    &lt;servlet-mapping&gt;</span><br><span class="line">        &lt;servlet-name&gt;HelloServlet&lt;/servlet-name&gt;</span><br><span class="line">        &lt;url-pattern&gt;/hello&lt;/url-pattern&gt;</span><br><span class="line">    &lt;/servlet-mapping&gt;</span><br><span class="line"> </span><br><span class="line">&lt;/web-app&gt;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; &lt;servlet&gt; 标签下的 &lt;servlet-name&gt; 与</span><br><span class="line">&gt; &lt;servlet-mapping&gt; 标签下的 &lt;servlet-name&gt;</span><br><span class="line">&gt; 必须一样</span><br><span class="line">&gt; </span><br><span class="line">&gt; &lt;servlet-name&gt;与&lt;servlet-class&gt;可以不一样，</span><br><span class="line">&gt; 但是为了便于理解与维护，一般都会写的一样。</span><br></pre></td></tr></table></figure>
-
-<p>eclipse(导包）<br>1.首先建空包 在下面写方法<br>2.建web文件夹web-inf文件夹web.xml(配置映射）<br>3.首先在WEB-INF下创建classes目录<br>把项目的class文件输出由原来的 j2ee/bin 设置到 j2ee/web/WEB-INF/classes下<br>步骤:<br>项目右键-&gt;properties-&gt;Java Build Path-&gt;Source-&gt;右下角的 Brower-&gt; 指定位置是 j2ee/web/WEB-INF/classes。</p>
-<ol start="4">
-<li>tomcat下conf下serve.xml写</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;Context path=&quot;/&quot; docBase=&quot;e:\\project\\j2ee\\web&quot; debug=&quot;0&quot; reloadable=&quot;false&quot; /&gt;</span><br><span class="line">5.启动tomcat</span><br></pre></td></tr></table></figure>
-
-<p>6.注意写加上.html(如login.html）</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">web</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/01/Servle学习/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-二叉排序树" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/31/二叉排序树/">二叉排序树和其中序输出(从小到大）</a>
-    </h1>
-  
-
-        
-        <a href="/2019/10/31/二叉排序树/" class="archive-article-date">
-  	<time datetime="2019-10-31T07:15:15.251Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-31</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>插入数据并按顺序输出(就是中序遍历—-左中右）<br>如图<br>假设通过二叉树对如下10个随机数进行排序<br>37,9,16,34,29,6,48,46,59<br>排序的第一个步骤是把数据插入到该二叉树中<br>插入基本逻辑是，小、相同的放左边，大的放右边中序遍历输出即为从小到大顺序</p>
-<p><img src="https://img-blog.csdnimg.cn/20191031151137459.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">package nnn;</span><br><span class="line">import java.util.*;</span><br><span class="line">public class node &#123;</span><br><span class="line">	public node left;</span><br><span class="line">	public node right;</span><br><span class="line">	public Object value;//存空,所以用Object</span><br><span class="line">	public void add(Object num)&#123;</span><br><span class="line">		 // 如果当前节点没有值，就把数据放在当前节点上</span><br><span class="line">		if(value==null)</span><br><span class="line">			value=num;</span><br><span class="line">		// 如果当前节点有值，就进行判断，新增的值与当前值的大小关系</span><br><span class="line">		else&#123;</span><br><span class="line">			// 新增的值，比当前值小或者相同</span><br><span class="line">			if((Integer)num-((Integer)value)&lt;=0)&#123;</span><br><span class="line">				if(left==null)</span><br><span class="line">				left=new node();</span><br><span class="line">				left.add(num);</span><br><span class="line">			&#125;</span><br><span class="line">			else&#123;</span><br><span class="line">				if(right==null)</span><br><span class="line">				right=new node();</span><br><span class="line">				right.add(num);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;	</span><br><span class="line">	&#125;</span><br><span class="line">	public List&lt;Object&gt; values()&#123;</span><br><span class="line">		List&lt;Object&gt; values = new ArrayList&lt;&gt;();</span><br><span class="line">	    if(left!=null)</span><br><span class="line">            values.addAll(left.values());//等于把左子树的所有递归得到的值存到容器中</span><br><span class="line">	    values.add(value);</span><br><span class="line">	    if(right!=null)</span><br><span class="line">	    	values.addAll(right.values());</span><br><span class="line">	    return values;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		int p[]=new int[]&#123;37,9,16,34,29,6,48,46,59&#125;;</span><br><span class="line">		  node S=new node();</span><br><span class="line">		  for(int number:p)&#123;</span><br><span class="line">			  S.add(number);</span><br><span class="line">		  &#125;	</span><br><span class="line">		  System.out.println(S.values());//从根开始便利</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>输出(为从小到大的终须排序）<br><img src="https://img-blog.csdnimg.cn/20191031151323171.png" alt="在这里插入图片描述"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">树</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/31/二叉排序树/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/23/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="page-number" href="/page/23/">23</a><span class="page-number current">24</span><a class="page-number" href="/page/25/">25</a><a class="extend next" rel="next" href="/page/25/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/23/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="page-number" href="/page/23/">23</a><span class="page-number current">24</span><a class="page-number" href="/page/25/">25</a><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" href="/page/25/">Next &raquo;</a>
     </nav>
   
 
@@ -768,15 +752,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -800,11 +784,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTML</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color5">HTML</a>
               </li>
              
               <li class="article-tag-list-item">

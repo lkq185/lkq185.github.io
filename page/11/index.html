@@ -140,6 +140,163 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-高阶函数和闭包" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/05/高阶函数和闭包/">高阶函数和闭包</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/05/高阶函数和闭包/" class="archive-article-date">
+  	<time datetime="2020-05-05T15:44:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="高阶函数"><a href="#高阶函数" class="headerlink" title="高阶函数"></a>高阶函数</h2><blockquote>
+<p>高阶函数是什么？</p>
+</blockquote>
+<p>定义：<strong>高阶函数</strong>是对其他函数进行操作的函数，它<strong>接收函数作为参数</strong>或者<strong>将函数作为返回值输出</strong>。</p>
+<h2 id="接收函数传给回调函数"><a href="#接收函数传给回调函数" class="headerlink" title="接收函数传给回调函数"></a>接收函数传给回调函数</h2><p>例如：jquery<br><img src="https://img-blog.csdnimg.cn/20200505183621187.png" alt="在这里插入图片描述"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">a,b,callback</span>)</span>&#123;</span><br><span class="line">       <span class="built_in">console</span>.log(a+b);</span><br><span class="line">       <span class="comment">//回调函数</span></span><br><span class="line">       <span class="comment">//函数传给collback</span></span><br><span class="line">       callback&amp;&amp;callback();</span><br><span class="line">    &#125;</span><br><span class="line">    fn(<span class="number">1</span>,<span class="number">2</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'我是最后调用的'</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="返回的是函数类型"><a href="#返回的是函数类型" class="headerlink" title="返回的是函数类型"></a>返回的是函数类型</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">     <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    fn();</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>原理是什么？</p>
+</blockquote>
+<p>因为JavaScript中函数可以作为参数，同样可以作为返回值，可以传递给回调函数。</p>
+<h2 id="闭包（closure）"><a href="#闭包（closure）" class="headerlink" title="闭包（closure）"></a>闭包（closure）</h2><blockquote>
+<p>闭包的定义</p>
+</blockquote>
+<p>定义：闭包指有权访问另一个函数作用域中变量的<strong>函数</strong>。<br>简单地说：一个作用域可以访问另一个函数内部局部变量。</p>
+<p><img src="https://img-blog.csdnimg.cn/20200505184637565.png" alt="在这里插入图片描述"><br><strong>闭包</strong>：我们fun这个函数作用域访问了另外一个函数fn作用域的局部变量num<br>闭包函数：被访问的函数称为闭包函数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="comment">//闭包：我们fun这个函数作用域访问了另外一个函数fn作用域的局部变量num</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      <span class="keyword">var</span> num=<span class="number">10</span>;</span><br><span class="line">      <span class="function"><span class="keyword">function</span> <span class="title">fun</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">         <span class="built_in">console</span>.log(num);</span><br><span class="line">     &#125;</span><br><span class="line">     fun();</span><br><span class="line">    &#125;</span><br><span class="line">    fn();</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>调用过程？</p>
+</blockquote>
+<ol>
+<li>fn函数调用</li>
+<li>到了num，此时没有值，为undefine</li>
+<li>到了fun（），调用fun函数。</li>
+<li>执行fun(){}函数，到了fun函数，此时有了闭包closure（fn）</li>
+<li>访问fn的局部变量num</li>
+</ol>
+<blockquote>
+<p>闭包的作用？</p>
+</blockquote>
+<ol>
+<li>fn外部作用域可以访问fun内部局部变量。<strong>函数外部作用域或者全局作用域可以访问局部变量。</strong></li>
+<li><strong>延伸了变量的作用范围。</strong>局部变量执行完后不会立刻销毁。</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">  &lt;script&gt;</span><br><span class="line">      <span class="comment">//fn外面的作用域可以访问fn内部局部变量</span></span><br><span class="line">      <span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> num=<span class="number">10</span>;</span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">fun</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">           <span class="built_in">console</span>.log(num);</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> fun;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">var</span> f=fn();</span><br><span class="line">      <span class="comment">//f存的是fun</span></span><br><span class="line">      f();</span><br><span class="line">      <span class="comment">//类似于</span></span><br><span class="line">      <span class="keyword">var</span> f=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">          <span class="built_in">console</span>.log(num);</span><br><span class="line">      &#125;</span><br><span class="line">==================================</span><br><span class="line">      <span class="comment">//fn外面的作用域可以访问fn内部局部变量</span></span><br><span class="line">      <span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> num=<span class="number">10</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(num);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">//f存的是function</span></span><br><span class="line">      <span class="keyword">var</span> f=fn();</span><br><span class="line">      f();</span><br><span class="line">  &lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="闭包案列"><a href="#闭包案列" class="headerlink" title="闭包案列"></a>闭包案列</h2><ul>
+<li>闭包模板:将模板里的函数从异步改为同步的（函数跟for循环同步，立刻执行。</li>
+<li>function()最外层函数称作闭包函数。</li>
+<li>作用：增大变量范围。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params">i</span>)</span>&#123;</span><br><span class="line"> <span class="comment">//函数</span></span><br><span class="line">&#125;)(i);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>点击某一个li输出对应li的索引号</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/2020050523115284.png" alt="在这里插入图片描述"></p>
+<ul>
+<li>for循环同步任务，马上执行。onlick异步任务，不会立刻执行。</li>
+<li>闭包是立即执行函数</li>
+<li>var声明的，一个函数只有一个var，var声明的i属于当前函数，公用一个i。可以用let或者闭包使得产生n个i。<br>。<br><strong>普通方式</strong></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">      &lt;ul <span class="class"><span class="keyword">class</span></span>=<span class="string">"nav"</span>&gt;</span><br><span class="line">          &lt;li&gt;榴莲&lt;<span class="regexp">/li&gt;</span></span><br><span class="line"><span class="regexp">          &lt;li&gt;臭豆腐&lt;/</span>li&gt;</span><br><span class="line">          &lt;li&gt;鲱鱼罐头&lt;<span class="regexp">/li&gt;</span></span><br><span class="line"><span class="regexp">          &lt;li&gt;大猪蹄子&lt;/</span>li&gt;</span><br><span class="line">      &lt;<span class="regexp">/ul&gt;</span></span><br><span class="line"><span class="regexp">      &lt;script&gt;</span></span><br><span class="line"><span class="regexp">          /</span><span class="regexp">/动态添加属性</span></span><br><span class="line"><span class="regexp">          var lis=document.querySelector('.nav').querySelectorAll('li');</span></span><br><span class="line"><span class="regexp">          for(var i=0;i&lt;lis.length;i++)&#123;</span></span><br><span class="line"><span class="regexp">              /</span><span class="regexp">/index为0 1 2 3</span></span><br><span class="line"><span class="regexp">              lis[i].index=i;</span></span><br><span class="line"><span class="regexp">              lis[i].onclick=function()&#123;</span></span><br><span class="line"><span class="regexp">                  console.log(this.index);</span></span><br><span class="line"><span class="regexp">              &#125;</span></span><br><span class="line"><span class="regexp">          &#125;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>script&gt;</span><br><span class="line">&lt;<span class="regexp">/body&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>闭包方式</strong></p>
+<ol>
+<li>第1个i传递给第5个i</li>
+<li>第5个i传递给第2个i</li>
+<li>点击第i个小li时。(lis[i].onclick)</li>
+<li>打印出第4个i。</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">      &lt;ul <span class="class"><span class="keyword">class</span></span>=<span class="string">"nav"</span>&gt;</span><br><span class="line">          &lt;li&gt;榴莲&lt;<span class="regexp">/li&gt;</span></span><br><span class="line"><span class="regexp">          &lt;li&gt;臭豆腐&lt;/</span>li&gt;</span><br><span class="line">          &lt;li&gt;鲱鱼罐头&lt;<span class="regexp">/li&gt;</span></span><br><span class="line"><span class="regexp">          &lt;li&gt;大猪蹄子&lt;/</span>li&gt;</span><br><span class="line">      &lt;<span class="regexp">/ul&gt;</span></span><br><span class="line"><span class="regexp">      &lt;script&gt;</span></span><br><span class="line"><span class="regexp">          /</span><span class="regexp">/动态添加属性</span></span><br><span class="line"><span class="regexp">          var lis=document.querySelector('.nav').querySelectorAll('li');</span></span><br><span class="line"><span class="regexp">          /</span><span class="regexp">/闭包</span></span><br><span class="line"><span class="regexp">          /</span><span class="regexp">/第1个i传递给第5个i,第5个i传递给第2个i,点击第i个小li时。打印出第4个i。</span></span><br><span class="line"><span class="regexp">          for(var i=0;i&lt;lis.length;i++)&#123;</span></span><br><span class="line"><span class="regexp">              /</span><span class="regexp">/利用for循环创建4个立即执行函数</span></span><br><span class="line"><span class="regexp">              /</span><span class="regexp">/立即执行函数又叫小闭包，因为立即函数里面任何一个函数都可以使用它的i变量。</span></span><br><span class="line"><span class="regexp">              /</span><span class="regexp">/()();</span></span><br><span class="line"><span class="regexp">              (function(i)&#123;</span></span><br><span class="line"><span class="regexp">                  /</span><span class="regexp">/console.log(i);</span></span><br><span class="line"><span class="regexp">                  lis[i].onclick=function()&#123;</span></span><br><span class="line"><span class="regexp">                      /</span><span class="regexp">/闭包，用了第一个function中二个i的值。</span></span><br><span class="line"><span class="regexp">                      console.log(i);</span></span><br><span class="line"><span class="regexp">                  &#125;</span></span><br><span class="line"><span class="regexp">              &#125;)(i);</span></span><br><span class="line"><span class="regexp">          &#125;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>script&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>立即执行函数</strong>又叫小闭包，因为立即函数里面任何一个函数都可以使用它的i变量。<br>闭包体现：用了第一个function中function(i)中i的值。</p>
+<p><strong>总结：for循环马上结束，而函数效果会一直保存。</strong><br>当鼠标点击li时，调用lis[i].onclick=function()。输出函数内的值。</p>
+<blockquote>
+<p>三秒后，控制台打印li中所有元素</p>
+</blockquote>
+<p><strong>定时器里的回调函数都是异步任务</strong>。只是触发了才执行，即3秒后才执行。就算改成0也不会立刻执行，会把任务放到异步队列中。<strong>而for循环同步任务</strong>，马上执行。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="comment">//动态添加属性</span></span><br><span class="line">    <span class="keyword">var</span> lis=<span class="built_in">document</span>.querySelector(<span class="string">'.nav'</span>).querySelectorAll(<span class="string">'li'</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;lis.length;i++)&#123;</span><br><span class="line">        (<span class="function"><span class="keyword">function</span>(<span class="params">i</span>)</span>&#123;</span><br><span class="line">         setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">           <span class="built_in">console</span>.log(lis[i].innerHTML);</span><br><span class="line">         &#125;,<span class="number">3000</span>)</span><br><span class="line">        &#125;)(i);</span><br><span class="line">    &#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>输入公里数，输出打车价格<br>起步价13（3公里内） 每一公里加3 元<br>有拥堵，加10块度车费。</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20200505233507499.png" alt="在这里插入图片描述"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">var</span> car=(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      <span class="keyword">var</span> start=<span class="number">13</span>;</span><br><span class="line">      <span class="keyword">var</span> total=<span class="number">0</span>;</span><br><span class="line">      <span class="keyword">return</span> &#123;</span><br><span class="line">          price: <span class="function"><span class="keyword">function</span>(<span class="params">n</span>)</span>&#123;</span><br><span class="line">               <span class="keyword">if</span>(n&lt;=<span class="number">3</span>)&#123;</span><br><span class="line">                   <span class="keyword">return</span> start;</span><br><span class="line">               &#125;</span><br><span class="line">               <span class="keyword">else</span>&#123;</span><br><span class="line">                 total=start+(n<span class="number">-3</span>)*<span class="number">5</span>;</span><br><span class="line">                 <span class="keyword">return</span> total;                   </span><br><span class="line">               &#125;</span><br><span class="line">          &#125;,</span><br><span class="line">          yd:<span class="function"><span class="keyword">function</span>(<span class="params">flag</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(flag=<span class="literal">true</span>)</span><br><span class="line">               <span class="keyword">return</span> total+<span class="number">10</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">return</span> total;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)();</span><br><span class="line">   <span class="built_in">console</span>.log(car.price(<span class="number">5</span>));<span class="comment">//23</span></span><br><span class="line">   <span class="built_in">console</span>.log(car.yd(<span class="literal">true</span>));<span class="comment">//33</span></span><br><span class="line">   <span class="built_in">console</span>.log(car.yd(<span class="literal">false</span>));<span class="comment">//33</span></span><br><span class="line">   <span class="built_in">console</span>.log(car.price(<span class="number">1</span>));<span class="comment">//覆盖n=5 total=13</span></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>闭包：外面function访问里面function的total和start</li>
+<li>注意：局部变量会被新的值覆盖。</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/05/高阶函数和闭包/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-递归" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -749,110 +906,9 @@
 
 
   
-    <article id="post-JavaScript继承和call()" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/04/JavaScript继承和call()/">JavaScript继承和call()</a>
-    </h1>
-  
-
-        
-        <a href="/2020/05/04/JavaScript继承和call()/" class="archive-article-date">
-  	<time datetime="2020-05-04T08:42:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><blockquote>
-<p>ES6之前没有extends继承。我们可以用<strong>构造函数加原型对象</strong>模拟实现继承，称为<strong>组合继承</strong></p>
-</blockquote>
-<h2 id="call"><a href="#call" class="headerlink" title="call()"></a>call()</h2><p>fun.call(thisarg,arg1,arg2,…)<br>thisArg:当前调用this的指向对象<br><strong>功能：</strong><br>1.调用函数<br>2.改变函数指向</p>
-<blockquote>
-<p>输出andy</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">x，y</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'hhh'</span>);</span><br><span class="line">        <span class="comment">//正常指向window</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">        <span class="built_in">console</span>.log(x+y);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> o=&#123;</span><br><span class="line">      name=<span class="string">'andy'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//1.调用函数</span></span><br><span class="line">    fn.call();</span><br><span class="line">    <span class="comment">//2.改变函数指向</span></span><br><span class="line">    <span class="comment">//第一个o不会当做参数传输。</span></span><br><span class="line">    fn.call(o,<span class="number">1</span>,<span class="number">2</span>);    </span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="子构造函数用父构造函数"><a href="#子构造函数用父构造函数" class="headerlink" title="子构造函数用父构造函数"></a>子构造函数用父构造函数</h2><p><strong>父亲this指向子类this</strong>或理解为<strong>call()传进this，把父类构造函数拿过来。</strong><br><strong>指回：从左向右看，约等于链表。</strong><br>1.指向子构造函数实例<br>2.先用call调用方法，然后把子this传进来<br>3.改为指向子类实例</p>
-<blockquote>
-<p>输出子类构造函数</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="comment">//父构造函数</span></span><br><span class="line">     <span class="function"><span class="keyword">function</span> <span class="title">father</span>(<span class="params">name,age</span>)</span>&#123;</span><br><span class="line">         <span class="comment">//指向父构造函数实例</span></span><br><span class="line">         <span class="keyword">this</span>.name=name;</span><br><span class="line">         <span class="keyword">this</span>.age=age;</span><br><span class="line">     &#125;    </span><br><span class="line">     <span class="function"><span class="keyword">function</span> <span class="title">son</span>(<span class="params">name,age</span>)</span>&#123;</span><br><span class="line">         <span class="comment">//指向子构造函数实例</span></span><br><span class="line">         <span class="comment">//先用call调用方法，然后把子this传进来</span></span><br><span class="line">         <span class="comment">//改为指向子类实例</span></span><br><span class="line">         father.call(<span class="keyword">this</span>,name,age);</span><br><span class="line">     &#125;    </span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="子类继承父类方法"><a href="#子类继承父类方法" class="headerlink" title="子类继承父类方法"></a>子类继承父类方法</h2><blockquote>
-<p>son.prototype=father.prototype;<br>会有问题吗。</p>
-</blockquote>
-<p>有问题：子类指向父类原型对象，<strong>父类地址给了孩子。</strong>这样父类有了子类的原型对象方法。子原型对象变化了，父类也会变化。约等于双方方法互通了。<br><strong>解决方法</strong><br><strong>new一个father的实例对象。</strong><br>父类实例通过_proto_指向father原型对象<br>这样son的_proto_拥有父类原型对象方法（本身指向son的构造函数的，被覆盖了）</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> father.baba=<span class="keyword">new</span> father();</span><br><span class="line">son.prototype=baba.prototype;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>问题：这样做缺点？</p>
-</blockquote>
-<p>son的prototype的构造函数指向了父类，需要用constructor重新指回原来的构造函数。<br><strong>指向、指回：从左向右看，约等于链表。</strong></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">son.prototype.constructor=son;</span><br></pre></td></tr></table></figure>
-
-<p><strong>总结：传递的是地址。</strong></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/04/JavaScript继承和call()/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/10/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><a class="extend next" rel="next" href="/page/12/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/10/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" href="/page/12/">Next &raquo;</a>
     </nav>
   
 
@@ -1003,15 +1059,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1035,11 +1091,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTML</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color5">HTML</a>
               </li>
              
               <li class="article-tag-list-item">

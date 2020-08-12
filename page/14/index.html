@@ -140,6 +140,231 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Java常见集合类—HashMap" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="首先HashMap结构"><a href="#首先HashMap结构" class="headerlink" title="首先HashMap结构"></a>首先HashMap结构</h2><p>底层是数组，当key相同时，是一个链表。<br>JDK8以后，当HashMap采用了拉链法。<br><strong>当数组长度大于64且链表大于8时，链表变为红黑树。</strong><br>因为红黑树查找更快为2的n次方。<br>HashMap长度为2的n次方。</p>
+<h2 id="1-Hashmap长度为啥是2的n次方？"><a href="#1-Hashmap长度为啥是2的n次方？" class="headerlink" title="1.Hashmap长度为啥是2的n次方？"></a>1.Hashmap长度为啥是2的n次方？</h2><p>因为会进行<code>(len-1)&amp;hashcode</code>(等价于取模操作)来确定位置。<br>&amp;运算比取模效率更高。<br>当len是2的n次方时，2的n次方减1最后一位是1(如16-1=15为1111)<br>可以让位置更分散，减少key的碰撞。<br>如果最后一位是0，很多位置取不到。</p>
+<h2 id="2-HashMap-put为null时怎么办？"><a href="#2-HashMap-put为null时怎么办？" class="headerlink" title="2.HashMap put为null时怎么办？"></a>2.HashMap put为null时怎么办？</h2><p>不为null时，定位index，如果key不存在，插在头部，如果key存在，替换新value。<br>在table[0]里找，如果有key=null的，就返回原null的value。并把原来value更新为新的value。<br>如果没有，<code>则插在表头。</code></p>
+<h2 id="3-为什么是0-75-就是到0-75长度就会扩容"><a href="#3-为什么是0-75-就是到0-75长度就会扩容" class="headerlink" title="3.为什么是0.75(就是到0.75长度就会扩容)"></a>3.为什么是0.75(就是到0.75长度就会扩容)</h2><p>平均了时间和空间效率。<br>如果是1。提高了空间效率。但是增加了查询时间成本。<br>如果是0.5。降低了时间效率。提高了空间效率。</p>
+<h2 id="4-怎么设置初始化大小。"><a href="#4-怎么设置初始化大小。" class="headerlink" title="4.怎么设置初始化大小。"></a>4.怎么设置初始化大小。</h2><p>首先扩容非常消耗性能。<br>如果new HashMap(1000) 则会自动设置为1024个<br>但是这样就会进行扩容了。<br>所以必须初始化为2048，保证0.75*2048&gt;1024。<br>即是2的倍数页防止了扩容。</p>
+<h2 id="5-扩容方法和为什么HashMap线程不安全？"><a href="#5-扩容方法和为什么HashMap线程不安全？" class="headerlink" title="5.扩容方法和为什么HashMap线程不安全？"></a>5.扩容方法和为什么HashMap线程不安全？</h2><p>JDK1.7<br>原扩容方式：把数组扩容俩倍。然后重新计算位置（计算index）后，把数组复制到扩容后的数组。<br>缺点：头插法，可能造成死锁（形成环形链表）。线程不安全。网络不安全。<br>JDK8的扩容方式。新的索引要么和原索引相等，要么高位加1。<br>尾插法<br>方法：与原来Hashcode进行&amp;（len-1）运算。<br>比如从1111扩容到11111<br>则 00001&amp;01111=1  00001&amp;11111=1<br>   10001&amp;01111=1  10001&amp;11111=17<br>   原hashcode高位为0索引不变<br>   原hashcode高位为1新索引高位加1</p>
+<p>JDK1.8中为了避免死锁头插改成尾插<br>JDK1.8当put操作时，可能造成数据覆盖。即俩个不同的key会覆盖，由于size++操作。<br>假设当前HashMap的zise大小为10，当线程A执行到第38行代码时，从主内存中获得size的值为10后准备进行+1操作，但是由于时间片耗尽只好让出CPU，线程B快乐的拿到CPU还是从主内存中拿到size的值10进行+1操作，完成了put操作并将size=11写回主内存，然后线程A再次拿到CPU并继续执行(此时size的值仍为10)，当执行完put操作后，还是将size=11写回内存，此时，线程A、B都执行了一次put操作，但是size的值只增加了1</p>
+<h2 id="6-HashMap在JDK8的新特征？"><a href="#6-HashMap在JDK8的新特征？" class="headerlink" title="6.HashMap在JDK8的新特征？"></a>6.HashMap在JDK8的新特征？</h2><p>当链表长度大于8时自动转化为红黑树（且数组必须大于64）<br>红黑树特征？<br>1.每个节点只能是红色或者黑色<br>2.根结点为黑色<br>3.红色结点的叶节点只能是黑色。<br>4.任意结点到其每个叶子结点，包含相同的黑色结点</p>
+<h2 id="7-为什么重写equals方法时，也要重写hashcode方法呢？"><a href="#7-为什么重写equals方法时，也要重写hashcode方法呢？" class="headerlink" title="7.为什么重写equals方法时，也要重写hashcode方法呢？"></a>7.为什么重写equals方法时，也要重写hashcode方法呢？</h2><p>对equals方法进行了重写，建议一定要对hashCode方法重写，以保证相同的对象返回相同的hash值，不同的对象返回不同的hash值。用来区分相同hash值的俩个元素（同一个链表的元素）。</p>
+<h2 id="8-put操作"><a href="#8-put操作" class="headerlink" title="8.put操作"></a>8.put操作</h2><p>确定下标，然后判断是否已经存在键值对。如果存在的话更新这个键值对的value值。</p>
+<h2 id="9-Hash方法为什么右移-16-位，为什么要使用-位异或"><a href="#9-Hash方法为什么右移-16-位，为什么要使用-位异或" class="headerlink" title="9.Hash方法为什么右移 16 位，为什么要使用 ^ 位异或"></a>9.Hash方法为什么右移 16 位，为什么要使用 ^ 位异或</h2><p><strong>首先hashcode算法</strong><br>之所以使用 31， 是因为他是一个奇素数。如果乘数是偶数，并且乘法溢出的话，信息就会丢失，因为与2相乘等价于移位运算（低位补0）。使用素数的好处并不很明显，但是习惯上使用素数来计算散列结果。 31 有个很好的性能，即用移位和减法来代替乘法，可以得到更好的性能： 31 * i == (i &lt;&lt; 5） - i， 现代的 VM 可以自动完成这种优化。这个公式可以很简单的推导出来。</p>
+<p>JDK8 hash（扰动函数）<br>防止index函数出现有规律的情况</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">   5static final int hash(Object key) &#123;</span><br><span class="line">    int h;</span><br><span class="line">    return (key == null) ? 0 : (h = key.hashCode()) ^ (h &gt;&gt;&gt; 16);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>右位移16位，正好是32bit的一半，自己的高半区和低半区做异或，就是为了混合原始哈希码的高16位和低16位，以此来加大低位的随机性。而且混合后的低位掺杂了高位的部分特征，这样高位的信息也被变相保留下来。</strong></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/29/Java常见集合类—HashMap/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-微信小程序回顾（2019年10月12日制作）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/27/微信小程序回顾（2019年10月12日制作）/">微信小程序回顾（2019年10月12日制作）</a>
+    </h1>
+  
+
+        
+        <a href="/2020/04/27/微信小程序回顾（2019年10月12日制作）/" class="archive-article-date">
+  	<time datetime="2020-04-27T14:56:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="https://img-blog.csdnimg.cn/20200610210655581.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">- 好久没点开的小程序，已经冻结了，哈哈。重新申请了回来。</p>
+<ul>
+<li><p>pages的index：首页</p>
+</li>
+<li><p>logs：日志</p>
+</li>
+<li><p>pages的index.js：js代码</p>
+</li>
+<li><p>pages的wxss：css样式</p>
+</li>
+<li><p>pages的wxml：html<br><img src="https://img-blog.csdnimg.cn/20200610212331434.png" alt="在这里插入图片描述"></p>
+</li>
+<li><p>app.js：入口文件</p>
+</li>
+<li><p>app.json：大体结构的控制，全局配置、网络超时、界面表现。</p>
+</li>
+</ul>
+<blockquote>
+<p>新增一个页面（app.json）</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"pages"</span>: [</span><br><span class="line">  <span class="string">"pages/index/index"</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>page.json</p>
+</blockquote>
+<ul>
+<li>用来配置全局文件。</li>
+</ul>
+<blockquote>
+<p>wxss</p>
+</blockquote>
+<ul>
+<li>rpx:根据屏幕宽度自适应。</li>
+</ul>
+<blockquote>
+<p>样式</p>
+<ul>
+<li>内联样式、类选择器、id选择器、标签选择器。</li>
+<li>全局样式：app.wxss</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>图片标签</p>
+</blockquote>
+<ul>
+<li>image不是img</li>
+<li>存在默认宽度和高度</li>
+<li>不存在背景图片说法、背景图片和图片标签的结合体：image</li>
+</ul>
+<blockquote>
+<p>组件</p>
+<ol>
+<li>一个组件有js、json、wxml、wxss</li>
+<li>在json里声明为true</li>
+</ol>
+</blockquote>
+<blockquote>
+<p>view</p>
+<ul>
+<li>就是div呗</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>index.js</p>
+</blockquote>
+<ul>
+<li>这不就是vue里的new Vue(Page)、data、list吗？</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Page(&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 页面的初始数据</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  data: &#123;</span><br><span class="line">    list:[</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>index.wxml</p>
+<ul>
+<li>就是v-for</li>
+</ul>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wx:<span class="keyword">for</span>=<span class="string">'&#123;&#123;list&#125;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>bindtap就是bind呗，触发playvideo函数（事件冒泡，儿子冒泡到父亲）</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data-url=<span class="string">'&#123;&#123;item.videoUrl&#125;&#125;'</span> bindtap=<span class="string">'playVideo</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>生命周期函数</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">onLoad: <span class="function"><span class="keyword">function</span> (<span class="params">options</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.videoCtx=wx.createVideoContext(<span class="string">'myVideo'</span>)</span><br><span class="line">&#125;,</span><br><span class="line"><span class="comment">//==========</span></span><br><span class="line">  playVideo: <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.videoCtx.stop()</span><br><span class="line">  <span class="comment">// 停止播放之前正在播放的视频</span></span><br><span class="line">  <span class="keyword">this</span>.setData(&#123;</span><br><span class="line">    src: e.currentTarget.dataset.url</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="comment">// 更新视频地址</span></span><br><span class="line">  <span class="keyword">this</span>.videoCtx.play()</span><br><span class="line">  <span class="comment">// 播放新的视频</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">前端综合</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/27/微信小程序回顾（2019年10月12日制作）/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-秒杀如何解决超卖？" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -436,163 +661,9 @@
 
 
   
-    <article id="post-equals和==的区别" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/01/17/equals和==的区别/">equals和==的区别与关系</a>
-    </h1>
-  
-
-        
-        <a href="/2020/01/17/equals和==的区别/" class="archive-article-date">
-  	<time datetime="2020-01-17T07:16:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="区别："><a href="#区别：" class="headerlink" title="区别："></a>区别：</h2><p>==：可以比较值，引用类型比较地址。<br><strong>equals</strong>：继承自Object。比较引用对象，不能比较基本类型。重写的话可以比较引用对象。<br>如：String类重写equala()方法，使其比较的是字符的内容，而不再是内存地址。</p>
-<h2 id="equals-与hashCode-方法："><a href="#equals-与hashCode-方法：" class="headerlink" title="equals()与hashCode()方法："></a>equals()与hashCode()方法：</h2><p>不同对象的hashacode基本是不相同的，不过也有很小概率相同。这是需要用equals了<br>equals不相同，hashcode一定不相同<br>hashcode相同，equals不一定相同(因为不同对象hashcode可能相同)</p>
-<h2 id="为什么重写一个对象的equals方法，就必须重写他的hashCode方法"><a href="#为什么重写一个对象的equals方法，就必须重写他的hashCode方法" class="headerlink" title="为什么重写一个对象的equals方法，就必须重写他的hashCode方法"></a>为什么重写一个对象的equals方法，就必须重写他的hashCode方法</h2><p>Student s1=new Student(“小明”,18);</p>
-<p>Student s2=new Student(“小明”,18);</p>
-<p>如果s1.equals(s2)==true<br>由于默认的hashcode方法是根据对象的内存地址经哈希算法得来的，显然此时s1!=s2,故两者的hashcode不一定相等。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Java基础</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/01/17/equals和==的区别/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-什么是Java虚拟机？为什么Java被称作是“平台无关的编程语言" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/01/17/什么是Java虚拟机？为什么Java被称作是“平台无关的编程语言/">什么是JAVA虚拟机，JDK与JRE</a>
-    </h1>
-  
-
-        
-        <a href="/2020/01/17/什么是Java虚拟机？为什么Java被称作是“平台无关的编程语言/" class="archive-article-date">
-  	<time datetime="2020-01-17T07:16:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Java虚拟机"><a href="#Java虚拟机" class="headerlink" title="Java虚拟机"></a>Java虚拟机</h2><p>是一个可以执行Java字节码的虚拟机进程，Java源文件被编译成能被Java虚拟机执行的字节码文件。<br>Java虚拟机知道底层硬件平台的指令长度和其他特性。<br>java的跨平台不是java源程序的跨平台。java源程序先经过javac编译器编译成二进制的.class字节码文件（java的跨平台指的就是.class字节码文件的跨平台，.class字节码文件是与平台无关的），.class文件再运行在jvm上，java解释器（jvm的一部分）会将其解释成对应平台的机器码执行，所以java所谓的跨平台就是在不同平台上安装了不同的jvm，而在不同平台上生成的.class文件都是一样的，而.class文件再由对应平台的jvm解释成对应平台的机器码执行。 </p>
-<h2 id="机器码和字节码的区别"><a href="#机器码和字节码的区别" class="headerlink" title="机器码和字节码的区别"></a>机器码和字节码的区别</h2><p>一，机器码，完全依附硬件而存在～并且不同硬件由于内嵌指令集不同，即使相同的0 1代码 意思也可能是不同的～换句话说，根本不存在跨平台性～比如～不同型号的CPU,你给他个指令10001101，他们可能会解析为不同的结果～<br>二，我们知道JAVA是跨平台的，为什么呢？因为他有一个jvm,不论哪种硬件，只要你装有jvm,那么他就认识这个JAVA字节码～～～～至于底层的机器码，咱不用管，有jvm搞定，他会把字节码再翻译成所在机器认识的机器码～～～</p>
-<h2 id="JDK和JRE的区别是什么？"><a href="#JDK和JRE的区别是什么？" class="headerlink" title="JDK和JRE的区别是什么？"></a>JDK和JRE的区别是什么？</h2><p>JRE：Java Runtime Environment<br>JDK：Java Development Kit<br>JRE顾名思义是java运行时环境，包含了java虚拟机，java基础类库。是使用java语言编写的程序运行所需要的软件环境，是提供给想运行java程序的用户使用的。<br>JDK顾名思义是java开发工具包，是程序员使用java语言编写java程序所需的开发工具包，是提供给程序员使用的。JDK包含了JRE，同时还包含了编译java源码的编译器javac，还包含了很多java程序调试和分析的工具：jconsole，jvisualvm等工具软件，还包含了java程序编写所需的文档和demo例子程序。<br>如果你需要运行java程序，只需安装JRE就可以了。如果你需要编写java程序，需要安装JDK。<br>JRE根据不同操作系统（如：windows，linux等）和不同JRE提供商（IBM,ORACLE等）有很多版本 </p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JVM</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/01/17/什么是Java虚拟机？为什么Java被称作是“平台无关的编程语言/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/13/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><a class="extend next" rel="next" href="/page/15/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/13/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" href="/page/15/">Next &raquo;</a>
     </nav>
   
 
@@ -743,15 +814,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -775,11 +846,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTML</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color5">HTML</a>
               </li>
              
               <li class="article-tag-list-item">

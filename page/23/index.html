@@ -140,6 +140,158 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-38字符串操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/13/38字符串操作/">字符串操作</a>
+    </h1>
+  
+
+        
+        <a href="/2019/11/13/38字符串操作/" class="archive-article-date">
+  	<time datetime="2019-11-13T14:50:18.240Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>报数序列是一个整数序列，按照其中的整数的顺序进行报数，得到下一个数。其前五项如下：</p>
+<ol>
+<li>1</li>
+<li>11</li>
+<li>21</li>
+<li>1211</li>
+<li>111221</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">   	 public String countAndSay(int n) &#123;</span><br><span class="line">	        String str=&quot;1&quot;;</span><br><span class="line">	        for(int i=2;i&lt;=n;i++)&#123;</span><br><span class="line">	            StringBuilder bulid=new StringBuilder();</span><br><span class="line">	            char c=str.charAt(0);</span><br><span class="line">	            int count=1;</span><br><span class="line">	            for(int j=1;j&lt;str.length();j++)&#123;</span><br><span class="line">	            	char t=str.charAt(j);</span><br><span class="line">	                if(c==t)</span><br><span class="line">	                   count++;</span><br><span class="line">	                else&#123;	                    </span><br><span class="line">                        bulid.append(count).append(c);</span><br><span class="line">                        count=1;</span><br><span class="line">	                    c=t;</span><br><span class="line">	                &#125;</span><br><span class="line">	            &#125;</span><br><span class="line">                bulid.append(count).append(c);</span><br><span class="line">	            str=bulid.toString();</span><br><span class="line">	        &#125;</span><br><span class="line">	        return str;</span><br><span class="line">	    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>字符串操作<br>每次new一个新的new StringBuilder();<br>在后面加上字符串用append<br>变成字符串用toString()<br>本题思路就是不断更新字符串</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">字符串</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/13/38字符串操作/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-94栈对二叉树遍历" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/13/94栈对二叉树遍历/">栈与二叉树</a>
+    </h1>
+  
+
+        
+        <a href="/2019/11/13/94栈对二叉树遍历/" class="archive-article-date">
+  	<time datetime="2019-11-13T14:39:18.313Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>二叉树中序遍历<br>递归和栈<br>递归传统没有多说的<br>注意：可以通过help返回想要的元素类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition for a binary tree node.</span><br><span class="line"> * public class TreeNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     TreeNode left;</span><br><span class="line"> *     TreeNode right;</span><br><span class="line"> *     TreeNode(int x) &#123; val = x; &#125;</span><br><span class="line"> * &#125;</span><br><span class="line"> */</span><br><span class="line">class Solution &#123;</span><br><span class="line">            public void help(TreeNode root,List&lt;Integer&gt; A)&#123;</span><br><span class="line">               if(root==null) return;</span><br><span class="line">               help(root.left,A);</span><br><span class="line">	           A.add(root.val);</span><br><span class="line">	           help(root.right,A);</span><br><span class="line">            &#125;</span><br><span class="line">    	    public List&lt;Integer&gt; inorderTraversal(TreeNode root) &#123;</span><br><span class="line">	        List&lt;Integer&gt; a=new ArrayList&lt;&gt;();</span><br><span class="line">            help(root,a);</span><br><span class="line">	        return a;</span><br><span class="line">	    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>利用Stack<br>因为左子树的插入中，节点是先进后出<br>遍历顺序为当前节点(栈顶，可以当作父节点)-&gt;其右节点-&gt;父节点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public List&lt;Integer&gt; inorderTraversal(TreeNode root) &#123;</span><br><span class="line">        Stack&lt;TreeNode&gt; q=new Stack&lt;&gt;();</span><br><span class="line">        List&lt;Integer&gt; res=new ArrayList&lt;&gt;();</span><br><span class="line">        TreeNode t=root;</span><br><span class="line">        while(t!=null||!q.isEmpty())&#123;</span><br><span class="line">             while(t!=null)&#123;</span><br><span class="line">                 q.push(t);</span><br><span class="line">                 t=t.left;</span><br><span class="line">             &#125;</span><br><span class="line">             t=q.pop();</span><br><span class="line">            res.add(t.val);</span><br><span class="line">            t=t.right;</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/13/94栈对二叉树遍历/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-58字符串基础操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -464,156 +616,9 @@
 
 
   
-    <article id="post-1第一次力扣" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/12/1第一次力扣/">第一次力扣</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/12/1第一次力扣/" class="archive-article-date">
-  	<time datetime="2019-11-12T15:11:28.496Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。</p>
-<p>你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。</p>
-<p>示例:</p>
-<p>给定 nums = [2, 7, 11, 15], target = 9</p>
-<p>因为 nums[0] + nums[1] = 2 + 7 = 9<br>所以返回 [0, 1]</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int[] twoSum(int[] nums, int target) &#123;</span><br><span class="line">	        HashMap&lt;Integer,Integer&gt; map = new HashMap&lt;&gt;();</span><br><span class="line">	        int[] res = new int[2];</span><br><span class="line">	        for (int i = 0; i &lt; nums.length; i++) &#123;</span><br><span class="line">	            int dif = target - nums[i];</span><br><span class="line">	            if (map.get(dif) != null) &#123;</span><br><span class="line">	                res[0] = map.get(dif);</span><br><span class="line">	                res[1] = i;</span><br><span class="line">	                return res;</span><br><span class="line">	            &#125;</span><br><span class="line">	            map.put(nums[i],i);</span><br><span class="line">	        &#125;</span><br><span class="line">	        return res;</span><br><span class="line">	    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>力扣第一题，经典的运用HashMap<br>思路就是如果出现了这个值的 需要的值key存在(map.get(dif) != null)，即返回下标。<br>因为存在key=数组索引<br>              value=值<br>              所以想到用HashMap</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/12/1第一次力扣/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-归并排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/11/归并排序/">归并排序</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/11/归并排序/" class="archive-article-date">
-  	<time datetime="2019-11-11T06:16:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">public static void mergeSort(int[] arr) &#123;</span><br><span class="line">    sort(arr, 0, arr.length - 1);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static void sort(int[] arr, int L, int R) &#123;</span><br><span class="line">    if(L == R) &#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    int mid = L + ((R - L) &gt;&gt; 1);</span><br><span class="line">    sort(arr, L, mid);</span><br><span class="line">    sort(arr, mid + 1, R);</span><br><span class="line">    merge(arr, L, mid, R);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static void merge(int[] arr, int L, int mid, int R) &#123;</span><br><span class="line">    int[] temp = new int[R - L + 1];</span><br><span class="line">    int i = 0;</span><br><span class="line">    int p1 = L;</span><br><span class="line">    int p2 = mid + 1;</span><br><span class="line">    // 比较左右两部分的元素，哪个小，把那个元素填入temp中</span><br><span class="line">    while(p1 &lt;= mid &amp;&amp; p2 &lt;= R) &#123;</span><br><span class="line">        temp[i++] = arr[p1] &lt; arr[p2] ? arr[p1++] : arr[p2++];</span><br><span class="line">    &#125;</span><br><span class="line">    // 上面的循环退出后，把剩余的元素依次填入到temp中</span><br><span class="line">    // 以下两个while只有一个会执行</span><br><span class="line">    while(p1 &lt;= mid) &#123;</span><br><span class="line">        temp[i++] = arr[p1++];</span><br><span class="line">    &#125;</span><br><span class="line">    while(p2 &lt;= R) &#123;</span><br><span class="line">        temp[i++] = arr[p2++];</span><br><span class="line">    &#125;</span><br><span class="line">    // 把最终的排序的结果复制给原数组</span><br><span class="line">    for(i = 0; i &lt; temp.length; i++) &#123;</span><br><span class="line">        arr[L + i] = temp[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> <strong><strong>复杂度</strong></strong></p>
-<p>时间复杂度：O(nlogn)<br>空间复杂度：O(N)，归并排序需要一个与原数组相同长度的数组做辅助来排序<br>稳定性：归并排序是稳定的排序算法，temp[i++] = arr[p1] &lt;= arr[p2] ? arr[p1++] : arr[p2++];这行代码可以保证当左右两部分的值相等的时候，先复制左边的值，这样可以保证值相等的时候两个元素的相对位置不变。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">排序</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/11/归并排序/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/22/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="page-number" href="/page/22/">22</a><span class="page-number current">23</span><a class="page-number" href="/page/24/">24</a><a class="page-number" href="/page/25/">25</a><a class="extend next" rel="next" href="/page/24/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/22/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="page-number" href="/page/22/">22</a><span class="page-number current">23</span><a class="page-number" href="/page/24/">24</a><a class="page-number" href="/page/25/">25</a><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" href="/page/24/">Next &raquo;</a>
     </nav>
   
 
@@ -764,15 +769,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -796,11 +801,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTML</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color5">HTML</a>
               </li>
              
               <li class="article-tag-list-item">
