@@ -140,6 +140,109 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-React基础入门学习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-React简介和Vue的区别"><a href="#1-React简介和Vue的区别" class="headerlink" title="1.React简介和Vue的区别"></a>1.React简介和Vue的区别</h2><h5 id="React三大体系"><a href="#React三大体系" class="headerlink" title="React三大体系"></a>React三大体系</h5><p><img src="https://img-blog.csdnimg.cn/20201011152523995.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<ul>
+<li>React.js相对于Vue.js它的灵活性和协作性更好一点，所以我在处理复杂项目或公司核心项目时，React都是我的第一选择。</li>
+<li>而Vue.js有着丰富的API，实现起来更简单快速，所以当团队不大，沟通紧密时，我会选择Vue，因为它更快速更易用。</li>
+</ul>
+<h2 id="2-基础文件目录"><a href="#2-基础文件目录" class="headerlink" title="2.基础文件目录"></a>2.基础文件目录<img src="https://img-blog.csdnimg.cn/20201011153054479.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></h2><ul>
+<li><code>README.md</code> :这个文件主要作用就是对项目的说明。</li>
+<li><code>package.json</code>: 这个文件是webpack配置和项目包管理文件，项目中依赖的第三方包（包的版本）和一些常用命令配置都在这个里边进行配置，当然脚手架已经为我们配置了一些了，目前位置，我们不需要改动。<ul>
+<li><code>package-lock.json</code>：这个文件用一句话来解释，就是锁定安装时的版本号，并且需要上传到git，以保证其他人再npm install 时大家的依赖能保证一致。</li>
+</ul>
+</li>
+<li><code>gitignore</code> : 这个是git的选择性上传的配置文件，比如一会要介绍的node_modules文件夹，就需要配置不上传。</li>
+<li><code>node_modules</code> :这个文件夹就是我们项目的依赖包，到目前位置，脚手架已经都给我们下载好了，你不需要单独安装什么。</li>
+<li><code>public</code> ：公共文件，里边有公用模板和图标等一些东西。</li>
+<li><code>src</code> ：主要代码编写文件，这个文件夹里的文件对我们来说最重要，都需要我们掌握。</li>
+</ul>
+<h3 id="src下文件"><a href="#src下文件" class="headerlink" title="src下文件"></a>src下文件</h3><ul>
+<li>index.js : 这个就是项目的入口文件，视频中我们会简单的看一下这个文件。</li>
+<li>index.css ：这个是index.js里的CSS文件。</li>
+<li>app.js : 这个文件相当于一个方法模块，也是一个简单的模块化编程。</li>
+<li>serviceWorker.js: 这个是用于写移动端开发的，PWA必须用到这个文件，有了这个文件，就相当于有了离线浏览的功能。</li>
+</ul>
+<h4 id="index-js中文件"><a href="#index-js中文件" class="headerlink" title="index.js中文件"></a>index.js中文件</h4><ul>
+<li>react.js 核心文件</li>
+<li>react-dom.js 渲染页面DOM 当前文件必须1依赖react文件</li>
+<li>babel.js 把ES6转化为ES5 把JSX语法转化为Javascript</li>
+<li>native app文件</li>
+</ul>
+<h2 id="3-什么是JXS"><a href="#3-什么是JXS" class="headerlink" title="3.什么是JXS"></a>3.什么是JXS</h2><blockquote>
+<p>什么是JXS</p>
+<ul>
+<li>定义：一个对象，很像html，但是不是。</li>
+</ul>
+<ol>
+<li>这个东西的属性不能增加和修改。（约等于object.freeze）</li>
+<li>JXS代码会被运行或者打包阶段被编译、生成浏览器可以识别的代码。</li>
+</ol>
+</blockquote>
+<blockquote>
+<p>  为什么使用JXS</p>
+</blockquote>
+<ol>
+<li>简化了语法、提高了开发效率。</li>
+<li>一个页面或者组件渲染逻辑应该与其他UI逻辑放在一起、比如事件的绑定，状态变化时，渲染内容的变化。这个合并产出就叫组件（component）。</li>
+<li>React DOM 在渲染所有输入内容之前，默认会进行转义。它可以确保在你的应用中，永远不会注入那些并非自己明确编写的内容。所有的内容在渲染之前都被转换成了字符串。这样可以有效地防止 XSS（cross-site-scripting, 跨站脚本）攻击</li>
+</ol>
+<blockquote>
+<p>注意</p>
+<ol start="4">
+<li>类选择器要改为className</li>
+<li>命名要改成小驼峰形式</li>
+<li>自定义组件必须大写字母开头</li>
+</ol>
+</blockquote>
+<h4 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">import React from <span class="string">'react'</span>;</span><br><span class="line">import ReactDOM from <span class="string">'react-dom'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> NumberList(props) &#123;</span><br><span class="line">  const numbers = props.numbers;</span><br><span class="line">  const listItems = numbers.map((number) =&gt;    &lt;li&gt;&#123;number&#125;&lt;/li&gt;  );  <span class="built_in">return</span> (</span><br><span class="line">    &lt;ul&gt;&#123;listItems&#125;&lt;/ul&gt;  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const numbers = [1, 2, 3, 4, 5];</span><br><span class="line">ReactDOM.render(</span><br><span class="line">  &lt;NumberList numbers=&#123;numbers&#125; /&gt;,  document.getElementById(<span class="string">'root'</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/10/11/React基础入门学习/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-单点登录和思考（俩种方案）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1297,126 +1400,6 @@
 
 
   
-    <article id="post-flex布局应用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/10/flex布局应用/">flex构建网站</a>
-    </h1>
-  
-
-        
-        <a href="/2020/06/10/flex布局应用/" class="archive-article-date">
-  	<time datetime="2020-06-10T08:22:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>1.最大缩放倍数和最小缩放倍数</p>
-</blockquote>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta name=<span class="string">"viewport"</span> content=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<ol start="2">
-<li><code>flex:1</code>  假如5个小li，则5个li各站五分之一</li>
-</ol>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flex：<span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<ol start="3">
-<li><code>Flex: 1</code> 和 <code>flex:0</code>   flex为0的占0份，flex为1的自适应，占剩下的全部。</li>
-</ol>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">flex：<span class="number">1</span></span><br><span class="line">flex：<span class="number">0</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<ol start="4">
-<li>设置上下对齐思路：(图片和景点颜色)<ol>
-<li>将主轴换为y轴 </li>
-<li>把侧轴设为居中对齐。<br><img src="https://img-blog.csdnimg.cn/20200609202635848.png" alt="在这里插入图片描述"></li>
-</ol>
-</li>
-</ol>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">flex-direction:column <span class="comment">//y轴变为侧轴</span></span><br><span class="line">align-items:center  <span class="comment">//y轴居中</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>5.主轴变为y轴</p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20200609203749478.png" alt="在这里插入图片描述"></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flex-direction:column;<span class="comment">//主轴设置为y轴</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<ol start="6">
-<li>怎么设置2行<ol>
-<li>儿子flex:20%（相对于父亲占20%）</li>
-<li>自动换行<br><img src="https://img-blog.csdnimg.cn/20200609204024763.png" alt="在这里插入图片描述"></li>
-</ol>
-</li>
-</ol>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.subnay-entry &#123;</span><br><span class="line">    flex-wrap:wrap;<span class="comment">//自动换行</span></span><br><span class="line">&#125;</span><br><span class="line">li &#123;</span><br><span class="line">   flex:<span class="number">20</span>%;<span class="comment">//每个占父亲的20%</span></span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">flex</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/06/10/flex布局应用/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1431,7 +1414,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2020 lkq
+    		&copy; 2021 lkq
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -1526,11 +1509,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">DFS</a>
+                <a href="javascript:void(0)" class="js-tag color2">堆</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">堆</a>
+                <a href="javascript:void(0)" class="js-tag color4">DFS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1582,11 +1565,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">前端综合</a>
+                <a href="javascript:void(0)" class="js-tag color4">Vue</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Vue</a>
+                <a href="javascript:void(0)" class="js-tag color5">前端综合</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1618,19 +1601,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">排序</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">排序算法</a>
+                <a href="javascript:void(0)" class="js-tag color3">OS</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">OS</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">排序算法</a>
               </li>
              
               <li class="article-tag-list-item">

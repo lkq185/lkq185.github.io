@@ -140,6 +140,63 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-垃圾收集器之G1和CMS" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="首先要了解串行和并行的概念"><a href="#首先要了解串行和并行的概念" class="headerlink" title="首先要了解串行和并行的概念"></a>首先要了解串行和并行的概念</h2><blockquote>
+<p>串行和并行： 串行指垃圾回收器与程序交替执行。 并行指垃圾回收器与程序一起执行(只有G1和CMS时串行)</p>
+</blockquote>
+<p>接下来引出俩种常见的垃圾收集器。</p>
+<h2 id="1-G1垃圾收集器。"><a href="#1-G1垃圾收集器。" class="headerlink" title="1.G1垃圾收集器。"></a><strong>1.G1垃圾收集器。</strong></h2><p><strong>在多CPU和大内存有很好的性能。<br>只有G1可以一起回收新生代和老年代。</strong><br><code>初始标记</code>：G1把整个堆分成若干个小部分(新生代和老年代不在隔离),可以单独回收一个小区域。根据每个区域回收空间和回收时间维护一个优先列表，优先回收价值最大的region。<br><code>并发标记：</code>每个 Region 都有一个 Re    membered Set，用来记录该 Region 对象的引用对象所在的 Region。通过使用Remembered Set，在做可达性分析的时候就可以避免全堆扫描。</p>
+<h2 id="回收步骤："><a href="#回收步骤：" class="headerlink" title="回收步骤："></a>回收步骤：</h2><p><code>1、初始标记</code>（它标记了从GC Root开始直接可达的对象）需要停止<br><code>2、并发标记</code>（从GC Roots开始对堆中对象进行可达性分析，找出存活对象）可并行<br><code>3、最终标记</code>（标记那些在并发标记阶段发生变化的对象，将被回收）可并行<br><code>4、筛选回收</code>（首先对各个Regin的回收价值和成本进行排序，根据用户所期待的GC停顿时间指定回收计划，回收一部分Region<br><strong><code>优点</code></strong>：无内存碎片，cpu利用率高。<br><strong>整体是标记整理，局部是复制。有利于连续连续执行，防止产生因为无连续内存产生gc。</strong></p>
+<h2 id="2-CMS-标记清理算法"><a href="#2-CMS-标记清理算法" class="headerlink" title="2.CMS 标记清理算法"></a>2.CMS 标记清理算法</h2><blockquote>
+<p>CMS收集器是一种以获取最短回收停顿时间为目标的收集器。</p>
+</blockquote>
+<p><strong>这是因为CMS收集器工作时，GC工作线程与用户线程可以并发执行，以此来达到降低收集停顿时间的目的。</strong><br>CMS收集器仅作用于老年代的收集，是基于<code>标记-清除</code>算法的，它的运作过程分为4个步骤：<br><code>初始标记</code>：记录GCroot到达的对象 <strong>STW</strong><br><code>并发标记</code>：进行GCrootTracing过程，耗时最长。<br><code>重新标记</code>：修正这个过程中一些对象引用的更改。<code>STW</code><br><code>并发清除</code>：不需要停顿。<br><strong>优点</strong>：并发收集，低停顿。<br><strong>缺点</strong>：吞吐量低：CPU利用率低。<br>标记清理算法产生内存碎片，会导致老年代无连续内存分配，造成full gc<br><img src="https://img-blog.csdnimg.cn/20200429224541462.png" alt="在这里插入图片描述"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/29/垃圾收集器之G1和CMS/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Java常见集合类—HashMap" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -598,69 +655,6 @@
 
 
   
-    <article id="post-安装vm12为啥弹出此安装程序不支持降级？该怎么处理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/01/21/安装vm12为啥弹出此安装程序不支持降级？该怎么处理/">如何处理VM12弹出此安装程序不支持降级</a>
-    </h1>
-  
-
-        
-        <a href="/2020/01/21/安装vm12为啥弹出此安装程序不支持降级？该怎么处理/" class="archive-article-date">
-  	<time datetime="2020-01-21T12:38:16.085Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>1从网上下载专门针对Wmare的清理工具，如图，在百度中搜索“Windows Installer Clean UP 简体中文版”来下载。<br>2.解压并安装该程序，然后就可以在“开始”-&gt;“所有程序”列表中找到“Windows Installer Clean UP”程序。<br>3.运行该程序，在打开的程序主界面中，选中与“Wmare相关”的部分，如图所示的选择，然后点击“Remove”按钮。<br>4.在弹出的窗口中点击“确定”按钮以授权进行删除操作。<br>5.接下来就可以再次运行“Wmare”虚拟机安装程序了，而且发现安装程序正常运行。（本人亲测，希望对你有所帮助）</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/01/21/安装vm12为啥弹出此安装程序不支持降级？该怎么处理/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/13/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" href="/page/15/">Next &raquo;</a>
@@ -675,7 +669,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2020 lkq
+    		&copy; 2021 lkq
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -770,11 +764,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">DFS</a>
+                <a href="javascript:void(0)" class="js-tag color2">堆</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">堆</a>
+                <a href="javascript:void(0)" class="js-tag color4">DFS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -826,11 +820,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">前端综合</a>
+                <a href="javascript:void(0)" class="js-tag color4">Vue</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Vue</a>
+                <a href="javascript:void(0)" class="js-tag color5">前端综合</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -862,19 +856,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">排序</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">排序算法</a>
+                <a href="javascript:void(0)" class="js-tag color3">OS</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">OS</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">排序算法</a>
               </li>
              
               <li class="article-tag-list-item">

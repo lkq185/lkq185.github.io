@@ -140,6 +140,96 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-72最小变化次数 动态规划" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/26/72最小变化次数 动态规划/">最小单词变化次数</a>
+    </h1>
+  
+
+        
+        <a href="/2019/11/26/72最小变化次数 动态规划/" class="archive-article-date">
+  	<time datetime="2019-11-26T02:31:07.848Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="最小单词变化次数"><a href="#最小单词变化次数" class="headerlink" title="最小单词变化次数"></a>最小单词变化次数</h2><p>给定两个单词 word1 和 word2，计算出将 word1 转换成 word2 所使用的最少操作数 。</p>
+<p>你可以对一个单词进行如下三种操作：</p>
+<pre><code>插入一个字符
+删除一个字符
+替换一个字符</code></pre><p>示例 1:</p>
+<p>输入: word1 = “horse”, word2 = “ros”<br>输出: 3<br>解释:<br>horse -&gt; rorse (将 ‘h’ 替换为 ‘r’)<br>rorse -&gt; rose (删除 ‘r’)<br>rose -&gt; ros (删除 ‘e’)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int minDistance(String word1, String word2) &#123;</span><br><span class="line">        int n=word1.length();</span><br><span class="line">        int m=word2.length();</span><br><span class="line">        int dp[][]=new int[n+1][m+1];</span><br><span class="line">        for(int i=0;i&lt;=m;i++) dp[0][i]=i;</span><br><span class="line">        for(int i=0;i&lt;=n;i++) dp[i][0]=i;</span><br><span class="line">        for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">            for(int j=0;j&lt;m;j++)&#123;</span><br><span class="line">                if(word1.charAt(i)==word2.charAt(j))</span><br><span class="line">                   dp[i+1][j+1]=dp[i][j];</span><br><span class="line">                else</span><br><span class="line">                   dp[i+1][j+1]=Math.min(Math.min(dp[i][j],dp[i+1][j]),dp[i][j+1])+1;//dp[i][j]代表替换操作,dp[i+1][j]代表删除操作，dp[i][j+1]代表增加操作</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[n][m];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当 word1[i] == word2[j]，dp[i][j] = dp[i-1][j-1]；<br>相当于最后一位是一样的，这一位就不用操作，只看前面的就行</p>
+<p>当 word1[i] != word2[j]，dp[i][j] = min(dp[i-1][j-1], dp[i-1][j], dp[i][j-1]) + 1</p>
+<p>最后一位不一样，3种方法：<br>1.dp[i-1][j-1] 表示替换操作，只需要直接替换最后一位就行，这时就是前i-1 j-1的+1<br>2.dp[i-1][j]删除操作， hors horse 前4个 前5个 ，只要删一个就行<br>3.dp[i][j-1] 表示插入操作，horse hors，插入一个s<br>返回dp[-1][-1]</p>
+<p><img src="https://img-blog.csdnimg.cn/2019112610293031.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="image.png"></p>
+<p>红色字代表word1[i] == word2[j]，dp[i][j] = dp[i-1][j-1]，和左上那个格一样</p>
+<p>用黄色格子举例，对应的操作为’ho’ -&gt; ‘r’</p>
+<p>首先判断word1[i] != word2[j]，因为r!=o，所以dp[i][j] = min(dp[i-1][j-1], dp[i-1][j], dp[i][j-1]) + 1，找黄色格子上方，左方，左上最小的那个值+1就得到。可以看到，上方和左上+1都满足条件，对应的操作为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.换掉h，删掉o，2，从上方格子来，dp[i-1][j]+1，删除操作</span><br><span class="line">2.删掉h，换掉o，2，从左上的格子来，dp[i-1][j-1]+1替换操作</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">dp</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/26/72最小变化次数 动态规划/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-144 589 590二叉树和n叉树前序遍历" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -563,95 +653,6 @@ C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。</code><
 
 
   
-    <article id="post-46 47 22全排列和括号生成" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/24/46 47 22全排列和括号生成/">回溯求全排列和全排列变形(括号生成)</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/24/46 47 22全排列和括号生成/" class="archive-article-date">
-  	<time datetime="2019-11-24T01:42:52.723Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="全排列46"><a href="#全排列46" class="headerlink" title="全排列46"></a>全排列46</h2><p>给定一个没有重复数字的序列，返回其所有可能的全排列。</p>
-<p>示例:</p>
-<p>输入: [1,2,3]<br>输出:<br>[<br>  [1,2,3],<br>  [1,3,2],<br>  [2,1,3],<br>  [2,3,1],<br>  [3,1,2],<br>  [3,2,1]<br>]</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt; res= new LinkedList();</span><br><span class="line">    int n;</span><br><span class="line">    public void back(int nums[],LinkedList&lt;Integer&gt; cur,int h[])&#123;</span><br><span class="line">        if(cur.size()==n)&#123;</span><br><span class="line">           res.add(new LinkedList(cur));</span><br><span class="line">           return;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">           if(h[i]!=0)</span><br><span class="line">           continue;</span><br><span class="line">           cur.add(nums[i]);</span><br><span class="line">           h[i]=1;</span><br><span class="line">           back(nums,cur,h);</span><br><span class="line">           h[i]=0;</span><br><span class="line">           cur.removeLast(); //除去最后一个元素</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public List&lt;List&lt;Integer&gt;&gt; permute(int[] nums) &#123;</span><br><span class="line">        int n=nums.length;</span><br><span class="line">        this.n=n; //全局变量设置</span><br><span class="line">        int used[]=new int[n]; </span><br><span class="line">        back(nums,new LinkedList&lt;Integer&gt;(),used);</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://img-blog.csdnimg.cn/20191119225124487.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">以n叉树的思想就行递归和回溯</p>
-<h2 id="47有重复数全排列"><a href="#47有重复数全排列" class="headerlink" title="47有重复数全排列"></a>47有重复数全排列</h2><p>给定一个可包含重复数字的序列，返回所有不重复的全排列。</p>
-<p>示例:</p>
-<p>输入: [1,1,2]<br>输出:<br>[<br>  [1,1,2],<br>  [1,2,1],<br>  [2,1,1]<br>]</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt; res= new LinkedList();</span><br><span class="line">    int n;</span><br><span class="line">    int h[]=new int[100];</span><br><span class="line">    public void init(int n)&#123;</span><br><span class="line">        this.n=n;</span><br><span class="line">    &#125;</span><br><span class="line">    public void back(int nums[],LinkedList&lt;Integer&gt; cur)&#123;</span><br><span class="line">        if(cur.size()==n&amp;&amp;res.contains(cur)==false)&#123;</span><br><span class="line">           res.add(new LinkedList(cur));</span><br><span class="line">           return;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">           if(h[i]!=0)</span><br><span class="line">           continue;</span><br><span class="line">           cur.add(nums[i]);</span><br><span class="line">           h[i]=1;</span><br><span class="line">           back(nums,cur);</span><br><span class="line">           h[i]=0;</span><br><span class="line">           cur.removeLast();//除去最后一个元素</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public List&lt;List&lt;Integer&gt;&gt; permuteUnique(int[] nums) &#123;</span><br><span class="line">        int n=nums.length;</span><br><span class="line">        init(n);</span><br><span class="line">        back(nums,new LinkedList&lt;Integer&gt;());</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="22-括号生成"><a href="#22-括号生成" class="headerlink" title="22. 括号生成"></a>22. 括号生成</h2><p>给出 n 代表生成括号的对数，请你写出一个函数，使其能够生成所有可能的并且有效的括号组合。</p>
-<p>例如，给出 n = 3，生成结果为：</p>
-<p>[<br>  “((()))”,<br>  “(()())”,<br>  “(())()”,<br>  “()(())”,<br>  “()()()”<br>]</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;//必须有左括号才能右括号，只要右括号数小于左括号，总有左括号和右括号匹配</span><br><span class="line">    List&lt;String&gt; res=new ArrayList&lt;&gt;();</span><br><span class="line">    public void dfs(String t,int left,int right)&#123;</span><br><span class="line">         if(left==0&amp;&amp;right==0)&#123;</span><br><span class="line">             res.add(t);</span><br><span class="line">             return;</span><br><span class="line">         &#125;</span><br><span class="line">         if(left&gt;0)&#123;</span><br><span class="line">           dfs(t+&quot;(&quot;,left-1,right);</span><br><span class="line">         &#125;</span><br><span class="line">         if(right&gt;left)&#123;//right剩余比left多，保证left永远比right值小</span><br><span class="line">             dfs(t+&quot;)&quot;,left,right-1);</span><br><span class="line">         &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public List&lt;String&gt; generateParenthesis(int n) &#123;</span><br><span class="line">        dfs(&quot;&quot;,n,n);</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">回溯</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/24/46 47 22全排列和括号生成/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/19/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="page-number" href="/page/19/">19</a><span class="page-number current">20</span><a class="page-number" href="/page/21/">21</a><a class="page-number" href="/page/22/">22</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" href="/page/21/">Next &raquo;</a>
@@ -666,7 +667,7 @@ C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。</code><
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2020 lkq
+    		&copy; 2021 lkq
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -761,11 +762,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">DFS</a>
+                <a href="javascript:void(0)" class="js-tag color2">堆</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">堆</a>
+                <a href="javascript:void(0)" class="js-tag color4">DFS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -817,11 +818,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">前端综合</a>
+                <a href="javascript:void(0)" class="js-tag color4">Vue</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Vue</a>
+                <a href="javascript:void(0)" class="js-tag color5">前端综合</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -853,19 +854,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">排序</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">排序算法</a>
+                <a href="javascript:void(0)" class="js-tag color3">OS</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">OS</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">排序算法</a>
               </li>
              
               <li class="article-tag-list-item">

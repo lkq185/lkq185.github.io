@@ -140,6 +140,182 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Vue学习1-基础本地应用(text、html、on)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/08/Vue学习1-基础本地应用(text、html、on)/">Vue学习1-MVVM和基础应用(cloak/text/html/pre/on和时间修饰符)</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/08/Vue学习1-基础本地应用(text、html、on)/" class="archive-article-date">
+  	<time datetime="2020-05-08T13:56:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Vue特点"><a href="#Vue特点" class="headerlink" title="Vue特点"></a>Vue特点</h2><ul>
+<li>JavaScript框架</li>
+<li>简化Dom操作</li>
+<li>响应式数据驱动</li>
+</ul>
+<h2 id="第一个Vue程序"><a href="#第一个Vue程序" class="headerlink" title="第一个Vue程序"></a>第一个Vue程序</h2><ol>
+<li>导入   <code>&lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&quot;&gt;&lt;/script&gt;</code></li>
+<li>设置el和data。用#app管理id叫app的元素。</li>
+</ol>
+<ul>
+<li>el：元素挂载位置（告诉元素填充的位置），值是DOM元素或者CSS选择器</li>
+<li>data：模型数据，值是一个对象。</li>
+<li>代码运行：Vue语法通过Vue框架转化为原生语法</li>
+<li>如何前段渲染：把数据填充到html标签里</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">   &#123;&#123;message&#125;&#125;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;script src="https:/</span><span class="regexp">/cdn.jsdelivr.net/</span>npm/vue/dist/vue.js<span class="string">"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="string">&lt;script&gt;</span></span><br><span class="line"><span class="string">    var app=new Vue(&#123;</span></span><br><span class="line"><span class="string">        // #是id选择器，告诉el去管理id叫做app的元素</span></span><br><span class="line">        el:"#app",</span><br><span class="line">        data:&#123;</span><br><span class="line">            message:<span class="string">"Hello Vue!"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Vue实例作用范围?<br>是否可以使用其他选择器？<br>是否可以设置其他dom元素（除了div）</p>
+</blockquote>
+<ol>
+<li>只在标签里面可以或者标签里的子孙。</li>
+<li>可以使用其他选择器。建议用id选择器。</li>
+<li>不能用单标签。双标签不可以的情况：<code>html</code>或者<code>body</code></li>
+</ol>
+<h2 id="data数据"><a href="#data数据" class="headerlink" title="data数据"></a>data数据</h2><blockquote>
+<p>其他数据类型的使用</p>
+</blockquote>
+<ul>
+<li><p>对象使用</p>
+   
+</li>
+<li><p>数组使用</p>
+   
+
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> app=<span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    <span class="comment">// #是id选择器，告诉el去管理id叫做app的元素</span></span><br><span class="line">    el:<span class="string">"#app"</span>,</span><br><span class="line">    data:&#123;</span><br><span class="line">        message:<span class="string">"Hello Vue!"</span>,</span><br><span class="line">        school:&#123;</span><br><span class="line">            name:<span class="string">"大学生"</span>,</span><br><span class="line">            mobile:<span class="string">"13334"</span></span><br><span class="line">        &#125;,</span><br><span class="line">        array:[<span class="string">"沈阳"</span>,<span class="string">"大连"</span>]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="本地应用"><a href="#本地应用" class="headerlink" title="本地应用"></a>本地应用</h2><h2 id="1-v-text-v-cloak"><a href="#1-v-text-v-cloak" class="headerlink" title="1.v-text v-cloak"></a>1.v-text v-cloak</h2><ul>
+<li>v-text指令用于将数据填充到标签中，作用于插值表达式类似</li>
+<li>与v-cloak相比，没有闪动问题。</li>
+<li>如果数据中有HTML标签会将html标签一并输出</li>
+<li>注意：此处为单向绑定，数据对象上的值改变，插值会发生变化；但是当插值发生变化并不会影响数据对象的值</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;h2 v-text=<span class="string">"message"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line">&lt;h2&gt;&#123;&#123;message&#125;&#125;&lt;<span class="regexp">/h2&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20200508193421114.png" alt="在这里插入图片描述"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;h2 v-text=<span class="string">"message"</span>&gt;hhh&lt;<span class="regexp">/h2&gt;</span></span><br><span class="line"><span class="regexp">&lt;h2&gt;&#123;&#123;message&#125;&#125;hhh&lt;/</span>h2&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>字符串拼接</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20200508193750315.png" alt="在这里插入图片描述"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;h2 v-text=<span class="string">"message+'hh'"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line">&lt;h2&gt;&#123;&#123;message+<span class="string">'hhh'</span>&#125;&#125;&lt;<span class="regexp">/h2&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-v-html-v-pre"><a href="#2-v-html-v-pre" class="headerlink" title="2.v-html v-pre"></a>2.v-html v-pre</h2><ul>
+<li>三种形式一模一样。</li>
+<li>用法和v-text 相似  但是他可以将HTML片段填充到标签中</li>
+<li>可能有安全问题, 一般只在可信任内容上使用 <code>v-html</code>，<strong>永不</strong>用在用户提交的内容上</li>
+<li>它与v-text区别在于v-text输出的是纯文本，浏览器不会对其再进行html解析，但v-html会将其当html标签解析后输出。</li>
+<li>更危险，可能导致XSS攻击，不能用在用户提交的内容上</li>
+<li>v-pre：跳过编辑过程，就是跟不用Vue框架没区别</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">   &lt;h2 v-html=<span class="string">"message"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line">   &lt;h2 v-text=<span class="string">"message"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line">   &lt;h2&gt;&#123;&#123;message&#125;&#125;&lt;<span class="regexp">/h2&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>div&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>放链接，text不能渲染标签内容，如链接a。<img src="https://img-blog.csdnimg.cn/20200508194455352.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">   &lt;h2 v-html=<span class="string">"message"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line">   &lt;h2 v-text=<span class="string">"message"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line">   &lt;h2&gt;&#123;&#123;message&#125;&#125;&lt;<span class="regexp">/h2&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>div&gt;</span><br><span class="line">&lt;script src=<span class="string">"https://cdn.jsdelivr.net/npm/vue/dist/vue.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">var</span> app=<span class="keyword">new</span> Vue(&#123;</span><br><span class="line">      el:<span class="string">"#app"</span>,</span><br><span class="line">      data: &#123;</span><br><span class="line">          message:<span class="string">"&lt;a href='https://www.baidu.com'&gt;百度&lt;/a&gt;"</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-v-on事件绑定"><a href="#3-v-on事件绑定" class="headerlink" title="3. v-on事件绑定"></a>3. v-on事件绑定</h2><ul>
+<li><p>含义：点击按钮后，出现method方法里内容。<code>@click</code>和v-<code>on:click</code>都是点击一次之后，实现<code>methods</code>方法。<code>@dblclick</code>则是双击之后实现函数方法。</p>
+</li>
+<li><p>v-on:click 鼠标点击</p>
+</li>
+<li><p>v-on:keyup 键盘抬起</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">   &lt;input type=<span class="string">"button"</span> value=<span class="string">"v-on指令"</span> v-on:click=<span class="string">"doIt"</span>&gt;</span><br><span class="line">   &lt;input type=<span class="string">"button"</span> value=<span class="string">"v-on简写"</span> @click=<span class="string">"doIt"</span>&gt;</span><br><span class="line">   &lt;input type=<span class="string">"button"</span> value=<span class="string">"双击事件"</span> @dblclick=<span class="string">"doIt"</span>&gt;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;script&gt;</span></span><br><span class="line"><span class="regexp">    var app=new Vue(&#123;</span></span><br><span class="line"><span class="regexp">      el:"#app",</span></span><br><span class="line"><span class="regexp">      methods:&#123;</span></span><br><span class="line"><span class="regexp">          doIt:function()&#123;</span></span><br><span class="line"><span class="regexp">              alert("做it");</span></span><br><span class="line"><span class="regexp">          &#125;,</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">    &#125;)</span></span><br><span class="line"><span class="regexp">&lt;/</span>script&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>左键单击一次出现出现很好吃，俩次就是蛋炒饭很好吃很好吃。</p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">   &lt;h2 @click=<span class="string">"changeFood"</span>&gt;&#123;&#123;food&#125;&#125;&lt;<span class="regexp">/h2&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>div&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">var</span> app=<span class="keyword">new</span> Vue(&#123;</span><br><span class="line">      el:<span class="string">"#app"</span>,</span><br><span class="line">      data:&#123;</span><br><span class="line">          food:<span class="string">"蛋炒饭"</span></span><br><span class="line">      &#125;,</span><br><span class="line">      changeFood:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="comment">// console.log(this.food);</span></span><br><span class="line">        <span class="keyword">this</span>.food+=<span class="string">"很好吃"</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="4-事件修饰符"><a href="#4-事件修饰符" class="headerlink" title="4. 事件修饰符"></a>4. 事件修饰符</h2><h3 id="阻止冒泡"><a href="#阻止冒泡" class="headerlink" title="阻止冒泡"></a>阻止冒泡</h3><ul>
+<li><p>js里用event.stopPropagation()、Vue用事件修饰符，<div v-on:click.stop>(子元素)</div></p>
+</li>
+<li><p>js在父元素，Vue在子元素添加</p>
+<h3 id="阻止默认行为：如a标签的跳转。"><a href="#阻止默认行为：如a标签的跳转。" class="headerlink" title="阻止默认行为：如a标签的跳转。"></a>阻止默认行为：如a标签的跳转。</h3></li>
+<li><a href v-on:click.prevent></a></li>
+<li><p>event.preventDefault</p>
+</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20200508201000515.png" alt="在这里插入图片描述"></p>
+<h2 id="MVVM"><a href="#MVVM" class="headerlink" title="MVVM"></a>MVVM</h2><ul>
+<li>采用分治思想。将不同的功能代码放在不同模块里，在建立起关系。</li>
+<li>MVC 是后端的分层开发概念； MVVM是前端视图层的概念，主要关注于 视图层分离，也就是说：MVVM把前端的视图层，分为了 三部分 Model, View , VM ViewModel</li>
+<li>m   model（模板）数据。数据层Vue中 数据层 都放在 data 里面</li>
+<li>v   view（DOM元素）视图。Vue中view即我们的HTML页面  </li>
+<li>vm   （view-model）控制器将数据和视图层建立联系vm 即  Vue 的实例  就是 vm </li>
+<li>从view到model层，用的就是DOM Listeners事件监听</li>
+<li>从model到view，用到了Data Bindings 视图绑定。</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Vue</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/08/Vue学习1-基础本地应用(text、html、on)/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-ES6的内置对象扩展" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -933,108 +1109,6 @@
 
 
   
-    <article id="post-深拷贝和浅拷贝" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/06/深拷贝和浅拷贝/">深拷贝和浅拷贝</a>
-    </h1>
-  
-
-        
-        <a href="/2020/05/06/深拷贝和浅拷贝/" class="archive-article-date">
-  	<time datetime="2020-05-05T17:08:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="深拷贝和浅拷贝"><a href="#深拷贝和浅拷贝" class="headerlink" title="深拷贝和浅拷贝"></a>深拷贝和浅拷贝</h2><ul>
-<li>浅拷贝只是拷贝一层，更深层次对象级别的只拷贝引用。</li>
-<li>深拷贝拷贝多层，每一级数据都会拷贝。</li>
-</ul>
-<h2 id="浅拷贝："><a href="#浅拷贝：" class="headerlink" title="浅拷贝："></a>浅拷贝：</h2><p><img src="https://img-blog.csdnimg.cn/20200506004625787.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<blockquote>
-<p>造成的问题</p>
-</blockquote>
-<ul>
-<li>把深层次的地址拷贝给了赋值对象。赋值对象更改深层次属性时，原对象也会发生改变。</li>
-<li>原理：俩个对象指向同一块区域，共享属性</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">var</span> obj=&#123;</span><br><span class="line">        id:<span class="number">1</span>,</span><br><span class="line">        name:<span class="string">'andy'</span>,</span><br><span class="line">        msg:&#123;</span><br><span class="line">            age:<span class="number">18</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">var</span> o=&#123;&#125;;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> k <span class="keyword">in</span> obj)&#123;</span><br><span class="line">        <span class="comment">//k是属性名 obj[k]属性值</span></span><br><span class="line">        o[k]=obj[k];</span><br><span class="line">    &#125;</span><br><span class="line">    o.msg.age=<span class="number">20</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(o.msg.age);<span class="comment">//20</span></span><br><span class="line">    <span class="built_in">console</span>.log(obj.msg.age);<span class="comment">//20</span></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>浅拷贝方式。把obj浅拷贝给o</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.assign(o,obj);</span><br></pre></td></tr></table></figure>
-
-<h2 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h2><p><img src="https://img-blog.csdnimg.cn/20200506004611319.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<ul>
-<li>把深层次的地址拷贝给了赋值对象。赋值对象更改深层次属性时，原对象不会发生改变。</li>
-<li>原理：赋值对象开辟了一个新的空间，指向了新的空间。</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">     &lt;script&gt;</span><br><span class="line">         <span class="keyword">var</span> obj=&#123;</span><br><span class="line">             id:<span class="number">1</span>,</span><br><span class="line">             name:<span class="string">'andy'</span>,</span><br><span class="line">             msg:&#123;</span><br><span class="line">                 age:<span class="number">18</span></span><br><span class="line">             &#125;,</span><br><span class="line">             color:[<span class="string">'pink'</span>,<span class="string">'red'</span>]</span><br><span class="line">         &#125;;</span><br><span class="line">         <span class="keyword">var</span> o=&#123;&#125;;</span><br><span class="line">         <span class="function"><span class="keyword">function</span> <span class="title">deepCopy</span>(<span class="params">newobj,oldobj</span>)</span>&#123;</span><br><span class="line">             <span class="keyword">for</span>(<span class="keyword">var</span> k <span class="keyword">in</span> oldobj)&#123;</span><br><span class="line">                <span class="comment">//判断属性属于简单还是复杂数据类型</span></span><br><span class="line">               <span class="comment">//1.获取属性值 oldobj[k]</span></span><br><span class="line">               <span class="keyword">var</span> item=oldobj[k];</span><br><span class="line">               <span class="comment">//2.判断这个值是不是数组</span></span><br><span class="line">               <span class="keyword">if</span>(item <span class="keyword">instanceof</span> <span class="built_in">Array</span>)&#123;</span><br><span class="line">                 newobj[k]=[];</span><br><span class="line">                 <span class="comment">//等于o.color=[]，下一层;</span></span><br><span class="line">                 deepCopy(newobj[k],item);</span><br><span class="line">               &#125;<span class="keyword">else</span> <span class="keyword">if</span>(item <span class="keyword">instanceof</span> <span class="built_in">Object</span>)&#123;</span><br><span class="line">                  <span class="comment">//3.判断是否为对象</span></span><br><span class="line">                  newobj[k]=&#123;&#125;;</span><br><span class="line">                  deepCopy(newobj[k],item);</span><br><span class="line">               &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                 <span class="comment">//4.判断是否为简单数据类型</span></span><br><span class="line">                 <span class="comment">//进行赋值</span></span><br><span class="line">                 newobj[k]=item;</span><br><span class="line">               &#125;           </span><br><span class="line">             &#125;</span><br><span class="line">         &#125;</span><br><span class="line">         deepCopy(o,obj);</span><br><span class="line">         <span class="built_in">console</span>.log(o);</span><br><span class="line">  &lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>进行赋值 newobj[k]=item;</p>
-</blockquote>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/06/深拷贝和浅拷贝/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/9/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" href="/page/11/">Next &raquo;</a>
@@ -1049,7 +1123,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2020 lkq
+    		&copy; 2021 lkq
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -1144,11 +1218,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">DFS</a>
+                <a href="javascript:void(0)" class="js-tag color2">堆</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">堆</a>
+                <a href="javascript:void(0)" class="js-tag color4">DFS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1200,11 +1274,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">前端综合</a>
+                <a href="javascript:void(0)" class="js-tag color4">Vue</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Vue</a>
+                <a href="javascript:void(0)" class="js-tag color5">前端综合</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1236,19 +1310,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">排序</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">排序算法</a>
+                <a href="javascript:void(0)" class="js-tag color3">OS</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">OS</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">排序算法</a>
               </li>
              
               <li class="article-tag-list-item">

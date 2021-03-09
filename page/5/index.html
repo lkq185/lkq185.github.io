@@ -140,6 +140,298 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-webpack打包学习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/22/webpack打包学习/">webpack打包学习</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/22/webpack打包学习/" class="archive-article-date">
+  	<time datetime="2020-05-21T17:42:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="webpack的概念"><a href="#webpack的概念" class="headerlink" title="webpack的概念"></a>webpack的概念</h2><p>-webpack是一个流行的前端项目构建工具，可以解决目前web开发的困境。</p>
+<ul>
+<li>webpack提供了模块化支持，代码压缩混淆，解决js兼容问题，性能优化等特性，提高了开发效率和项目的可维护性</li>
+</ul>
+<h2 id="webpack的基本使用"><a href="#webpack的基本使用" class="headerlink" title="webpack的基本使用"></a>webpack的基本使用</h2><ol>
+<li>创建项目目录并初始化，创建项目，并打开项目所在目录的终端，输入命令：<code>npm init -y</code></li>
+<li>创建首页及js文件。在项目目录中创建index.html页面，并初始化页面结构：在页面中摆放一个ul，ul里面放置几个li。在项目目录中创建js文件夹，并在文件夹中创建index.js文件</li>
+<li>安装jQuery。打开项目目录终端，输入命令:npm install jQuery -S</li>
+<li>导入jQuery。打开index.js文件，编写代码导入jQuery并实现功能：</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> $ <span class="keyword">from</span> <span class="string">"jquery"</span>;</span><br><span class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    $(<span class="string">"li:odd"</span>).css(<span class="string">"background"</span>,<span class="string">"cyan"</span>);</span><br><span class="line">    $(<span class="string">"li:odd"</span>).css(<span class="string">"background"</span>,<span class="string">"pink"</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>注意：此时项目运行会有错误，因为import $ from “jquery”;这句代码属于ES6的新语法代码，在浏览器中可能会存在兼容性问题</li>
+<li>所以我们需要webpack来帮助我们解决这个问题。</li>
+</ul>
+<blockquote>
+<p>安装webpack</p>
+</blockquote>
+<p>   1). 打开项目目录终端，输入命令 <code>npm install webpack webpack-cli -D</code><br>    2.) 然后在项目根目录中，创建一个 <code>webpack.config.js</code> 的配置文件用来配置webpack<br>    3). 在 webpack.config.js 文件中编写代码进行webpack配置，mode是编译模式</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">    </span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    mode:<span class="string">"development"</span><span class="comment">//可以设置为development(开发模式)，production(发布模式)</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>补充：mode设置的是项目的编译模式。</li>
+<li>如果设置为development则表示项目处于开发阶段，不会进行压缩和混淆，打包速度会快一些。<ul>
+<li>如果设置为production则表示项目处于上线发布阶段，会进行压缩和混淆，打包速度会慢一些<br>4). 修改项目中的package.json文件添加运行脚本dev，如下：</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"scripts"</span>:&#123;</span><br><span class="line">    <span class="string">"dev"</span>:<span class="string">"webpack"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>   注意：scripts节点下的脚本，可以通过 npm run 运行，如：<br>    运行终端命令：npm run dev<br>    将会启动webpack进行项目打包</p>
+<p> 5). 运行dev命令进行项目打包，并在页面中引入项目打包生成的js文件。打开项目目录终端，输入命令:<code>npm run dev</code><br> 6). 等待webpack打包完毕之后，找到默认的dist路径中生成的main.js文件，将其引入到html页面中。</p>
+<h2 id="设置webpack的打包入口-出口"><a href="#设置webpack的打包入口-出口" class="headerlink" title="设置webpack的打包入口/出口"></a>设置webpack的打包入口/出口</h2><ul>
+<li>在webpack 4.x中，默认会将src/index.js 作为默认的打包入口js文件,默认会将dist/main.js 作为默认的打包输出js文件。</li>
+<li>如果不想使用默认的入口/出口js文件，我们可以通过改变 <code>webpack.config.js</code> 来设置入口/出口的js文件，如下：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">"path"</span>);</span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    mode:<span class="string">"development"</span>,</span><br><span class="line">    <span class="comment">//设置入口文件路径</span></span><br><span class="line">    entry: path.join(__dirname,<span class="string">"./src/xx.js"</span>),</span><br><span class="line">    <span class="comment">//设置出口文件</span></span><br><span class="line">    output:&#123;</span><br><span class="line">        <span class="comment">//设置路径</span></span><br><span class="line">        path:path.join(__dirname,<span class="string">"./dist"</span>),</span><br><span class="line">        <span class="comment">//设置文件名</span></span><br><span class="line">        filename:<span class="string">"res.js"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="设置webpack的自动打包"><a href="#设置webpack的自动打包" class="headerlink" title="设置webpack的自动打包"></a>设置webpack的自动打包</h2><ul>
+<li>默认情况下，我们更改入口js文件的代码，需要重新运行命令打包webpack，才能生成出口的js文件。</li>
+<li>那么每次都要重新执行命令打包，这是一个非常繁琐的事情，那么，自动打包可以解决这样繁琐的操作。</li>
+</ul>
+<blockquote>
+<p> 实现自动打包功能的步骤如下：</p>
+</blockquote>
+<ol>
+<li>安装自动打包功能的包webpack-dev-server:<code>npm install webpack-dev-server -D</code><ol start="2">
+<li>修改package.json中的dev指令如下：</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"scripts"</span>:&#123;</span><br><span class="line">    <span class="string">"dev"</span>:<span class="string">"webpack-dev-server"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>将引入的js文件路径更改为：<code>&lt;script src=&quot;/bundle.js&quot;&gt;&lt;/script&gt;</code></li>
+<li>运行<code>npm run dev</code>，进行打包</li>
+<li>打开网址查看效果：<code>http://localhost:8080</code></li>
+</ol>
+<ul>
+<li>注意：webpack-dev-server自动打包的输出文件，默认放到了服务器的根目录中，<code>http://localhost:8080</code></li>
+<li>webpack-dev-serve打包生成的bundle.js生存在内存中，不在磁盘中。（index中的src = bundle.js）</li>
+<li>补充：在自动打包完毕之后，默认打开服务器网页，实现方式就是打开package.json文件，修改dev命令：<code>&quot;dev&quot;: &quot;webpack-dev-server --open --host 127.0.0.1 --port 9999&quot;</code></li>
+</ul>
+<h2 id="配置html-webpack-plugin"><a href="#配置html-webpack-plugin" class="headerlink" title="配置html-webpack-plugin"></a>配置html-webpack-plugin</h2><ul>
+<li>使首页就有我们想要的东西</li>
+<li>使用html-webpack-plugin 可以生成一个预览页面。<ul>
+<li>因为当我们访问默认的 <a href="http://localhost:8080/的时候，看到的是一些文件和文件夹，想要查看我们的页面还需要点击文件夹点击文件才能查看，那么我们希望默认就能看到一个页面，而不是看到文件夹或者目录。" target="_blank" rel="noopener">http://localhost:8080/的时候，看到的是一些文件和文件夹，想要查看我们的页面还需要点击文件夹点击文件才能查看，那么我们希望默认就能看到一个页面，而不是看到文件夹或者目录。</a><blockquote>
+<p> 实现默认预览页面功能的步骤如下：</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>安装默认预览功能的包html-webpack-plugin:<code>npm install html-webpack-plugin -D</code></li>
+<li>修改<code>webpack.config.js</code>文件，如下：</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//导入包</span></span><br><span class="line"><span class="keyword">const</span> HtmlWebpackPlugin = <span class="built_in">require</span>(<span class="string">"html-webpack-plugin"</span>);</span><br><span class="line"><span class="comment">//创建对象</span></span><br><span class="line"><span class="keyword">const</span> htmlPlugin = <span class="keyword">new</span> HtmlWebpackPlugin(&#123;</span><br><span class="line">    <span class="comment">//设置生成预览页面的模板文件</span></span><br><span class="line">    template:<span class="string">"./src/index.html"</span>,</span><br><span class="line">    <span class="comment">//设置生成的预览页面名称</span></span><br><span class="line">    filename:<span class="string">"index.html"</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>继续修改<code>webpack.config.js</code>文件，添加plugins信息：</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    ......</span><br><span class="line">    plugins:[ htmlPlugin ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="webpack中的加载器"><a href="#webpack中的加载器" class="headerlink" title="webpack中的加载器"></a>webpack中的加载器</h2><ul>
+<li>通过loader打包非js模块：默认情况下，webpack<code>只能打包js文件</code>，如果想要打包非js文件，如css文件需要调用<code>loader加载器</code>才能打包</li>
+</ul>
+<blockquote>
+<p>   loader加载器包含：</p>
+</blockquote>
+<p>   1).less-loader<br>   2).sass-loader<br>   3).url-loader:打包处理css中与url路径有关的文件<br>   4).babel-loader:处理高级js语法的加载器<br>   5).postcss-loader<br>   6).css-loader,style-loader</p>
+<ul>
+<li>注意：指定多个loader时的顺序是固定的，而调用loader的顺序是从后向前进行调用</li>
+</ul>
+<blockquote>
+<p>   步骤</p>
+</blockquote>
+<ol>
+<li>安装style-loader,css-loader来处理样式文件<code>npm install style-loader css-loader -D</code></li>
+<li>配置规则：更改<code>webpack.config.js</code>的module中的rules数组。use数组中loarder顺序是固定的，从后往前调用。use数组中调用顺序是固定的。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">            ......</span><br><span class="line">            plugins:[ htmlPlugin ],</span><br><span class="line">            <span class="built_in">module</span> : &#123;</span><br><span class="line">                rules:[</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="comment">//test设置需要匹配的文件类型，支持正则</span></span><br><span class="line">                        test:<span class="regexp">/\.css$/</span>,</span><br><span class="line">                        <span class="comment">//use表示该文件类型需要调用的loader</span></span><br><span class="line">                        use:[<span class="string">'style-loader'</span>,<span class="string">'css-loader'</span>]</span><br><span class="line">                    &#125;</span><br><span class="line">                ]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<blockquote>
+<p>安装less,less-loader处理less文件</p>
+</blockquote>
+<ol>
+<li>安装包<code>npm install less-loader less -D</code>，安装它之前，必须安装前一个文件。</li>
+<li>配置规则：更改<code>webpack.config.js</code>的module中的rules数组</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">            ......</span><br><span class="line">            plugins:[ htmlPlugin ],</span><br><span class="line">            <span class="built_in">module</span> : &#123;</span><br><span class="line">                rules:[</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="comment">//test设置需要匹配的文件类型，支持正则</span></span><br><span class="line">                        test:<span class="regexp">/\.css$/</span>,</span><br><span class="line">                        <span class="comment">//use表示该文件类型需要调用的loader</span></span><br><span class="line">                        use:[<span class="string">'style-loader'</span>,<span class="string">'css-loader'</span>]</span><br><span class="line">                    &#125;,</span><br><span class="line">                    &#123;</span><br><span class="line">                        test:<span class="regexp">/\.less$/</span>,</span><br><span class="line">                        use:[<span class="string">'style-loader'</span>,<span class="string">'css-loader'</span>,<span class="string">'less-loader'</span>]</span><br><span class="line">                    &#125;</span><br><span class="line">                ]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>安装sass-loader,node-sass处理less文件</p>
+</blockquote>
+<p>1.安装包<code>npm install sass-loader node-sass -D</code><br>2).配置规则：更改<code>webpack.config.js</code>的module中的rules数组</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    ......</span><br><span class="line">    plugins:[ htmlPlugin ],</span><br><span class="line">    <span class="built_in">module</span> : &#123;</span><br><span class="line">        rules:[</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">//test设置需要匹配的文件类型，支持正则</span></span><br><span class="line">                test:<span class="regexp">/\.css$/</span>,</span><br><span class="line">                <span class="comment">//use表示该文件类型需要调用的loader</span></span><br><span class="line">                use:[<span class="string">'style-loader'</span>,<span class="string">'css-loader'</span>]</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                test:<span class="regexp">/\.less$/</span>,</span><br><span class="line">                use:[<span class="string">'style-loader'</span>,<span class="string">'css-loader'</span>,<span class="string">'less-loader'</span>]</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                test:<span class="regexp">/\.scss$/</span>,</span><br><span class="line">                use:[<span class="string">'style-loader'</span>,<span class="string">'css-loader'</span>,<span class="string">'sass-loader'</span>]</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>补充：安装sass-loader失败时，大部分情况是因为网络原因，详情参考：</li>
+</ul>
+<blockquote>
+<p>安装post-css自动添加css的兼容性前缀（-ie-,-webkit-）</p>
+</blockquote>
+<ol>
+<li>安装包<code>npm install postcss-loader autoprefixer -D</code></li>
+<li>在项目根目录创建并配置postcss.config.js文件</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> autoprefixer = <span class="built_in">require</span>(<span class="string">"autoprefixer"</span>);</span><br><span class="line">   <span class="built_in">module</span>.exports = &#123;</span><br><span class="line">       plugins:[ autoprefixer ]</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="number">3</span>).配置规则：更改webpack.config.js的<span class="built_in">module</span>中的rules数组</span><br><span class="line">   <span class="built_in">module</span>.exports = &#123;</span><br><span class="line">       ......</span><br><span class="line">       plugins:[ htmlPlugin ],</span><br><span class="line">       <span class="built_in">module</span> : &#123;</span><br><span class="line">           rules:[</span><br><span class="line">               &#123;</span><br><span class="line">                   <span class="comment">//test设置需要匹配的文件类型，支持正则</span></span><br><span class="line">                   test:<span class="regexp">/\.css$/</span>,</span><br><span class="line">                   <span class="comment">//use表示该文件类型需要调用的loader</span></span><br><span class="line">                   use:[<span class="string">'style-loader'</span>,<span class="string">'css-loader'</span>,<span class="string">'postcss-loader'</span>]</span><br><span class="line">               &#125;,</span><br><span class="line">               &#123;</span><br><span class="line">                   test:<span class="regexp">/\.less$/</span>,</span><br><span class="line">                   use:[<span class="string">'style-loader'</span>,<span class="string">'css-loader'</span>,<span class="string">'less-loader'</span>]</span><br><span class="line">               &#125;,</span><br><span class="line">               &#123;</span><br><span class="line">                   test:<span class="regexp">/\.scss$/</span>,</span><br><span class="line">                   use:[<span class="string">'style-loader'</span>,<span class="string">'css-loader'</span>,<span class="string">'sass-loader'</span>]</span><br><span class="line">               &#125;</span><br><span class="line">           ]</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p>打包样式表中的图片以及字体文件</p>
+</blockquote>
+<ul>
+<li>在样式表css中有时候会设置背景图片和设置字体文件，一样需要loader进行处理</li>
+<li>使用url-loader和file-loader来处理打包图片文件以及字体文件<ol>
+<li>安装包<code>npm install url-loader file-loader -D</code></li>
+<li>配置规则：更改webpack.config.js的module中的rules数组</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    ......</span><br><span class="line">    plugins:[ htmlPlugin ],</span><br><span class="line">    <span class="built_in">module</span> : &#123;</span><br><span class="line">        rules:[</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">//test设置需要匹配的文件类型，支持正则</span></span><br><span class="line">                test:<span class="regexp">/\.css$/</span>,</span><br><span class="line">                <span class="comment">//use表示该文件类型需要调用的loader</span></span><br><span class="line">                use:[<span class="string">'style-loader'</span>,<span class="string">'css-loader'</span>]</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                test:<span class="regexp">/\.less$/</span>,</span><br><span class="line">                use:[<span class="string">'style-loader'</span>,<span class="string">'css-loader'</span>,<span class="string">'less-loader'</span>]</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                test:<span class="regexp">/\.scss$/</span>,</span><br><span class="line">                use:[<span class="string">'style-loader'</span>,<span class="string">'css-loader'</span>,<span class="string">'sass-loader'</span>]</span><br><span class="line">            &#125;,&#123;</span><br><span class="line">                test:<span class="regexp">/\.jpg|png|gif|bmp|ttf|eot|svg|woff|woff2$/</span>,</span><br><span class="line">                <span class="comment">//limit用来设置字节数，只有小于limit值的图片，才会转换</span></span><br><span class="line">                <span class="comment">//为base64图片</span></span><br><span class="line">                use:<span class="string">"url-loader?limit=16940"</span></span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>  打包js文件中的高级语法：在编写js的时候，有时候我们会使用高版本的js语法<br>  有可能这些高版本的语法不被兼容，我们需要将之打包为兼容性的js代码</p>
+</blockquote>
+<ul>
+<li>我们需要安装babel系列的包<ol>
+<li>安装babel转换器<code>npm install babel-loader @babel/core @babel/runtime -D</code></li>
+<li>安装babel语法插件包<code>npm install @babel/preset-env @babel/plugin-transform-runtime @babel/plugin-proposal-class-properties -D</code></li>
+<li>在项目根目录创建并配置<code>babel.config.js</code>文件</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    presets:[<span class="string">"@babel/preset-env"</span>],</span><br><span class="line">    plugins:[ <span class="string">"@babel/plugin-transform-runtime"</span>, <span class="string">"@babel/plugin-proposal-class-properties"</span> ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>配置规则：更改<code>webpack.config.js</code>的module中的rules数组</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    ......</span><br><span class="line">    plugins:[ htmlPlugin ],</span><br><span class="line">    <span class="built_in">module</span> : &#123;</span><br><span class="line">        rules:[</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">//test设置需要匹配的文件类型，支持正则</span></span><br><span class="line">                test:<span class="regexp">/\.css$/</span>,</span><br><span class="line">                <span class="comment">//use表示该文件类型需要调用的loader</span></span><br><span class="line">                use:[<span class="string">'style-loader'</span>,<span class="string">'css-loader'</span>]</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                test:<span class="regexp">/\.less$/</span>,</span><br><span class="line">                use:[<span class="string">'style-loader'</span>,<span class="string">'css-loader'</span>,<span class="string">'less-loader'</span>]</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                test:<span class="regexp">/\.scss$/</span>,</span><br><span class="line">                use:[<span class="string">'style-loader'</span>,<span class="string">'css-loader'</span>,<span class="string">'sass-loader'</span>]</span><br><span class="line">            &#125;,&#123;</span><br><span class="line">                test:<span class="regexp">/\.jpg|png|gif|bmp|ttf|eot|svg|woff|woff2$/</span>,</span><br><span class="line">                <span class="comment">//limit用来设置字节数，只有小于limit值的图片，才会转换</span></span><br><span class="line">                <span class="comment">//为base64图片</span></span><br><span class="line">                use:<span class="string">"url-loader?limit=16940"</span></span><br><span class="line">            &#125;,&#123;</span><br><span class="line">                test:<span class="regexp">/\.js$/</span>,</span><br><span class="line">                use:<span class="string">"babel-loader"</span>,</span><br><span class="line">                <span class="comment">//exclude为排除项，意思是不要处理node_modules中的js文件</span></span><br><span class="line">                exclude:<span class="regexp">/node_modules/</span></span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Vue单文件组件"><a href="#Vue单文件组件" class="headerlink" title="Vue单文件组件"></a>Vue单文件组件</h2><blockquote>
+<p>传统Vue组件的缺陷：</p>
+</blockquote>
+<ul>
+<li>全局定义的组件不能重名，字符串模板缺乏语法高亮，不支持css(当html和js组件化时，css没有参与其中)</li>
+<li>没有构建步骤限制，只能使用H5和ES5，不能使用预处理（babel）</li>
+</ul>
+<blockquote>
+<p>解决方案：</p>
+</blockquote>
+<ul>
+<li>使用Vue单文件组件，每个单文件组件的后缀名都是.vue<br>每一个Vue单文件组件都由三部分组成</li>
+</ul>
+<ol>
+<li>template组件组成的模板区域</li>
+<li>script组成的业务逻辑区域</li>
+<li>style样式区域</li>
+</ol>
+<ul>
+<li>export default{}是向外暴露的配置对象，data写私有数据，methods写行为<br>代码如下：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line"></span><br><span class="line">    组件代码区域</span><br><span class="line"></span><br><span class="line">&lt;<span class="regexp">/template&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;script&gt;</span></span><br><span class="line"><span class="regexp">export default&#123;</span></span><br><span class="line"><span class="regexp">   data()&#123;</span></span><br><span class="line"><span class="regexp">   &#125;,</span></span><br><span class="line"><span class="regexp">   methods:&#123;&#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp">    js代码区域</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;/</span>script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style scoped&gt;</span><br><span class="line"></span><br><span class="line">    样式代码区域</span><br><span class="line"></span><br><span class="line">&lt;<span class="regexp">/style&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>安装Vetur插件可以使得.vue文件中的代码高亮</li>
+</ul>
+<ol>
+<li>安装vue组件的加载器<code>npm install vue-loader vue-template-compiler -D</code></li>
+<li>配置规则：更改<code>webpack.config.js</code>的module中的rules数组</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> VueLoaderPlugin = <span class="built_in">require</span>(<span class="string">"vue-loader/lib/plugin"</span>);</span><br><span class="line"><span class="keyword">const</span> vuePlugin = <span class="keyword">new</span> VueLoaderPlugin();</span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    ......</span><br><span class="line">    plugins:[ htmlPlugin, vuePlugin  ],</span><br><span class="line">    <span class="built_in">module</span> : &#123;</span><br><span class="line">        rules:[</span><br><span class="line">            ...<span class="comment">//其他规则</span></span><br><span class="line">            &#123; </span><br><span class="line">                test:<span class="regexp">/\.vue$/</span>,</span><br><span class="line">                loader:<span class="string">"vue-loader"</span>,</span><br><span class="line">                </span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="在webpack中使用vue"><a href="#在webpack中使用vue" class="headerlink" title="在webpack中使用vue"></a>在webpack中使用vue</h2><blockquote>
+<p>我们安装处理了vue单文件组件的加载器，想要让vue单文件组件能够使用，我们必须要安装vue并使用vue来引用vue单文件组件。</p>
+</blockquote>
+<ol>
+<li>安装Vue<br> npm install vue -S</li>
+<li>在index.js中引入vue：import Vue from “vue”</li>
+<li>创建Vue实例对象并指定el，最后使用<code>render</code>函数渲染单文件组件</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el:<span class="string">"#first"</span>,</span><br><span class="line">    render:<span class="function"><span class="params">h</span>=&gt;</span>h(app)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用webpack打包发布项目"><a href="#使用webpack打包发布项目" class="headerlink" title="使用webpack打包发布项目"></a>使用webpack打包发布项目</h2><ul>
+<li>在项目上线之前，我们需要将整个项目打包并发布。</li>
+</ul>
+<ol>
+<li>配置package.json</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"scripts"</span>:&#123;</span><br><span class="line">    <span class="string">"dev"</span>:<span class="string">"webpack-dev-server"</span>,</span><br><span class="line">    <span class="string">"build"</span>:<span class="string">"webpack -p"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>在项目打包之前，可以将dist目录删除，生成全新的dist目录</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">webpack</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/22/webpack打包学习/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-后台管理系统总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1136,234 +1428,6 @@
 
 
   
-    <article id="post-路由" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/19/路由/">路由</a>
-    </h1>
-  
-
-        
-        <a href="/2020/05/19/路由/" class="archive-article-date">
-  	<time datetime="2020-05-19T11:16:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>1.能够说出什么是路由<br>2.能够使用Vue-Router实现前端路由<br>3.能够实现嵌套路由，动态路由<br>4.能够实现命名路由以及编程式导航 </p>
-<h3 id="1-路由的概念"><a href="#1-路由的概念" class="headerlink" title="1.路由的概念"></a>1.路由的概念</h3><p>路由的本质就是一种对应关系，比如说我们在url地址中输入我们要访问的url地址之后，浏览器要去请求这个url地址对应的资源。<br>那么<code>url地址和真实的资源之间就有一种对应的关系</code>，就是路由。</p>
-<blockquote>
-<p>路由分为前端路由和后端路由</p>
-</blockquote>
-<p>1).后端路由：根据<code>不同的用户url</code>请求，<code>后端路由拦截并查找服务器资源</code>，返回不同的内容。服务端进行实现，并完成资源的分发。<br>2).前端路由：是依靠hash值(锚链接)的变化进行实现 </p>
-<ul>
-<li>后端路由会造成页面频繁刷新，性能相对前端路由来说较低</li>
-<li>Ajax前端渲染、局部刷新很大程度提高了用户体验。但是不能保存前端状态。</li>
-<li>前端路由的基本概念：根据不同的事件来显示不同的页面内容，即事件与事件处理函数之间的对应关系</li>
-<li>前端路由主要做的事情就是监听事件并分发执行事件处理函数</li>
-</ul>
-<h2 id="2-前端路由的初体验"><a href="#2-前端路由的初体验" class="headerlink" title="2.前端路由的初体验"></a>2.前端路由的初体验</h2><p>前端路由是基于hash值的变化进行实现的（比如点击页面中的菜单或者按钮改变URL的hash值，根据hash值的变化来控制组件的切换）<br>核心实现依靠一个事件，即监听hash值变化的事件</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">window</span>.onhashchange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">//location.hash可以获取到最新的hash值</span></span><br><span class="line">    location.hash</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>前端路由实现tab栏切换：</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line"> &lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line"> &lt;head&gt;</span><br><span class="line">     &lt;meta charset=<span class="string">"UTF-8"</span> /&gt;</span><br><span class="line">     &lt;meta name=<span class="string">"viewport"</span> content=<span class="string">"width=device-width, initial-scale=1.0"</span> /&gt;</span><br><span class="line">     &lt;meta http-equiv=<span class="string">"X-UA-Compatible"</span> content=<span class="string">"ie=edge"</span> /&gt;</span><br><span class="line">     &lt;title&gt;Document&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">     &lt;!-- 导入 vue 文件 --&gt;</span></span><br><span class="line"><span class="regexp">     &lt;script src="./</span>lib/vue_2<span class="number">.5</span><span class="number">.22</span>.js<span class="string">"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="string"> &lt;/head&gt;</span></span><br><span class="line"><span class="string"> &lt;body&gt;</span></span><br><span class="line"><span class="string">     &lt;!-- 被 vue 实例控制的 div 区域 --&gt;</span></span><br><span class="line"><span class="string">     &lt;div id="</span>app<span class="string">"&gt;</span></span><br><span class="line"><span class="string">     &lt;!-- 切换组件的超链接 --&gt;</span></span><br><span class="line">     &lt;a href="#/zhuye"&gt;主页&lt;/a&gt; </span><br><span class="line">     &lt;a href=<span class="string">"#/keji"</span>&gt;科技&lt;<span class="regexp">/a&gt; </span></span><br><span class="line"><span class="regexp">     &lt;a href="#/</span>caijing<span class="string">"&gt;财经&lt;/a&gt;</span></span><br><span class="line">     &lt;a href="#/yule"&gt;娱乐&lt;/a&gt;</span><br><span class="line"></span><br><span class="line">     &lt;!-- 根据 :is 属性指定的组件名称，把对应的组件渲染到 component 标签所在的位置 --&gt;</span><br><span class="line">     &lt;!-- 可以把 component 标签当做是【组件的占位符】 --&gt;</span><br><span class="line">     &lt;component :is=<span class="string">"comName"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">component</span>&gt;</span></span></span><br><span class="line">     &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">     &lt;script&gt;</span></span><br><span class="line"><span class="regexp">     /</span><span class="regexp">/ #region 定义需要被切换的 4 个组件</span></span><br><span class="line"><span class="regexp">     /</span><span class="regexp">/ 主页组件</span></span><br><span class="line"><span class="regexp">     const zhuye = &#123;</span></span><br><span class="line"><span class="regexp">         template: '&lt;h1&gt;主页信息&lt;/</span>h1&gt;<span class="string">'</span></span><br><span class="line"><span class="string">     &#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">     // 科技组件</span></span><br><span class="line"><span class="string">     const keji = &#123;</span></span><br><span class="line"><span class="string">         template: '</span>&lt;h1&gt;科技信息&lt;<span class="regexp">/h1&gt;'</span></span><br><span class="line"><span class="regexp">     &#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">     /</span><span class="regexp">/ 财经组件</span></span><br><span class="line"><span class="regexp">     const caijing = &#123;</span></span><br><span class="line"><span class="regexp">         template: '&lt;h1&gt;财经信息&lt;/</span>h1&gt;<span class="string">'</span></span><br><span class="line"><span class="string">     &#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">     // 娱乐组件</span></span><br><span class="line"><span class="string">     const yule = &#123;</span></span><br><span class="line"><span class="string">         template: '</span>&lt;h1&gt;娱乐信息&lt;<span class="regexp">/h1&gt;'</span></span><br><span class="line"><span class="regexp">     &#125;</span></span><br><span class="line"><span class="regexp">     /</span><span class="regexp">/ #endregion</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">     /</span><span class="regexp">/ #region vue 实例对象</span></span><br><span class="line"><span class="regexp">     const vm = new Vue(&#123;</span></span><br><span class="line"><span class="regexp">         el: '#app',</span></span><br><span class="line"><span class="regexp">         data: &#123;</span></span><br><span class="line"><span class="regexp">         comName: 'zhuye'</span></span><br><span class="line"><span class="regexp">         &#125;,</span></span><br><span class="line"><span class="regexp">         /</span><span class="regexp">/ 注册私有组件</span></span><br><span class="line"><span class="regexp">         components: &#123;</span></span><br><span class="line"><span class="regexp">         zhuye,</span></span><br><span class="line"><span class="regexp">         keji,</span></span><br><span class="line"><span class="regexp">         caijing,</span></span><br><span class="line"><span class="regexp">         yule</span></span><br><span class="line"><span class="regexp">         &#125;</span></span><br><span class="line"><span class="regexp">     &#125;)</span></span><br><span class="line"><span class="regexp">     /</span><span class="regexp">/ #endregion</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">     /</span><span class="regexp">/ 监听 window 的 onhashchange 事件，根据获取到的最新的 hash 值，切换要显示的组件的名称</span></span><br><span class="line"><span class="regexp">     window.onhashchange = function() &#123;</span></span><br><span class="line"><span class="regexp">         /</span><span class="regexp">/ 通过 location.hash 获取到最新的 hash 值</span></span><br><span class="line"><span class="regexp">         console.log(location.hash);</span></span><br><span class="line"><span class="regexp">         /</span><span class="regexp">/</span></span><br><span class="line"><span class="regexp">         switch(location.hash.slice(1))&#123;</span></span><br><span class="line"><span class="regexp">         case '/</span>zhuye<span class="string">':</span></span><br><span class="line"><span class="string">             vm.comName = '</span>zhuye<span class="string">'</span></span><br><span class="line"><span class="string">         break</span></span><br><span class="line"><span class="string">         case '</span>/keji<span class="string">':</span></span><br><span class="line"><span class="string">             vm.comName = '</span>keji<span class="string">'</span></span><br><span class="line"><span class="string">         break</span></span><br><span class="line"><span class="string">         case '</span>/caijing<span class="string">':</span></span><br><span class="line"><span class="string">             vm.comName = '</span>caijing<span class="string">'</span></span><br><span class="line"><span class="string">         break</span></span><br><span class="line"><span class="string">         case '</span>/yule<span class="string">':</span></span><br><span class="line"><span class="string">             vm.comName = '</span>yule<span class="string">'</span></span><br><span class="line"><span class="string">         break</span></span><br><span class="line"><span class="string">         &#125;</span></span><br><span class="line"><span class="string">     &#125;</span></span><br><span class="line"><span class="string">     &lt;/script&gt;</span></span><br><span class="line"><span class="string"> &lt;/body&gt;</span></span><br><span class="line"><span class="string"> &lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>案例效果图：</p>
-<p>点击每个超链接之后，会进行相应的内容切换，如下：<br><img src="https://img-blog.csdnimg.cn/20200516203344881.png" alt="在这里插入图片描述"></p>
-<p>核心思路：<br>在页面中有一个vue实例对象，vue实例对象中有四个组件，分别是tab栏切换需要显示的组件内容<br>在页面中有四个超链接，如下：<br><img src="https://img-blog.csdnimg.cn/20200516203259819.png" alt="在这里插入图片描述"></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=<span class="string">"#/zhuye"</span>&gt;主页&lt;<span class="regexp">/a&gt; </span></span><br><span class="line"><span class="regexp">&lt;a href="#/</span>keji<span class="string">"&gt;科技&lt;/a&gt; </span></span><br><span class="line">&lt;a href="#/caijing"&gt;财经&lt;/a&gt;</span><br><span class="line">&lt;a href=<span class="string">"#/yule"</span>&gt;娱乐&lt;<span class="regexp">/a&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>当我们点击这些超链接的时候，就会改变url地址中的hash值，当hash值被改变时，就会触发onhashchange事件<br>在触发onhashchange事件的时候，我们根据hash值来让不同的组件进行显示：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onhashchange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 通过 location.hash 获取到最新的 hash 值</span></span><br><span class="line">    <span class="built_in">console</span>.log(location.hash);</span><br><span class="line">    <span class="keyword">switch</span>(location.hash.slice(<span class="number">1</span>))&#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'/zhuye'</span>:</span><br><span class="line">        <span class="comment">//通过更改数据comName来指定显示的组件</span></span><br><span class="line">        <span class="comment">//因为 &lt;component :is="comName"&gt;&lt;/component&gt; ，组件已经绑定了comName</span></span><br><span class="line">        vm.comName = <span class="string">'zhuye'</span></span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">case</span> <span class="string">'/keji'</span>:</span><br><span class="line">        vm.comName = <span class="string">'keji'</span></span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">case</span> <span class="string">'/caijing'</span>:</span><br><span class="line">        vm.comName = <span class="string">'caijing'</span></span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">case</span> <span class="string">'/yule'</span>:</span><br><span class="line">        vm.comName = <span class="string">'yule'</span></span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>Vue Router</p>
-</blockquote>
-<ul>
-<li>它是一个Vue.js官方提供的路由管理器。是一个功能更加强大的前端路由器，推荐使用。</li>
-<li>Vue Router和Vue.js非常契合，可以一起方便的实现SPA(single page web application,单页应用程序)应用程序的开发。</li>
-<li>Vue Router依赖于Vue，所以需要先引入Vue，再引入Vue Router</li>
-</ul>
-<blockquote>
-<p>Vue Router的特性：</p>
-</blockquote>
-<ul>
-<li>支持H5历史模式或者hash模式</li>
-<li>支持嵌套路由</li>
-<li>支持路由参数</li>
-<li>支持编程式路由</li>
-<li>支持命名路由</li>
-<li>支持路由导航守卫</li>
-<li>支持路由过渡动画特效</li>
-<li>支持路由懒加载</li>
-<li>支持路由滚动行为</li>
-</ul>
-<blockquote>
-<p>Vue Router的使用步骤(★★★)</p>
-</blockquote>
-<ul>
-<li>导入js文件，先引入vue，在引入vue-route。因为vue-router内部依赖于vue</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//导入vue文件，为全局window对象挂载Vue构造函数</span></span><br><span class="line">&lt;script src=<span class="string">"lib/vue_2.5.22.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="comment">//导入vue-router文件，为全局window对象挂载VueRouter构造函数</span></span><br><span class="line">&lt;script src=<span class="string">"lib/vue-router_3.0.2.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>添加路由链接:&lt; router-link &gt;是路由中提供的标签，默认会被渲染为a标签，to属性默认被渲染为href属性</li>
-<li>to属性的值会被渲染为#开头的hash地址</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;router-link to=<span class="string">"/user"</span>&gt;User&lt;<span class="regexp">/router-link&gt;</span></span><br><span class="line"><span class="regexp">&lt;router-link to="/</span>login<span class="string">"&gt;Login&lt;/router-link&gt;</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>添加路由填充位（路由占位符）</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;router-view&gt;<span class="xml"><span class="tag">&lt;/<span class="name">router-view</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>定义路由组件</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> User = &#123; <span class="attr">template</span>:<span class="string">"&lt;div&gt;This is User&lt;/div&gt;"</span> &#125;</span><br><span class="line"><span class="keyword">var</span> Login = &#123; <span class="attr">template</span>:<span class="string">"&lt;div&gt;This is Login&lt;/div&gt;"</span> &#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>配置路由规则并创建路由实例（重点）</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myRouter = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">    <span class="comment">//routes是路由规则数组</span></span><br><span class="line">    routes:[</span><br><span class="line">        <span class="comment">//每一个路由规则都是一个对象，对象中至少包含path和component两个属性</span></span><br><span class="line">        <span class="comment">//path表示  路由匹配的hash地址，component表示路由规则对应要展示的组件对象</span></span><br><span class="line">        &#123;<span class="attr">path</span>:<span class="string">"/user"</span>,<span class="attr">component</span>:User&#125;,</span><br><span class="line">        &#123;<span class="attr">path</span>:<span class="string">"/login"</span>,<span class="attr">component</span>:Login&#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>将路由挂载到Vue实例中</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el:<span class="string">"#app"</span>,</span><br><span class="line">    <span class="comment">//通过router属性挂载路由对象</span></span><br><span class="line">    router:myRouter</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<ul>
-<li>小结：</li>
-</ul>
-</blockquote>
-<p>Vue Router的使用步骤还是比较清晰的，按照步骤一步一步就能完成路由操作</p>
-<ol>
-<li>导入js文件</li>
-<li>添加路由链接</li>
-<li>添加路由占位符(最后路由展示的组件就会在占位符的位置显示，比如下面定义的template组件)</li>
-<li>定义路由组件</li>
-<li>配置路由规则并创建路由实例</li>
-<li>将路由挂载到Vue实例中</li>
-</ol>
-<blockquote>
-<p>路由重定向：</p>
-</blockquote>
-<ul>
-<li>可以通过路由重定向为页面设置默认展示的组件</li>
-<li>在路由规则中添加一条路由规则即可，如下：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var myRouter = new VueRouter(&#123;</span><br><span class="line">    //routes是路由规则数组</span><br><span class="line">    routes: [</span><br><span class="line">        //path设置为/表示页面最初始的地址 / ,redirect表示要被重定向的新地址，设置为一个路由即可</span><br><span class="line">        &#123; path:<span class="string">"/"</span>,redirect:<span class="string">"/user"</span>&#125;,</span><br><span class="line">        &#123; path: <span class="string">"/user"</span>, component: User &#125;,</span><br><span class="line">        &#123; path: <span class="string">"/login"</span>, component: Login &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>嵌套路由，动态路由的实现方式</p>
-</blockquote>
-<p>嵌套路由的概念(★★★)</p>
-<ul>
-<li>当我们进行路由的时候显示的组件中还有新的子级路由链接以及内容。</li>
-<li>嵌套路由最关键的代码在于理解子级路由的概念：</li>
-<li>比如我们有一个/login的路由</li>
-<li>那么/login下面还可以添加子级路由，如:</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/login/account</span><br><span class="line">/login/phone</span><br></pre></td></tr></table></figure>
-
-<p>参考代码如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> User = &#123; <span class="attr">template</span>: <span class="string">"&lt;div&gt;This is User&lt;/div&gt;"</span> &#125;</span><br><span class="line"><span class="comment">//Login组件中的模板代码里面包含了子级路由链接以及子级路由的占位符</span></span><br><span class="line">    <span class="keyword">var</span> Login = &#123; <span class="attr">template</span>: <span class="string">`&lt;div&gt;</span></span><br><span class="line"><span class="string">        &lt;h1&gt;This is Login&lt;/h1&gt;</span></span><br><span class="line"><span class="string">        &lt;hr&gt;</span></span><br><span class="line"><span class="string">        &lt;router-link to="/login/account"&gt;账号密码登录&lt;/router-link&gt;</span></span><br><span class="line"><span class="string">        &lt;router-link to="/login/phone"&gt;扫码登录&lt;/router-link&gt;</span></span><br><span class="line"><span class="string">        &lt;!-- 子路由组件将会在router-view中显示 --&gt;</span></span><br><span class="line"><span class="string">        &lt;router-view&gt;&lt;/router-view&gt;</span></span><br><span class="line"><span class="string">        &lt;/div&gt;`</span> &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//定义两个子级路由组件</span></span><br><span class="line">    <span class="keyword">var</span> account = &#123; <span class="attr">template</span>:<span class="string">"&lt;div&gt;账号：&lt;input&gt;&lt;br&gt;密码：&lt;input&gt;&lt;/div&gt;"</span>&#125;;</span><br><span class="line">    <span class="keyword">var</span> phone = &#123; <span class="attr">template</span>:<span class="string">"&lt;h1&gt;扫我二维码&lt;/h1&gt;"</span>&#125;;</span><br><span class="line">    <span class="keyword">var</span> myRouter = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">        <span class="comment">//routes是路由规则数组</span></span><br><span class="line">        routes: [</span><br><span class="line">            &#123; <span class="attr">path</span>:<span class="string">"/"</span>,<span class="attr">redirect</span>:<span class="string">"/user"</span>&#125;,</span><br><span class="line">            &#123; <span class="attr">path</span>: <span class="string">"/user"</span>, <span class="attr">component</span>: User &#125;,</span><br><span class="line">            &#123; </span><br><span class="line">                path: <span class="string">"/login"</span>, </span><br><span class="line">                component: Login,</span><br><span class="line">                <span class="comment">//通过children属性为/login添加子路由规则</span></span><br><span class="line">                children:[</span><br><span class="line">                    &#123; <span class="attr">path</span>: <span class="string">"/login/account"</span>, <span class="attr">component</span>: account &#125;,</span><br><span class="line">                    &#123; <span class="attr">path</span>: <span class="string">"/login/phone"</span>, <span class="attr">component</span>: phone &#125;,</span><br><span class="line">                ]</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">        el: <span class="string">'#app'</span>,</span><br><span class="line">        data: &#123;&#125;,</span><br><span class="line">        methods: &#123;&#125;,</span><br><span class="line">        router:myRouter</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>动态路由匹配(★★★)</p>
-</blockquote>
-<ul>
-<li>路由链接相似的情况下，这时候只改变一些参数。通过动态参数的模式进行路由匹配。</li>
-<li>可以提高复用性</li>
-<li>三个路由共用一个规则，<code>{$route.params.id}</code>传递id值</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var User = &#123; template:<span class="string">"&lt;div&gt;用户：&#123;&#123;<span class="variable">$route</span>.params.id&#125;&#125;&lt;/div&gt;"</span>&#125;</span><br><span class="line">var myRouter = new VueRouter(&#123;</span><br><span class="line">    //routes是路由规则数组</span><br><span class="line">    routes: [</span><br><span class="line">        //通过/:参数名  的形式传递参数 </span><br><span class="line">        &#123; path: <span class="string">"/user/:id"</span>, component: User &#125;,     </span><br><span class="line">    ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>补充：<br>如果使用<code>$route.params.id</code>来获取路径传参的数据不够灵活。</p>
-<ol>
-<li>我们可以通过<code>props</code>来接收参数</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> User = &#123; </span><br><span class="line">    props:[<span class="string">"id"</span>],</span><br><span class="line">    template:<span class="string">"&lt;div&gt;用户：&#123;&#123;id&#125;&#125;&lt;/div&gt;"</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> myRouter = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">    <span class="comment">//routes是路由规则数组</span></span><br><span class="line">    routes: [</span><br><span class="line">        <span class="comment">//通过/:参数名  的形式传递参数 </span></span><br><span class="line">        <span class="comment">//如果props设置为true，route.params将会被设置为组件属性</span></span><br><span class="line">        &#123; <span class="attr">path</span>: <span class="string">"/user/:id"</span>, <span class="attr">component</span>: User,<span class="attr">props</span>:<span class="literal">true</span> &#125;,      </span><br><span class="line">    ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>还有一种情况，我们可以将<code>props</code>设置为对象，那么就直接将对象的数据传递给组件进行使用</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> User = &#123; </span><br><span class="line">    props:[<span class="string">"username"</span>,<span class="string">"pwd"</span>],</span><br><span class="line">    template:<span class="string">"&lt;div&gt;用户：&#123;&#123;username&#125;&#125;---&#123;&#123;pwd&#125;&#125;&lt;/div&gt;"</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> myRouter = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">    <span class="comment">//routes是路由规则数组</span></span><br><span class="line">    routes: [</span><br><span class="line">        <span class="comment">//通过/:参数名  的形式传递参数 </span></span><br><span class="line">        <span class="comment">//如果props设置为对象，则传递的是对象中的数据给组件</span></span><br><span class="line">        &#123; <span class="attr">path</span>: <span class="string">"/user/:id"</span>, <span class="attr">component</span>: User,<span class="attr">props</span>:&#123;<span class="attr">username</span>:<span class="string">"jack"</span>,<span class="attr">pwd</span>:<span class="number">123</span>&#125; &#125;,</span><br><span class="line">        </span><br><span class="line">    ]</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="number">3.</span>如果想要获取传递的参数值还想要获取传递的对象数据，那么props应该设置为</span><br><span class="line">函数形式。</span><br><span class="line"><span class="keyword">var</span> User = &#123; </span><br><span class="line">    props:[<span class="string">"username"</span>,<span class="string">"pwd"</span>,<span class="string">"id"</span>],</span><br><span class="line">    template:<span class="string">"&lt;div&gt;用户：&#123;&#123;id&#125;&#125; -&gt; &#123;&#123;username&#125;&#125;---&#123;&#123;pwd&#125;&#125;&lt;/div&gt;"</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> myRouter = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">    <span class="comment">//routes是路由规则数组</span></span><br><span class="line">    routes: [</span><br><span class="line">        <span class="comment">//通过/:参数名  的形式传递参数 </span></span><br><span class="line">        <span class="comment">//如果props设置为函数，则通过函数的第一个参数获取路由对象</span></span><br><span class="line">        <span class="comment">//并可以通过路由对象的params属性获取传递的参数</span></span><br><span class="line">        <span class="comment">//</span></span><br><span class="line">        &#123; <span class="attr">path</span>: <span class="string">"/user/:id"</span>, <span class="attr">component</span>: User,<span class="attr">props</span>:<span class="function">(<span class="params">route</span>)=&gt;</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> &#123;<span class="attr">username</span>:<span class="string">"jack"</span>,<span class="attr">pwd</span>:<span class="number">123</span>,<span class="attr">id</span>:route.params.id&#125;</span><br><span class="line">            &#125; </span><br><span class="line">        &#125;,       </span><br><span class="line">    ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>命名路由以及编程式导航</p>
-</blockquote>
-<p>命名路由：为了更加方便表示路由的路径，可以给路由规则起一个别名，即为命名路由。</p>
-<ul>
-<li>绑定一个name和params，vue给路由传参数，直接跳转到命名路由对应url。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myRouter = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">    <span class="comment">//routes是路由规则数组</span></span><br><span class="line">    routes: [</span><br><span class="line">        <span class="comment">//通过name属性为路由添加一个别名</span></span><br><span class="line">        &#123; <span class="attr">path</span>: <span class="string">"/user/:id"</span>, <span class="attr">component</span>: User, <span class="attr">name</span>:<span class="string">"user"</span>&#125;, </span><br><span class="line">    ]</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//添加了别名之后，可以使用别名进行跳转</span></span><br><span class="line">&lt;router-link to=<span class="string">"/user"</span>&gt;User&lt;<span class="regexp">/router-link&gt;</span></span><br><span class="line"><span class="regexp">&lt;router-link v-bind:to="&#123; name:'user' , params: &#123;id:123&#125; &#125;"&gt;User&lt;/</span>router-link&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">//还可以编程式导航</span></span><br><span class="line">myRouter.push( &#123; <span class="attr">name</span>:<span class="string">'user'</span> , <span class="attr">params</span>: &#123;<span class="attr">id</span>:<span class="number">123</span>&#125; &#125; )</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="编程式导航-★★★"><a href="#编程式导航-★★★" class="headerlink" title="编程式导航(★★★)"></a>编程式导航(★★★)</h2><p>页面导航的两种方式：<br>A.声明式导航：通过点击链接的方式实现的导航(如a和router-link)<br>B.编程式导航：调用js的api方法实现导航，如location.herf</p>
-<p>Vue-Router中常见的导航方式(编程式导航)：<br>this.$router.push(“hash地址”);<br>this.$router.push(“/login”);<br>this.$router.push({ name:’user’ , params: {id:123} });<br>this.$router.push({ path:”/login” });<br>this.$router.push({ path:”/login”,query:{username:”jack”} });</p>
-<p>this.$router.go( n );//n为数字，参考history.go<br>this.$router.go( -1 );</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Vue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/19/路由/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" href="/page/6/">Next &raquo;</a>
@@ -1378,7 +1442,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2020 lkq
+    		&copy; 2021 lkq
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -1473,11 +1537,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">DFS</a>
+                <a href="javascript:void(0)" class="js-tag color2">堆</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">堆</a>
+                <a href="javascript:void(0)" class="js-tag color4">DFS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1529,11 +1593,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">前端综合</a>
+                <a href="javascript:void(0)" class="js-tag color4">Vue</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Vue</a>
+                <a href="javascript:void(0)" class="js-tag color5">前端综合</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1565,19 +1629,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">排序</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">排序算法</a>
+                <a href="javascript:void(0)" class="js-tag color3">OS</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">OS</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">排序算法</a>
               </li>
              
               <li class="article-tag-list-item">

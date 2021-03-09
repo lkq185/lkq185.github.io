@@ -140,6 +140,94 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-26 27题 原数组修改" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/12/26 27题 原数组修改/">原数组修改</a>
+    </h1>
+  
+
+        
+        <a href="/2019/11/12/26 27题 原数组修改/" class="archive-article-date">
+  	<time datetime="2019-11-12T15:25:47.727Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="26题"><a href="#26题" class="headerlink" title="26题"></a>26题</h2><p>给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。</p>
+<p>不要使用额外的数组空间，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成。</p>
+<p>示例 1:</p>
+<p>给定数组 nums = [1,1,2], </p>
+<p>函数应该返回新的长度 2, 并且原数组 nums 的前两个元素被修改为 1, 2。 </p>
+<p>你不需要考虑数组中超出新长度后面的元素。</p>
+<p>示例 2:</p>
+<p>给定 nums = [0,0,1,1,1,2,2,3,3,4],</p>
+<p>函数应该返回新的长度 5, 并且原数组 nums 的前五个元素被修改为 0, 1, 2, 3, 4。</p>
+<p>你不需要考虑数组中超出新长度后面的元素。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int removeDuplicates(int[] nums)&#123;</span><br><span class="line">		     int ans=0;</span><br><span class="line">	         int j;</span><br><span class="line">	            for(j=1;j&lt;nums.length;j++)&#123;//从1开始</span><br><span class="line">	            	if(nums[j]!=nums[ans])</span><br><span class="line">	            	&#123;</span><br><span class="line">	            		nums[++ans]=nums[j];</span><br><span class="line">	            		 </span><br><span class="line">	            		//System.out.println(nums[ans]);</span><br><span class="line">	            	&#125;</span><br><span class="line">	            &#125;</span><br><span class="line">	            //System.out.println(ans);</span><br><span class="line">	         return ans+1;//数组长度加1</span><br><span class="line">	    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这道题数组并没有改成真正的无重复数，只是占用了ans+1的nums数组长度。<br>同时题目还要求在原题下修改。<br>nums[++ans]=nums[j];</p>
+<h2 id="27题"><a href="#27题" class="headerlink" title="27题"></a>27题</h2><p>给定 nums = [3,2,2,3], val = 3,</p>
+<p>函数应该返回新的长度 2, 并且 nums 中的前两个元素均为 2。</p>
+<p>你不需要考虑数组中超出新长度后面的元素。</p>
+<p>示例 2:</p>
+<p>给定 nums = [0,1,2,2,3,0,4,2], val = 2,</p>
+<p>函数应该返回新的长度 5, 并且 nums 中的前五个元素为 0, 1, 3, 0, 4。</p>
+<p>注意这五个元素可为任意顺序。</p>
+<p>你不需要考虑数组中超出新长度后面的元素。</p>
+<p>说明:</p>
+<p>为什么返回数值是整数，但输出的答案是数组呢?</p>
+<p>请注意，输入数组是以“引用”方式传递的，这意味着在函数里修改输入数组对于调用者是可见的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int removeElement(int[] nums, int val) &#123;</span><br><span class="line">		     int ans=0;</span><br><span class="line">	         int j;</span><br><span class="line">	            for(j=0;j&lt;nums.length;j++)&#123;</span><br><span class="line">	            	if(nums[j]!=val)</span><br><span class="line">	            	&#123;</span><br><span class="line">	            		nums[ans]=nums[j];</span><br><span class="line">	            		ans++;	    </span><br><span class="line">	            	&#125;</span><br><span class="line">	            &#125;</span><br><span class="line">	            //System.out.println(ans);</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/12/26 27题 原数组修改/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-1第一次力扣" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -517,88 +605,6 @@
 
 
   
-    <article id="post-排序1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/04/排序1/">排序1</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/04/排序1/" class="archive-article-date">
-  	<time datetime="2019-11-04T00:49:08.562Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>1.冒泡排序<br>时间复杂度最好和最坏均为n*n</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">package lkq;</span><br><span class="line">import java.util.*;</span><br><span class="line">public class MaoPao &#123;</span><br><span class="line">	public static void sort(int arr[],int n)&#123;</span><br><span class="line">		int t;</span><br><span class="line">		for(int i=0;i&lt;n-1;i++)&#123;</span><br><span class="line">			for(int j=0;j&lt;n-i-1;j++)&#123;</span><br><span class="line">				if(arr[j]&gt;arr[j+1])&#123;</span><br><span class="line">					t=arr[j];</span><br><span class="line">					arr[j]=arr[j+1];</span><br><span class="line">					arr[j+1]=t;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">		Scanner in=new Scanner(System.in);</span><br><span class="line">		int n=in.nextInt();</span><br><span class="line">		int arr[]=new int[n];</span><br><span class="line">		for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">			arr[i]=(int)(15*Math.random()+1);</span><br><span class="line">		&#125;</span><br><span class="line">		sort(arr,n);</span><br><span class="line">		for(int num:arr)&#123;</span><br><span class="line">            System.out.print(num+&quot; &quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>2.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">package lkq;</span><br><span class="line">import java.util.*;</span><br><span class="line">public class ChaRu &#123;</span><br><span class="line">	public static void charu(int s[])&#123;</span><br><span class="line">        int j;</span><br><span class="line">		for(int i=1;i&lt;s.length;i++)&#123;</span><br><span class="line">			int t=s[i];</span><br><span class="line">			for(j=i-1;j&gt;=0&amp;&amp;s[j]&gt;t;j--)&#123;//先写j&gt;=0 否则会出现数组索引异常</span><br><span class="line">				s[j+1]=s[j];</span><br><span class="line">			&#125;</span><br><span class="line">			s[j+1]=t;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Scanner in=new Scanner(System.in);</span><br><span class="line">		int n=in.nextInt();</span><br><span class="line">		int s[]=new int[n];</span><br><span class="line">		for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">			s[i]=(int)(100*Math.random()+1);</span><br><span class="line">		&#125;</span><br><span class="line">		charu(s);</span><br><span class="line">		for(int k=0;k&lt;n;k++)</span><br><span class="line">            System.out.print(s[k]+&quot; &quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>3<br>首先快速排序是一种不稳定的排序算法<br>首先其最好情况下时间复杂度为nlog2n<br>最差情况下为n*n<br>快速排序有多种方法<br>这里用的是其中一种<br>比如有如下序列 4 6 9 3 7 5<br>则我们以4为基准p<br>i=0(left) j=n-1(right)<br>先从j开始找比基准p小的数，找不到了停止<br>再从i开始找比基准p大的数，找不到了停止<br>交换arr[i]和arr[j](这样左边都比基准p小，右边都比基准p大）<br>最后当i与j碰面时 基准p与i与j碰面的位置互换<br>则第一次<br>              4 6 9 3 7 5<br>              4 3 9 6 7 5<br>              3 【4】 9 6 7 5<br>第二种方法<br>i与j同时在头的位置(i==0&amp;&amp;j==0)<br>当j找到比到比p=5小的数时停止<br>arr[i+1]与arr[j]互换<br>则第一次<br>              4 6 9 3 7 5<br>              4 6 9 3 7 5<br>              4 3 9 6 7 5<br>              4 3 【5】 6 7 9</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">package lkq;</span><br><span class="line">import java.util.*;</span><br><span class="line">public class QuickSort&#123;</span><br><span class="line">	public static void sort(int arr[],int left,int right)&#123;</span><br><span class="line">		 if(left&gt;right) return;</span><br><span class="line">	     int i=left;</span><br><span class="line">	     int j=right;</span><br><span class="line">	     int p=arr[left];</span><br><span class="line">	     int t;</span><br><span class="line">	     while(i!=j)&#123;</span><br><span class="line">	    	 while(arr[j]&gt;=p&amp;&amp;i&lt;j)&#123;</span><br><span class="line">	    		 j--;</span><br><span class="line">	    	 &#125;	 </span><br><span class="line">	         while(arr[i]&lt;=p&amp;&amp;i&lt;j)&#123;</span><br><span class="line">	        	 i++;</span><br><span class="line">	         &#125;</span><br><span class="line">	         if(i&lt;j)&#123;</span><br><span class="line">	        	t=arr[i]; </span><br><span class="line">	        	arr[i]=arr[j];</span><br><span class="line">	        	arr[j]=t;</span><br><span class="line">	         &#125;</span><br><span class="line">	     &#125;</span><br><span class="line">	     arr[left]=arr[i];</span><br><span class="line">	     arr[i]=p;</span><br><span class="line">	     sort(arr,i+1,right);</span><br><span class="line">	     sort(arr,left,i-1);</span><br><span class="line">	&#125;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">		Scanner in=new Scanner(System.in);</span><br><span class="line">		int n=in.nextInt();</span><br><span class="line">		int arr[]=new int[n];</span><br><span class="line">		for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">			arr[i]=(int)(15*Math.random()+1);</span><br><span class="line">		&#125;</span><br><span class="line">		sort(arr,0,n-1);</span><br><span class="line">		for(int num:arr)&#123;</span><br><span class="line">            System.out.print(num+&quot; &quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">排序算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/04/排序1/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/23/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="page-number" href="/page/23/">23</a><span class="page-number current">24</span><a class="page-number" href="/page/25/">25</a><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" href="/page/25/">Next &raquo;</a>
@@ -613,7 +619,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2020 lkq
+    		&copy; 2021 lkq
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -708,11 +714,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">DFS</a>
+                <a href="javascript:void(0)" class="js-tag color2">堆</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">堆</a>
+                <a href="javascript:void(0)" class="js-tag color4">DFS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -764,11 +770,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">前端综合</a>
+                <a href="javascript:void(0)" class="js-tag color4">Vue</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Vue</a>
+                <a href="javascript:void(0)" class="js-tag color5">前端综合</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -800,19 +806,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">排序</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">排序算法</a>
+                <a href="javascript:void(0)" class="js-tag color3">OS</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">OS</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">排序算法</a>
               </li>
              
               <li class="article-tag-list-item">

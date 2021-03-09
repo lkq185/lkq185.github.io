@@ -140,6 +140,85 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-LRU" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/01/07/LRU/">LRU算法</a>
+    </h1>
+  
+
+        
+        <a href="/2020/01/07/LRU/" class="archive-article-date">
+  	<time datetime="2020-01-07T07:16:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">package Node;</span><br><span class="line"></span><br><span class="line">class DoubleList &#123;  </span><br><span class="line">    private Node head, tail; // 头尾虚节点</span><br><span class="line">    private int size; // 链表元素数</span><br><span class="line"></span><br><span class="line">    public DoubleList() &#123;</span><br><span class="line">        head = new Node(0, 0);</span><br><span class="line">        tail = new Node(0, 0);</span><br><span class="line">        head.next = tail;</span><br><span class="line">        tail.prev = head;</span><br><span class="line">        size = 0;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 在链表头部添加节点 x</span><br><span class="line">    public void addFirst(Node x) &#123;</span><br><span class="line">        x.next = head.next;</span><br><span class="line">        x.prev = head;</span><br><span class="line">        head.next.prev = x;</span><br><span class="line">        head.next = x;</span><br><span class="line">        size++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 删除链表中的 x 节点（x 一定存在）</span><br><span class="line">    public void remove(Node x) &#123;</span><br><span class="line">        x.prev.next = x.next;</span><br><span class="line">        x.next.prev = x.prev;</span><br><span class="line">        size--;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 删除链表中最后一个节点，并返回该节点</span><br><span class="line">    public Node removeLast() &#123;</span><br><span class="line">        if (tail.prev == head)</span><br><span class="line">            return null;</span><br><span class="line">        Node last = tail.prev;</span><br><span class="line">        remove(last);</span><br><span class="line">        return last;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 返回链表长度</span><br><span class="line">    public int size() &#123; return size; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">package Node;</span><br><span class="line">import java.util.*;</span><br><span class="line">class LRUCache &#123;</span><br><span class="line">    // key -&gt; Node(key, val)</span><br><span class="line">    private HashMap&lt;Integer, Node&gt; map;</span><br><span class="line">    // Node(k1, v1) &lt;-&gt; Node(k2, v2)...</span><br><span class="line">    private DoubleList cache;</span><br><span class="line">    // 最大容量</span><br><span class="line">    private int cap;</span><br><span class="line">    </span><br><span class="line">    public LRUCache(int capacity) &#123;</span><br><span class="line">        this.cap = capacity;</span><br><span class="line">        map = new HashMap&lt;&gt;();</span><br><span class="line">        cache = new DoubleList();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public int get(int key) &#123;</span><br><span class="line">        if (!map.containsKey(key))</span><br><span class="line">            return -1;</span><br><span class="line">        int val = map.get(key).val;</span><br><span class="line">        // 利用 put 方法把该数据提前</span><br><span class="line">        put(key, val);</span><br><span class="line">        return val;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public void put(int key, int val) &#123;</span><br><span class="line">        // 先把新节点 x 做出来</span><br><span class="line">        Node x = new Node(key, val);</span><br><span class="line">        </span><br><span class="line">        if (map.containsKey(key)==true) &#123;</span><br><span class="line">            // 删除旧的节点，新的插到头部</span><br><span class="line">            cache.remove(map.get(key));</span><br><span class="line">            cache.addFirst(x);</span><br><span class="line">            // 更新 map 中对应的数据</span><br><span class="line">            map.put(key, x);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            if (cap == cache.size()) &#123;</span><br><span class="line">                // 删除链表最后一个数据</span><br><span class="line">                Node last = cache.removeLast();</span><br><span class="line">                map.remove(last.key);</span><br><span class="line">            &#125;</span><br><span class="line">            // 直接添加到头部</span><br><span class="line">            cache.addFirst(x);</span><br><span class="line">            map.put(key, x);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">package Node;</span><br><span class="line">class Node &#123;</span><br><span class="line">    public int key, val;</span><br><span class="line">    public Node next, prev;</span><br><span class="line">    public Node(int k, int v) &#123;</span><br><span class="line">        this.key = k;</span><br><span class="line">        this.val = v;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">链表</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/01/07/LRU/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-树的子结构" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -510,88 +589,6 @@
 
 
   
-    <article id="post-215利用最小堆" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/11/215利用最小堆/">最小堆应用</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/11/215利用最小堆/" class="archive-article-date">
-  	<time datetime="2019-12-11T06:35:27.317Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="—利用最小堆"><a href="#—利用最小堆" class="headerlink" title="—利用最小堆"></a>—利用最小堆</h2><p>在未排序的数组中找到第 k 个最大的元素。请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。</p>
-<p>示例 1:</p>
-<p>输入: [3,2,1,5,6,4] 和 k = 2<br>输出: 5</p>
-<p>示例 2:</p>
-<p>输入: [3,2,3,1,2,4,5,5,6] 和 k = 4<br>输出: 4</p>
-<p>说明:</p>
-<p>你可以假设 k 总是有效的，且 1 ≤ k ≤ 数组的长度。<br>思路:利用升序最小队列,当大于k时，删除最小的元素。<br>最后队列首为第k小元素。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int findKthLargest(int[] nums, int k) &#123;</span><br><span class="line">          //利用最小堆，创建K+1的size,遍历数组元素进行添加，并poll出一个。</span><br><span class="line">          //最后遍历结束剩下的第K个中，第一个就是最大的。</span><br><span class="line">          PriorityQueue&lt;Integer&gt; largeK = new PriorityQueue&lt;Integer&gt;(k + 1);</span><br><span class="line">                for(int el : nums) &#123;</span><br><span class="line">                    largeK.add(el);</span><br><span class="line">                    if (largeK.size() &gt; k) &#123;</span><br><span class="line">                        largeK.poll();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                return largeK.poll(); </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">堆</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/11/215利用最小堆/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/15/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/page/17/">17</a><a class="page-number" href="/page/18/">18</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" href="/page/17/">Next &raquo;</a>
@@ -606,7 +603,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2020 lkq
+    		&copy; 2021 lkq
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -701,11 +698,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">DFS</a>
+                <a href="javascript:void(0)" class="js-tag color2">堆</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">堆</a>
+                <a href="javascript:void(0)" class="js-tag color4">DFS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -757,11 +754,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">前端综合</a>
+                <a href="javascript:void(0)" class="js-tag color4">Vue</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Vue</a>
+                <a href="javascript:void(0)" class="js-tag color5">前端综合</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -793,19 +790,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">排序</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">排序算法</a>
+                <a href="javascript:void(0)" class="js-tag color3">OS</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">OS</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">排序算法</a>
               </li>
              
               <li class="article-tag-list-item">

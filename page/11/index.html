@@ -140,6 +140,108 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-深拷贝和浅拷贝" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/06/深拷贝和浅拷贝/">深拷贝和浅拷贝</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/06/深拷贝和浅拷贝/" class="archive-article-date">
+  	<time datetime="2020-05-05T17:08:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="深拷贝和浅拷贝"><a href="#深拷贝和浅拷贝" class="headerlink" title="深拷贝和浅拷贝"></a>深拷贝和浅拷贝</h2><ul>
+<li>浅拷贝只是拷贝一层，更深层次对象级别的只拷贝引用。</li>
+<li>深拷贝拷贝多层，每一级数据都会拷贝。</li>
+</ul>
+<h2 id="浅拷贝："><a href="#浅拷贝：" class="headerlink" title="浅拷贝："></a>浅拷贝：</h2><p><img src="https://img-blog.csdnimg.cn/20200506004625787.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p>造成的问题</p>
+</blockquote>
+<ul>
+<li>把深层次的地址拷贝给了赋值对象。赋值对象更改深层次属性时，原对象也会发生改变。</li>
+<li>原理：俩个对象指向同一块区域，共享属性</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">var</span> obj=&#123;</span><br><span class="line">        id:<span class="number">1</span>,</span><br><span class="line">        name:<span class="string">'andy'</span>,</span><br><span class="line">        msg:&#123;</span><br><span class="line">            age:<span class="number">18</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">var</span> o=&#123;&#125;;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> k <span class="keyword">in</span> obj)&#123;</span><br><span class="line">        <span class="comment">//k是属性名 obj[k]属性值</span></span><br><span class="line">        o[k]=obj[k];</span><br><span class="line">    &#125;</span><br><span class="line">    o.msg.age=<span class="number">20</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(o.msg.age);<span class="comment">//20</span></span><br><span class="line">    <span class="built_in">console</span>.log(obj.msg.age);<span class="comment">//20</span></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>浅拷贝方式。把obj浅拷贝给o</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.assign(o,obj);</span><br></pre></td></tr></table></figure>
+
+<h2 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h2><p><img src="https://img-blog.csdnimg.cn/20200506004611319.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<ul>
+<li>把深层次的地址拷贝给了赋值对象。赋值对象更改深层次属性时，原对象不会发生改变。</li>
+<li>原理：赋值对象开辟了一个新的空间，指向了新的空间。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">     &lt;script&gt;</span><br><span class="line">         <span class="keyword">var</span> obj=&#123;</span><br><span class="line">             id:<span class="number">1</span>,</span><br><span class="line">             name:<span class="string">'andy'</span>,</span><br><span class="line">             msg:&#123;</span><br><span class="line">                 age:<span class="number">18</span></span><br><span class="line">             &#125;,</span><br><span class="line">             color:[<span class="string">'pink'</span>,<span class="string">'red'</span>]</span><br><span class="line">         &#125;;</span><br><span class="line">         <span class="keyword">var</span> o=&#123;&#125;;</span><br><span class="line">         <span class="function"><span class="keyword">function</span> <span class="title">deepCopy</span>(<span class="params">newobj,oldobj</span>)</span>&#123;</span><br><span class="line">             <span class="keyword">for</span>(<span class="keyword">var</span> k <span class="keyword">in</span> oldobj)&#123;</span><br><span class="line">                <span class="comment">//判断属性属于简单还是复杂数据类型</span></span><br><span class="line">               <span class="comment">//1.获取属性值 oldobj[k]</span></span><br><span class="line">               <span class="keyword">var</span> item=oldobj[k];</span><br><span class="line">               <span class="comment">//2.判断这个值是不是数组</span></span><br><span class="line">               <span class="keyword">if</span>(item <span class="keyword">instanceof</span> <span class="built_in">Array</span>)&#123;</span><br><span class="line">                 newobj[k]=[];</span><br><span class="line">                 <span class="comment">//等于o.color=[]，下一层;</span></span><br><span class="line">                 deepCopy(newobj[k],item);</span><br><span class="line">               &#125;<span class="keyword">else</span> <span class="keyword">if</span>(item <span class="keyword">instanceof</span> <span class="built_in">Object</span>)&#123;</span><br><span class="line">                  <span class="comment">//3.判断是否为对象</span></span><br><span class="line">                  newobj[k]=&#123;&#125;;</span><br><span class="line">                  deepCopy(newobj[k],item);</span><br><span class="line">               &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                 <span class="comment">//4.判断是否为简单数据类型</span></span><br><span class="line">                 <span class="comment">//进行赋值</span></span><br><span class="line">                 newobj[k]=item;</span><br><span class="line">               &#125;           </span><br><span class="line">             &#125;</span><br><span class="line">         &#125;</span><br><span class="line">         deepCopy(o,obj);</span><br><span class="line">         <span class="built_in">console</span>.log(o);</span><br><span class="line">  &lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>进行赋值 newobj[k]=item;</p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/06/深拷贝和浅拷贝/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-高阶函数和闭包" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -810,102 +912,6 @@
 
 
   
-    <article id="post-ES5中新增方法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/04/ES5中新增方法/">ES5中新增方法</a>
-    </h1>
-  
-
-        
-        <a href="/2020/05/04/ES5中新增方法/" class="archive-article-date">
-  	<time datetime="2020-05-04T09:24:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="forEach"><a href="#forEach" class="headerlink" title="forEach"></a>forEach</h2><p><img src="https://img-blog.csdnimg.cn/20200504165010851.png" alt="在这里插入图片描述"></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">        <span class="comment">//forEach遍历</span></span><br><span class="line">        <span class="keyword">var</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line">        arr.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">value,index,array</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'每个数组元素'</span>+value);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'每个数组元素索引号'</span>+index);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'数组本身'</span>+array);</span><br><span class="line">        &#125;)</span><br><span class="line">    &lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="filter"><a href="#filter" class="headerlink" title="filter()"></a>filter()</h2><p>筛选数组<br><img src="https://img-blog.csdnimg.cn/20200504165343209.png" alt="在这里插入图片描述"></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">        <span class="comment">//forEach遍历</span></span><br><span class="line">        <span class="keyword">var</span> arr=[<span class="number">44</span>,<span class="number">22</span>,<span class="number">33</span>];</span><br><span class="line">        <span class="keyword">var</span> newArr=arr.filter(<span class="function"><span class="keyword">function</span>(<span class="params">value,index</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> value&gt;=<span class="number">27</span>;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="built_in">console</span>.log(newArr);</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="some"><a href="#some" class="headerlink" title="some"></a>some</h2><p>查看是否有满足的元素，返回true或者false<br><img src="https://img-blog.csdnimg.cn/20200504165735788.png" alt="在这里插入图片描述"></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="comment">//forEach遍历</span></span><br><span class="line">    <span class="keyword">var</span> arr=[<span class="number">44</span>,<span class="number">22</span>,<span class="number">33</span>];</span><br><span class="line">    <span class="keyword">var</span> flag1=arr.some(<span class="function"><span class="keyword">function</span>(<span class="params">value</span>)</span>&#123;</span><br><span class="line">       <span class="keyword">return</span> value&gt;=<span class="number">29</span>;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">var</span> flag2=arr.some(<span class="function"><span class="keyword">function</span>(<span class="params">value</span>)</span>&#123;</span><br><span class="line">       <span class="keyword">return</span> value&gt;=<span class="number">55</span>;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="built_in">console</span>.log(flag1);</span><br><span class="line">    <span class="built_in">console</span>.log(flag2);</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>如果找到第一个合适的，就不再继续查找了。</p>
-<h2 id="trim"><a href="#trim" class="headerlink" title="trim"></a>trim</h2><p>清除左边和右边的空格。返回一个新的字符串，不修改原字符串。<br>但是不去除中间的空格。<br><img src="https://img-blog.csdnimg.cn/20200504170241515.png" alt="在这里插入图片描述"></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">var</span> str=<span class="string">'  tom  '</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(str);</span><br><span class="line">    <span class="keyword">var</span> str1=str.trim(str);</span><br><span class="line">    <span class="built_in">console</span>.log(str1);</span><br><span class="line">    <span class="keyword">var</span> str=<span class="string">' t om '</span>;</span><br><span class="line">    <span class="keyword">var</span> str2=str.trim(str);</span><br><span class="line">    <span class="built_in">console</span>.log(str2);</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>解决的问题</p>
-</blockquote>
-<p>用户输入几个空格（实际为null），但是可以提交请求的bug。<br>防止额外空格影响字符串长度数据。如输入空格tom长度为4，实际我们需要长度为3的字符串。</p>
-<h2 id="Object-keys-obj"><a href="#Object-keys-obj" class="headerlink" title="Object.keys(obj)"></a>Object.keys(obj)</h2><p>效果类似for in<br>返回一个数组<br><img src="https://img-blog.csdnimg.cn/20200504171118852.png" alt="在这里插入图片描述"></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">var</span> obj=&#123;</span><br><span class="line">    id: <span class="number">1</span>,</span><br><span class="line">    pname: <span class="string">'小米'</span>,</span><br><span class="line">    price: <span class="number">1000</span>,</span><br><span class="line">    num:<span class="number">2000</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> arr=<span class="built_in">Object</span>.keys(obj);</span><br><span class="line">arr.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">value</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(value);</span><br><span class="line">&#125;)</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Object-defineProperties-obj-prop-descriptor"><a href="#Object-defineProperties-obj-prop-descriptor" class="headerlink" title="Object.defineProperties(obj,prop,descriptor)"></a>Object.defineProperties(obj,prop,descriptor)</h2><p>添加修改属性方式<img src="https://img-blog.csdnimg.cn/20200504172342410.png" alt="在这里插入图片描述"></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">var</span> obj=&#123;</span><br><span class="line">    id: <span class="number">1</span>,</span><br><span class="line">    pname: <span class="string">'小米'</span>,</span><br><span class="line">    price: <span class="number">1000</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(obj,<span class="string">'pname'</span>,&#123;<span class="attr">value</span>:<span class="string">'华为'</span>&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(obj.pname);</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CSS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/04/ES5中新增方法/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/10/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" href="/page/12/">Next &raquo;</a>
@@ -920,7 +926,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2020 lkq
+    		&copy; 2021 lkq
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -1015,11 +1021,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">DFS</a>
+                <a href="javascript:void(0)" class="js-tag color2">堆</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">堆</a>
+                <a href="javascript:void(0)" class="js-tag color4">DFS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1071,11 +1077,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">前端综合</a>
+                <a href="javascript:void(0)" class="js-tag color4">Vue</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Vue</a>
+                <a href="javascript:void(0)" class="js-tag color5">前端综合</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1107,19 +1113,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">排序</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">排序算法</a>
+                <a href="javascript:void(0)" class="js-tag color3">OS</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">OS</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">排序算法</a>
               </li>
              
               <li class="article-tag-list-item">

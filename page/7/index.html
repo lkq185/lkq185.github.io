@@ -140,6 +140,202 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-git学习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/17/git学习/">git学习</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/17/git学习/" class="archive-article-date">
+  	<time datetime="2020-05-17T09:06:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p> 什么是版本管理</p>
+</blockquote>
+<ul>
+<li>版本管理是一种记录文件变化的方式，以便将来查阅特定版本的文件内容。</li>
+</ul>
+<blockquote>
+<p> Git 是什么</p>
+</blockquote>
+<p>Git是一个版本管理控制系统（缩写VCS），它可以在任何时间点，将文档的状态作为更新记录保存起来，也可以在任何时间点，将更新记录恢复回来。</p>
+<blockquote>
+<p>Git 基本工作流程</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>git仓库</th>
+<th>暂存区</th>
+<th>工作目录</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>用于存放提交记录</td>
+<td>临时存放被修改文件</td>
+<td>被Git管理的项目目录</td>
+</tr>
+</tbody></table>
+<h2 id="Git-的使用"><a href="#Git-的使用" class="headerlink" title="Git 的使用"></a>Git 的使用</h2><blockquote>
+<p>Git 使用前配置</p>
+</blockquote>
+<p>在使用 git 前，需要告诉 git 你是谁，在向 git 仓库中提交时需要用到。</p>
+<ol>
+<li>配置提交人姓名：<code>git config --global user.name 提交人姓名</code></li>
+<li>配置提交人姓名：<code>git config --global user.email 提交人邮箱</code> </li>
+<li>查看git配置信息：<code>git config --list</code>   </li>
+</ol>
+<p><strong>注意</strong></p>
+<ol>
+<li><p>如果要对配置信息进行修改，重复上述命令即可。</p>
+</li>
+<li><p>配置只需要执行一次。</p>
+</li>
+</ol>
+<blockquote>
+<p>提交步骤</p>
+</blockquote>
+<ol>
+<li><code>git init</code> 初始化git仓库</li>
+<li><code>git status</code> 查看文件状态</li>
+<li><code>git add 文件列表</code> 追踪文件</li>
+<li><code>git commit -m 提交信息</code>  向仓库中提交代码</li>
+<li><code>git log</code> 查看提交记录</li>
+</ol>
+<blockquote>
+<p>撤销</p>
+</blockquote>
+<ul>
+<li><p>用暂存区中的文件覆盖工作目录中的文件： <code>git checkout 文件</code></p>
+</li>
+<li><p>将文件从暂存区中删除： <code>git rm --cached 文件</code></p>
+</li>
+<li><p>将 git 仓库中指定的更新记录恢复出来，并且覆盖暂存区和工作目录：<code>git rest --hard commitID</code> </p>
+</li>
+</ul>
+<blockquote>
+<p> 分支命令</p>
+</blockquote>
+<ul>
+<li><p><code>git branch</code> 查看分支</p>
+</li>
+<li><p><code>git branch 分支名称</code> 创建分支</p>
+</li>
+<li><p><code>git checkout 分支名称</code> 切换分支</p>
+</li>
+<li><p><code>git merge 来源分支</code> 合并分支</p>
+</li>
+<li><p><code>git branch -d 分支名称</code> 删除分支（分支被合并后才允许删除）（-D 强制删除）</p>
+</li>
+</ul>
+<blockquote>
+<p> 暂时保存更改</p>
+</blockquote>
+<p>在git中，可以暂时提取分支上所有的改动并存储，让开发人员得到一个干净的工作副本，临时转向其他工作。</p>
+<p>使用场景：分支临时切换</p>
+<ul>
+<li>存储临时改动：<code>git stash</code></li>
+<li>恢复改动：<code>git stash pop</code></li>
+</ul>
+<blockquote>
+<p> 多人协作开发流程</p>
+</blockquote>
+<ul>
+<li>A在自己的计算机中创建本地仓库</li>
+<li>A在github中创建远程仓库</li>
+<li>A将本地仓库推送到远程仓库</li>
+<li>B克隆远程仓库到本地进行开发</li>
+<li>B将本地仓库中开发的内容推送到远程仓库</li>
+<li>A将远程仓库中的最新内容拉去到本地</li>
+</ul>
+<blockquote>
+<p> 创建仓库</p>
+</blockquote>
+<ol>
+<li><p>填写仓库基本信息</p>
+</li>
+<li><p>将本地仓库推送到远程仓库</p>
+<ol>
+<li><p>git push 远程仓库地址 分支名称</p>
+</li>
+<li><p>git push 远程仓库地址别名 分支名称</p>
+</li>
+<li><p>git push -u 远程仓库地址别名 分支名称</p>
+<p> -u 记住推送地址及分支，下次推送只需要输入git push即可</p>
+</li>
+<li><p>git remote add 远程仓库地址别名 远程仓库地址</p>
+</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p> 克隆仓库</p>
+</blockquote>
+<p>克隆远端数据仓库到本地：<code>git clone 仓库地址</code></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">前端综合</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/17/git学习/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Ajax和同源解决方法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -919,103 +1115,6 @@
 
 
   
-    <article id="post-JS——键盘事件和输入框案列" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/12/JS——键盘事件和输入框案列/">JS——键盘事件和输入框案列</a>
-    </h1>
-  
-
-        
-        <a href="/2020/05/12/JS——键盘事件和输入框案列/" class="archive-article-date">
-  	<time datetime="2020-05-12T11:31:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>能够说出常用的3-5个键盘事件<br>能够知道如何获取当前键盘按下的是哪个键</p>
-</blockquote>
-<h2 id="键盘事件"><a href="#键盘事件" class="headerlink" title="键盘事件"></a>键盘事件</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="comment">// 常用的键盘事件</span></span><br><span class="line">    <span class="comment">//1. keyup 按键弹起的时候触发 </span></span><br><span class="line">    <span class="built_in">document</span>.addEventListener(<span class="string">'keyup'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'我弹起了'</span>);</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    <span class="comment">//3. keypress 按键按下的时候触发  不能识别功能键 比如 ctrl shift 左右箭头啊</span></span><br><span class="line">    <span class="built_in">document</span>.addEventListener(<span class="string">'keypress'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'我按下了press'</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="comment">//2. keydown 按键按下的时候触发  能识别功能键 比如 ctrl shift 左右箭头啊</span></span><br><span class="line">    <span class="built_in">document</span>.addEventListener(<span class="string">'keydown'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'我按下了down'</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="comment">// 4. 三个事件的执行顺序  keydown -- keypress -- keyup</span></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>使用keyCode属性判断用户按下哪个键</p>
-</blockquote>
-<ul>
-<li>keyup和keydown不区分大小写</li>
-<li>keypress区分大小写</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="comment">// 键盘事件对象中的keyCode属性可以得到相应键的ASCII码值</span></span><br><span class="line">    <span class="built_in">document</span>.addEventListener(<span class="string">'keyup'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 我们可以利用keycode返回的ASCII码值来判断用户按下了那个键</span></span><br><span class="line">        <span class="keyword">if</span> (e.keyCode === <span class="number">65</span>) &#123;</span><br><span class="line">            alert(<span class="string">'您按下的a键'</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            alert(<span class="string">'您没有按下a键'</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="built_in">document</span>.addEventListener(<span class="string">'keypress'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// console.log(e);</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'press:'</span> + e.keyCode);</span><br><span class="line">    &#125;)</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>案列：s定位焦点<br><img src="https://img-blog.csdnimg.cn/20200512171436575.png" alt="在这里插入图片描述"></p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> search = <span class="built_in">document</span>.querySelector(<span class="string">'input'</span>);</span><br><span class="line"><span class="built_in">document</span>.addEventListener(<span class="string">'keyup'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">     <span class="keyword">if</span>(e.keyCode === <span class="number">83</span>)&#123;</span><br><span class="line">         search.focus();</span><br><span class="line">     &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>模拟京东快递单号查询。输入内容出现大框框。<br><img src="https://img-blog.csdnimg.cn/20200512192511798.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyOTY0NzEx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"search"</span>&gt;</span><br><span class="line">        &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"con"</span>&gt;<span class="number">123</span>&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">        &lt;input type="text" placeholder="请输入您的快递单号" class="jd"&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>div&gt;</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        <span class="comment">// 获取要操作的元素</span></span><br><span class="line">        <span class="keyword">var</span> con = <span class="built_in">document</span>.querySelector(<span class="string">'.con'</span>);</span><br><span class="line">        <span class="keyword">var</span> jd_input = <span class="built_in">document</span>.querySelector(<span class="string">'.jd'</span>);</span><br><span class="line">		<span class="comment">// 给输入框注册keyup事件</span></span><br><span class="line">        jd_input.addEventListener(<span class="string">'keyup'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">				<span class="comment">// 判断输入框内容是否为空</span></span><br><span class="line">                <span class="keyword">if</span> (<span class="keyword">this</span>.value == <span class="string">''</span>) &#123;</span><br><span class="line">                    <span class="comment">// 为空，隐藏放大提示盒子</span></span><br><span class="line">                    con.style.display = <span class="string">'none'</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="comment">// 不为空，显示放大提示盒子，设置盒子的内容</span></span><br><span class="line">                    con.style.display = <span class="string">'block'</span>;</span><br><span class="line">                    con.innerText = <span class="keyword">this</span>.value;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;)</span><br><span class="line">        <span class="comment">// 给输入框注册失去焦点事件，隐藏放大提示盒子</span></span><br><span class="line">        jd_input.addEventListener(<span class="string">'blur'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">                con.style.display = <span class="string">'none'</span>;</span><br><span class="line">            &#125;)</span><br><span class="line">        <span class="comment">// 给输入框注册获得焦点事件</span></span><br><span class="line">        jd_input.addEventListener(<span class="string">'focus'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="comment">// 判断输入框内容是否为空</span></span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">this</span>.value !== <span class="string">''</span>) &#123;</span><br><span class="line">                <span class="comment">// 不为空则显示提示盒子</span></span><br><span class="line">                con.style.display = <span class="string">'block'</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/12/JS——键盘事件和输入框案列/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/6/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" href="/page/8/">Next &raquo;</a>
@@ -1030,7 +1129,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2020 lkq
+    		&copy; 2021 lkq
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -1125,11 +1224,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">DFS</a>
+                <a href="javascript:void(0)" class="js-tag color2">堆</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">堆</a>
+                <a href="javascript:void(0)" class="js-tag color4">DFS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1181,11 +1280,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">前端综合</a>
+                <a href="javascript:void(0)" class="js-tag color4">Vue</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Vue</a>
+                <a href="javascript:void(0)" class="js-tag color5">前端综合</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1217,19 +1316,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">排序</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">排序算法</a>
+                <a href="javascript:void(0)" class="js-tag color3">OS</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">OS</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">排序算法</a>
               </li>
              
               <li class="article-tag-list-item">
